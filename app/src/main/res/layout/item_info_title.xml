@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_30">
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="14dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
+            android:background="@color/color_1e88e5" />
+
+        <TextView
+            android:id="@+id/tv_my_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="22dp"
+            android:drawablePadding="3dp"
+            android:gravity="center"
+            android:text="基本信息"
+            android:textColor="@color/color_23a7f0"
+            android:textSize="@dimen/dp_13" />
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/rl_bottom"
+        android:layout_alignParentTop="true"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@color/color_f2f2f2"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@color/white"
+                android:drawableLeft="@drawable/icon_cedit_search"
+                android:drawablePadding="10dp"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="@dimen/dp_24"
+                android:text="贷款数据"
+                android:textColor="@color/color_23a7f0"
+                android:textSize="@dimen/dp_13"
+                />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_credit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@color/color_f2f2f2"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@color/white"
+                android:drawableLeft="@drawable/icon_cedit_search"
+                android:drawablePadding="10dp"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="@dimen/dp_24"
+                android:text="信用卡"
+                android:textColor="@color/color_23a7f0"
+                android:textSize="@dimen/dp_13"
+                />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_credit_two"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@color/color_f2f2f2"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@color/white"
+                android:drawableLeft="@drawable/icon_cedit_search"
+                android:drawablePadding="10dp"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="@dimen/dp_24"
+                android:text="个人担保"
+                android:textColor="@color/color_23a7f0"
+                android:textSize="@dimen/dp_13"
+                />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_credit_three"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@color/color_f2f2f2"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@color/white"
+                android:drawableLeft="@drawable/icon_cedit_search"
+                android:drawablePadding="10dp"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="@dimen/dp_24"
+                android:text="近一年征信记录查询"
+                android:textColor="@color/color_23a7f0"
+                android:textSize="@dimen/dp_13"
+                />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_credit_four"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:paddingLeft="120dp"
+                android:paddingBottom="30dp"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

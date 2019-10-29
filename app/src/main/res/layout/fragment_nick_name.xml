@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp">
+
+    <EditText
+        android:id="@+id/edit_nick_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        android:paddingBottom="8dp"
+        android:background="@null"
+        android:colorControlActivated="@color/color_ededed"
+        android:colorControlNormal="@color/color_ededed"
+        android:textColor="@color/color_4a4a4a" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_ededed" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="5dp"
+        android:text="好名字更容易让人记住哦!"
+        android:textColor="@color/color_a4a4a4"
+        android:textSize="12dp" />
+</LinearLayout>

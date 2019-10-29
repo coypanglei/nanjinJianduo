@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/speed_button_bg"
+    android:orientation="horizontal">
+
+
+    <LinearLayout
+        android:id="@+id/ll_right"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="83dp"
+        android:orientation="vertical"
+        android:paddingLeft="14dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textColor="@color/color_4a4a4a"
+            android:textSize="13dp" />
+
+        <TextView
+            android:id="@+id/tv_grade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:layout_marginBottom="13dp"
+
+            android:textColor="@color/color_4a4a4a"
+            android:textSize="13dp" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:textColor="@color/color_4a4a4a"
+            android:textSize="13dp" />
+
+
+    </LinearLayout>
+
+    <com.gcssloop.widget.RCRelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/rcrel_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/ll_right"
+        android:layout_alignBottom="@id/ll_right"
+        android:layout_centerVertical="true"
+        app:round_corner_bottom_left="3dp"
+        app:round_corner_top_left="3dp">
+
+        <RelativeLayout
+            android:layout_width="83dp"
+            android:layout_height="match_parent"
+            android:background="@color/color_a4a4a4"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profile_image"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/icon_head_default"
+                app:civ_fill_color="@color/white" />
+
+            <TextView
+                android:id="@+id/tv_nick_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_image"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textSize="12dp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+    </com.gcssloop.widget.RCRelativeLayout>
+
+
+</RelativeLayout>

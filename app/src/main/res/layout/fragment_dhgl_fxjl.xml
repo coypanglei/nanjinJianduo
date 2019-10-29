@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_all"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:visibility="visible">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:background="@color/white">
+
+        <com.libracore.lib.widget.StateButton
+            android:id="@+id/sb_edit"
+
+            android:layout_width="83dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_27"
+            android:drawableLeft="@drawable/icon_sb_copy"
+            android:paddingLeft="6dp"
+            android:paddingTop="1dp"
+            android:paddingRight="6dp"
+            android:paddingBottom="1dp"
+            android:text="提交"
+            android:textSize="12dp"
+            app:normalBackgroundColor="@color/color_23a7f0"
+            app:normalTextColor="@color/white"
+            app:pressedBackgroundColor="@color/color_48b2ed"
+            app:pressedTextColor="@color/white"
+            app:radius="2dp" />
+
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_c0c0c0" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_5"
+        android:background="@color/color_f3f2f2" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_8"
+                android:background="@color/white">
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="14dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12dp"
+                    android:background="@color/color_1e88e5" />
+
+                <TextView
+                    android:id="@+id/tv_name_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="22dp"
+                    android:drawablePadding="3dp"
+                    android:gravity="center"
+                    android:text="待现场原因"
+                    android:textColor="@color/color_23a7f0"
+                    android:textSize="@dimen/dp_13" />
+            </RelativeLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_c0c0c0" />
+
+            <RelativeLayout
+                android:layout_width="520dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal">
+
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="@dimen/dp_350"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="9dp"
+                    android:gravity="center_vertical"
+                    android:paddingRight="8dp"
+                    android:textColor="@color/color_49a0ed"
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_toLeftOf="@id/tv_title"
+                    android:gravity="center"
+                    android:text="系统原因："
+                    android:textColor="@color/color_3b3b3b"
+                    android:textSize="11dp" />
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/id_jiben_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="9dp"
+                android:paddingRight="3dp"
+                android:paddingBottom="9dp">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_weight="1">
+
+
+                    <com.shaoyue.weizhegou.widget.DropDownView
+                        android:id="@+id/ddv_xb"
+                        android:layout_width="159dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="9dp"
+                        android:layout_marginRight="3dp"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/color_666666"
+                        android:textSize="11dp"
+                        app:itemArray="@array/dropdown_array_fxjl" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_toLeftOf="@id/ddv_xb"
+                        android:drawableLeft="@drawable/icon_left_red"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/dp_5"
+                        android:text="授信额度"
+                        android:textColor="@color/color_666666"
+                        android:textSize="11dp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_weight="1">
+
+
+                    <EditText
+                        android:id="@+id/et_xzyx"
+                        style="@style/AddEditStyle"
+                        android:inputType="number|numberDecimal"
+                        android:layout_width="159dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="9dp"
+                        android:imeOptions="actionDone"
+                        android:paddingRight="@dimen/dp_12"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/color_666666" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_toLeftOf="@id/et_xzyx"
+                        android:drawableLeft="@drawable/icon_left_red"
+                        android:gravity="center"
+
+                        android:paddingLeft="@dimen/dp_5"
+                        android:text="限制用信(万元):"
+                        android:textColor="@color/color_666666"
+                        android:textSize="11dp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_weight="1">
+
+
+                    <EditText
+                        android:id="@+id/et_zzsx"
+                        android:inputType="number|numberDecimal"
+                        style="@style/AddEditStyle"
+                        android:layout_width="159dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="9dp"
+                        android:imeOptions="actionDone"
+                        android:paddingRight="@dimen/dp_12"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/color_666666" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_toLeftOf="@id/et_zzsx"
+                        android:drawableLeft="@drawable/icon_left_red"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/dp_5"
+                        android:text="最终授信(万元):"
+                        android:textColor="@color/color_666666"
+                        android:textSize="11dp" />
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/id_jiben_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+
+</LinearLayout>

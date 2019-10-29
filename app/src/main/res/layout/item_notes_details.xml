@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/dp_29"
+    android:paddingTop="@dimen/dp_21"
+    android:paddingRight="@dimen/dp_29"
+    android:paddingBottom="@dimen/dp_21"
+    android:background="@color/white"
+    android:layout_marginBottom="@dimen/dp_9">
+
+    <TextView
+        android:id="@+id/note_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:textColor="@color/color_666666"
+        android:textSize="12dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/tv_time"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/note_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/dp_10"
+        android:textColor="@color/color_23a7f0"
+        android:textSize="@dimen/dp_10"/>
+
+</RelativeLayout>

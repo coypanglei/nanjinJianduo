@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/ll_bg"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:background="@drawable/icon_activity_bg"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tv_activity_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="115dp"
+            android:textColor="#333333"
+            android:textSize="16dp"
+            tools:text="@string/t_sorry_your_credit_is_running_low" />
+
+        <TextView
+            android:id="@+id/tv_activity_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:lineSpacingExtra="5dp"
+            android:textColor="#666666"
+            android:textSize="14dp"
+            tools:text="碍手碍脚上来看大家阿里斯顿加拉斯多久啊周星驰周星驰周星驰周星驰周星驰支持者" />
+
+        <com.libracore.lib.widget.StateButton
+            android:id="@+id/sb_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginTop="20dp"
+            android:textSize="10dp"
+            app:normalBackgroundColor="@color/color_ffd300"
+            app:normalTextColor="@color/default_btn_text_color"
+            app:pressedBackgroundColor="@color/color_ffd300"
+            app:pressedTextColor="@color/default_btn_text_color"
+            app:radius="15dp"
+            tools:text="@string/t_Immediate_recharge" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/tv_close"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignEnd="@id/ll_bg"
+        android:layout_alignRight="@id/ll_bg"
+        android:layout_alignTop="@id/ll_bg"
+        android:layout_marginTop="38dp"
+        android:scaleType="center"
+        android:visibility="invisible"
+        android:src="@drawable/icon_dialog_close" />
+</RelativeLayout>

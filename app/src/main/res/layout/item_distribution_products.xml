@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_pay_bg"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:background="@drawable/ic_speed_but_bg">
+
+        <com.gcssloop.widget.RCRelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/rcrel_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            app:round_corner="5dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_goods"
+                    android:layout_width="88dp"
+                    android:layout_height="88dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/icon_default_placeholder" />
+
+                <ImageView
+                    android:id="@+id/iv_sold_out"
+                    android:layout_width="61dp"
+                    android:layout_height="46dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/icon_sold_out_white"
+                    android:visibility="invisible" />
+
+            </RelativeLayout>
+
+
+        </com.gcssloop.widget.RCRelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_go_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/icon_red_jbshape_20"
+            android:paddingLeft="7dp"
+            android:paddingTop="5dp"
+            android:paddingRight="7dp"
+            android:paddingBottom="5dp"
+            android:text="我要分销"
+            android:textColor="@color/white"
+            android:textSize="13dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@id/rcrel_iv"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/tv_goods_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="7dp"
+                android:ellipsize="end"
+                android:lines="2"
+                android:textColor="@color/color_4a4a4a"
+                android:textSize="13dp"
+                tools:text="洗衣液大品牌，微折购微折购微折购微折购撒旦" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp">
+
+                <TextView
+                    android:id="@+id/tv_current_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="￥158"
+                    android:textColor="@color/color_cd0946"
+                    android:textSize="11dp" />
+
+                <TextView
+                    android:id="@+id/tv_original_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="60dp"
+                    android:text="原价258"
+                    android:textColor="@color/color_999999"
+                    android:textSize="11dp" />
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="预计佣金："
+                    android:textColor="@color/color_4a4a4a"
+                    android:textSize="12dp" />
+
+
+                <TextView
+                    android:id="@+id/tv_commission"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="￥2.00"
+                    android:textColor="@color/color_cd0946"
+                    android:textSize="12dp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

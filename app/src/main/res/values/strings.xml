@@ -1,0 +1,325 @@
+<resources>
+    <string name="email_name">邮箱</string>
+    <string name="name_password_forget">忘记密码?</string>
+    <string name="register_ok">注册成功</string>
+    <string name="str_pwd_change">修改密码</string>
+    <string name="str_pwd_old">旧密码</string>
+    <string name="str_disconnected">断开</string>
+    <string name="t_permission_denied">拒绝了权限申请</string>
+    <string name="content_new_password">新密码</string>
+    <string name="app_name">东海智能运营</string>
+    <string name="tv_renew_member">续费</string>
+    <string name="tv_online_terminal">在线终端</string>
+    <string name="about_me_text">关于我们</string>
+    <string name="use_record_text">使用记录</string>
+    <string name="pay_record_text">购买记录</string>
+    <string name="tips_exit_out">再按一次退出！</string>
+    <string name="tv_account_info">账户信息</string>
+    <string name="tv_mdfiy_name">用户名修改</string>
+    <string name="tv_change_phone">手机号修改</string>
+    <string name="tv_bind_phone_title">手机号绑定</string>
+    <string name="tv_replace_email">邮箱修改</string>
+    <string name="tv_bind_email">邮箱绑定</string>
+    <string name="no_cache">0K</string>
+    <string name="tv_modify_passwrod">密码修改</string>
+    <string name="profile_tv_pay_record">购买记录</string>
+    <string name="tv_termainal_dialog_tips">您的账号登录终端已满，您可以选择下线其他终端或续费</string>
+    <string name="profile_tv_use_record">使用记录</string>
+    <string name="profile_line_termainal">在线终端</string>
+    <string name="tv_speed_choose_title">加速选择</string>
+    <string name="tv_me_questions_title">我要提问</string>
+    <string name="tv_me_questions_reply">我要回复</string>
+    <string name="tv_loginout_text">确定要退出登录吗?</string>
+    <string name="tv_login_out">退出登录</string>
+    <string name="tv_cancel_text">取消</string>
+    <string name="pay_success">支付成功</string>
+    <string name="pay_in">支付结果确认中</string>
+    <string name="pay_fial">支付失败</string>
+    <string name="pay_cancel_fial">取消支付</string>
+    <string name="pay_network_fial">网络连接出错</string>
+    <string name="pay_other_fial">其它支付错误</string>
+    <string name="pay_handle_fial">支付结果处理中</string>
+    <string name="down_state">正在下载：%s</string>
+    <string name="prepare_download">准备下载</string>
+    <string name="title_tv_forget_password">找回密码</string>
+    <string name="tv_forget_code_Null">验证码不能为空</string>
+    <string name="tv_phone_null">手机号不能为空</string>
+    <string name="tv_img_code_null">图片验证码不能为空</string>
+    <string name="tv_name_null">用户名不能为空</string>
+    <string name="two_password_unify">两次输入的密码不一致</string>
+    <string name="tv_password_six">密码必须大于6位</string>
+    <string name="tv_new_password_null">新密码不能为空</string>
+    <string name="tv_old_pasword_null">旧密码不能为空</string>
+    <string name="title_tv_login">登录</string>
+    <string name="tv_login_forget_password">忘记密码？</string>
+    <string name="tv_login_load">正在登录中...</string>
+    <string name="tv_password_null">密码不能为空</string>
+    <string name="tv_item_me">我</string>
+    <string name="tv_item_service">客服</string>
+    <string name="title_tv_notice">公告</string>
+    <string name="title_tv_setting">设置</string>
+    <string name="title_tv_reward">套餐购买</string>
+    <string name="tv_email_format_no">邮箱格式不正确</string>
+    <string name="tv_email_null">邮箱不能为空</string>
+    <string name="title_tv_pay_mode">选择支付方式</string>
+    <string name="title_tv_ticket">选择优惠券</string>
+    <string name="tv_no_purchase_record">暂无购买记录</string>
+    <string name="tv_buy_null_content">还没有使用过，快去使用吧！</string>
+    <string name="content_ok">确 认</string>
+    <string name="toast_payment_success">支付成功</string>
+    <string name="toast_server_error">服务器错误</string>
+    <string name="toast_cancel_payment">取消支付</string>
+    <string name="content_name">名称：</string>
+    <string name="content_order_number">订单号：</string>
+    <string name="content_trading_time">交易时间：</string>
+    <string name="content_unlimited">无限制</string>
+    <string name="content_expiry_time">到期时间</string>
+    <string name="content_immediate_use">立即使用</string>
+    <string name="content_version_update">版本更新</string>
+    <string name="content_update_yes_or_no">检测到有新版本，是否需要更新</string>
+    <string name="content_immediate_update">立即更新</string>
+    <string name="content_back">返回</string>
+    <string name="content_intelligent_mode">智能模式</string>
+    <string name="content_modify">修改</string>
+    <string name="account_settings">账号设置</string>
+    <string name="account_invitation_code">邀请码</string>
+    <string name="content_purchase_record">购买记录</string>
+    <string name="content_use_records">使用记录</string>
+    <string name="content_contact_us">联系我们</string>
+    <string name="content_acceleration_mode">加速模式</string>
+    <string name="content_switch_account">切换账号</string>
+    <string name="content_bound_mailbox">已绑定邮箱</string>
+    <string name="content_second">秒</string>
+    <string name="content_branch">分</string>
+    <string name="content_hour">时</string>
+    <string name="content_unbound_mailbox">未绑定邮箱</string>
+    <string name="content_global_pattern">全局模式</string>
+    <string name="content_bindings">已绑定</string>
+    <string name="content_unbound">未绑定</string>
+    <string name="content_switch">切换</string>
+
+    <string name="toast_time_expire">会员时间到期，请续费</string>
+    <string name="content_disconnect">断开成功</string>
+    <string name="content_close">关闭</string>
+    <string name="toast_connection_success">连接成功</string>
+    <string name="content_connection_timed_out">连接超时</string>
+    <string name="content_company">公司名称</string>
+    <string name="wechat_public_number">微信公众号</string>
+    <string name="customer_service_qq">客服QQ</string>
+    <string name="content_please_install_wechat_first">请先安装微信</string>
+    <string name="content_please_enter_mailbox">手机号</string>
+    <string name="content_please_enter_password">请输入密码</string>
+    <string name="content_account_login">登录</string>
+    <string name="content_visitors_login">游客登录</string>
+    <string name="content_go_to_registration">去注册</string>
+    <string name="content_login_ok">登录即代表同意</string>
+    <string name="content_user_service_protocol">《用户服务协议》</string>
+    <string name="content_msg">提示</string>
+    <string name="tv_ok">确定</string>
+    <string name="content_please_bind_the_mailbox_first">请先绑定邮箱</string>
+    <string name="title_purchase_record">购买记录</string>
+    <string name="toast_no_more_data">没有更多数据了</string>
+    <string name="title_use_records">使用记录</string>
+    <string name="title_news_records">消息记录</string>
+    <string name="expiry_time">到期时间：</string>
+    <string name="title_thanks_to_the_wall">致谢墙</string>
+    <string name="title_please_select_the_proxy_mode">请选择代理模式</string>
+    <string name="title_coupon">优惠券</string>
+    <string name="title_shuoming">说明：  智能模式:仅支持国内的APP和网页跳转加速  全局模式:全部APP跳转回中国，无法使用Facebook、  Google等</string>
+    <string name="title_setting">设置</string>
+    <string name="title_wechat_payment">微信支付</string>
+    <string name="content_failure_to_pay">支付失败</string>
+    <string name="tv_pay_content">1、充值失败or无法充值，请联系平台客服，我们会耐心帮您解决问题。 2、客服QQ：</string>
+    <string name="tv_i_see">我知道了</string>
+    <string name="content_no_announcement">暂无公告</string>
+    <string name="tv_unused_coupons">未使用优惠券</string>
+    <string name="tv_coupons">优惠券</string>
+    <string name="content_automatic_selection_line">自动选择线路</string>
+    <string name="content_proxy_pattern">代理模式</string>
+    <string name="content_now_lines">当前线路</string>
+    <string name="title_caravelle">海龟</string>
+    <string name="content_immediate_payment">立即支付</string>
+    <string name="content_acceleration_time_length">使用记录</string>
+    <string name="content_use_data">使用日期</string>
+    <string name="title_sharing_application">分享应用</string>
+    <string name="content_mailbox_verification_code">验证码</string>
+    <string name="content_get_the_verifying_code">获取验证码</string>
+    <string name="content_register">注册</string>
+    <string name="content_already_account">已有账号？</string>
+    <string name="content_login">去登录</string>
+    <string name="content_node_selection">节点选择</string>
+    <string name="content_order_submission_success">订单提交成功</string>
+    <string name="content_completed_payment">已完成支付</string>
+    <string name="tv_price">价格</string>
+    <string name="content_creation_time">创建时间</string>
+    <string name="content_confirm_the_password">确认密码</string>
+    <string name="tv_bind">绑定</string>
+    <string name="tv_email">邮箱</string>
+    <string name="retrieve_the_password">找回密码</string>
+    <string name="tv_unknown">未知</string>
+    // 加速模块
+    <string name="t_disconnected">已断开</string>
+    <string name="t_disconnect">断开</string>
+    <string name="t_connecting">连接中...</string>
+    <string name="t_disconnecting">断开中...</string>
+    <string name="t_connect_succ">连接成功</string>
+    <string name="t_open">开启</string>
+    <string name="content_binded_mailbox">已绑定的邮箱：</string>
+    <string name="content_friendship_hints">友情提示</string>
+    <string name="title_please_try_again_later">线路升级中,请稍后重试</string>
+    <string name="content_retry">重试</string>
+    <string name="content_sign_out">退出</string>
+    <string name="content_user_protocol">用户协议</string>
+    <string name="content_re_send_after">s后重新发送</string>
+    <string name="title_binding_mailbox">绑定邮箱</string>
+    <string name="content_two_cipher_inconsistencies">两次密码不一致</string>
+    <string name="content_binding_success">绑定成功</string>
+    <string name="content_bindings_failure">绑定失败</string>
+    <string name="content_the_password_can_not_be_empty">密码不能为空</string>
+    <string name="content_mailbox_cannot_be_empty">邮箱不能为空</string>
+    <string name="btn_share">分享</string>
+    <string name="title_register">注册</string>
+    <string name="mailbox_cannot_be_empty">邮箱不能为空</string>
+    <string name="content_mailbox_is_empty">邮箱为空</string>
+    <string name="mailbox_verification_code_is_empty">邮箱验证码为空</string>
+    <string name="reset_the_password_success">重置密码成功</string>
+    <string name="node_selection">节点选择</string>
+    <string name="t_choose_payment_method">选择支付方式</string>
+    <string name="t_actual_payment">实际支付：</string>
+    <string name="t_alipay_payment">支付宝支付</string>
+    <string name="t_recommend_the_use_of_alipay_account">推荐有支付宝账户的使用</string>
+    <string name="t_wechat_payment">微信支付</string>
+    <string name="t_recommend_the_use_of_wechat_account">推荐有微信账户的使用</string>
+    <string name="t_confirm_the_payment">确认付款</string>
+    <string name="t_congratulations_on_your_acquisition">恭喜您获得</string>
+    <string name="t_collect_immediately">立即领取</string>
+    <string name="t_you_have_signed_in_today">今天您已经签到过了哦</string>
+    <string name="t_come_back_tomorrow">明天再来</string>
+    <string name="tv_back">返回</string>
+    <string name="t_packag_purchase">套餐购买</string>
+    <string name="t_turtle_accelerator_is_with_you">海龟加速器已陪伴您</string>
+    <string name="t_day">天</string>
+    <string name="t_contact_us">联系我们</string>
+    <string name="t_failure_to_pay">支付失败</string>
+    <string name="t_discovery_of_new_versions">发现新版本</string>
+    <string name="t_upgrade">升级</string>
+    <string name="t_automatic_selection_of_circuits">【自动选择线路】</string>
+    <string name="t_automatic_selection_of_circuits_content">自动选择线路会根据线路负载、流畅度等情况为您匹配优质线路；</string>
+    <string name="t_manual_route_selection">【手动选择线路】</string>
+    <string name="t_manual_route_selection_content">如果您对自动选择的线路不满意可手动选择线路；手动优先选择您所在地区的线路，线路信号为手动选择提供参考。</string>
+    <string name="t_personal_center">个人中心</string>
+    <string name="t_membership_expiration_date">会员到期时间：</string>
+    <string name="t_expired">已过期</string>
+    <string name="t_user_service_protocol">用户服务协议</string>
+    <string name="t_amount_payable">应付金额：</string>
+    <string name="t_immediate_payment">立即支付</string>
+    <string name="t_line_maintenance">线路维护中...</string>
+    <string name="t_share_success">分享成功</string>
+    <string name="t_sharing_failure">分享失败</string>
+    <string name="t_urls_cannot_be_empty">URL不能为空</string>
+    <string name="t_free_to_you">免费送你</string>
+    <string name="t_members_of_the_heavens">天会员，快去尝鲜吧</string>
+    <string name="t_cancel">取消</string>
+    <string name="t_ok">确定</string>
+    <string name="t_become_a_member_and_enjoy_more_privileged_services">成为会员，享受更多特权服务</string>
+    <string name="t_go_for_a_stroll">去逛逛</string>
+    <string name="t_intelligent_mode">智能模式</string>
+    <string name="t_global_schema">全局模式</string>
+    <string name="t_pattern_content">智能模式: 仅支持选择的App 应用进行加速，默认不加速任何应用和网页。\n全局模式: 全部APP跳转回中国，无法使用Facebook、  Google等</string>
+    <string name="t_go_ahead_and_use_it">还没有用过，快去用吧!</string>
+    <string name="t_your_membership_will_be">你的会员将于</string>
+    <string name="t_expire">到期</string>
+    <string name="t_your_account_has_expired">您的账号已过期，请重新登录</string>
+    <string name="t_random_line_acquisition_failure">随机线路获取失败</string>
+    <string name="t_no_news_yet">还没有消息</string>
+    <string name="t_your_invitation_code_has_been_generated">您的邀请码已生成</string>
+    <string name="t_click_replication">点击复制</string>
+    <string name="t_please_enter_the_invitation_code">请输入应邀码</string>
+    <string name="t_pull">提交</string>
+    <string name="t_please_check_the_details">*只能填写一次应邀码，详情请查看</string>
+    <string name="t_invitation_code_rules">«邀请码规则»</string>
+    <string name="t_please_select_the_line_first">请先选择线路</string>
+    <string name="t_share">分享</string>
+    <string name="t_editors_share_content">编辑分享内容</string>
+    <string name="t_unknown">未知</string>
+    <string name="t_sorry_your_credit_is_running_low">余额不足</string>
+    <string name="t_Immediate_recharge">立即充值</string>
+    <string name="t_your_membership_will_expire_tomorrow_please_recharge">你的会员将于明日到期、请充值：</string>
+    <string name="t_smart_mode_instructions">【智能模式使用说明】</string>
+    <string name="t_smart_mode_instructions_content">选择你要加速的App应用进行加速；未选择的应用不支持加速.</string>
+    <string name="t_immediate_experience">立即体验</string>
+    <string name="fingerprintLogin">使用指纹登录</string>
+    <string name="gestureLogin">使用手势登录</string>
+    <string name="fingerprint_hint">开启指纹登录后可使用指纹认证完成快速登录，设置仅对本机生效。如需修改指纹，请在系统设置中操作。</string>
+
+    <string name="login_success">登录成功</string>
+    <string name="login_cancel">您取消了登录</string>
+    <string name="login_gain_info_error">获取用户信息出错了</string>
+    <string name="tv_install_wachet">请先安装微信</string>
+
+    <string name="cancel">取消</string>
+    <string name="title">请选择时间</string>
+    <string name="confirm">确定</string>
+    <string name="year">年</string>
+    <string name="month">月</string>
+    <string name="day">日</string>
+    <string name="hour">时</string>
+    <string name="minute">分</string>
+    <string name="select_date">选择日期</string>
+    <string name="current_date">当前日期</string>
+    <string name="select_time">选择时间</string>
+    <string name="current_time">当前时间</string>
+    <string name="str_rlsb"><u>人脸识别</u></string>
+    <string name="str_zxsq"><u>征信授权</u></string>
+    <string name="str_zxcx"><u>征信查询</u></string>
+
+    <string-array name="main_tab_txt">
+        <item>服务</item>
+        <item>商城</item>　　
+        <item>看点</item>　　
+        <item>个人中心</item>　　
+    </string-array>
+
+
+    <string-array name="main_tab_login_or_register_txt">
+        <item>登录</item>　　
+        <item>注册</item>　　
+    </string-array>
+
+
+    <string-array name="main_tab_order">
+        <item> "全部" </item>　　
+        <item>"待付款"</item>　　
+        <item>"已付款"</item>　
+        <item>"已发货"</item>　
+        <item>"退换货"</item>　
+    </string-array>
+
+    <string-array name="main_tab_coupon">
+        <item>全部类型</item>　　
+        <item>未使用</item>　　
+        <item>已使用</item>　
+        <item>已过期</item>　
+    </string-array>
+
+
+    <string-array name="main_tab_center">
+        <item>会员中心</item>　　
+        <item>分销中心</item>　　
+        <item>订货商中心</item>　
+    </string-array>
+
+
+    <string-array name="main_tab_navigation">
+        <item>智能营销</item>　　
+        <item>信贷运营</item>　　
+        <item>贷后管理</item>　
+        <item>信贷风控</item>　
+        <item>合规平台</item>　
+        <item>智能绩效</item>　
+        <item>人力资源管理</item>
+        <item>系统设置</item>　　
+        　
+    </string-array>
+
+</resources>

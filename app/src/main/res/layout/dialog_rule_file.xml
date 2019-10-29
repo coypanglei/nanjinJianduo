@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/ll_top"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="400dp"
+            android:layout_marginBottom="20dp"
+            android:padding="10dp"
+            android:background="@drawable/bg_invitation_rule"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scrollbarSize="3dp"
+                android:scrollbarThumbHorizontal="@drawable/rule_scroll_bg"
+                android:scrollbarThumbVertical="@drawable/rule_scroll_bg">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="23dp"
+                        android:text="邀请码规则"
+                        android:textColor="@color/color_333333"
+                        android:textSize="17dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="22dp"
+                        android:layout_marginRight="22dp"
+                        android:layout_marginTop="20dp"
+                        android:text="1、月邀请50人以上，达到初级代理人，奖励如下："
+                        android:textColor="@color/color_f6760a"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:lineSpacingExtra="10dp"
+                        android:text="30天套餐，返80%\n90天套餐，返60%\n180天套餐，返50%\n360天套餐，返40%"
+                        android:textColor="@color/color_333333"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="22dp"
+                        android:layout_marginRight="22dp"
+                        android:text="2、月邀请500人以上，达到中级代理人，奖励如下："
+                        android:textColor="@color/color_f6760a"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:lineSpacingExtra="10dp"
+                        android:text="30天套餐，返80%，后续返20%\n90天套餐，返60%，后续返10%\n180天套餐，返50%，后续返10%\n360天套餐，返40%，后续返10%
+"
+                        android:textColor="@color/color_333333"
+                        android:textSize="14dp" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="22dp"
+                        android:layout_marginRight="22dp"
+                        android:text="3、月邀请2000人以上，达到高级代理人，奖励如下："
+                        android:textColor="@color/color_f6760a"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:lineSpacingExtra="10dp"
+                        android:text="30天套餐，返100%，后续返30%\n90天套餐，返60%，后续返15%\n180天套餐，返50%，后续返15%\n360天套餐，返40%，后续返15%
+"
+                        android:textColor="@color/color_333333"
+                        android:textSize="14dp" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="代理人规则"
+                        android:textColor="@color/color_333333"
+                        android:textSize="17dp"
+
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="30dp"
+                        android:layout_marginLeft="22dp"
+                        android:layout_marginRight="22dp"
+                        android:layout_marginTop="10dp"
+                        android:lineSpacingExtra="5dp"
+                        android:text="1、以月为单位对代理人进行考核，达到考核标准的代理人次月发放奖励，考核不合格者不予发放奖励。\n2、成为代理人的首月，邀请未达标奖励照常发放。\n3、考核奖励不限于邀请用户的当月充值金额，邀请用户的首次充值都在返还范围内。\n4、对于使用作弊手谋取奖励的用户，海龟有权利取消其奖励和邀请人资格。\n5、本活动最终解释权归江苏灵匠信息科技有限公司。\n"
+                        android:textColor="@color/color_333333"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+            </ScrollView>
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/icon_select_line_file_close" />
+
+    </LinearLayout>
+
+</RelativeLayout>

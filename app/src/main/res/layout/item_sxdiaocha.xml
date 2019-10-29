@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <LinearLayout
+        android:id="@+id/ll_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_36"
+        android:background="@color/color_white"
+        android:orientation="horizontal"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp">
+
+        <TextView
+            android:id="@+id/tv_xuhao"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="@color/color_fc1c1a1d"
+            android:textSize="@dimen/dp_11"
+
+            />
+
+        <TextView
+            android:id="@+id/tv_id_card"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            android:gravity="center"
+
+            android:textColor="@color/color_fc1c1a1d"
+            android:textSize="@dimen/dp_11"
+            />
+        <TextView
+            android:id="@+id/khxm"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:gravity="center"
+            android:id="@+id/sqsx"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+        <TextView
+            android:id="@+id/tv_dc_status"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+
+            android:gravity="center"
+
+
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+        <TextView
+            android:id="@+id/tv_dcmx"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:gravity="center"
+
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+        <TextView
+            android:id="@+id/tv_lc_status"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:gravity="center"
+
+
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+
+        <TextView
+            android:id="@+id/tv_slr"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:id="@+id/tv_ygxd"
+
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+        <TextView
+            android:layout_width="0dp"
+            android:id="@+id/tv_sxjg"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:gravity="center"
+
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        app:layout_constraintTop_toBottomOf="@id/ll_top"
+        />
+</android.support.constraint.ConstraintLayout>

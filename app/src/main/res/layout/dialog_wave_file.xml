@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.gcssloop.widget.RCRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rcrel_iv"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:round_corner="15dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/icon_spec_close" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="18dp"
+                android:text="实名认证须知"
+                android:textColor="@color/color_4a4a4a"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <com.shaoyue.weizhegou.widget.MaxHeightScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="27dp"
+                android:layout_marginBottom="27dp"
+                android:fillViewport="true"
+                app:mhsv_max_height="400dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <org.sufficientlysecure.htmltextview.HtmlTextView
+                        android:id="@+id/html_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="29dp"
+                        android:layout_marginRight="29dp" />
+
+
+                </LinearLayout>
+
+
+            </com.shaoyue.weizhegou.widget.MaxHeightScrollView>
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_wave" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</com.gcssloop.widget.RCRelativeLayout>
+
+
+
+
+

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
+
+    <!--左边 时间-->
+    <RelativeLayout
+        android:layout_width="120dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="right"
+            android:text="2019-09-09"
+            android:textColor="@color/color_333333"
+            android:textSize="11dp"/>
+    </RelativeLayout>
+
+    <!--中间 时间轴-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:id="@+id/ll_status"
+            android:layout_width="308dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/rl_left"
+            android:minHeight="110dp"
+            android:orientation="vertical"
+            android:paddingTop="70dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_progress_inquiry"
+                android:minHeight="110dp"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp">
+
+                    <TextView
+                        android:id="@+id/tv_left"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="30dp"
+                        android:text="查询机构:"
+                        android:textColor="@color/color_333333"
+                        android:textSize="@dimen/dp_15"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/dp_15"
+                        android:layout_marginRight="@dimen/dp_10"
+                        android:layout_toRightOf="@id/tv_left"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="江苏省连云港东海农商行\n牛山支行"
+                        android:textColor="@color/color_666666"
+                        android:textSize="14dp"
+                        />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp">
+
+                    <TextView
+                        android:id="@+id/tv_left_two"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="30dp"
+                        android:text="查询原因:"
+                        android:textColor="@color/color_333333"
+                        android:textSize="@dimen/dp_15"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/dp_15"
+                        android:layout_marginRight="@dimen/dp_10"
+                        android:layout_toRightOf="@id/tv_left_two"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="申请贷款"
+                        android:textColor="@color/color_666666"
+                        android:textSize="14dp"
+                        />
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_left"
+            android:layout_width="28dp"
+            android:layout_height="200dp"
+            android:layout_alignTop="@id/ll_status"
+            android:layout_alignBottom="@id/ll_status"
+            android:layout_marginLeft="20dp">
+
+
+            <ImageView
+                android:id="@+id/iv_status"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_centerInParent="true"/>
+
+            <ImageView
+                android:id="@+id/iv_bottom_line"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_below="@id/iv_status"
+                android:layout_centerInParent="true"
+                android:src="@color/color_23a7f0"/>
+
+            <ImageView
+                android:id="@+id/iv_top_line"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_above="@id/iv_status"
+                android:layout_centerInParent="true"
+                android:src="@color/color_23a7f0"/>
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iv_url"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginRight="30dp"
+            android:layout_toRightOf="@id/ll_status"
+            android:scaleType="center"
+            />
+    </RelativeLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/dp_12">
+
+    <RelativeLayout
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/corners_white_bg_15"
+        android:paddingBottom="30dp"
+
+        >
+
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="14dp"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@color/color_1e88e5" />
+
+        <TextView
+            android:id="@+id/tv_my_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="@dimen/dp_18"
+            android:text="新增家庭信息"
+            android:textColor="@color/color_2e2e2e"
+            android:textSize="@dimen/dp_13" />
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentRight="true"
+            android:paddingRight="20dp"
+            android:scaleType="center"
+            android:src="@drawable/dialog_line_close" />
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_close"
+            android:layout_centerHorizontal="true" />
+
+        <LinearLayout
+            android:id="@+id/ll_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@id/rv_list"
+            android:layout_centerHorizontal="true"
+
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@drawable/blue_btn_bg_kong_5dp"
+            android:visibility="invisible">
+
+            <TextView
+                android:id="@+id/tv_add"
+                android:layout_width="97dp"
+                android:layout_height="33dp"
+                android:background="@drawable/blue_btn_5dp"
+                android:gravity="center"
+                android:text="添加"
+                android:textColor="@color/white"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/tv_cancel"
+                android:layout_width="97dp"
+                android:layout_height="33dp"
+                android:gravity="center"
+                android:text="取消"
+                android:textColor="@color/color_23a7f0"
+                android:textSize="14dp"
+
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
+
+

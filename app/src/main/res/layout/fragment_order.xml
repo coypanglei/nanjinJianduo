@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_f8f8f9">
+        <com.shizhefei.view.indicator.ScrollIndicatorView
+            android:id="@+id/moretab_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/color_f8f8f9"
+            android:fillViewport="false" />
+        <android.support.v4.view.ViewPager
+            android:layout_below="@id/moretab_indicator"
+            android:id="@+id/moretab_viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/view_top" />
+</LinearLayout>

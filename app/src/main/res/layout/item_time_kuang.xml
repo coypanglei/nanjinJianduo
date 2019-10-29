@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
+
+    <RelativeLayout
+        android:layout_width="@dimen/dp_260"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        >
+
+
+        <TextView
+            android:id="@+id/tv_time"
+            style="@style/IDEditStyle"
+            android:layout_width="159dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="9dp"
+            android:drawableRight="@drawable/icon_bottom_go"
+            android:hint="截止于"
+            android:paddingRight="8dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/color_666666"
+
+            />
+
+        <TextView
+            android:id="@+id/tv_name_title"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_toLeftOf="@id/tv_time"
+            android:drawableLeft="@drawable/icon_left_red"
+            android:gravity="center"
+            android:textColor="@color/color_3b3b3b"
+            android:textSize="11dp"
+            tools:text="证件有效期:" />
+    </RelativeLayout>
+</RelativeLayout>

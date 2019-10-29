@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/dp_12">
+
+    <RelativeLayout
+        android:layout_width="600dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/corners_white_bg_15">
+
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="14dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@color/color_1e88e5" />
+
+        <TextView
+            android:id="@+id/tv_my_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="@dimen/dp_18"
+            android:text="主查"
+            android:textColor="@color/color_2e2e2e"
+            android:textSize="@dimen/dp_13" />
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentRight="true"
+            android:paddingRight="20dp"
+            android:scaleType="center"
+            android:src="@drawable/dialog_line_close" />
+
+        <LinearLayout
+            android:id="@+id/ll_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_close"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_select"
+                android:visibility="gone"
+                android:layout_width="430dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dp_11">
+
+
+                <com.shaoyue.weizhegou.widget.DropDownView
+                    android:id="@+id/ddv_xb"
+
+                    android:layout_width="294dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="11dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/color_666666"
+                    android:textSize="11dp" />
+
+                <TextView
+                    android:id="@+id/tv_nl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_toLeftOf="@id/ddv_xb"
+                    android:drawableLeft="@drawable/icon_left_red"
+                    android:gravity="center"
+                    android:text="下环节审核人员"
+                    android:textColor="@color/color_666666"
+                    android:textSize="11dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="430dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+
+                android:layout_marginTop="@dimen/dp_11">
+
+                <ImageView
+                    android:id="@+id/iv_qianzi"
+                    android:layout_width="294dp"
+                    android:layout_height="189dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="11dp"
+                    android:padding="@dimen/dp_4"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/icon_blue_qianzi"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/iv_qianzi"
+                    android:drawableLeft="@drawable/icon_left_red"
+                    android:gravity="center"
+                    android:text="当前环节审批人签名"
+                    android:textColor="@color/color_666666"
+                    android:textSize="11dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="430dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+
+                android:layout_marginTop="11dp">
+
+
+                <EditText
+                    android:id="@+id/et_ms"
+                    style="@style/AddEditStyle"
+                    android:layout_width="294dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="9dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_toLeftOf="@id/et_nl"
+                    android:gravity="center"
+                    android:text="备注:"
+                    android:textColor="@color/color_666666"
+                    android:textSize="11dp" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_top"
+            android:layout_marginBottom="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_30"
+            android:background="@drawable/blue_btn_bg_kong_5dp">
+
+            <TextView
+                android:id="@+id/tv_add"
+                android:layout_width="97dp"
+                android:layout_height="33dp"
+                android:background="@drawable/blue_btn_5dp"
+                android:gravity="center"
+                android:text="保存"
+                android:textColor="@color/white"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/tv_cancel"
+                android:layout_width="97dp"
+                android:layout_height="33dp"
+                android:gravity="center"
+                android:text="取消"
+                android:textColor="@color/color_23a7f0"
+                android:textSize="14dp"
+
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
+
+

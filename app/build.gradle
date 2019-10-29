@@ -1,0 +1,278 @@
+apply plugin: 'com.android.application'
+
+Properties props = new Properties()
+props.load(project.rootProject.file('config.properties').newDataInputStream())
+//注解专用
+import org.aspectj.bridge.IMessage
+import org.aspectj.bridge.MessageHandler
+import org.aspectj.tools.ajc.Main
+
+final def log = project.logger
+final def variants = project.android.applicationVariants
+
+variants.all { variant ->
+//    if (!variant.buildType.isDebuggable()) {
+//        log.debug("Skipping non-debuggable build type '${variant.buildType.name}'.")
+//        return;
+//    }
+
+    JavaCompile javaCompile = variant.javaCompile
+    javaCompile.doLast {
+        String[] args = ["-showWeaveInfo",
+                         "-1.8",
+                         "-inpath", javaCompile.destinationDir.toString(),
+                         "-aspectpath", javaCompile.classpath.asPath,
+                         "-d", javaCompile.destinationDir.toString(),
+                         "-classpath", javaCompile.classpath.asPath,
+                         "-bootclasspath", project.android.bootClasspath.join(File.pathSeparator)]
+        log.debug "ajc args: " + Arrays.toString(args)
+
+        MessageHandler handler = new MessageHandler(true);
+        new Main().run(args, handler);
+        for (IMessage message : handler.getMessages(null, true)) {
+            switch (message.getKind()) {
+                case IMessage.ABORT:
+                case IMessage.ERROR:
+                case IMessage.FAIL:
+                    log.error message.message, message.thrown
+                    break;
+                case IMessage.WARNING:
+                    log.warn message.message, message.thrown
+                    break;
+                case IMessage.INFO:
+                    log.info message.message, message.thrown
+                    break;
+                case IMessage.DEBUG:
+                    log.debug message.message, message.thrown
+                    break;
+            }
+        }
+    }
+}
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        applicationId props['S_APP_ID']
+
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+
+        manifestPlaceholders = [
+                UMENG_APPKEY_VALUE : props['S_UMENG_APP_KEY_VALUE'],
+                UMENG_CHANNEL_VALUE: "umeng",
+
+        ]
+
+        multiDexEnabled true
+
+        ndk {
+            abiFilters 'x86', 'armeabi-v7a'
+        }
+    }
+
+    signingConfigs {
+        release {
+            keyAlias props['KEY_ALIAS']
+            keyPassword props['KEY_PASSWORD']
+            storeFile file(props['KEYSTORE_FILE'])
+            storePassword props['KEYSTORE_PASSWORD']
+        }
+    }
+    buildTypes {
+        debug {
+
+            buildConfigField "String", "BASE_URL", "\"" + props['S_BASE_URL'] + "\""
+            buildConfigField "String", "WX_APP_ID", "\"" + props['S_WX_APP_ID_VALUE'] + "\""
+            buildConfigField "String", "BUILD_NAME", "\"" + props['S_APP_BUILD_NAME'] + "\""
+
+            minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+
+            signingConfig signingConfigs.release
+
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+        }
+
+
+        release {
+            buildConfigField "String", "BASE_URL", "\"" + props['S_BASE_URL'] + "\""
+            buildConfigField "String", "WX_APP_ID", "\"" + props['S_WX_APP_ID_VALUE'] + "\""
+            buildConfigField "String", "BUILD_NAME", "\"" + props['S_APP_BUILD_NAME'] + "\""
+
+            minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+
+            signingConfig signingConfigs.release
+
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+
+            android.applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = props['S_APP_BUILD_NAME'] + "_android_v${defaultConfig.versionName}_${defaultConfig.versionCode}_${variant.productFlavors[0].name}.apk"
+                }
+            }
+        }
+    }
+
+
+    flavorDimensions 'default'
+
+    productFlavors {
+        official {}
+
+        ANDROID_TENCENT {}
+        ANDROID_ANZHI {}
+        ANDROID_360 {}
+        ANDROID_BAIDU {}
+        ANDROID_MI {}
+        ANDROID_HUAWEI {}
+        ANDROID_MEIZU {}
+        ANDROID_WANDOUJIA {}
+        ANDROID_91 {}
+
+        productFlavors.all { flavor ->
+            flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+        }
+
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+    packagingOptions {
+        doNotStrip '*/mips/*.so'
+        doNotStrip '*/mips64/*.so'
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'org.aspectj:aspectjrt:1.8.10'
+    //noinspection GradleCompatible
+    implementation "com.android.support:appcompat-v7:$supportVersion"
+    implementation "com.android.support:support-v4:$supportVersion"
+    implementation "com.android.support:recyclerview-v7:$supportVersion"
+    implementation "com.android.support:cardview-v7:$supportVersion"
+
+    // 内存泄露检测
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.1'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.1'
+
+    // Optional, if you use support library fragments:
+    debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.1'
+
+    // 工具集
+    implementation 'com.blankj:utilcode:1.19.0'
+
+    // 视图依赖注入
+    implementation 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+    compile 'com.android.support:multidex:1.0.0'
+    // gson
+    implementation 'com.google.code.gson:gson:2.7'
+
+    //高斯模糊
+    implementation 'jp.wasabeef:glide-transformations:4.0.1'
+
+    // 事件总线
+    implementation 'org.greenrobot:eventbus:3.1.1'
+
+    // 图片
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+    //签字板
+    implementation'com.github.F1ReKing:SignatureView:v1.0.0'
+
+    // 网络框架
+    implementation 'com.lzy.net:okgo:3.0.4'
+    implementation 'com.lzy.widget:imagepicker:0.5.5'
+
+    // Adapter封装类
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.41'
+
+    // 自定义加载
+    implementation 'com.dyhdyh.loadingbar:loadingbar:1.4.4'
+
+    // 进度条
+    implementation 'com.github.ybq:Android-SpinKit:1.2.0'
+    compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
+
+    // 头像
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'com.airbnb.android:lottie:2.2.0'
+    implementation project(':vendorlib')
+    implementation project(':libracore')
+    implementation project(':citypickerview')
+    implementation project(':pictureselector')
+
+    // 屏幕适配
+    implementation 'me.jessyan:autosize:1.1.2'
+
+    // 浏览器
+    implementation 'com.just.agentweb:agentweb:4.0.2'
+
+    // 下拉刷新
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
+
+    //广告位
+    compile 'com.youth.banner:banner:1.4.10'
+
+    //tabHost
+    implementation 'com.shizhefei:ViewPagerIndicator:1.1.7'
+
+    //沉浸式导航栏
+    implementation 'com.gyf.immersionbar:immersionbar:2.3.3-beta15'
+
+    //圆角布局
+    implementation 'com.gcssloop.widget:rclayout:1.8.1'
+
+    implementation files('libs/umeng-share-core-6.9.3.jar')
+    implementation files('libs/umeng-sharetool-6.9.3.jar')
+    implementation files('libs/umeng-share-wechat-simplify-6.9.3.jar')
+
+    //权限
+    implementation 'com.yanzhenjie:permission:2.0.0-rc12'
+
+    // 自适用布局
+    implementation 'com.zhy:autolayout:1.4.5'
+    implementation 'com.github.zcweng:switch-button:0.0.3@aar'
+    implementation 'cn.bingoogolapple:bga-banner:2.2.5@aar'
+
+    //腾讯地图
+
+
+    implementation 'com.hyman:flowlayout-lib:1.1.2'
+//
+    //文字跑马灯
+    implementation 'com.sunfusheng:marqueeview:1.3.3'
+    //刷新控件
+    implementation 'cn.bingoogolapple:bga-refreshlayout:1.1.8@aar'
+//    compile project(path: ':library')
+
+    //SpringView core library (only include DefaultHeader/Footer)
+    implementation 'com.liaoinstan.springview:library:1.5.1'
+
+    //other Headers/Footers, choose one or more that you like
+    implementation 'com.liaoinstan.springview:AcfunHeader:1.5.1'
+
+    //瀑布流布局
+    implementation 'com.google.android:flexbox:1.0.0'
+    implementation 'org.jsoup:jsoup:1.9.2'
+    //htmltextview
+    implementation 'org.sufficientlysecure:html-textview:3.6'
+    implementation 'org.apache.commons:commons-lang3:3.7'
+
+    //约束布局
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+
+    implementation 'top.zibin:Luban:1.1.8'
+}
+

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="2dp"
+    android:layout_marginRight="2dp"
+    android:background="@color/color_f8f8f9"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp">
+
+            <ImageView
+                android:id="@+id/iv_all_good_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:src="@drawable/app_home_logo" />
+
+            <ImageView
+                android:id="@+id/iv_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="7dp"
+                android:src="@drawable/icon_info" />
+
+            <RelativeLayout
+                android:id="@+id/ll_search"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="15dp"
+                android:layout_toLeftOf="@id/iv_info"
+                android:layout_toRightOf="@id/iv_all_good_logo"
+                android:background="@drawable/icon_search_bg">
+
+                <TextView
+                    android:id="@+id/tv_search_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:drawableLeft="@drawable/ic_search_left"
+                    android:drawablePadding="4dp"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="search"
+                    android:textColor="@color/color_a4a4a4"
+                    android:textSize="12dp" />
+
+                <ImageView
+                    android:id="@+id/iv_clear"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="center"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_default_cancel" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <com.flyco.tablayout.CommonTabLayout
+            android:id="@+id/tl_all_commodity"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:layout_marginRight="50dp"
+            tl:tl_iconVisible="false"
+            tl:tl_indicator_color="@color/color_4a90e2"
+            tl:tl_indicator_width="60dp"
+            tl:tl_tab_space_equal="true"
+
+            tl:tl_textSelectColor="@color/color_4a90e2"
+            tl:tl_textUnselectColor="@color/color_4a4a4a"
+            tl:tl_textsize="15dp" />
+
+    </LinearLayout>
+
+    <include layout="@layout/layout_dropmenu_goodcomment" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/empty_view" />
+
+        <com.liaoinstan.springview.widget.SpringView
+            android:id="@+id/sv_one_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.shaoyue.weizhegou.widget.MyScrollView
+                android:id="@+id/msv_home_all"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:scrollbars="none">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_goods"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </com.shaoyue.weizhegou.widget.MyScrollView>
+        </com.liaoinstan.springview.widget.SpringView>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

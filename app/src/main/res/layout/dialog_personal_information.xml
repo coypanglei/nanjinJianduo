@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/dp_12">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/corners_white_bg_15"
+        android:paddingLeft="20dp"
+
+
+        android:paddingBottom="30dp"
+        >
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="14dp"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@color/color_1e88e5"/>
+
+        <TextView
+            android:id="@+id/tv_my_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="@dimen/dp_18"
+            android:text="个人资料"
+            android:textColor="@color/color_2e2e2e"
+            android:textSize="@dimen/dp_13"
+            />
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentRight="true"
+            android:paddingRight="20dp"
+            android:scaleType="center"
+            android:src="@drawable/dialog_line_close"
+            />
+
+        <TextView
+            android:id="@+id/tv_name_title"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignRight="@id/tv_my_info"
+            android:layout_marginTop="@dimen/dp_56"
+            android:gravity="center"
+            android:text="姓名:"
+            android:textColor="@color/color_666666"
+            android:textSize="12dp"/>
+
+        <EditText
+            android:id="@+id/tv_name"
+            style="@style/CenterInfoStyle"
+            android:layout_width="150dp"
+            android:layout_alignTop="@id/tv_name_title"
+            android:layout_marginLeft="17dp"
+            android:layout_toRightOf="@id/tv_name_title"
+            android:enabled="false"
+            android:text="王蓝光"
+            android:textColor="@color/color_23a7f0"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tv_name"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/tv_name">
+
+            <TextView
+                android:id="@+id/tv_cancel_name"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:text="取消"
+                android:textColor="@color/color_959595"
+                android:textSize="@dimen/dp_12"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/tv_change_name"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:tag="change"
+                android:text="修改"
+                android:textColor="@color/color_2e8bfff"
+                android:textSize="@dimen/dp_12"/>
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_profile_picture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_name_title"
+            android:layout_alignRight="@id/tv_name_title"
+            android:layout_marginTop="@dimen/dp_26"
+            android:text="用户头像:"
+            android:textColor="@color/color_666666"
+            android:textSize="12dp"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                      android:id="@+id/profile_image"
+                                                      android:layout_width="80dp"
+                                                      android:layout_height="80dp"
+                                                      android:layout_alignTop="@id/tv_profile_picture"
+                                                      android:layout_marginLeft="33dp"
+                                                      android:layout_marginTop="5dp"
+                                                      android:layout_toRightOf="@id/tv_profile_picture"
+                                                      android:src="@drawable/icon_sex_man"
+                                                      app:civ_fill_color="@color/white"/>
+
+        <TextView
+            android:id="@+id/tv_change_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/profile_image"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_toRightOf="@id/profile_image"
+            android:text="修改"
+            android:textColor="@color/color_2e8bfff"
+            android:textSize="@dimen/dp_12"
+            />
+
+        <TextView
+            android:id="@+id/tv_branch"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_below="@id/profile_image"
+            android:layout_alignRight="@id/tv_my_info"
+            android:layout_marginTop="@dimen/dp_14"
+            android:gravity="center"
+            android:text="所在支行:"
+            android:textColor="@color/color_666666"
+            android:textSize="12dp"/>
+
+        <EditText
+            android:id="@+id/et_branch"
+            style="@style/CenterInfoStyle"
+            android:layout_width="150dp"
+            android:layout_alignTop="@id/tv_branch"
+            android:layout_marginLeft="17dp"
+            android:layout_toRightOf="@id/tv_branch"
+            android:enabled="false"
+            android:textColor="@color/color_23a7f0"
+            tools:text="牛山支行"
+            />
+
+        <TextView
+            android:id="@+id/tv_position"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_below="@id/tv_branch"
+            android:layout_alignRight="@id/tv_my_info"
+            android:layout_marginTop="@dimen/dp_14"
+            android:gravity="center"
+            android:text="职位:"
+            android:textColor="@color/color_666666"
+            android:textSize="12dp"/>
+
+        <EditText
+            android:id="@+id/et_position"
+            style="@style/CenterInfoStyle"
+            android:layout_width="150dp"
+            android:layout_alignTop="@id/tv_position"
+            android:layout_marginLeft="17dp"
+            android:layout_toRightOf="@id/tv_position"
+            android:enabled="false"
+            android:textColor="@color/color_23a7f0"
+            tools:text="营销经理"
+            />
+
+        <TextView
+            android:id="@+id/tv_phone_num"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_below="@id/tv_position"
+            android:layout_alignRight="@id/tv_my_info"
+            android:layout_marginTop="@dimen/dp_14"
+            android:gravity="center"
+            android:text="手机号码:"
+            android:textColor="@color/color_666666"
+            android:textSize="12dp"/>
+
+        <EditText
+            android:id="@+id/et_phone_num"
+            style="@style/CenterInfoStyle"
+            android:layout_width="150dp"
+            android:layout_alignTop="@id/tv_phone_num"
+            android:layout_marginLeft="17dp"
+            android:layout_toRightOf="@id/tv_phone_num"
+            android:enabled="false"
+            android:inputType="phone"
+            android:text="1599999999"
+            android:textColor="@color/color_666666"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/et_phone_num"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/et_phone_num">
+
+            <TextView
+                android:id="@+id/tv_cancel_phone_num"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:text="取消"
+                android:textColor="@color/color_959595"
+                android:textSize="@dimen/dp_12"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/tv_change_phone_num"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:tag="change"
+                android:text="修改"
+                android:textColor="@color/color_2e8bfff"
+                android:textSize="@dimen/dp_12"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_email"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_below="@id/tv_phone_num"
+            android:layout_alignRight="@id/tv_my_info"
+            android:layout_marginTop="@dimen/dp_14"
+            android:gravity="center"
+            android:text="邮件:"
+            android:textColor="@color/color_666666"
+            android:textSize="12dp"/>
+
+        <EditText
+            android:id="@+id/et_email"
+            style="@style/CenterInfoStyle"
+            android:layout_width="150dp"
+            android:layout_alignTop="@id/tv_email"
+            android:layout_marginLeft="17dp"
+            android:layout_toRightOf="@id/tv_email"
+            android:enabled="false"
+            android:text="1599999999@qq.com"
+            android:textColor="@color/color_666666"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/et_email"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/et_email">
+
+            <TextView
+                android:id="@+id/tv_cancel_email"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:text="取消"
+                android:textColor="@color/color_959595"
+                android:textSize="@dimen/dp_12"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/tv_change_email"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:tag="change"
+                android:text="修改"
+                android:textColor="@color/color_2e8bfff"
+                android:textSize="@dimen/dp_12"/>
+        </LinearLayout>
+
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                      android:id="@+id/profile_image_lager"
+                                                      android:layout_width="155dp"
+                                                      android:layout_height="155dp"
+                                                      android:layout_alignParentRight="true"
+                                                      android:layout_marginLeft="33dp"
+                                                      android:layout_marginTop="65dp"
+                                                      android:layout_marginRight="38dp"
+                                                      android:src="@drawable/icon_sex_man"
+                                                      app:civ_fill_color="@color/white"/>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/profile_image_lager"
+            android:layout_alignLeft="@id/profile_image_lager"
+            android:layout_alignRight="@id/profile_image_lager"
+            android:layout_marginTop="13dp"
+            android:gravity="center"
+            android:textSize="@dimen/dp_12"
+            />
+
+    </RelativeLayout>
+
+</RelativeLayout>
+
+

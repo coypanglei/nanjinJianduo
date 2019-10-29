@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/dp_12">
+
+    <RelativeLayout
+        android:layout_width="600dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/corners_white_bg_15"
+        android:paddingBottom="30dp">
+
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="14dp"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@color/color_1e88e5" />
+
+        <TextView
+            android:id="@+id/tv_my_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="@dimen/dp_18"
+            android:text="开始调查"
+            android:textColor="@color/color_2e2e2e"
+            android:textSize="@dimen/dp_13" />
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentRight="true"
+            android:paddingRight="20dp"
+            android:scaleType="center"
+            android:src="@drawable/dialog_line_close" />
+
+        <View
+            android:id="@+id/view_top"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_below="@id/iv_close"
+            android:background="@color/color_f2f2f2" />
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/view_top"
+            android:id="@+id/sc_all"
+            android:visibility="invisible"
+            android:fillViewport="true"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_30">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="22dp"
+                        android:drawablePadding="3dp"
+                        android:gravity="center"
+                        android:text="基本信息"
+                        android:textColor="@color/color_23a7f0"
+                        android:textSize="@dimen/dp_13" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_c0c0c0" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+
+                    android:layout_below="@id/iv_close"
+                    android:background="@color/color_f2f2f2" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_30">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="22dp"
+                        android:drawablePadding="3dp"
+                        android:gravity="center"
+                        android:text="经营信息"
+                        android:textColor="@color/color_23a7f0"
+                        android:textSize="@dimen/dp_13" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_c0c0c0" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_list_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:layout_below="@id/iv_close"
+                    android:background="@color/color_f2f2f2" />
+
+                <LinearLayout
+                    android:layout_marginTop="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_name_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_toLeftOf="@id/ddv_xb"
+                        android:drawableLeft="@drawable/icon_left_red"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/dp_5"
+                        android:textColor="@color/color_666666"
+                        android:textSize="11dp"
+                        android:text="授信调查模板" />
+
+                    <com.shaoyue.weizhegou.widget.DropDownView
+                        android:id="@+id/ddv_xb"
+                        android:layout_width="200dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="9dp"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/color_666666"
+                        app:itemArray="@array/dropdown_array_start_dc"
+                        android:textSize="11dp" />
+
+                    <com.libracore.lib.widget.StateButton
+                        android:id="@+id/sb_edit"
+                        android:layout_width="83dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dp_27"
+                        android:paddingLeft="6dp"
+                        android:paddingTop="1dp"
+                        android:paddingRight="6dp"
+                        android:paddingBottom="1dp"
+                        android:text="开始调查"
+                        android:textSize="12dp"
+                        app:normalBackgroundColor="@color/color_23a7f0"
+                        app:normalTextColor="@color/white"
+                        app:pressedBackgroundColor="@color/color_48b2ed"
+                        app:pressedTextColor="@color/white"
+                        app:radius="2dp" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+    </RelativeLayout>
+
+</RelativeLayout>
+
+

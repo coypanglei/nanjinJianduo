@@ -1,0 +1,13 @@
+<resources>
+    <!-- Example customization of dimensions originally defined in res/values/dimens.xml
+         (such as screen margins) for screens with more than 820dp of available width. This
+         would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively). -->
+    <dimen name="home_progress">400dp</dimen>
+    <dimen name="scan_margn">350dp</dimen>
+    <dimen name="home_progress_width">30dp</dimen>
+    <dimen name="currency_three_hundred_sixty">300px</dimen>
+    <dimen name="currency_activity_height">400px</dimen>
+    <dimen name="currency_load">10px</dimen>
+    <dimen name="speed_home_center">215px</dimen>
+
+</resources>

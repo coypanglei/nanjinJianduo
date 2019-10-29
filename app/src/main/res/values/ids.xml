@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="anim_icon" type="id"/>
+    <item type="id" name="hold_dropdown_map"/>
+    <item type="id" name="hold_dropdown_key"/>
+</resources>

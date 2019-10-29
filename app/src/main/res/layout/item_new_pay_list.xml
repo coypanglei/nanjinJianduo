@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+
+    >
+
+    <RelativeLayout
+        android:id="@+id/rl_pay_bg"
+        android:layout_width="match_parent"
+        android:layout_height="97dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/speed_button_bg">
+
+        <ImageView
+            android:id="@+id/iv_pay_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="18dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/iv_pay_icon"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:textColor="@color/color_333333"
+                android:textSize="17dp"
+                tools:text="30天VIP" />
+
+            <TextView
+                android:id="@+id/jian_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="7dp"
+                android:background="@drawable/icon_pay_jian_bg"
+                android:padding="3dp"
+                android:textColor="@color/color_ee5002"
+                android:textSize="9dp"
+                android:visibility="invisible"
+                tools:text="立减3元" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_sub_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/iv_pay_icon"
+            tools:text="买30天送30天"
+            android:textSize="11dp" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="24dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_price_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="￥"
+                android:textColor="@color/color_949494"
+                android:textSize="17dp" />
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="35"
+                android:textColor="@color/color_ee5002"
+                android:textSize="30dp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_tuijian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/icon_pay_tujian"
+        android:visibility="invisible" />
+</RelativeLayout>

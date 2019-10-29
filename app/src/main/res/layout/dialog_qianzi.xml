@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/dp_12">
+
+    <RelativeLayout
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/corners_white_bg_15">
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="14dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@color/color_1e88e5"/>
+
+        <TextView
+            android:id="@+id/tv_my_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="@dimen/dp_18"
+            android:text="签字板"
+            android:textColor="@color/color_2e2e2e"
+            android:textSize="@dimen/dp_13"
+            />
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentRight="true"
+            android:paddingRight="20dp"
+            android:scaleType="center"
+            android:src="@drawable/dialog_line_close"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_close"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:background="@drawable/icon_xuxian"/>
+
+            <com.f1reking.signatureview.SignatureView
+                android:id="@+id/sign_view"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_below="@id/iv_close"
+                app:backColor="@color/white"
+                app:penColor="@color/black"
+                app:penWidth="6"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_23a7f0"/>
+           <com.gcssloop.widget.RCRelativeLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               app:round_corner_bottom_right="15dp"
+               app:round_corner_bottom_left="15dp">
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="50dp"
+                   android:orientation="horizontal">
+
+                   <TextView
+                       android:id="@+id/tv_clear"
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="1"
+                       android:text="清除"
+                       android:textColor="@color/color_23a7f0"
+                       android:textSize="18dp"
+                       android:gravity="center"
+                       />
+
+                   <TextView
+                       android:id="@+id/tv_ok"
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:textSize="18dp"
+                       android:gravity="center"
+                       android:layout_weight="1"
+                       android:background="@color/color_23a7f0"
+                       android:text="确认"
+                       android:textColor="@color/white"
+                       />
+
+               </LinearLayout>
+           </com.gcssloop.widget.RCRelativeLayout>
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
+
+

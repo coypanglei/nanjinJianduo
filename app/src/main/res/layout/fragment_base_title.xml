@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+
+    <com.shaoyue.weizhegou.widget.CommonTopBar xmlns:custom="http://schemas.android.com/apk/res-auto"
+                                               android:id="@+id/top_bar"
+                                               android:layout_width="match_parent"
+                                               android:layout_height="47dp"
+                                               custom:TextCenter="无标题"
+                                               custom:TextColorCenter="@color/color_white"
+                                               custom:TextColorRight="@color/color_white"
+                                               custom:TextSizeCenter="20dp"
+                                               custom:isShowImgLeft="true"
+                                               custom:isShowRight="false"
+        />
+
+    <ViewStub
+        android:id="@+id/layout_content"
+        android:layout_width="match_parent"
+        android:background="@color/black"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

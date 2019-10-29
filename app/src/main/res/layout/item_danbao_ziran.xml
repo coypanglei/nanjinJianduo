@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_36"
+        android:background="@color/color_f7f7f7"
+        android:orientation="horizontal"
+        android:id="@+id/ll_top"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:id="@+id/tv_xuhao"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11"
+
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:id="@+id/tv_xm"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11"
+            />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            android:gravity="center"
+            android:id="@+id/tv_sfzh"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11"
+            />
+
+        <TextView
+            android:id="@+id/tv_hyzk"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11"
+            />
+
+        <TextView
+            android:id="@+id/tv_dbrpo"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11"
+            />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            android:gravity="center"
+            android:id="@+id/tv_dbrposfz"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:id="@+id/tv_ms"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11"
+            />
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        app:layout_constraintTop_toBottomOf="@id/ll_top"
+        />
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/dp_12">
+
+    <RelativeLayout
+        android:layout_width="415dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/corners_white_bg_15"
+        android:paddingBottom="30dp">
+
+        <LinearLayout
+            android:id="@+id/ll_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@drawable/blue_btn_bg_kong_5dp"
+            >
+
+            <TextView
+                android:id="@+id/tv_add"
+                android:layout_width="97dp"
+                android:layout_height="33dp"
+                android:background="@drawable/blue_btn_5dp"
+                android:gravity="center"
+                android:text="添加"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                />
+
+            <TextView
+                android:id="@+id/tv_cancel"
+                android:layout_width="97dp"
+                android:layout_height="33dp"
+                android:gravity="center"
+                android:text="取消"
+                android:textColor="@color/color_23a7f0"
+                android:textSize="14dp"
+
+                />
+        </LinearLayout>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="14dp"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@color/color_1e88e5"/>
+
+        <TextView
+            android:id="@+id/tv_my_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="@dimen/dp_18"
+            android:text="新增家庭信息"
+            android:textColor="@color/color_2e2e2e"
+            android:textSize="@dimen/dp_13"
+            />
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentRight="true"
+            android:paddingRight="20dp"
+            android:scaleType="center"
+            android:src="@drawable/dialog_line_close"
+            />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/ll_bottom"
+            android:layout_below="@id/iv_close"
+            android:scrollbars="none">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_13"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingRight="20dp"
+                android:paddingBottom="20dp">
+
+                <RelativeLayout
+                    android:layout_width="@dimen/dp_274"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true">
+
+
+                    <EditText
+                        android:id="@+id/et_name"
+                        style="@style/AddEditStyle"
+                        android:layout_width="206dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="9dp"
+                        android:hint="请输入姓名"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_name_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_toLeftOf="@id/et_name"
+                        android:drawableLeft="@drawable/icon_left_red"
+                        android:gravity="center"
+                        android:text="姓名:"
+                        android:textColor="@color/color_666666"
+                        android:textSize="11dp"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="@dimen/dp_274"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="11dp">
+
+
+                    <EditText
+                        android:id="@+id/et_id_card"
+                        style="@style/AddEditStyle"
+                        android:layout_width="206dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="9dp"
+                        android:digits="0123456789xyzXYZ"
+                        android:hint="请输入身份证号码"
+                        android:inputType="number"
+                        android:maxLength="18"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_name_id_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_toLeftOf="@id/et_id_card"
+                        android:drawableLeft="@drawable/icon_left_red"
+                        android:gravity="center"
+                        android:text="身份证号:"
+                        android:textColor="@color/color_666666"
+                        android:textSize="11dp"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="@dimen/dp_274"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="11dp">
+
+
+                    <EditText
+                        android:id="@+id/et_nl"
+                        style="@style/AddEditStyle"
+                        android:layout_width="206dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="9dp"
+                        android:hint="请输入年龄"
+                        android:inputType="number"
+                        android:maxLength="3"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_toLeftOf="@id/et_nl"
+                        android:drawableLeft="@drawable/icon_left_red"
+                        android:gravity="center"
+                        android:text="年龄:"
+                        android:textColor="@color/color_666666"
+                        android:textSize="11dp"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="@dimen/dp_274"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/dp_11">
+
+
+                    <com.shaoyue.weizhegou.widget.DropDownView
+                        android:id="@+id/ddv_xb"
+                        android:layout_width="206dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="9dp"
+                        android:gravity="center_vertical"
+                        android:text="请选择性别"
+                        android:textColor="@color/color_666666"
+                        android:textSize="11dp"
+                        app:itemArray="@array/dropdown_array_xb"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_nl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_toLeftOf="@id/ddv_xb"
+                        android:drawableLeft="@drawable/icon_left_red"
+                        android:gravity="center"
+                        android:text="性别:"
+                        android:textColor="@color/color_666666"
+                        android:textSize="11dp"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="@dimen/dp_274"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/dp_11">
+
+
+                    <com.shaoyue.weizhegou.widget.DropDownView
+                        android:id="@+id/ddv_mz"
+                        android:layout_width="206dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="9dp"
+                        android:gravity="center_vertical"
+                        android:text="请选择民族"
+                        android:textColor="@color/color_666666"
+                        android:textSize="11dp"
+                        app:itemArray="@array/dropdown_array_mz"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_mz"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_toLeftOf="@id/ddv_mz"
+                        android:drawableLeft="@drawable/icon_left_red"
+                        android:gravity="center"
+                        android:text="民族:"
+                        android:textColor="@color/color_666666"
+                        android:textSize="11dp"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="@dimen/dp_274"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/dp_11">
+
+
+                    <com.shaoyue.weizhegou.widget.DropDownView
+                        android:id="@+id/ddv_xw"
+                        android:layout_width="206dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="9dp"
+                        android:gravity="center_vertical"
+                        android:text="请选择学位"
+                        android:textColor="@color/color_666666"
+                        android:textSize="11dp"
+                        app:itemArray="@array/dropdown_array_xw"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_xw"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_toLeftOf="@id/ddv_xw"
+                        android:drawableLeft="@drawable/icon_left_red"
+                        android:gravity="center"
+                        android:text="学位:"
+                        android:textColor="@color/color_666666"
+                        android:textSize="11dp"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="@dimen/dp_274"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/dp_11">
+
+
+                    <com.shaoyue.weizhegou.widget.DropDownView
+                        android:id="@+id/ddv_xl"
+                        android:layout_width="206dp"
+                        android:layout_height="30dp"
+
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="9dp"
+                        android:gravity="center_vertical"
+                        android:text="请选择学历"
+                        android:textColor="@color/color_666666"
+                        android:textSize="11dp"
+                        app:itemArray="@array/dropdown_array_xl"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_xl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_toLeftOf="@id/ddv_xl"
+                        android:drawableLeft="@drawable/icon_left_red"
+                        android:gravity="center"
+                        android:text="学历:"
+                        android:textColor="@color/color_666666"
+                        android:textSize="11dp"/>
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="@dimen/dp_274"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/dp_11">
+
+
+                    <com.shaoyue.weizhegou.widget.DropDownView
+                        android:id="@+id/ddv_jkzk"
+                        android:layout_width="206dp"
+                        android:layout_height="30dp"
+
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="9dp"
+                        android:gravity="center_vertical"
+                        android:text="请选择健康状况"
+                        android:textColor="@color/color_666666"
+                        android:textSize="11dp"
+                        app:itemArray="@array/dropdown_array_jkzk"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_jkzk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_toLeftOf="@id/ddv_jkzk"
+                        android:drawableLeft="@drawable/icon_left_red"
+                        android:gravity="center"
+                        android:text="健康状况:"
+                        android:textColor="@color/color_666666"
+                        android:textSize="11dp"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="@dimen/dp_274"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/dp_11">
+
+
+                    <com.shaoyue.weizhegou.widget.DropDownView
+                        android:id="@+id/ddv_hyzk"
+                        android:layout_width="206dp"
+                        android:layout_height="30dp"
+
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="9dp"
+                        android:gravity="center_vertical"
+                        android:text="请选择婚姻状况"
+                        android:textColor="@color/color_666666"
+                        android:textSize="11dp"
+                        app:itemArray="@array/dropdown_array_hyzk"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_hyzk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_toLeftOf="@id/ddv_hyzk"
+                        android:drawableLeft="@drawable/icon_left_red"
+                        android:gravity="center"
+                        android:text="婚姻状况:"
+                        android:textColor="@color/color_666666"
+                        android:textSize="11dp"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="@dimen/dp_274"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="11dp">
+
+
+                    <EditText
+                        android:id="@+id/et_phone_num"
+                        style="@style/AddEditStyle"
+                        android:layout_width="206dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="9dp"
+                        android:hint="请输入联系电话"
+                        android:inputType="phone"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_toLeftOf="@id/et_phone_num"
+                        android:drawableLeft="@drawable/icon_left_red"
+                        android:gravity="center"
+                        android:text="联系电话:"
+                        android:textColor="@color/color_666666"
+                        android:textSize="11dp"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="@dimen/dp_274"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="11dp">
+
+
+                    <EditText
+                        android:id="@+id/et_dz"
+                        style="@style/AddEditStyle"
+                        android:layout_width="206dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="9dp"
+                        android:hint="请输入地址"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_toLeftOf="@id/et_dz"
+                        android:drawableLeft="@drawable/icon_left_red"
+                        android:gravity="center"
+                        android:text="地址:"
+                        android:textColor="@color/color_666666"
+                        android:textSize="11dp"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="@dimen/dp_274"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="11dp">
+
+
+                    <EditText
+                        android:id="@+id/et_zy"
+                        style="@style/AddEditStyle"
+                        android:layout_width="206dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="9dp"
+                        android:hint="请输入职业"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_toLeftOf="@id/et_zy"
+                        android:drawableLeft="@drawable/icon_left_red"
+                        android:gravity="center"
+                        android:text="职业:"
+                        android:textColor="@color/color_666666"
+                        android:textSize="11dp"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="@dimen/dp_274"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/dp_11">
+
+
+                    <com.shaoyue.weizhegou.widget.DropDownView
+                        android:id="@+id/ddv_js"
+                        android:layout_width="206dp"
+                        android:layout_height="30dp"
+
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="9dp"
+                        android:gravity="center_vertical"
+                        android:text="请选择角色"
+                        android:textColor="@color/color_666666"
+                        android:textSize="11dp"
+                        app:itemArray="@array/dropdown_array_js"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_js"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_toLeftOf="@id/ddv_js"
+                        android:drawableLeft="@drawable/icon_left_red"
+                        android:gravity="center"
+                        android:text="角色:"
+                        android:textColor="@color/color_666666"
+                        android:textSize="11dp"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="@dimen/dp_274"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="11dp">
+
+
+                    <EditText
+                        android:id="@+id/et_ms"
+                        style="@style/AddEditStyle"
+                        android:layout_width="206dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="9dp"
+                        android:hint="请输入描述"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_toLeftOf="@id/et_ms"
+                        android:gravity="center"
+                        android:text="描述:"
+                        android:textColor="@color/color_666666"
+                        android:textSize="11dp"/>
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
+
+

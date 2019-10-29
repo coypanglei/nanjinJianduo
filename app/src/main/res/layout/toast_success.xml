@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_centerVertical="true"
+        android:layout_width="151dp"
+        android:layout_height="110dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/toast_success_bg"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="47dp"
+            android:layout_height="47dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="14dp"
+            android:src="@drawable/toast_success" />
+
+        <TextView
+            android:id="@+id/tv_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            tools:text="保存成功" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

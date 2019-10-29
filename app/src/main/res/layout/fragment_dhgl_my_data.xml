@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_all"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:visibility="visible">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:background="@color/white">
+
+        <com.libracore.lib.widget.StateButton
+            android:id="@+id/sb_edit"
+            android:visibility="gone"
+            android:layout_width="83dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_27"
+            android:drawableLeft="@drawable/icon_sb_copy"
+            android:paddingLeft="6dp"
+            android:paddingTop="1dp"
+            android:paddingRight="6dp"
+            android:paddingBottom="1dp"
+            android:text="保存"
+            android:textSize="12dp"
+            app:normalBackgroundColor="@color/color_23a7f0"
+            app:normalTextColor="@color/white"
+            app:pressedBackgroundColor="@color/color_48b2ed"
+            app:pressedTextColor="@color/white"
+            app:radius="2dp" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_c0c0c0" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_5"
+        android:background="@color/color_f3f2f2" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/rl_bottom"
+        android:layout_alignParentTop="true"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@color/color_f2f2f2" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@color/white"
+                android:drawableLeft="@drawable/icon_cedit_search"
+                android:drawablePadding="10dp"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="@dimen/dp_24"
+                android:text="贷款数据"
+                android:textColor="@color/color_23a7f0"
+                android:textSize="@dimen/dp_13" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_credit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@color/color_f2f2f2" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@color/white"
+                android:drawableLeft="@drawable/icon_cedit_search"
+                android:drawablePadding="10dp"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="@dimen/dp_24"
+                android:text="存款数据"
+                android:textColor="@color/color_23a7f0"
+                android:textSize="@dimen/dp_13" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_credit_two"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_11"/>
+
+            <View
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@color/color_f2f2f2" />
+
+
+
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_39">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:drawableLeft="@drawable/icon_left_xing"
+                        android:text="我行评价"
+                        android:textColor="@color/color_0d1730"
+                        android:textSize="@dimen/dp_13" />
+
+                    <com.shaoyue.weizhegou.widget.YStarView
+                        android:id="@+id/starBar"
+                        android:layout_width="200dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="@dimen/dp_20" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/dp_60"
+                        android:drawableLeft="@drawable/icon_left_xing"
+                        android:text="我行征信审核结论"
+                        android:textColor="@color/color_0d1730"
+                        android:textSize="13dp" />
+
+                    <TextView
+                        android:id="@+id/tv_tg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/dp_21"
+
+                        android:drawablePadding="@dimen/dp_12"
+                        android:text="通过"
+                        android:textColor="@color/color_49a0ed"
+                        android:textSize="@dimen/dp_26" />
+
+
+
+
+                </LinearLayout>
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_error"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="@dimen/dp_30"-->
+                    <!--tools:text="系统未通过，人工干预通过"-->
+                    <!--android:visibility="invisible"-->
+                    <!--android:textColor="@color/color_ff4747"-->
+                    <!--android:gravity="center"-->
+                    <!--android:paddingRight="12dp"-->
+                    <!--android:paddingLeft="12dp"-->
+                    <!--android:background="@drawable/icon_ff4747_frame_5dp"-->
+                    <!--android:layout_marginLeft="@dimen/dp_330"-->
+                    <!--/>-->
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

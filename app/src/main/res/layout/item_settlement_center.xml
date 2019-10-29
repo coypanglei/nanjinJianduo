@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/rl_pay_bg"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/white">
+
+
+        <com.gcssloop.widget.RCRelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/rcrel_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="14dp"
+            android:layout_toRightOf="@id/ll_left"
+            app:round_corner="1dp">
+
+            <RelativeLayout
+                android:layout_width="88dp"
+                android:layout_height="88dp">
+
+                <ImageView
+                    android:id="@+id/iv_goods"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/icon_default_placeholder" />
+
+                <ImageView
+                    android:id="@+id/iv_expired"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginBottom="18dp"
+
+                    android:visibility="invisible" />
+            </RelativeLayout>
+
+
+        </com.gcssloop.widget.RCRelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+
+            android:layout_marginRight="13dp"
+            android:layout_toRightOf="@id/rcrel_iv"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/tv_products_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:ellipsize="end"
+                android:lineSpacingExtra="-1dp"
+                android:lines="2"
+                android:textColor="@color/color_4a4a4a"
+                android:textSize="13dp"
+                tools:text="阿三打掃打掃阿三打掃阿三打掃" />
+
+            <TextView
+                android:id="@+id/tv_specs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="12dp"
+                android:layout_toLeftOf="@id/tv_change_info"
+                android:ellipsize="end"
+                android:lines="1"
+                android:textColor="@color/color_a4a4a4"
+                android:textSize="11dp"
+                tools:text="黑色  标准" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_member_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_cd0946"
+                    android:textSize="16dp"
+                    tools:text="￥158" />
+
+                <TextView
+                    android:id="@+id/tv_products_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/color_4a4a4a"
+                    android:textSize="13dp"
+                    android:textStyle="bold"
+                    tools:text="x2" />
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/tv_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_cd0946"
+                android:textSize="9dp"
+                tools:text="该商品没有库存" />
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

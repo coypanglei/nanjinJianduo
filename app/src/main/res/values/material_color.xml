@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="material_red">#F44336</color>
+    <color name="material_red_700">#D32F2F</color>
+    <color name="material_red_800">#C62828</color>
+    <color name="material_red_900">#B71C1C</color>
+
+    <color name="material_light_teal">#009688</color>
+    <color name="material_light_teal_200">#80CBC4</color>
+    <color name="material_light_teal_500">#009688</color>
+
+
+    <color name="material_blue">#2196F3</color>
+    <color name="material_blue_200">#90CAF9</color>
+    <color name="material_blue_700">#1976D2</color>
+
+    <color name="material_light_green">#8BC34A</color>
+    <color name="material_light_green_50">#F1F8E9</color>
+    <color name="material_light_green_200">#C5E1A5</color>
+    <color name="material_light_green_500">#8bc34a</color>
+    <color name="material_light_green_700">#689f38</color>
+    <color name="material_light_green_a100">#CCFF90</color>
+    <color name="material_light_green_a200">#b2ff59</color>
+    <color name="material_light_green_a700">#64dd17</color>
+
+
+    <color name="material_gray">#9E9E9E</color>
+    <color name="material_gray_50">#FAFAFA</color>
+    <color name="material_gray_100">#F5F5F5</color>
+    <color name="material_gray_200">#EEEEEE</color>
+    <color name="material_gray_300">#E0E0E0</color>
+    <color name="material_gray_400">#BDBDBD</color>
+    <color name="material_gray_600">#757575</color>
+    <color name="material_gray_700">#616161</color>
+    <color name="material_gray_800">#424242</color>
+
+
+    <color name="material_amber">#FFC107</color>
+    <color name="material_amber_800">#FF8F00</color>
+
+    <color name="material_orange_100">#FFE0B2</color>
+
+    <color name="material_brown">#795548</color>
+
+
+
+    <!-- 常用颜色 -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="red">#FF0000</color>
+    <color name="gold">#FFD700</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="blue">#0000FF</color>
+    <color name="purple">#800080</color>
+    <color name="pink">#FFC0CB</color>
+    <color name="orange">#FFA500</color>
+    <color name="transparent">#00000000</color>
+
+</resources>

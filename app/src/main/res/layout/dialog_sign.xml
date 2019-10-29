@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="258dp"
+        android:layout_height="320dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/dialog_sign_bg"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_sign_ok"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-28dp"
+                android:src="@drawable/ic_sign_ok_image" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-50dp"
+                android:text="@string/t_congratulations_on_your_acquisition"
+                android:textColor="#333333"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/tv_sign_get_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                tools:text="2小时加速时长"
+                android:textColor="#e94f2f"
+                android:textSize="16dp" />
+
+            <com.libracore.lib.widget.StateButton
+                android:id="@+id/sb_sign_fetch"
+                android:layout_width="130dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="20dp"
+                android:paddingBottom="2dp"
+                android:paddingTop="2dp"
+                android:text="@string/t_collect_immediately"
+                android:textSize="15dp"
+                app:normalBackgroundColor="@color/default_btn_color"
+                app:normalTextColor="@color/default_btn_text_color"
+                app:pressedBackgroundColor="@color/defalut_btn_bg_color"
+                app:pressedTextColor="@color/default_btn_text_color"
+                app:radius="3dp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_sign_fail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-28dp"
+                android:src="@drawable/ic_sign_fail_image" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-27dp"
+                android:text="@string/t_you_have_signed_in_today"
+                android:textColor="#333333"
+                android:textSize="14dp" />
+
+            <com.libracore.lib.widget.StateButton
+                android:id="@+id/sb_sign_tomorrow"
+                android:layout_width="130dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="25dp"
+                android:paddingBottom="2dp"
+                android:paddingTop="2dp"
+                android:text="@string/t_come_back_tomorrow"
+                android:textSize="15dp"
+                app:normalBackgroundColor="@color/default_btn_color"
+                app:normalTextColor="@color/default_btn_text_color"
+                app:pressedBackgroundColor="@color/defalut_btn_bg_color"
+                app:pressedTextColor="@color/default_btn_text_color"
+                app:radius="3dp" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_dialog_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dp"
+        android:src="@drawable/ic_sign_close" />
+
+</LinearLayout>

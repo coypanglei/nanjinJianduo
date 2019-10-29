@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="default_ui_height">48dp</dimen>
+    <dimen name="default_img_size">96dp</dimen>
+    <dimen name="default_button_height">40dp</dimen>
+    <dimen name="default_button_text_size">16sp</dimen>
+
+    <dimen name="default_ui_margin_micro">2dp</dimen>
+    <dimen name="default_ui_margin_small">4dp</dimen>
+    <dimen name="default_ui_margin">8dp</dimen>
+    <dimen name="default_ui_margin_medium">12dp</dimen>
+    <dimen name="default_ui_margin_large">16dp</dimen>
+    <dimen name="default_ui_margin_huge">32dp</dimen>
+
+
+    <dimen name="basic_text_title">21sp</dimen>
+    <dimen name="basic_text_subhead">18sp</dimen>
+    <dimen name="basic_text_body">15sp</dimen>
+    <dimen name="basic_text_body_big">16sp</dimen>
+    <dimen name="basic_text_body_bb">16sp</dimen>
+    <dimen name="basic_text_body_small">14sp</dimen>
+    <dimen name="basic_text_button">15sp</dimen>
+    <dimen name="basic_text_caption">13sp</dimen>
+
+
+
+    <!-- 标准的中文文本尺寸 -->
+    <dimen name="material_text_display4">112sp</dimen>
+    <dimen name="material_text_display3">56sp</dimen>
+    <dimen name="material_text_display2">45sp</dimen>
+    <dimen name="material_text_display1">34sp</dimen>
+    <dimen name="material_text_headline">24sp</dimen>
+    <dimen name="material_text_title">21sp</dimen>
+    <dimen name="material_text_subhead">17sp</dimen>
+    <dimen name="material_text_caption">13sp</dimen>
+    <dimen name="material_text_body">15sp</dimen>
+    <dimen name="material_text_button">15sp</dimen>
+</resources>

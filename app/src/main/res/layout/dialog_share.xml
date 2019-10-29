@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/view_dismiss"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="120dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/dialog_share_bg"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="分享至"
+            android:textColor="@color/color_4a4a4a"
+            android:textSize="16dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
+
+            <ImageView
+                android:id="@+id/iv_wechat"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:scaleType="center"
+                android:src="@drawable/icon_wechat_share" />
+
+            <ImageView
+                android:id="@+id/iv_friends"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:scaleType="center"
+                android:src="@drawable/icon_friends" />
+
+            <ImageView
+                android:id="@+id/iv_copy_link"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:scaleType="center"
+                android:src="@drawable/icon_copy_link" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

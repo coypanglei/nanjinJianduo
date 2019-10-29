@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_55"
+        android:background="@color/white">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_160">
+
+            <com.libracore.lib.widget.StateButton
+                android:id="@+id/sb_add"
+                android:layout_width="50dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_horizontal"
+                android:drawableLeft="@drawable/icon_add_new"
+                android:gravity="end|center_vertical"
+                android:paddingLeft="4dp"
+                android:paddingTop="1dp"
+                android:paddingRight="6dp"
+                android:paddingBottom="1dp"
+                android:text="新增"
+                android:textSize="12dp"
+                app:normalBackgroundColor="@color/color_17c295"
+
+                app:normalTextColor="@color/white"
+                app:pressedBackgroundColor="@color/color_35d9ae"
+
+                app:pressedTextColor="@color/white"
+                app:radius="2dp" />
+
+            <com.libracore.lib.widget.StateButton
+                android:id="@+id/sb_edit"
+                android:layout_width="50dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginRight="@dimen/dp_12"
+                android:drawableLeft="@drawable/icon_edit_but"
+                android:paddingLeft="6dp"
+                android:paddingTop="1dp"
+                android:paddingRight="6dp"
+                android:paddingBottom="1dp"
+                android:text="修改"
+                android:textSize="12dp"
+                app:normalBackgroundColor="@color/white"
+                app:normalStrokeColor="@color/color_49a0ed"
+                app:normalStrokeWidth="1dp"
+                app:normalTextColor="@color/color_49a0ed"
+                app:pressedBackgroundColor="@color/white"
+                app:pressedStrokeColor="@color/color_49a0ed"
+                app:pressedStrokeWidth="1dp"
+                app:pressedTextColor="@color/color_49a0ed"
+                app:radius="2dp" />
+
+            <com.libracore.lib.widget.StateButton
+                android:id="@+id/sb_detel"
+                android:layout_width="50dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginRight="12dp"
+                android:drawableLeft="@drawable/icon_cancel_application"
+                android:paddingLeft="6dp"
+                android:paddingTop="1dp"
+                android:paddingRight="6dp"
+                android:paddingBottom="1dp"
+                android:text="删除"
+                android:textSize="12dp"
+                app:normalBackgroundColor="@color/color_fe4646"
+                app:normalTextColor="@color/white"
+                app:pressedBackgroundColor="@color/color_fb5959"
+                app:pressedTextColor="@color/white"
+                app:radius="2dp" />
+
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:layout_alignParentBottom="true"
+            android:background="@color/color_c0c0c0" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_9"
+        android:background="@color/color_ebebeb" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/color_d4d4d4" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_36"
+        android:background="@color/color_f7f7f7"
+        android:orientation="horizontal"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp">
+
+        <TextView
+            android:id="@+id/tv_xuhao"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:text="序号"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11"
+
+            />
+
+        <TextView
+            android:id="@+id/tv_dbgsmc"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:gravity="center"
+            android:text="担保公司名称"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+
+
+        <TextView
+            android:id="@+id/tv_bcdbje"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:gravity="center"
+            android:text="本次担保金额(万)"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+
+        <TextView
+            android:id="@+id/tv_fdbcs"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:gravity="center"
+            android:text="反担保措施"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+
+        <TextView
+            android:id="@+id/tv_ms"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:gravity="center"
+            android:text="描述"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+
+
+    </LinearLayout>
+
+    <include layout="@layout/empty_view" />
+
+    <cn.bingoogolapple.refreshlayout.BGARefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_f5f5f5"
+        >
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_application"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+    </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
+
+
+</LinearLayout>

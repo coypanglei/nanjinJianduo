@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/ll_bg"
+        android:layout_width="250dp"
+        android:layout_height="240dp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:background="@drawable/icon_not_sufficient_funds_bg"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:text="@string/t_sorry_your_credit_is_running_low"
+            android:textColor="#333333"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/tv_member_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/t_your_membership_will_expire_tomorrow_please_recharge"
+            android:textColor="#666666"
+            android:textSize="15dp" />
+
+        <com.libracore.lib.widget.StateButton
+            android:id="@+id/sb_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/t_Immediate_recharge"
+            android:textSize="10dp"
+            app:normalBackgroundColor="#de4242"
+            app:normalTextColor="@color/default_btn_text_color"
+            app:pressedBackgroundColor="@color/color_b83838"
+            app:pressedTextColor="@color/default_btn_text_color"
+            app:radius="15dp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/tv_close"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignEnd="@id/ll_bg"
+        android:layout_alignRight="@id/ll_bg"
+        android:layout_alignTop="@id/ll_bg"
+        android:layout_marginTop="38dp"
+        android:scaleType="center"
+        android:src="@drawable/icon_dialog_close" />
+</RelativeLayout>

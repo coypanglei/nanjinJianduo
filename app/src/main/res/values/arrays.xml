@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="dropdown_array_xb">
+        <item>男</item>
+        <item>女</item>
+    </string-array>
+
+    <string-array name="dropdown_array_mz">
+        <item>汉</item>
+        <item>少数民族</item>
+    </string-array>
+
+    <string-array name="dropdown_array_xl">
+        <item>大学本科</item>
+        <item>大学专科</item>
+        <item>中专/中等技校/高中</item>
+        <item>初中</item>
+        <item>初中以下</item>
+        <item>缺失</item>
+    </string-array>
+
+
+    <string-array name="dropdown_array_jkzk">
+        <item>健康</item>
+        <item>良好</item>
+        <item>一般</item>
+        <item>较差</item>
+    </string-array>
+
+    <string-array name="dropdown_array_js">
+        <item>本人</item>
+        <item>配偶</item>
+    </string-array>
+    <string-array name="dropdown_array_hyzk">
+        <item>未婚</item>
+        <item>已婚</item>
+        <item>再婚</item>
+        <item>离异</item>
+        <item>丧偶</item>
+    </string-array>
+
+    <string-array name="dropdown_array_xw">
+        <item>无</item>
+        <item>学士</item>
+        <item>硕士</item>
+        <item>博士</item>
+        <item>名誉博士</item>
+    </string-array>
+    <string-array name="dropdown_array_default_with_key">
+        <item>op1_选项1</item>
+        <item>op2_选项2</item>
+        <item>op3_选项3</item>
+    </string-array>
+    <string-array name="dropdown_array_start_dc">
+        <item>工薪</item>
+        <item>简化经营</item>
+        <item>经营</item>
+        <item>农户</item>
+    </string-array>
+
+    <string-array name="dropdown_array_fxjl">
+        <item>取消</item>
+        <item>维持</item>
+        <item>调减</item>
+        <item>调增</item>
+    </string-array>
+</resources>

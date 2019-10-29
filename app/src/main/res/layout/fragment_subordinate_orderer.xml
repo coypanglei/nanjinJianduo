@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_f8f8f9"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+    <include layout="@layout/empty_view" />
+    <cn.bingoogolapple.refreshlayout.BGARefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_content"
+            android:layout_width="match_parent"
+            android:paddingTop="10dp"
+            android:layout_height="0dp"
+            android:paddingRight="15dp"
+            android:paddingLeft="15dp"
+            android:layout_weight="1" />
+    </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
+
+
+</RelativeLayout>

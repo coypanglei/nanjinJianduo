@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <!--左边 时间-->
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="15dp"
+        android:gravity="center"
+        android:lines="2"
+        android:text="10-12 02:18"
+        android:textColor="@color/color_a4a4a4"
+        android:textSize="13dp" />
+    <!--中间 时间轴-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:id="@+id/ll_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/rl_left"
+            android:minHeight="70dp"
+            android:orientation="vertical"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:id="@+id/tv_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="派送中"
+                android:textColor="@color/color_a4a4a4"
+                android:textSize="13dp" />
+            <!--右边 信息-->
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="13dp"
+                android:autoLink="phone"
+                android:gravity="center_vertical"
+
+
+                android:text="正在派送途中,请您准备签收(派件人:张小建,电话:18513394441)"
+                android:textColor="@color/color_a4a4a4" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_left"
+            android:layout_width="20dp"
+            android:layout_height="200dp"
+            android:layout_marginLeft="20dp"
+            android:layout_alignTop="@id/ll_status"
+            android:layout_alignBottom="@id/ll_status">
+
+            <ImageView
+                android:id="@+id/iv_status"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerInParent="true" />
+
+            <ImageView
+                android:id="@+id/iv_line"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_below="@id/iv_status"
+                android:layout_centerInParent="true"
+                android:src="#dddddd" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

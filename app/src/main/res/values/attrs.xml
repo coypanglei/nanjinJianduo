@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--头部title栏的属性-->
+    <declare-styleable name="TitleBar">
+        <attr name="TextColorLeft" format="color" />
+        <attr name="TextColorRight" format="color" />
+        <attr name="TextColorCenter" format="color" />
+        <attr name="TextLeft" format="string" />
+        <attr name="TextRight" format="string" />
+        <attr name="TextCenter" format="string" />
+        <attr name="TextSizeLeft" format="dimension" />
+        <attr name="TextSizeRight" format="dimension" />
+        <attr name="TextSizeCenter" format="dimension" />
+        <attr name="isShowImgLeft" format="boolean" />
+        <attr name="isShowImgRight" format="boolean" />
+        <attr name="isShowLeft" format="boolean" />
+        <attr name="isShowRight" format="boolean" />
+        <attr name="srcLeft" format="color|reference" />
+        <attr name="srcRight" format="color|reference" />
+        <attr name="bg" format="color|reference" />
+        <attr name="onClickLeft" format="string" />
+        <attr name="onClickCenter" format="string" />
+        <attr name="onClickRight" format="string" />
+    </declare-styleable>
+
+    <attr name="rightPadding" format="dimension" />
+    <declare-styleable name="SlidingMenu">
+        <attr name="rightPadding" />
+    </declare-styleable>
+
+    <declare-styleable name="AmountView">
+            <!-- 左右2边+-按钮的宽度 -->
+            <attr name="btnWidth" format="dimension" />
+            <!-- 中间TextView的宽度 -->
+            <attr name="tvWidth" format="dimension" />
+            <!--<attr name="tvColor" format="color"/>-->
+            <attr name="tvTextSize" format="dimension"/>
+            <attr name="btnTextSize" format="dimension"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="MaxHeightScrollView">
+        <!-- 左右2边+-按钮的宽度 -->
+        <attr name="mhsv_max_height" format="dimension" />
+
+    </declare-styleable>
+
+    <declare-styleable name="GoodsViewGroup">
+        <attr name="isSelector" format="boolean" />
+        <attr name="normal_drawable" format="reference" />
+        <attr name="selected_drawable" format="reference" />
+        <attr name="normal_textColor" format="color" />
+        <attr name="selected_textColor" format="color" />
+        <attr name="itemTextSize" format="dimension" />
+        <attr name="horInterval" format="dimension" />
+        <attr name="verInterval" format="dimension" />
+        <attr name="horPadding" format="dimension" />
+        <attr name="verPadding" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="PasswordEditText">
+        <!--密码个数-->
+        <attr name="passwordNumber" format="integer"/>
+        <!--密码原点的半径-->
+        <attr name="passwordRadius" format="dimension"/>
+        <!--密码原点的颜色-->
+        <attr name="passwordColor" format="color"/>
+        <!--分割线的颜色-->
+        <attr name="divisionLineColor" format="color"/>
+        <!--分割线的大小  指宽度-->
+        <attr name="divisionLineSize" format="dimension"/>
+        <!--背景边框的颜色-->
+        <attr name="bgColor" format="color"/>
+        <!--背景边框的大小-->
+        <attr name="bgSize" format="dimension"/>
+        <!--背景边框的圆角大小-->
+        <attr name="bgCorner" format="dimension"/>
+
+    </declare-styleable>
+
+    <declare-styleable name="MaxHeightRecyclerView">
+        <attr name="maxHeight" format="dimension" />
+    </declare-styleable>
+</resources>

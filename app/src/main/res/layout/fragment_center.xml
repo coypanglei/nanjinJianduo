@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_mohu"
+                    android:layout_width="match_parent"
+                    android:layout_height="265dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/icon_center_bg" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="265dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/ll_login"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/profile_image"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginTop="6dp"
+                            android:src="@drawable/icon_head_default"
+                            app:civ_fill_color="@color/white" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="-20dp"
+                            android:src="@drawable/icon_center_leaf" />
+
+                        <TextView
+                            android:id="@+id/tv_go_login"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="登录/注册"
+                            android:textColor="@color/color_333333"
+                            android:textSize="18dp" />
+
+                    </LinearLayout>
+
+
+                    <include layout="@layout/center_info" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <com.shizhefei.view.indicator.ScrollIndicatorView
+                android:id="@+id/moretab_indicator"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/white"
+                android:visibility="gone" />
+
+
+            <com.shaoyue.weizhegou.widget.ScrollViewPager
+                android:id="@+id/moretab_viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            //订单列表
+
+            <include
+                layout="@layout/center_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-20dp" />
+            //功能列表
+
+            <include layout="@layout/center_features" />
+
+            <TextView
+                android:id="@+id/tv_sign_out"
+                android:layout_width="match_parent"
+                android:layout_height="39dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="26dp"
+                android:background="@drawable/icon_red_jbshape"
+                android:gravity="center"
+                android:text="退出登录"
+                android:textColor="@color/white"
+                android:textSize="18dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

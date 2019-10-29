@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_f8f8f9"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="15dp"
+        android:gravity="center_vertical"
+        android:text="解绑你当前的手机号"
+        android:textColor="@color/color_4a4a4a"
+        android:textSize="14dp" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:text="原手机号"
+            android:textColor="@color/color_4a4a4a"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/tv_phone_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="103dp"
+            android:textColor="@color/color_4a4a4a"
+            android:textSize="16dp" />
+
+    </RelativeLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/color_ededed" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:text="验证码"
+            android:textColor="@color/color_4a4a4a"
+            android:textSize="16dp" />
+
+
+        <com.libracore.lib.widget.TimerButton
+            android:id="@+id/tb_code"
+            android:layout_width="93dp"
+            android:layout_height="28dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/icon_jbshape_5dp"
+            android:gravity="center"
+            android:text="@string/content_get_the_verifying_code"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            app:afterText="s"
+            app:countTime="60" />
+
+        <EditText
+            android:id="@+id/et_verify_code"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="103dp"
+            android:layout_toLeftOf="@id/tb_code"
+            android:layout_weight="1"
+            android:background="@color/reveal"
+            android:hint="输入验证码"
+            android:textColorHint="@color/default_hint_text_color"
+            android:textSize="15dp" />
+
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/sb_confirm"
+        android:layout_width="147dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="45dp"
+        android:background="@drawable/icon_blue_jbshape"
+        android:gravity="center"
+        android:text="下一步"
+        android:textColor="@color/white"
+        android:textSize="16dp" />
+
+
+</LinearLayout>
