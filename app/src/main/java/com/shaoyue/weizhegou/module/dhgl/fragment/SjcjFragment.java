@@ -25,7 +25,7 @@ import com.shaoyue.weizhegou.entity.cedit.XcjyListBean;
 import com.shaoyue.weizhegou.entity.dhgl.SelectDataBean;
 import com.shaoyue.weizhegou.event.OkOrCancelEvent;
 import com.shaoyue.weizhegou.manager.UserMgr;
-import com.shaoyue.weizhegou.module.dhgl.adapter.XcjyAdapter;
+import com.shaoyue.weizhegou.module.dhgl.adapter.SjcjAdapter;
 import com.shaoyue.weizhegou.router.UIHelper;
 import com.shaoyue.weizhegou.util.ThreadUtil;
 import com.shaoyue.weizhegou.util.ToastUtil;
@@ -47,7 +47,7 @@ import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
 
-public class XcjyFragment extends BaseAppFragment implements BGARefreshLayout.BGARefreshLayoutDelegate {
+public class SjcjFragment extends BaseAppFragment implements BGARefreshLayout.BGARefreshLayoutDelegate {
 
     String title;
     @BindView(R.id.et_name)
@@ -73,13 +73,13 @@ public class XcjyFragment extends BaseAppFragment implements BGARefreshLayout.BG
     RelativeLayout mEmptyRelative;
     private String approvalFlag = "Y";
     private String lczt;
-    private XcjyAdapter mAdapter;
+    private SjcjAdapter mAdapter;
     private List<SelectDataBean> mSelect = new ArrayList<>();
 
-    public static XcjyFragment newInstance(String title) {
+    public static SjcjFragment newInstance(String title) {
         Bundle args = new Bundle();
         args.putString("title", title);
-        XcjyFragment fragment = new XcjyFragment();
+        SjcjFragment fragment = new SjcjFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -87,7 +87,7 @@ public class XcjyFragment extends BaseAppFragment implements BGARefreshLayout.BG
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_dh_xcdc;
+        return R.layout.fragment_dh_sjcj;
     }
 
     @Override
@@ -115,20 +115,11 @@ public class XcjyFragment extends BaseAppFragment implements BGARefreshLayout.BG
     protected void initView(View rootView) {
         super.initView(rootView);
         setPopupBigPhoto();
-        setPopupSelectView();
         List<Map<String, Object>> dataList = new ArrayList<>();
 
         mSelect.clear();
-//        mSelect.add(new SelectDataBean("-1", "待采集"));
-//        mSelect.add(new SelectDataBean("0", "待认领"));
-        mSelect.add(new SelectDataBean("1", "待现场检验"));
-        mSelect.add(new SelectDataBean("2", "待协查"));
-        mSelect.add(new SelectDataBean("3", "待小组组长检查"));
-        mSelect.add(new SelectDataBean("4", "待信贷部总经理审核"));
-        mSelect.add(new SelectDataBean("6", "待授信部总经理审核"));
-        mSelect.add(new SelectDataBean("5", "待授信部审批岗审核"));
-        mSelect.add(new SelectDataBean("200", "完成"));
-        mSelect.add(new SelectDataBean("500", "终止"));
+        mSelect.add(new SelectDataBean("-1", "待采集"));
+        mSelect.add(new SelectDataBean("0", "已采集"));
         for (int i = 0; i < mSelect.size(); i++) {
             Map<String, Object> map = new HashMap<>();
             map.put("name", mSelect.get(i).getName());
@@ -145,7 +136,7 @@ public class XcjyFragment extends BaseAppFragment implements BGARefreshLayout.BG
                 initData();
             }
         });
-        mAdapter = new XcjyAdapter();
+        mAdapter = new SjcjAdapter();
         mRvApplication.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvApplication.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -180,13 +171,15 @@ public class XcjyFragment extends BaseAppFragment implements BGARefreshLayout.BG
                         //请求id 身份证
                         SPUtils.getInstance().put(UserMgr.SP_APPLY_ID, getSelect().getZjhm());
                         SPUtils.getInstance().put(UserMgr.SP_ID_CARD, getSelect().getJcjd());
-                        UIHelper.showDcCommonActivity("现场检验", getActivity(), "查看详情");
+                        UIHelper.showDcCommonActivity("数据采集", getActivity(), "查看详情");
                     }
                 } else {
                     ToastUtil.showBlackToastSucess("暂未选取数据");
                 }
             }
         });
+        TextView tv = popupBigPhotoview.findViewById(R.id.tv_detail);
+        tv.setText("查看数据");
         popupBigPhotoview.findViewById(R.id.tv_progress).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -210,77 +203,6 @@ public class XcjyFragment extends BaseAppFragment implements BGARefreshLayout.BG
 
     }
 
-    private void setPopupSelectView() {
-        popupSelectView = getLayoutInflater().inflate(R.layout.popwindow_select_lczt, null);
-
-        popupSelectView.findViewById(R.id.tv_dcl).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (popupSelect.isShowing()) {
-                    popupSelect.dismiss();
-                }
-                approvalFlag = "Y";
-                lczt = "";
-                initData();
-            }
-        });
-        popupSelectView.findViewById(R.id.tv_ycl).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (popupSelect.isShowing()) {
-                    popupSelect.dismiss();
-                }
-                approvalFlag = "N";
-                lczt = "已处理";
-                initData();
-
-            }
-        });
-        popupSelectView.findViewById(R.id.tv_spz).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (popupSelect.isShowing()) {
-                    popupSelect.dismiss();
-                }
-                approvalFlag = "N";
-                lczt = "审批中";
-                initData();
-            }
-        });
-        popupSelectView.findViewById(R.id.tv_yzz).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (popupSelect.isShowing()) {
-                    popupSelect.dismiss();
-                }
-                approvalFlag = "N";
-                lczt = "已终止";
-                initData();
-            }
-        });
-        popupSelectView.findViewById(R.id.tv_ywc).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (popupSelect.isShowing()) {
-                    popupSelect.dismiss();
-                }
-                approvalFlag = "N";
-                lczt = "已完成";
-                initData();
-            }
-        });
-        popupSelectView.findViewById(R.id.tv_dtj).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (popupSelect.isShowing()) {
-                    popupSelect.dismiss();
-                }
-                approvalFlag = "Y";
-                lczt = "待提交";
-                initData();
-            }
-        });
-    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(OkOrCancelEvent event) {
@@ -319,15 +241,15 @@ public class XcjyFragment extends BaseAppFragment implements BGARefreshLayout.BG
         switch (view.getId()) {
             case R.id.sb_start_test:
                 if (ObjectUtils.isNotEmpty(getSelect())) {
-                    if (getSelect().getLczt().equals("1")) {
+                    if (getSelect().getDqschj().equals("-1") || getSelect().getDqschj().equals("0") || getSelect().getDqschj().equals("500")) {
                         if (ObjectUtils.isNotEmpty(getSelect().getZjhm())) {
                             //请求id 身份证
                             SPUtils.getInstance().put(UserMgr.SP_APPLY_ID, getSelect().getZjhm());
                             SPUtils.getInstance().put(UserMgr.SP_ID_CARD, getSelect().getJcjd());
-                            UIHelper.showDcCommonActivity("现场检验", getActivity(), "申请");
+                            UIHelper.showDcCommonActivity("数据采集", getActivity(), "申请");
                         }
                     } else {
-                        ToastUtil.showBlackToastSucess("请选择环节为待现场检验的数据");
+                        ToastUtil.showBlackToastSucess("请选择环节为待采集，待认领，终止的数据");
                     }
                 } else {
                     ToastUtil.showBlackToastSucess("暂未选取数据");
@@ -342,8 +264,6 @@ public class XcjyFragment extends BaseAppFragment implements BGARefreshLayout.BG
                     popupBigPhoto = new PopupWindow(popupBigPhotoview, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
                     popupBigPhoto.setOutsideTouchable(true);
                 }
-
-
                 if (popupBigPhoto.isShowing()) {
                     popupBigPhoto.dismiss();
                 } else {
@@ -372,11 +292,12 @@ public class XcjyFragment extends BaseAppFragment implements BGARefreshLayout.BG
     private void initData() {
         page = 1;
         String mNameOrId = mEtName.getText().toString().trim();
-        DhApi.getXcjyList(page, "12", mNameOrId, lczt, new BaseCallback<BaseResponse<XcjyListBean>>() {
+        DhApi.getSjcjList(page, "12", mNameOrId, lczt, new BaseCallback<BaseResponse<XcjyListBean>>() {
             @Override
             public void onSucc(BaseResponse<XcjyListBean> result) {
 
                 pages = result.data.getPages();
+
                 mAdapter.setNewData(result.data.getmBaseBean());
                 mAdapter.notifyDataSetChanged();
                 if (result.data.getmBaseBean().size() > 0) {
@@ -391,16 +312,14 @@ public class XcjyFragment extends BaseAppFragment implements BGARefreshLayout.BG
 
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
-
-        if (page == pages + 1) {
-//            page = pages;
+        if (page == pages+1) {
             mRefreshLayout.endLoadingMore();
             ToastUtil.showBlackToastSucess("没有更多的数据了");
             return false;
         }
         String mNameOrId = mEtName.getText().toString().trim();
 
-        DhApi.getXcjyList(page + 1, "12", mNameOrId, lczt, new BaseCallback<BaseResponse<XcjyListBean>>() {
+        DhApi.getSjcjList(page+1, "12", mNameOrId, lczt, new BaseCallback<BaseResponse<XcjyListBean>>() {
             @Override
             public void onSucc(final BaseResponse<XcjyListBean> result) {
 

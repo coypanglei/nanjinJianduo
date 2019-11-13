@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -15,8 +14,7 @@
         android:layout_marginTop="14dp"
         android:layout_marginRight="14dp"
         android:background="@drawable/withe_btn_bg_5dp"
-        android:scaleType="center"
-        />
+        android:scaleType="centerInside" />
 
     <TextView
         android:id="@+id/tv_title"
@@ -29,12 +27,11 @@
         android:gravity="center"
         android:text="智能营销"
         android:textColor="@color/white"
-        android:textSize="@dimen/dp_14"/>
+        android:textSize="@dimen/dp_14" />
 
 
     <TextView
         android:id="@+id/tv_msg"
-        android:visibility="gone"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_alignRight="@id/iv_icon"
@@ -43,7 +40,7 @@
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="@dimen/dp_12"
-        />
+        android:visibility="gone" />
 
 
 </RelativeLayout>

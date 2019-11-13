@@ -428,6 +428,7 @@ public class XzRlFragment extends BaseAppFragment implements BGARefreshLayout.BG
         DhApi.getXcjyRlList(page, "12", mNameOrId, lczt, new BaseCallback<BaseResponse<XcjyListBean>>() {
             @Override
             public void onSucc(BaseResponse<XcjyListBean> result) {
+                pages = result.data.getPages();
                 mAdapter.setNewData(result.data.getmBaseBean());
                 mAdapter.notifyDataSetChanged();
                 if (result.data.getmBaseBean().size() > 0) {
@@ -442,14 +443,14 @@ public class XzRlFragment extends BaseAppFragment implements BGARefreshLayout.BG
 
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
-        if (page == pages) {
+        if (page == pages+1) {
             mRefreshLayout.endLoadingMore();
             ToastUtil.showBlackToastSucess("没有更多的数据了");
             return false;
         }
         String mNameOrId = mEtName.getText().toString().trim();
 
-        DhApi.getXcjyRlList(page, "12", mNameOrId, lczt, new BaseCallback<BaseResponse<XcjyListBean>>() {
+        DhApi.getXcjyRlList(page+1, "12", mNameOrId, lczt, new BaseCallback<BaseResponse<XcjyListBean>>() {
             @Override
             public void onSucc(final BaseResponse<XcjyListBean> result) {
 

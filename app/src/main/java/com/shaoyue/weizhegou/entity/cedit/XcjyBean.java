@@ -5,6 +5,14 @@ import com.shaoyue.weizhegou.base.BaseBean;
 public class XcjyBean extends BaseBean {
 
 
+    public String getZt() {
+        return zt;
+    }
+
+    public void setZt(String zt) {
+        this.zt = zt;
+    }
+
     /**
      * khmc : 测试客户
      * jcjd : 201911
@@ -42,6 +50,8 @@ public class XcjyBean extends BaseBean {
      * cldrMc : 123
      */
 
+
+    private String zt;
     private String khmc;
     private String jcjd;
     private String lczt;

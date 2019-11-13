@@ -11,13 +11,15 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.shaoyue.weizhegou.R;
+import com.shaoyue.weizhegou.api.callback.BaseCallback;
+import com.shaoyue.weizhegou.api.model.BaseResponse;
+import com.shaoyue.weizhegou.api.remote.CeditApi;
 import com.shaoyue.weizhegou.base.BaseAppActivity;
-import com.shaoyue.weizhegou.entity.user.MainClickBean;
+import com.shaoyue.weizhegou.entity.cedit.XtPerssionBean;
 import com.shaoyue.weizhegou.module.main.adapter.NavigationAdapter;
 import com.shaoyue.weizhegou.router.UIHelper;
 import com.shaoyue.weizhegou.util.ToastUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -39,7 +41,7 @@ public class MainActivity extends BaseAppActivity {
     TextView mTvTitleCenter;
     private long exitTime = 0;
     private NavigationAdapter mNavigationAdapter;
-    private List<MainClickBean> mlist = new ArrayList<>();
+
 
     PopupWindow popupBigPhoto;
     View popupBigPhotoview;
@@ -71,24 +73,23 @@ public class MainActivity extends BaseAppActivity {
     @Override
     protected void initView() {
         super.initView();
-        mlist.add(new MainClickBean("智能营销", R.drawable.main_icon_1));
-        mlist.add(new MainClickBean("信贷运营", R.drawable.main_icon_2));
-        mlist.add(new MainClickBean("贷后管理", R.drawable.mian_icon_3));
-        mlist.add(new MainClickBean("信贷风控", R.drawable.main_icon_4));
-        mlist.add(new MainClickBean("合规平台", R.drawable.main_icon_5));
-        mlist.add(new MainClickBean("智能绩效", R.drawable.main_icon_6));
-        mlist.add(new MainClickBean("人力资源管理", R.drawable.main_icon_7));
-        mlist.add(new MainClickBean("系统设置", R.drawable.main_icon_8));
 
+        CeditApi.getPERMISSIONName(new BaseCallback<BaseResponse<List<XtPerssionBean>>>() {
+            @Override
+            public void onSucc(BaseResponse<List<XtPerssionBean>> result) {
+
+                mNavigationAdapter.setNewData(result.data);
+
+            }
+        }, this);
 
         mNavigationAdapter = new NavigationAdapter();
-        mNavigationAdapter.setNewData(mlist);
         mRvFeatures.setLayoutManager(new GridLayoutManager(this, 4, LinearLayoutManager.VERTICAL, false));
         mRvFeatures.setAdapter(mNavigationAdapter);
         mNavigationAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                MainClickBean data = (MainClickBean) adapter.getData().get(position);
+                XtPerssionBean data = (XtPerssionBean) adapter.getData().get(position);
                 switch (view.getId()) {
                     //消息管理
                     case R.id.tv_msg:
@@ -101,7 +102,7 @@ public class MainActivity extends BaseAppActivity {
                     case R.id.iv_icon:
                         if (data.getTitle().equals("信贷运营")) {
                             UIHelper.showCreditActivity(MainActivity.this);
-                        }else if(data.getTitle().equals("贷后管理")){
+                        } else if (data.getTitle().equals("季检年检")) {
                             UIHelper.showDhActivity(MainActivity.this);
                         }
                         break;

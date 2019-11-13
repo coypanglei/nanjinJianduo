@@ -15,6 +15,7 @@ import com.shaoyue.weizhegou.entity.dhgl.XcjyBBean;
 import com.shaoyue.weizhegou.entity.dhgl.XcjyProgressListBean;
 import com.shaoyue.weizhegou.entity.dhgl.XcjyZxcxBean;
 import com.shaoyue.weizhegou.entity.dhgl.XjlBean;
+import com.shaoyue.weizhegou.entity.dhgl.YunSpBean;
 import com.shaoyue.weizhegou.manager.UserMgr;
 
 import java.util.HashMap;
@@ -67,6 +68,12 @@ public class DhApi {
     //贷后-季检-现场分析结论-添加
     private static final String DHGL_FXJL_ADD = "jeecg-boot/business/dhglJjXcfxjl/add";
 
+    //贷后-数据采集-添加
+    private static final String DHGL_FXJL_SJCJ_ADD = "jeecg-boot/business/dhglJjCjfxjl/add";
+
+    //贷后-数据采集-编辑
+    private static final String DHGL_FXJL_SJCJ_EDIT = "jeecg-boot/business/dhglJjCjfxjl/edit";
+
     //贷后-季检-现场分析结论-编辑
     private static final String DHGL_FXJL_EDIT = "jeecg-boot/business/dhglJjXcfxjl/edit";
 
@@ -77,7 +84,136 @@ public class DhApi {
     //征信查询
     private static final String XCJY_ZXCX = "jeecg-boot/business/dhglJjZxjx/queryById";
 
+    //审批列表查询
+    private static final String SP_LIST_CX = "jeecg-boot/business/dhglJjXcjydx/splist";
 
+    //预审批
+    private static final String SP_YUN = "jeecg-boot/business/dhglJjXcjydx/presp";
+
+
+    //审批
+    private static final String GO_SP = "jeecg-boot/business/dhglJjXcjydx/sp";
+
+    //数据采集
+    private static final String SJCJ_LIST = "jeecg-boot/business/dhglJjCjdx/list";
+
+    //征信查询任务添加
+    private static final String ZXCC_ADD = "jeecg-boot/zx/dhglJjZx/add";
+
+    //数据采集分析结论
+    private static final String SJCJ_FXJL = "jeecg-boot/business/dhglJjCjfxjl/queryByZjhm";
+    /**
+     * 添加分析结论
+     *
+     * @param callback
+     * @param tag
+     */
+    public static void SjcjaddFxjl(Map<String, String> params, BaseCallback<BaseResponse<Void>> callback, Object tag) {
+        params.put("zjhm", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        params.put("jcjd", SPUtils.getInstance().getString(UserMgr.SP_ID_CARD));
+        ApiHttpClient.postJson(DHGL_FXJL_SJCJ_ADD, params, callback, tag);
+    }
+
+    /**
+     * 编辑分析结论
+     *
+     * @param callback
+     * @param tag
+     */
+    public static void SjcjeditFxjl(Map<String, String> params, BaseCallback<BaseResponse<Void>> callback, Object tag) {
+        params.put("zjhm", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        params.put("jcjd", SPUtils.getInstance().getString(UserMgr.SP_ID_CARD));
+        ApiHttpClient.putJson(DHGL_FXJL_SJCJ_EDIT, params, callback, tag);
+
+    }
+
+    /**
+     * 查询分析结论通过zjhm(数据采集)
+     *
+     * @param callback
+     * @param tag
+     */
+    public static void sjcjSearchFxjlByZjhm(BaseCallback<BaseResponse<XcfxBean>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("zjhm", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        params.put("jcjd", SPUtils.getInstance().getString(UserMgr.SP_ID_CARD));
+        ApiHttpClient.post(SJCJ_FXJL, params, callback, tag);
+    }
+
+
+    /**
+     * 数据采集征信任务添加
+     *
+     * @param callback
+     * @param tag
+     */
+    public static void xcjyZxcxAdd(BaseCallback<BaseResponse<Void>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("zjhm", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        params.put("jcjd", SPUtils.getInstance().getString(UserMgr.SP_ID_CARD));
+        ApiHttpClient.post(ZXCC_ADD, params, callback, tag);
+    }
+
+
+    /**
+     * 获取现场检验列表
+     */
+    public static void getSjcjList(int pageNum, String pageSize, String khmc
+            , String lczt
+            , BaseCallback<BaseResponse<XcjyListBean>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("pageNo", pageNum + "");
+        params.put("pageSize", pageSize);
+        params.put("khmc", khmc);
+        params.put("zt", lczt);
+        ApiHttpClient.post(SJCJ_LIST, params, callback, tag);
+    }
+
+
+    /**
+     * 审批
+     */
+
+    public static void goSp(String id, String cjjg, String clyj, BaseCallback<BaseResponse<Void>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("id", id);
+        params.put("cljg", cjjg);
+        params.put("clyj", clyj);
+        ApiHttpClient.post(GO_SP, params, callback, tag);
+    }
+
+
+    /**
+     * 预审批
+     */
+
+    public static void yuSp(String id, BaseCallback<BaseResponse<YunSpBean>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("id", id);
+        ApiHttpClient.post(SP_YUN, params, callback, tag);
+    }
+
+    /**
+     * 获取审批列表
+     */
+    public static void getSpList(int pageNum, String pageSize, String khmc
+            , String lczt
+            , BaseCallback<BaseResponse<XcjyListBean>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("pageNo", pageNum + "");
+        params.put("pageSize", pageSize);
+        params.put("khhOrkhmc", khmc);
+        params.put("lczt", lczt);
+        ApiHttpClient.post(SP_LIST_CX, params, callback, tag);
+    }
+
+
+    /**
+     * 现场征信查询
+     *
+     * @param callback
+     * @param tag
+     */
     public static void xcjyZxcx(BaseCallback<BaseResponse<XcjyZxcxBean>> callback, Object tag) {
         Map<String, String> params = new HashMap<>();
         params.put("zjhm", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));

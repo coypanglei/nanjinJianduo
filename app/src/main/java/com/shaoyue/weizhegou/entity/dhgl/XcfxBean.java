@@ -6,40 +6,53 @@ public class XcfxBean extends BaseBean {
 
 
     /**
-     * id : d20e4b6197b588251ee424368a3fe4e6
-     * zjhm : clg304198804012418
-     * xtyx : 通过
-     * wtggzmx : null
+     * id : null
+     * jcjd : null
+     * zjhm : null
+     * xtyx : 不通过
      * rggy : 是
-     * ly : 465
+     * ly : null
      * fxyjxx : null
      * qtfmxx : null
      * qtxyz : null
      * qxsm : null
      * fmxxsm : null
-     * sxed : 取消
-     * xzyx : 1.0
-     * zysxed : 0.0
-     * tjqxsm : 家庭变故
-     * ysxed : 1.0
-     * cfl : 次级
-     * flly : 关注：有潜在缺陷
-     * qtfmqksm : 1
+     * sxed : 维持
+     * xzyx : null
+     * zysxed : 10.0
+     * tjqxsm : null
+     * ysxed : 10.0
+     * cfl : null
+     * flly : null
+     * qtfmqksm : null
      * jyr : 管理
      * xjr : 管理
-     * zz : 周思梦
-     * zzsfcj : 是
-     * createBy : admin
-     * createTime : 2019-10-18 15:03:24
-     * updateBy : admin
-     * updateTime : 2019-10-18 15:03:40
+     * zz : 管理
+     * zzsfcj : null
+     * createBy : null
+     * createTime : null
+     * updateBy : null
+     * updateTime : null
      * description : null
+     * scjybh : null
+     * dkyt : null
+     * cqwc : null
+     * qtfx : null
+     * xxsm : null
+     * zxms : null
+     * yqms : null
+     * hfms : null
+     * wtggzmx : 存在不良贷款
+     存在欠息
+     * zxwtggzmx : null
+     * hfwwtggzmx : null
+     * qtwtggzmx : null
      */
 
     private String id;
+    private String jcjd;
     private String zjhm;
     private String xtyx;
-    private String wtggzmx;
     private String rggy;
     private String ly;
     private String fxyjxx;
@@ -48,10 +61,10 @@ public class XcfxBean extends BaseBean {
     private String qxsm;
     private String fmxxsm;
     private String sxed;
-    private double xzyx;
-    private double zysxed;
+    private String xzyx;
+    private String zysxed;
     private String tjqxsm;
-    private double ysxed;
+    private Double ysxed;
     private String cfl;
     private String flly;
     private String qtfmqksm;
@@ -64,6 +77,18 @@ public class XcfxBean extends BaseBean {
     private String updateBy;
     private String updateTime;
     private String description;
+    private String scjybh;
+    private String dkyt;
+    private String cqwc;
+    private String qtfx;
+    private String xxsm;
+    private String zxms;
+    private String yqms;
+    private String hfms;
+    private String wtggzmx;
+    private String zxwtggzmx;
+    private String hfwwtggzmx;
+    private String qtwtggzmx;
 
     public String getId() {
         return id;
@@ -71,6 +96,14 @@ public class XcfxBean extends BaseBean {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getJcjd() {
+        return jcjd;
+    }
+
+    public void setJcjd(String jcjd) {
+        this.jcjd = jcjd;
     }
 
     public String getZjhm() {
@@ -87,14 +120,6 @@ public class XcfxBean extends BaseBean {
 
     public void setXtyx(String xtyx) {
         this.xtyx = xtyx;
-    }
-
-    public String getWtggzmx() {
-        return wtggzmx;
-    }
-
-    public void setWtggzmx(String wtggzmx) {
-        this.wtggzmx = wtggzmx;
     }
 
     public String getRggy() {
@@ -161,19 +186,19 @@ public class XcfxBean extends BaseBean {
         this.sxed = sxed;
     }
 
-    public double getXzyx() {
+    public String getXzyx() {
         return xzyx;
     }
 
-    public void setXzyx(double xzyx) {
+    public void setXzyx(String xzyx) {
         this.xzyx = xzyx;
     }
 
-    public double getZysxed() {
+    public String getZysxed() {
         return zysxed;
     }
 
-    public void setZysxed(double zysxed) {
+    public void setZysxed(String zysxed) {
         this.zysxed = zysxed;
     }
 
@@ -185,11 +210,11 @@ public class XcfxBean extends BaseBean {
         this.tjqxsm = tjqxsm;
     }
 
-    public double getYsxed() {
+    public Double getYsxed() {
         return ysxed;
     }
 
-    public void setYsxed(double ysxed) {
+    public void setYsxed(Double ysxed) {
         this.ysxed = ysxed;
     }
 
@@ -287,5 +312,101 @@ public class XcfxBean extends BaseBean {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getScjybh() {
+        return scjybh;
+    }
+
+    public void setScjybh(String scjybh) {
+        this.scjybh = scjybh;
+    }
+
+    public String getDkyt() {
+        return dkyt;
+    }
+
+    public void setDkyt(String dkyt) {
+        this.dkyt = dkyt;
+    }
+
+    public String getCqwc() {
+        return cqwc;
+    }
+
+    public void setCqwc(String cqwc) {
+        this.cqwc = cqwc;
+    }
+
+    public String getQtfx() {
+        return qtfx;
+    }
+
+    public void setQtfx(String qtfx) {
+        this.qtfx = qtfx;
+    }
+
+    public String getXxsm() {
+        return xxsm;
+    }
+
+    public void setXxsm(String xxsm) {
+        this.xxsm = xxsm;
+    }
+
+    public String getZxms() {
+        return zxms;
+    }
+
+    public void setZxms(String zxms) {
+        this.zxms = zxms;
+    }
+
+    public String getYqms() {
+        return yqms;
+    }
+
+    public void setYqms(String yqms) {
+        this.yqms = yqms;
+    }
+
+    public String getHfms() {
+        return hfms;
+    }
+
+    public void setHfms(String hfms) {
+        this.hfms = hfms;
+    }
+
+    public String getWtggzmx() {
+        return wtggzmx;
+    }
+
+    public void setWtggzmx(String wtggzmx) {
+        this.wtggzmx = wtggzmx;
+    }
+
+    public String getZxwtggzmx() {
+        return zxwtggzmx;
+    }
+
+    public void setZxwtggzmx(String zxwtggzmx) {
+        this.zxwtggzmx = zxwtggzmx;
+    }
+
+    public String getHfwwtggzmx() {
+        return hfwwtggzmx;
+    }
+
+    public void setHfwwtggzmx(String hfwwtggzmx) {
+        this.hfwwtggzmx = hfwwtggzmx;
+    }
+
+    public String getQtwtggzmx() {
+        return qtwtggzmx;
+    }
+
+    public void setQtwtggzmx(String qtwtggzmx) {
+        this.qtwtggzmx = qtwtggzmx;
     }
 }

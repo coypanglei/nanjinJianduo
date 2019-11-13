@@ -37,7 +37,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 
-public class BasicInformationDhglFragment extends BaseAppFragment {
+public class BasicInformationSjcjFragment extends BaseAppFragment {
 
 
     @BindView(R.id.id_jiben_1)
@@ -63,11 +63,11 @@ public class BasicInformationDhglFragment extends BaseAppFragment {
     private List<BasicInformationBean.RecordsBean> mlist2 = new ArrayList<>();
 
 
-    public static BasicInformationDhglFragment newInstance() {
+    public static BasicInformationSjcjFragment newInstance() {
 
         Bundle args = new Bundle();
 
-        BasicInformationDhglFragment fragment = new BasicInformationDhglFragment();
+        BasicInformationSjcjFragment fragment = new BasicInformationSjcjFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -152,21 +152,22 @@ public class BasicInformationDhglFragment extends BaseAppFragment {
                 stopProgressDialog();
                 mlist1.clear();
                 mlist2.clear();
-                if (ObjectUtils.isNotEmpty(result.data.getRecords())) {
-                    for (BasicInformationBean.RecordsBean bean : result.data.getRecords()) {
-                        if (bean.getCategory().equals("基本信息")) {
-                            mlist1.add(bean);
-                        } else if (bean.getCategory().equals("风险信息")) {
-                            if ("是否有负面信息".equals(bean.getTitile())) {
-                                bean.setParamtype("select_chang");
-                            }
-                            if ("客户风险预警系统信息".equals(bean.getTitile())) {
-                                bean.setType("noedit");
-                            }
 
-                            mlist2.add(bean);
+                for (BasicInformationBean.RecordsBean bean : result.data.getRecords()) {
+                    if (bean.getCategory().equals("基本信息")) {
+                        if (bean.getTitile().equals("客户名称") || bean.getTitile().equals("授信总金额(万元)")) {
+                            bean.setType("noedit");
+                        }
+                        mlist1.add(bean);
+                    } else if (bean.getCategory().equals("风险信息")) {
+                        if ("是否有负面信息".equals(bean.getTitile())) {
+                            bean.setParamtype("select_chang");
+                        }
+                        if ("客户风险预警系统信息".equals(bean.getTitile())) {
+                            bean.setType("noedit");
                         }
 
+                        mlist2.add(bean);
                     }
 
                 }
@@ -230,12 +231,6 @@ public class BasicInformationDhglFragment extends BaseAppFragment {
                 if (ObjectUtils.isNotEmpty(list2)) {
                     for (BasicInformationBean.RecordsBean bean : list2) {
 
-//                        if ("其他负面信息".equals(bean.getTitile())) {
-//                            //首先是拼接字符串
-//                            String content = "<font color=\"#FF4747\">" + "含法华网信息" + "</font>";
-//                            //换行
-//                            bean.setTitile(bean.getTitile() + "<br>" + content);
-//                        }
 
                         if ("其他负面信息".equals(bean.getTitile()) || "汇法网信息".equals(bean.getTitile())) {
                             if ("否".equals(result.data.getSfyfmxx())) {

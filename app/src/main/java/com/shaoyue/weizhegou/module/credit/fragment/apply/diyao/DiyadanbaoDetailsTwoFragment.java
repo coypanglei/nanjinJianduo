@@ -198,7 +198,7 @@ public class DiyadanbaoDetailsTwoFragment extends BaseAppFragment implements BGA
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
 
-        if (page == pages) {
+        if (page == pages+1) {
             mRefreshLayout.endLoadingMore();
             ToastUtil.showBlackToastSucess("没有更多的数据了");
             return false;

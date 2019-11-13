@@ -210,6 +210,7 @@
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="match_parent"
+                    android:visibility="gone"
                     android:gravity="center"
                     android:text="审批状态"
                     android:textColor="@color/color_0d1730"
@@ -265,14 +266,23 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="当前环节"
+                    android:visibility="gone"
                     android:textColor="@color/color_0d1730"
                     android:textSize="@dimen/dp_11" />
 
                 <TextView
                     android:layout_width="@dimen/dp_90"
+
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="下一环节"
+                    android:textColor="@color/color_0d1730"
+                    android:textSize="@dimen/dp_11" />
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="机构名称"
                     android:textColor="@color/color_0d1730"
                     android:textSize="@dimen/dp_11" />
 

@@ -85,8 +85,6 @@ public class DhglXCJYBAdapter extends BaseQuickAdapter<BasicInformationBean.Reco
         helper.setText(R.id.tv_name_title, Html.fromHtml(item.getTitile() + ":"));
 
 
-
-
         if ("select".equals(item.getParamtype())) {
             if (item.getRequire().equals("false")) {
                 //非必填
@@ -95,7 +93,12 @@ public class DhglXCJYBAdapter extends BaseQuickAdapter<BasicInformationBean.Reco
                         null, null, null);
             }
             DropDownView mDdvXB = helper.getView(R.id.ddv_xb);
-
+            if ("noedit".equals(item.getType())) {
+                mDdvXB.setClickable(false);
+                mDdvXB.setBackground(mContext.getResources().getDrawable(R.drawable.bg_edit_shadow));
+            }else {
+                mDdvXB.setClickable(true);
+            }
             if ("国际行业分类".equals(item.getTitile())) {
                 mDdvXB.setSelectName(item.getDefaultvalue());
                 mDdvXB.setOnClickListener(new View.OnClickListener() {
@@ -162,6 +165,9 @@ public class DhglXCJYBAdapter extends BaseQuickAdapter<BasicInformationBean.Reco
                         InputFilter[] filters = {new InputFilter.LengthFilter(18)};
                         mDdvXB.setFilters(filters);
                     } else if ("noedit".equals(item.getParamtype())) {
+                        mDdvXB.setEnabled(false);
+                        mDdvXB.setBackground(mContext.getResources().getDrawable(R.drawable.bg_edit_shadow));
+                    } else if ("noedit".equals(item.getType())) {
                         mDdvXB.setEnabled(false);
                         mDdvXB.setBackground(mContext.getResources().getDrawable(R.drawable.bg_edit_shadow));
                     }

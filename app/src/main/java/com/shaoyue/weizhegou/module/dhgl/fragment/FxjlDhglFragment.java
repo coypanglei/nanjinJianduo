@@ -135,6 +135,7 @@ public class FxjlDhglFragment extends BaseAppFragment {
      */
 
     private void initview() {
+
         ddvXb.setOnItemClickListener(new DropDownView.OnItemClickListener() {
             @Override
             public void onItemClick(Map<String, Object> map, int pos, int realPos) {
@@ -173,6 +174,25 @@ public class FxjlDhglFragment extends BaseAppFragment {
                         etZzsx.setText("");
                         break;
                 }
+                List<BasicInformationBean.RecordsBean> list2 = mAdapter2.getData();
+                if (ObjectUtils.isNotEmpty(list2)) {
+                    for (BasicInformationBean.RecordsBean bean : list2) {
+                        if ("调减或取消授信说明".equals(bean.getTitile())) {
+
+                            if ("维持".equals(ddvXb.getSelectName()) || "调增".equals(ddvXb.getSelectName())) {
+                                bean.setDefaultvalue("");
+                                bean.setType("noedit");
+                                bean.setRequire("false");
+                            } else {
+                                bean.setType("");
+                                bean.setRequire("true");
+                            }
+                        }
+                    }
+                    mAdapter2.setNewData(list2);
+                    mAdapter2.notifyDataSetChanged();
+
+                }
             }
         });
         etXzyx.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -208,8 +228,8 @@ public class FxjlDhglFragment extends BaseAppFragment {
                 stopProgressDialog();
 
                 List<BasicInformationBean.RecordsBean> mlist = result.data.getRecords();
-                mlist.add(3, new BasicInformationBean.RecordsBean("false","top", "现场验证情况"));
-                mlist.add(new BasicInformationBean.RecordsBean("false","top", "检验结论"));
+                mlist.add(6, new BasicInformationBean.RecordsBean("false", "top", "现场验证情况"));
+                mlist.add(new BasicInformationBean.RecordsBean("false", "top", "检验结论"));
                 mAdapter.setNewData(mlist);
 
 
@@ -308,31 +328,63 @@ public class FxjlDhglFragment extends BaseAppFragment {
                             bean.setEdit(true);
                             bean.setDefaultvalue(map.get(bean.getName()));
                         }
-                    }
-                    mAdapter.setNewData(list);
-                    mAdapter.notifyDataSetChanged();
-                }
-                List<BasicInformationBean.RecordsBean> list2 = mAdapter2.getData();
-                if (ObjectUtils.isNotEmpty(list2)) {
-                    for (BasicInformationBean.RecordsBean bean : list2) {
-                        if (map.containsKey(bean.getName())) {
-
-                            bean.setEdit(true);
-                            bean.setDefaultvalue(map.get(bean.getName()));
+                        if ("系统未通过规则明细".equals(bean.getTitile()) || "理由".equals(bean.getTitile())
+                                || "征信未通过规则明细".equals(bean.getTitile()) ||
+                                "汇法网未通过规则明细".equals(bean.getTitile()) || "其他未通过规则明细".equals(bean.getTitile())) {
+                            bean.setType("noedit");
+                        }
+                        if ("人工干预(是否进行现场检验)".equals(bean.getTitile())) {
+                            bean.setType("noedit");
                         }
                     }
-                    mAdapter2.setNewData(list2);
-                    mAdapter2.notifyDataSetChanged();
+
+
+                    mAdapter.setNewData(list);
+                    mAdapter.notifyDataSetChanged();
                 }
                 if (ObjectUtils.isNotEmpty(result.data.getSxed())) {
                     ddvXb.setSelectName(result.data.getSxed());
                 } else {
                     ddvXb.setSelectName("维持");
                 }
+
+                List<BasicInformationBean.RecordsBean> list2 = mAdapter2.getData();
+                if (ObjectUtils.isNotEmpty(list2)) {
+                    for (BasicInformationBean.RecordsBean bean : list2) {
+                        if ("调减或取消授信说明".equals(bean.getTitile())) {
+
+                            if ("维持".equals(ddvXb.getSelectName()) || "调增".equals(ddvXb.getSelectName())) {
+                                bean.setDefaultvalue("");
+                                bean.setType("noedit");
+                                bean.setRequire("false");
+                            } else {
+                                bean.setType("");
+                                bean.setRequire("true");
+                            }
+                        }
+                        if (map.containsKey(bean.getName())) {
+
+                            bean.setEdit(true);
+                            bean.setDefaultvalue(map.get(bean.getName()));
+
+                        }
+                    }
+                    mAdapter2.setNewData(list2);
+                    mAdapter2.notifyDataSetChanged();
+                }
+//                LogUtils.e(result.data.getZysxed());
+
                 etXzyx.setText(result.data.getXzyx() + "");
                 etZzsx.setText(result.data.getZysxed() + "");
-                Ysxed = result.data.getYsxed();
+                if (ObjectUtils.isNotEmpty(result.data.getYsxed())) {
+                    Ysxed = result.data.getYsxed();
+                } else {
+                    Ysxed = 0.00;
+                }
+
                 status = result.data.getSxed();
+
+
                 if (ObjectUtils.isNotEmpty(result.data.getSxed())) {
                     switch (result.data.getSxed()) {
                         case "维持":
@@ -342,6 +394,7 @@ public class FxjlDhglFragment extends BaseAppFragment {
                             etXzyx.setBackground(getActivity().getResources().getDrawable(R.drawable.bg_edit_shadow));
                             etZzsx.setText(result.data.getYsxed() + "");
                             etXzyx.setText("0");
+
                             break;
                         case "取消":
                             etZzsx.setEnabled(false);
@@ -444,33 +497,35 @@ public class FxjlDhglFragment extends BaseAppFragment {
             case R.id.sb_edit:
 
                 Map<String, String> map = getMap();
-                if (ObjectUtils.isNotEmpty(id)) {
-                    map.put("id", id);
-                    map.put("sxed", ddvXb.getSelectName());
-                    String xzyxEd = etXzyx.getText().toString().trim();
-                    String zzsxEd = etZzsx.getText().toString().trim();
+                if (ObjectUtils.isNotEmpty(map)) {
+                    map.put("xtyx", tvTitle.getText().toString());
+                    if (ObjectUtils.isNotEmpty(id)) {
+                        map.put("id", id);
+                        map.put("sxed", ddvXb.getSelectName());
+                        String xzyxEd = etXzyx.getText().toString().trim();
+                        String zzsxEd = etZzsx.getText().toString().trim();
 
-                    if (ObjectUtils.isEmpty(zzsxEd)) {
-                        ToastUtil.showBlackToastSucess("最终授信额度不能为空");
-                        return;
-                    }
-                    if (ObjectUtils.isEmpty(xzyxEd)) {
-                        ToastUtil.showBlackToastSucess("限制用信额度不能为空");
-                        return;
-                    }
-                    map.put("xzyx", xzyxEd);
-                    map.put("zysxed", zzsxEd);
-                    DhApi.editFxjl(map, new BaseCallback<BaseResponse<Void>>() {
-                        @Override
-                        public void onSucc(BaseResponse<Void> result) {
-                            ToastUtil.showBlackToastSucess("保存成功");
-                            getListById();
+                        if (ObjectUtils.isEmpty(zzsxEd)) {
+                            ToastUtil.showBlackToastSucess("最终授信额度不能为空");
+                            return;
                         }
-                    }, this);
-                } else {
-                    firstAdd();
+                        if (ObjectUtils.isEmpty(xzyxEd)) {
+                            ToastUtil.showBlackToastSucess("限制用信额度不能为空");
+                            return;
+                        }
+                        map.put("xzyx", xzyxEd);
+                        map.put("zysxed", zzsxEd);
+                        DhApi.editFxjl(map, new BaseCallback<BaseResponse<Void>>() {
+                            @Override
+                            public void onSucc(BaseResponse<Void> result) {
+                                ToastUtil.showBlackToastSucess("保存成功");
+                                getListById();
+                            }
+                        }, this);
+                    } else {
+                        firstAdd();
+                    }
                 }
-
 
                 break;
         }
@@ -491,6 +546,12 @@ public class FxjlDhglFragment extends BaseAppFragment {
             for (BasicInformationBean.RecordsBean bean : list) {
                 if (ObjectUtils.isNotEmpty(bean.getDefaultvalue())) {
                     map.put(bean.getName(), bean.getDefaultvalue());
+
+                } else {
+                    if (bean.getRequire().equals("true")) {
+                        ToastUtil.showBlackToastSucess(bean.getTitile() + "不能为空");
+                        return null;
+                    }
                 }
             }
         }
@@ -501,46 +562,33 @@ public class FxjlDhglFragment extends BaseAppFragment {
      * 第一次添加
      */
     private void firstAdd() {
-        Map<String, String> map = new HashMap<>();
-        List<BasicInformationBean.RecordsBean> list = mAdapter.getData();
-        if (ObjectUtils.isNotEmpty(list)) {
-            for (BasicInformationBean.RecordsBean bean : list) {
-                if (ObjectUtils.isNotEmpty(bean.getDefaultvalue())) {
-                    map.put(bean.getName(), bean.getDefaultvalue());
-                } else {
+        Map<String, String> map = getMap();
+        if (ObjectUtils.isNotEmpty(map)) {
+            map.put("sxed", ddvXb.getSelectName());
 
-                    if (bean.getRequire().equals("true")) {
-                        ToastUtil.showBlackToastSucess(bean.getTitile() + "不能为空");
-                        return;
-                    }
+            String xzyxEd = etXzyx.getText().toString().trim();
+            String zzsxEd = etZzsx.getText().toString().trim();
+
+            if (ObjectUtils.isEmpty(zzsxEd)) {
+                ToastUtil.showBlackToastSucess("最终授信额度不能为空");
+                return;
+            }
+            if (ObjectUtils.isEmpty(xzyxEd)) {
+                ToastUtil.showBlackToastSucess("限制用信额度不能为空");
+                return;
+            }
+            map.put("xtyx", tvTitle.getText().toString());
+            map.put("xzyx", xzyxEd);
+            map.put("zysxed", zzsxEd);
+            DhApi.addFxjl(map, new BaseCallback<BaseResponse<Void>>() {
+                @Override
+                public void onSucc(BaseResponse<Void> result) {
+                    ToastUtil.showBlackToastSucess("保存成功");
+                    getListById();
                 }
-
-            }
+            }, this);
 
         }
-
-        map.put("sxed", ddvXb.getSelectName());
-        String xzyxEd = etXzyx.getText().toString().trim();
-        String zzsxEd = etZzsx.getText().toString().trim();
-
-        if (ObjectUtils.isEmpty(zzsxEd)) {
-            ToastUtil.showBlackToastSucess("最终授信额度不能为空");
-            return;
-        }
-        if (ObjectUtils.isEmpty(xzyxEd)) {
-            ToastUtil.showBlackToastSucess("限制用信额度不能为空");
-            return;
-        }
-        map.put("xzyx", xzyxEd);
-        map.put("zysxed", zzsxEd);
-        DhApi.addFxjl(map, new BaseCallback<BaseResponse<Void>>() {
-            @Override
-            public void onSucc(BaseResponse<Void> result) {
-                ToastUtil.showBlackToastSucess("保存成功");
-                getListById();
-            }
-        }, this);
-
     }
 
 

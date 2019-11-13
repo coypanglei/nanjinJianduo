@@ -141,7 +141,7 @@ public class JsonConvert<T> implements Converter<T> {
 
             if (typeArgument == Void.class) {
                 //noinspection unchecked
-                if ( success) {
+                if (success) {
                     return (T) new BaseResponse(code, msg);
                 } else {
                     response.close();
@@ -153,7 +153,7 @@ public class JsonConvert<T> implements Converter<T> {
 
                 //这里的200是以下意思
                 //一般来说服务器会和客户端约定一个数表示成功，其余的表示失败，这里根据实际情况修改
-                if ( success) {
+                if (success) {
                     try {
                         BaseResponse baseResponse = Convert.fromJson(jsonObject.toString(), type);
                         return (T) baseResponse;

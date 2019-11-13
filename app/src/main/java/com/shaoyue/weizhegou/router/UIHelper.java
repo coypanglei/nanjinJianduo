@@ -41,7 +41,6 @@ import com.shaoyue.weizhegou.module.account.dialog.LineHelpFilelFragment;
 import com.shaoyue.weizhegou.module.account.dialog.RuleFragment;
 import com.shaoyue.weizhegou.module.account.dialog.VerifiedDialogFragment;
 import com.shaoyue.weizhegou.module.credit.activity.ApplyInfoActivity;
-import com.shaoyue.weizhegou.module.credit.activity.DcInfoActivity;
 import com.shaoyue.weizhegou.module.credit.activity.DyFaceActivity;
 import com.shaoyue.weizhegou.module.credit.dialog.ApplicationProgressDialogFragment;
 import com.shaoyue.weizhegou.module.credit.dialog.DiYaDialogFragment;
@@ -49,6 +48,7 @@ import com.shaoyue.weizhegou.module.credit.dialog.FamilyInfoDialogFragment;
 import com.shaoyue.weizhegou.module.credit.dialog.NewQianziDialogFragment;
 import com.shaoyue.weizhegou.module.credit.dialog.ProvincialIdentificationDialogFragment;
 import com.shaoyue.weizhegou.module.credit.dialog.QianziDialogFragment;
+import com.shaoyue.weizhegou.module.credit.dialog.SpDialogFragment;
 import com.shaoyue.weizhegou.module.credit.dialog.StartDcDialogFragment;
 import com.shaoyue.weizhegou.module.credit.dialog.VideoPicDialogFragment;
 import com.shaoyue.weizhegou.module.credit.dialog.XcjyProgressDialogFragment;
@@ -171,6 +171,23 @@ public class UIHelper {
 
     public static final String TI_JIAO = "tijiao";
 
+    public static final String SP_DIALOG = "sp_dialog";
+
+
+    /**
+     * 审批弹窗
+     *
+     * @param activity
+     */
+    public static void showSpDialog(FragmentActivity activity, String id) {
+        FragmentManager fm = activity.getSupportFragmentManager();
+        Fragment fragment = fm.findFragmentByTag(SP_DIALOG);
+        if (fragment == null) {
+            DialogFragment dialog = SpDialogFragment.newInstance(id);
+            dialog.show(fm, SP_DIALOG);
+        }
+    }
+
 
     public static void showPayPage(Context context) {
         String packageUrl = AppMgr.getInstance().getH5PayUrl() + "?session=" +
@@ -253,6 +270,7 @@ public class UIHelper {
             dialog.show(fm, APPLICATION_PROGRESS);
         }
     }
+
     /**
      * 申请进度界面
      *
@@ -548,13 +566,9 @@ public class UIHelper {
      */
 
     public static void showDcCommonActivity(String type, Activity activity, String contentType) {
-        if ("调查".equals(type)) {
-            Intent intent = DcInfoActivity.newInstance(activity, contentType);
-            activity.startActivity(intent);
-        } else if ("现场检验".equals(type)) {
-            Intent intent = XcjyActivity.newInstance(activity, contentType);
-            activity.startActivity(intent);
-        }
+        Intent intent = XcjyActivity.newInstance(activity, contentType, type);
+        activity.startActivity(intent);
+
     }
 
 
@@ -633,8 +647,6 @@ public class UIHelper {
             dialog.show(fm, Ok_CANCEL_NEW);
         }
     }
-
-
 
 
     /**

@@ -272,7 +272,9 @@
     <string name="str_rlsb"><u>人脸识别</u></string>
     <string name="str_zxsq"><u>征信授权</u></string>
     <string name="str_zxcx"><u>征信查询</u></string>
-
+    <string name="str_ckjd"><u>查看进度</u></string>
+    <string name="str_ckjy"><u>查看检验</u></string>
+    <string name="str_ckcj"><u>查看采集</u></string>
     <string-array name="main_tab_txt">
         <item>服务</item>
         <item>商城</item>　　
@@ -313,7 +315,7 @@
     <string-array name="main_tab_navigation">
         <item>智能营销</item>　　
         <item>信贷运营</item>　　
-        <item>贷后管理</item>　
+        <item>季检年检</item>　
         <item>信贷风控</item>　
         <item>合规平台</item>　
         <item>智能绩效</item>　

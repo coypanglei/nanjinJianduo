@@ -7,6 +7,8 @@ import android.os.Bundle;
 import com.shaoyue.weizhegou.base.BaseCommonActivity;
 import com.shaoyue.weizhegou.base.BaseFragment;
 import com.shaoyue.weizhegou.entity.cedit.OcrBean;
+import com.shaoyue.weizhegou.module.credit.fragment.diaocha.DcInfoFragment;
+import com.shaoyue.weizhegou.module.dhgl.fragment.SjcjInfoFragment;
 import com.shaoyue.weizhegou.module.dhgl.fragment.XcjyInfoFragment;
 import com.shaoyue.weizhegou.router.UIHelper;
 
@@ -16,21 +18,47 @@ public class XcjyActivity extends BaseCommonActivity {
 
     private String mContentType;
 
-    public static Intent newInstance(Context context, String contentType) {
+
+    private String type;
+
+    public static Intent newInstance(Context context, String contentType, String type) {
         Intent intent = new Intent(context, XcjyActivity.class);
         intent.putExtra(UIHelper.CONTENT_TYPE, contentType);
+        intent.putExtra(UIHelper.TYPE, type);
         return intent;
     }
 
     @Override
     protected boolean initBundle(Bundle bundle) {
         mContentType = (String) getIntent().getSerializableExtra(UIHelper.CONTENT_TYPE);
+        type = getIntent().getStringExtra(UIHelper.TYPE);
         return true;
     }
 
     @Override
     protected BaseFragment getFirstFragment() {
-        return XcjyInfoFragment.newInstance(mContentType);
+        //if ("调查".equals(type)) {
+        //            Intent intent = DcInfoActivity.newInstance(activity, contentType);
+        //            activity.startActivity(intent);
+        //        } else if ("现场检验".equals(type)) {
+        //            Intent intent = XcjyActivity.newInstance(activity, contentType);
+        //            activity.startActivity(intent);
+        //        }else if("数据采集".equals(type)){
+        //            Intent intent = XcjyActivity.newInstance(activity, contentType);
+        //            activity.startActivity(intent);
+        //        }
+        switch (type) {
+            case "调查":
+                return DcInfoFragment.newInstance(mContentType);
+            case "现场检验":
+                return XcjyInfoFragment.newInstance(mContentType);
+            case "数据采集":
+                return SjcjInfoFragment.newInstance(mContentType);
+            default:
+                return null;
+        }
+
+
     }
 
 

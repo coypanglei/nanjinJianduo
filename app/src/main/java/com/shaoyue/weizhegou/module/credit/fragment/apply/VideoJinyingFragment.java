@@ -132,11 +132,14 @@ public class VideoJinyingFragment extends BaseAppFragment {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(final OcrBean ocrBean) {
         String mTitle = SPUtils.getInstance().getString("selectPic");
+        String id =SPUtils.getInstance().getString("selectPic_zllx");
         if (mTitle.equals("经营相关材料")) {
-            if (mAdapter.getSelet().getZllx().contains("法人客户") || mAdapter.getSelet().getZllx().contains("工薪类客户") || mAdapter.getSelet().getZllx().contains("个体经营户")) {
+            if (id.contains("法人客户") || id.contains("工薪类客户") ||id.contains("个体经营户")) {
                 /*结果回调*/
                 if (ocrBean.getResultCode() == 1007) {
-                    if (ObjectUtils.isEmpty(mAdapter.getSelet())) {
+
+//            LogUtils.e(id);
+                    if (ObjectUtils.isEmpty(id)) {
                         return;
                     }
                     //4m大小 支持
@@ -164,16 +167,18 @@ public class VideoJinyingFragment extends BaseAppFragment {
                                     @Override
                                     public void onSuccess(final File file) {
 
-                                        LogUtils.e(mAdapter.getSelet().getZllx());
-                                        final String zllx = mAdapter.getSelet().getZllx().replace("反", "").replace("正", "").replace("面", "");
+
+                                        final String zllx = SPUtils.getInstance().getString("selectPic_zllx").replace("反", "").replace("正", "").replace("面", "");
 //                                //上传头像
 
                                         UserApi.updatePic(file, new BaseCallback<BaseResponse<String>>() {
                                             @Override
                                             public void onSucc(BaseResponse<String> result) {
-                                                VideoMaterialBean.ListBean mdata = mAdapter.getSelet();
+                                                VideoMaterialBean.ListBean mdata = new VideoMaterialBean.ListBean();
                                                 mdata.setZldz(result.msg);
                                                 mdata.setZllx(zllx);
+                                                mdata.setSxsfzh(SPUtils.getInstance().getString("selectPic_sxsfzh"));
+
                                                 CeditApi.addVideo(mdata, new BaseCallback<BaseResponse<Void>>() {
                                                     @Override
                                                     public void onSucc(BaseResponse<Void> result) {
@@ -214,7 +219,8 @@ public class VideoJinyingFragment extends BaseAppFragment {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(final VideoMaterialBean.ListBean listBean) {
 
-        if (mAdapter.getSelet().getId().equals(listBean.getId())) {
+        String id =SPUtils.getInstance().getString("selectPic_id");
+        if (id.equals(listBean.getId())) {
             VideoMaterialBean videoMaterialBean = new VideoMaterialBean();
             unPic.clear();
             for (VideoMaterialBean bean : mAdapter.getData()) {
@@ -234,7 +240,7 @@ public class VideoJinyingFragment extends BaseAppFragment {
             videoMaterialBean.setList(unPic);
             int select = 0;
             for (int i = 0; i < unPic.size(); i++) {
-                if (unPic.get(i).getId().equals(mAdapter.getSelet().getId())) {
+                if (unPic.get(i).getId().equals(id)) {
                     select = i;
                 }
             }

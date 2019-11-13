@@ -126,16 +126,11 @@
             android:theme="@style/TestTheme"
             android:windowSoftInputMode="adjustResize"/>
         <activity
-            android:name=".module.credit.activity.DcInfoActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/TestTheme"
-            android:windowSoftInputMode="adjustResize"/>
-
-        <activity
             android:name=".module.dhgl.activity.XcjyActivity"
             android:screenOrientation="landscape"
             android:theme="@style/TestTheme"
             android:windowSoftInputMode="adjustResize"/>
+
 
         <activity
             android:name="com.shaoyue.weizhegou.module.update.UpdateActivity"

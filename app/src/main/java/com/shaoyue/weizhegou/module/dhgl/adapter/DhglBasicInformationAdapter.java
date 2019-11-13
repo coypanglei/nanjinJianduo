@@ -34,7 +34,9 @@ import java.util.Map;
  * <p>
  * 邮箱：xjs250@163.com
  */
-public class DhglBasicInformationAdapter extends BaseQuickAdapter<BasicInformationBean.RecordsBean, BaseViewHolder> {
+public class
+
+DhglBasicInformationAdapter extends BaseQuickAdapter<BasicInformationBean.RecordsBean, BaseViewHolder> {
 
     public FragmentActivity getActivity() {
         return activity;
@@ -91,7 +93,12 @@ public class DhglBasicInformationAdapter extends BaseQuickAdapter<BasicInformati
 
         if ("select".equals(item.getParamtype()) || "select_chang".equals(item.getParamtype())) {
             DropDownView mDdvXB = helper.getView(R.id.ddv_xb);
-
+            if ("noedit".equals(item.getType())) {
+                mDdvXB.setClickable(false);
+                mDdvXB.setBackground(mContext.getResources().getDrawable(R.drawable.bg_edit_shadow));
+            }else {
+                mDdvXB.setClickable(true);
+            }
             if ("国际行业分类".equals(item.getTitile())) {
                 mDdvXB.setSelectName(item.getDefaultvalue());
                 mDdvXB.setOnClickListener(new View.OnClickListener() {
@@ -114,9 +121,8 @@ public class DhglBasicInformationAdapter extends BaseQuickAdapter<BasicInformati
                     mDdvXB.setOnItemClickListener(new DropDownView.OnItemClickListener() {
                         @Override
                         public void onItemClick(Map<String, Object> map, int pos, int realPos) {
-
-
                             item.setDefaultvalue(map.get("key").toString());
+                            EventBus.getDefault().post(item);
                         }
                     });
                 }
@@ -148,7 +154,8 @@ public class DhglBasicInformationAdapter extends BaseQuickAdapter<BasicInformati
                     mDdvXB.setKeyListener(DigitsKeyListener.getInstance("0123456789xyzXYZ"));
                     InputFilter[] filters = {new InputFilter.LengthFilter(18)};
                     mDdvXB.setFilters(filters);
-                } else if ("noedit".equals(item.getParamtype())) {
+                }
+                else if ("noedit".equals(item.getParamtype())) {
                     mDdvXB.setEnabled(false);
                     mDdvXB.setBackground(mContext.getResources().getDrawable(R.drawable.bg_edit_shadow));
                 }

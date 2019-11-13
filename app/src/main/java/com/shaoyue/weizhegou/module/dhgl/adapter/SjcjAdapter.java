@@ -5,6 +5,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.entity.cedit.XcjyBean;
+import com.shaoyue.weizhegou.util.McUtils;
 
 
 /**
@@ -12,19 +13,20 @@ import com.shaoyue.weizhegou.entity.cedit.XcjyBean;
  * <p>
  * 邮箱：xjs250@163.com
  */
-public class XcjyAdapter extends BaseQuickAdapter<XcjyBean, BaseViewHolder> {
+public class SjcjAdapter extends BaseQuickAdapter<XcjyBean, BaseViewHolder> {
 
 
-    public XcjyAdapter() {
-        super(R.layout.item_xcjy_list);
+    public SjcjAdapter() {
+        super(R.layout.item_sjcj_list);
 
     }
 
     @Override
     protected void convert(final BaseViewHolder helper, final XcjyBean item) {
+        helper.setGone(R.id.tv_xyhj, false);
         helper.setText(R.id.tv_xuhao, helper.getAdapterPosition() + 1 + "");
         helper.setText(R.id.tv_nfcs, item.getJcjd());
-        helper.setText(R.id.tv_lczt, getString(item.getLczt()));
+        helper.setText(R.id.tv_lczt, getString(item.getZt()));
         helper.setText(R.id.tv_dqhj, item.getDqhj());
         helper.setText(R.id.tv_khh, item.getKhh());
         helper.setText(R.id.tv_khxm, item.getKhmc());
@@ -34,9 +36,9 @@ public class XcjyAdapter extends BaseQuickAdapter<XcjyBean, BaseViewHolder> {
         helper.setText(R.id.tv_zjhm, item.getZjhm());
         helper.setText(R.id.tv_ghrmc, item.getGhrXm());
         helper.setText(R.id.tv_sxje, item.getSxje());
-        helper.setText(R.id.tv_dqhj, getString(item.getDqhj()));
-        helper.setText(R.id.tv_xyhj, getString(item.getXyhj()));
-        helper.setText(R.id.tv_jgmc,item.getJgmc());
+        helper.setText(R.id.tv_dqhj, McUtils.getString(item.getDqschj()));
+//        helper.setText(R.id.tv_xyhj, getString(item.getXyhj()));
+        helper.setText(R.id.tv_jgmc, item.getJgmc());
         if (item.isClick()) {
             helper.setBackgroundColor(R.id.ll_top, mContext.getResources().getColor(R.color.color_33f0f0f0));
             helper.setTextColor(R.id.tv_xuhao, mContext.getResources().getColor(R.color.color_2c4eb6));
@@ -88,23 +90,7 @@ public class XcjyAdapter extends BaseQuickAdapter<XcjyBean, BaseViewHolder> {
             case "-1":
                 return "待采集";
             case "0":
-                return "待认领";
-            case "1":
-                return "待现场检验";
-            case "2":
-                return "待协查";
-            case "3":
-                return "待小组组长检查";
-            case "4":
-                return "待信贷部总经理审核";
-            case "6":
-                return "待授信部总经理审核";
-            case "5":
-                return "待授信部审批岗审核";
-            case "200":
-                return "完成";
-            case "500":
-                return "终止";
+                return "已采集";
 
             default:
                 break;

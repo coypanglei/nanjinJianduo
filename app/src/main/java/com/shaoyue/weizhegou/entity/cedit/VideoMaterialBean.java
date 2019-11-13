@@ -61,6 +61,26 @@ public class VideoMaterialBean extends BaseBean {
     }
 
     public static class ListBean extends BaseBean{
+        @Override
+        public String toString() {
+            return "ListBean{" +
+                    "id='" + id + '\'' +
+                    ", sxid='" + sxid + '\'' +
+                    ", sxsfzh='" + sxsfzh + '\'' +
+                    ", zllx='" + zllx + '\'' +
+                    ", zlsx=" + zlsx +
+                    ", zlmc=" + zlmc +
+                    ", zldz='" + zldz + '\'' +
+                    ", delFlag=" + delFlag +
+                    ", createBy='" + createBy + '\'' +
+                    ", createTime='" + createTime + '\'' +
+                    ", updateBy=" + updateBy +
+                    ", updateTime=" + updateTime +
+                    ", description=" + description +
+                    ", select=" + select +
+                    '}';
+        }
+
         /**
          * id : 12dde28be6d1c84d7afc29e2c1f1e766
          * sxid : 770fc215263b0d7ef0e310b4de57400c
@@ -91,6 +111,16 @@ public class VideoMaterialBean extends BaseBean {
         private Object updateBy;
         private Object updateTime;
         private Object description;
+
+        private boolean select;
+
+        public boolean isSelect() {
+            return select;
+        }
+
+        public void setSelect(boolean select) {
+            this.select = select;
+        }
 
         public String getId() {
             return id;

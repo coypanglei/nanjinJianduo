@@ -12,7 +12,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.entity.cedit.VideoMaterialBean;
@@ -44,7 +43,9 @@ public class VideoPicDialogFragment extends DialogFragment {
     Banner mGoodsBanner;
 
     private VideoMaterialBean videoMaterialBean;
-    private List<String> mPicList = new ArrayList<>();
+
+
+
     @BindView(R.id.tv_my_info)
     TextView mTvInfo;
 
@@ -58,19 +59,24 @@ public class VideoPicDialogFragment extends DialogFragment {
         final LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_video, null);
         unbinder = ButterKnife.bind(this, view);
+        List<String> mPicList = new ArrayList<>();
+        List<String> mPicList2 = new ArrayList<>();
         for (VideoMaterialBean.ListBean bean : videoMaterialBean.getList()) {
             mPicList.add(DomainMgr.getInstance().getBaseUrlImg() + bean.getZldz());
         }
 
         List<String> newpIc = mPicList.subList(videoMaterialBean.getSelect(), mPicList.size());
-        newpIc.addAll(mPicList.subList(0, videoMaterialBean.getSelect()));
-        LogUtils.e(newpIc.size());
+        List<String> newPic2 = mPicList.subList(0, videoMaterialBean.getSelect());
+        mPicList2.addAll(newpIc);
+        mPicList2.addAll(newPic2);
 
+        List<VideoMaterialBean.ListBean> listBeans = new ArrayList<>();
         List<VideoMaterialBean.ListBean> list = videoMaterialBean.getList().subList(videoMaterialBean.getSelect(), videoMaterialBean.getList().size());
-        list.addAll(videoMaterialBean.getList().subList(0, videoMaterialBean.getSelect()));
-        LogUtils.e(list.size());
-        videoMaterialBean.setList(list);
-        mGoodsBanner.setImages(newpIc);
+        List<VideoMaterialBean.ListBean> list2 = videoMaterialBean.getList().subList(0, videoMaterialBean.getSelect());
+        listBeans.addAll(list);
+        listBeans.addAll(list2);
+        videoMaterialBean.setList(listBeans);
+        mGoodsBanner.setImages(mPicList2);
 
         mGoodsBanner.setImageLoader(new GlideImageLoader(R.drawable.icon_default_placeholder, true));
         mGoodsBanner.setBannerStyle(BannerConfig.NUM_INDICATOR);
@@ -159,7 +165,7 @@ public class VideoPicDialogFragment extends DialogFragment {
                 break;
             case R.id.iv_detele:
 
-                UIHelper.showOkNewClearDialog(getActivity(), new OkOrCancelEvent("是否删除所选图片", id,url));
+                UIHelper.showOkNewClearDialog(getActivity(), new OkOrCancelEvent("是否删除所选图片", id, url));
                 dismiss();
                 break;
         }

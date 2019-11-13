@@ -53,48 +53,57 @@
 
             app:radius="2dp" />
 
+        <RelativeLayout
+            android:layout_width="@dimen/dp_230"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@id/sb_find">
+
+
+            <com.shaoyue.weizhegou.widget.DropDownView
+                android:id="@+id/ddv_xb"
+                android:layout_width="159dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="9dp"
+                android:gravity="center_vertical"
+                android:text="请选择"
+                android:textColor="@color/black"
+                android:textColorHint="@color/color_666666"
+                android:textSize="11dp" />
+
+            <TextView
+                android:id="@+id/tv_name_title"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_toLeftOf="@id/ddv_xb"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dp_5"
+                android:text="进度:"
+                android:textColor="@color/color_666666"
+                android:textSize="11dp" />
+        </RelativeLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dp_48"
-            android:layout_marginRight="@dimen/dp_10">
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_toLeftOf="@id/tv_more">
+
 
             <com.libracore.lib.widget.StateButton
-                android:id="@+id/sb_select_all"
+                android:id="@+id/sb_start_test"
                 android:layout_width="83dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="@dimen/dp_12"
-                android:layout_marginRight="@dimen/dp_12"
-
+                android:drawableLeft="@drawable/icon_synchronize"
                 android:paddingLeft="6dp"
                 android:paddingTop="1dp"
                 android:paddingRight="6dp"
                 android:paddingBottom="1dp"
-                android:text="一键全选"
-                android:textSize="12dp"
-                app:normalBackgroundColor="@color/white"
-                app:normalStrokeColor="@color/color_49a0ed"
-                app:normalStrokeWidth="1dp"
-                app:normalTextColor="@color/color_49a0ed"
-                app:pressedBackgroundColor="@color/white"
-                app:pressedStrokeColor="@color/color_49a0ed"
-                app:pressedStrokeWidth="1dp"
-                app:pressedTextColor="@color/color_49a0ed"
-                app:radius="2dp" />
-
-            <com.libracore.lib.widget.StateButton
-                android:id="@+id/sb_start_rl"
-                android:layout_width="83dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center_horizontal"
-                android:paddingLeft="6dp"
-                android:paddingTop="1dp"
-                android:paddingRight="6dp"
-                android:paddingBottom="1dp"
-                android:text="任务认领"
+                android:text="开始采集"
                 android:textSize="12dp"
                 app:normalBackgroundColor="@color/color_17c295"
                 app:normalTextColor="@color/white"
@@ -115,8 +124,7 @@
             android:drawablePadding="@dimen/dp_5"
             android:text="更多"
             android:textColor="@color/color_49a0ed"
-            android:textSize="@dimen/dp_13"
-            android:visibility="gone" />
+            android:textSize="@dimen/dp_13" />
 
         <View
             android:layout_width="match_parent"
@@ -190,18 +198,17 @@
 
                 <TextView
                     android:id="@+id/tv_status"
-                    android:layout_width="@dimen/dp_100"
+                    android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:paddingRight="@dimen/dp_6"
-                    android:text="流程状态"
+                    android:text="进度"
                     android:textColor="@color/color_0d1730"
                     android:textSize="@dimen/dp_11" />
 
                 <TextView
-                    android:visibility="gone"
-                    android:layout_width="70dp"
+                    android:layout_width="90dp"
                     android:layout_height="match_parent"
+                    android:visibility="gone"
                     android:gravity="center"
                     android:text="审批状态"
                     android:textColor="@color/color_0d1730"
@@ -218,7 +225,7 @@
                 <TextView
                     android:layout_width="@dimen/dp_120"
                     android:layout_height="match_parent"
-                    android:layout_weight="4"
+
                     android:gravity="center"
                     android:text="证件类型"
                     android:textColor="@color/color_0d1730"
@@ -228,7 +235,7 @@
                 <TextView
                     android:layout_width="@dimen/dp_120"
                     android:layout_height="match_parent"
-                    android:layout_weight="4"
+
                     android:gravity="center"
                     android:text="证件号码"
                     android:textColor="@color/color_0d1730"
@@ -236,7 +243,7 @@
 
 
                 <TextView
-                    android:layout_width="@dimen/dp_70"
+                    android:layout_width="@dimen/dp_90"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="管户人名称"
@@ -245,7 +252,7 @@
 
 
                 <TextView
-                    android:layout_width="@dimen/dp_80"
+                    android:layout_width="@dimen/dp_100"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="授信金额(万元)"
@@ -256,14 +263,14 @@
                     android:layout_width="@dimen/dp_90"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="当前环节"
-                    android:visibility="gone"
+                    android:text="当前所处环节"
+                    android:visibility="visible"
                     android:textColor="@color/color_0d1730"
                     android:textSize="@dimen/dp_11" />
 
                 <TextView
-
                     android:layout_width="@dimen/dp_90"
+                     android:visibility="gone"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="下一环节"

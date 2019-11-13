@@ -304,7 +304,7 @@ public class shouXinSurveyFragment extends BaseAppFragment implements BGARefresh
                         //请求id 身份证
                         SPUtils.getInstance().put(UserMgr.SP_APPLY_ID, getSelect().getSxid());
                         SPUtils.getInstance().put(UserMgr.SP_ID_CARD, getSelect().getSxsfzh());
-                        UIHelper.showDcCommonActivity("调查",getActivity(), "查看详情");
+                        UIHelper.showDcCommonActivity("调查", getActivity(), "查看详情");
                     }
                 } else {
                     ToastUtil.showBlackToastSucess("暂未选取数据");
@@ -649,6 +649,7 @@ public class shouXinSurveyFragment extends BaseAppFragment implements BGARefresh
         DiaoChaApi.getDiaoChaList(page, "12", mNameOrId, approvalFlag, dczt, lczt, new BaseCallback<BaseResponse<sxDiaoChaBean>>() {
             @Override
             public void onSucc(BaseResponse<sxDiaoChaBean> result) {
+                pages = result.data.getPages();
                 mAdapter.setNewData(result.data.getRecords());
                 mAdapter.notifyDataSetChanged();
                 if (result.data.getRecords().size() > 0) {
@@ -663,14 +664,14 @@ public class shouXinSurveyFragment extends BaseAppFragment implements BGARefresh
 
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
-        if (page == pages) {
+        if (page == pages + 1) {
             mRefreshLayout.endLoadingMore();
             ToastUtil.showBlackToastSucess("没有更多的数据了");
             return false;
         }
         String mNameOrId = mEtName.getText().toString().trim();
 
-        DiaoChaApi.getDiaoChaList(page, "12", mNameOrId, approvalFlag, dczt, lczt, new BaseCallback<BaseResponse<sxDiaoChaBean>>() {
+        DiaoChaApi.getDiaoChaList(page + 1, "12", mNameOrId, approvalFlag, dczt, lczt, new BaseCallback<BaseResponse<sxDiaoChaBean>>() {
             @Override
             public void onSucc(final BaseResponse<sxDiaoChaBean> result) {
 

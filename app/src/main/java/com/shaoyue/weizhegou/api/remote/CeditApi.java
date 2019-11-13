@@ -19,6 +19,7 @@ import com.shaoyue.weizhegou.entity.cedit.QianziBean;
 import com.shaoyue.weizhegou.entity.cedit.TiJiaoBean;
 import com.shaoyue.weizhegou.entity.cedit.VideoBean;
 import com.shaoyue.weizhegou.entity.cedit.VideoMaterialBean;
+import com.shaoyue.weizhegou.entity.cedit.XtPerssionBean;
 import com.shaoyue.weizhegou.entity.cedit.ZiRanDanBaoListBean;
 import com.shaoyue.weizhegou.entity.cedit.applyBean;
 import com.shaoyue.weizhegou.entity.diaocha.AddressSelectBean;
@@ -186,6 +187,21 @@ public class CeditApi {
 
     //发起流程
     public static final String INITIATION_PROCESS = "jeecg-boot/process/startProcess";
+
+    //权限管理
+    private static final String PERMISSION_GET_MENU = "jeecg-boot/sys/permission/getUserShouyeByToken";
+
+    /**
+     * 类型 用于获取权限btn
+     *
+     * @param callback
+     * @param tag
+     */
+    public static void getPERMISSIONName(BaseCallback<BaseResponse<List<XtPerssionBean>>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("token", UserMgr.getInstance().getSessionId());
+        ApiHttpClient.post(PERMISSION_GET_MENU, params, callback, tag);
+    }
 
 
     /**

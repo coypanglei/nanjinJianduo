@@ -70,6 +70,10 @@ public class PictureSelectDialog extends Dialog implements View.OnClickListener 
         initListener();
     }
 
+
+
+
+
     private void initView() {
         mBtnCamera = (Button) findViewById(R.id.btn_camera);
         mBtnAlbum = (Button) findViewById(R.id.btn_album);

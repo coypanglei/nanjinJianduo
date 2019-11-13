@@ -19,6 +19,8 @@ import com.shaoyue.weizhegou.base.BaseTitleFragment;
 import com.shaoyue.weizhegou.entity.home.profileBean;
 import com.shaoyue.weizhegou.entity.user.MainClickBean;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.MenuAdapter;
+import com.shaoyue.weizhegou.module.dhgl.fragment.SjcjFragment;
+import com.shaoyue.weizhegou.module.dhgl.fragment.SpFragment;
 import com.shaoyue.weizhegou.module.dhgl.fragment.XcjyFragment;
 import com.shaoyue.weizhegou.module.dhgl.fragment.XzRlFragment;
 import com.shaoyue.weizhegou.widget.NoScrollViewPager;
@@ -38,6 +40,7 @@ public class CreditApplicationFragment extends BaseTitleFragment {
     TextView mTvVisible;
     @BindView(R.id.rv_menu)
     RecyclerView mRvMenu;
+
 
     private int currentPage = 0;
     private MenuAdapter menuAdapter;
@@ -71,6 +74,7 @@ public class CreditApplicationFragment extends BaseTitleFragment {
     @Override
     protected void initView(View rootView) {
         super.initView(rootView);
+        hideLeftButtonV2();
         final List<MainClickBean> mMenuList = profileBean.getMainClickBeans();
         for (int i = 0; i < mMenuList.size(); i++) {
             if ("授信申请".equals(mMenuList.get(i).getTitle())) {
@@ -84,9 +88,11 @@ public class CreditApplicationFragment extends BaseTitleFragment {
             } else if ("现场检验".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(XcjyFragment.newInstance(mMenuList.get(i).getTitle()));
             } else if ("数据采集".equals(mMenuList.get(i).getTitle())) {
-                fragmentList.add(XcjyFragment.newInstance(mMenuList.get(i).getTitle()));
-            }else if("小组任务认领".equals(mMenuList.get(i).getTitle())){
+                fragmentList.add(SjcjFragment.newInstance(mMenuList.get(i).getTitle()));
+            } else if ("小组任务认领".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(XzRlFragment.newInstance(mMenuList.get(i).getTitle()));
+            } else if ("审批".equals(mMenuList.get(i).getTitle())) {
+                fragmentList.add(SpFragment.newInstance(mMenuList.get(i).getTitle()));
             }
         }
         mMenuList.get(profileBean.getType()).setSelect(true);
@@ -114,7 +120,7 @@ public class CreditApplicationFragment extends BaseTitleFragment {
         mViewpager.setOffscreenPageLimit(0);
 
         mViewpager.setAdapter(new ContentPagerAdapter(getActivity().getSupportFragmentManager()));
-
+        setCommonTitle(mMenuList.get(0).getTitle());
         mViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
@@ -157,14 +163,23 @@ public class CreditApplicationFragment extends BaseTitleFragment {
     }
 
 
-    @OnClick(R.id.tv_visible)
-    public void onViewClicked() {
-        if (mRvMenu.getVisibility() == View.GONE) {
-            mRvMenu.setVisibility(View.VISIBLE);
-            mTvVisible.setText("隐藏菜单");
-        } else {
-            mRvMenu.setVisibility(View.GONE);
-            mTvVisible.setText("显示菜单");
+
+
+    @OnClick({R.id.viewpager, R.id.tv_visible})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.viewpager:
+//
+                break;
+            case R.id.tv_visible:
+                if (mRvMenu.getVisibility() == View.GONE) {
+                    mRvMenu.setVisibility(View.VISIBLE);
+                    mTvVisible.setText("隐藏菜单");
+                } else {
+                    mRvMenu.setVisibility(View.GONE);
+                    mTvVisible.setText("显示菜单");
+                }
+                break;
         }
     }
 

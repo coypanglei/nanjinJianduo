@@ -30,7 +30,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 
-public class XcjyInfoFragment extends BaseTitleFragment {
+public class SjcjInfoFragment extends BaseTitleFragment {
 
     @BindView(R.id.viewpager)
     NoScrollViewPager mViewpager;
@@ -51,11 +51,11 @@ public class XcjyInfoFragment extends BaseTitleFragment {
         return R.layout.activity_credit_application;
     }
 
-    public static XcjyInfoFragment newInstance(String mContentType) {
+    public static SjcjInfoFragment newInstance(String mContentType) {
         SPUtils.getInstance().put("status", mContentType);
         Bundle args = new Bundle();
         args.putString("type", mContentType);
-        XcjyInfoFragment fragment = new XcjyInfoFragment();
+        SjcjInfoFragment fragment = new SjcjInfoFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -79,8 +79,8 @@ public class XcjyInfoFragment extends BaseTitleFragment {
         mMenuList.add(new MainClickBean("基本信息", false));
         mMenuList.add(new MainClickBean("系统数据", false));
         mMenuList.add(new MainClickBean("征信查询", false));
-        mMenuList.add(new MainClickBean("现金流", false));
-        mMenuList.add(new MainClickBean("影像资料", false));
+//        mMenuList.add(new MainClickBean("现金流", false));
+//        mMenuList.add(new MainClickBean("影像资料", false));
 //        mMenuList.add(new MainClickBean("现场检验表", false));
         mMenuList.add(new MainClickBean("分析结论", false));
 
@@ -92,7 +92,7 @@ public class XcjyInfoFragment extends BaseTitleFragment {
             } else if ("影像资料".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(XcjyVideoDetailsFragment.newInstance("现场检验"));
             } else if ("基本信息".equals(mMenuList.get(i).getTitle())) {
-                fragmentList.add(BasicInformationDhglFragment.newInstance());
+                fragmentList.add(BasicInformationSjcjFragment.newInstance());
             } else if ("系统数据".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(MyDataDhglFragment.newInstance());
             } else if ("现金流".equals(mMenuList.get(i).getTitle())) {
@@ -100,7 +100,7 @@ public class XcjyInfoFragment extends BaseTitleFragment {
             } else if ("现场检验表".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(XcjyBDhglFragment.newInstance());
             } else if ("分析结论".equals(mMenuList.get(i).getTitle())) {
-                fragmentList.add(FxjlDhglFragment.newInstance());
+                fragmentList.add(SjcjFxjlDhglFragment.newInstance());
             }
         }
         mMenuList.get(0).setSelect(true);
@@ -111,8 +111,6 @@ public class XcjyInfoFragment extends BaseTitleFragment {
         menuAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(final BaseQuickAdapter adapter, View view, final int position) {
-                mRvMenu.setVisibility(View.GONE);
-                mTvVisible.setText("显示菜单");
                 if (currentPage != position) {
                     refresh(position, adapter);
 

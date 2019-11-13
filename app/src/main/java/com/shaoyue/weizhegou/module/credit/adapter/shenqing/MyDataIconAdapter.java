@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.shaoyue.weizhegou.R;
+import com.shaoyue.weizhegou.manager.DomainMgr;
 import com.shaoyue.weizhegou.util.GlideNewImageLoader;
 
 /**
@@ -24,7 +25,7 @@ public class MyDataIconAdapter extends BaseQuickAdapter<String, BaseViewHolder> 
     @Override
     protected void convert(final BaseViewHolder helper, final String item) {
         ImageView iv = helper.getView(R.id.iv_icon);
-        String imgUrl = "http://212.129.138.235:8080/jeecg-boot/mobieImage/" + item;
+        String imgUrl = DomainMgr.getInstance().getBaseUrl()+"jeecg-boot/mobieImage/" + item;
 //        LogUtils.e(imgUrl);
         GlideNewImageLoader.displayImageNoCacheNoDefault(mContext,iv, imgUrl);
 

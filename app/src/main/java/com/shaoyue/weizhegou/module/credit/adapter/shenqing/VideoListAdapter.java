@@ -6,8 +6,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -26,21 +24,13 @@ import java.util.List;
 public class VideoListAdapter extends BaseQuickAdapter<VideoMaterialBean, BaseViewHolder> {
 
     private FragmentActivity mFragment;
-    private VideoMaterialBean.ListBean selet;
+
 
     public VideoListAdapter(FragmentActivity context) {
         super(R.layout.item_video_list);
         mFragment = context;
     }
 
-
-    public VideoMaterialBean.ListBean getSelet() {
-        return selet;
-    }
-
-    public void setSelet(VideoMaterialBean.ListBean selet) {
-        this.selet = selet;
-    }
 
     @Override
     protected void convert(final BaseViewHolder helper, final VideoMaterialBean item) {
@@ -116,17 +106,23 @@ public class VideoListAdapter extends BaseQuickAdapter<VideoMaterialBean, BaseVi
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 List<VideoMaterialBean.ListBean> selet = adapter.getData();
+                if (selet.size() <= 10) {
+                    if (ObjectUtils.isEmpty(selet.get(position).getId())) {
 
-                if (ObjectUtils.isEmpty(selet.get(position).getId())) {
-                    setSelet(selet.get(position));
-                    LogUtils.e(item.getCategory());
-                    SPUtils.getInstance().put("selectPic", item.getCategory());
-                    PictureSelector
-                            .create(mFragment, 1007)
-                            .selectPicture(false, 200, 200, 1, 1);
-                } else {
-                    setSelet(selet.get(position));
-                    EventBus.getDefault().post(selet.get(position));
+                        SPUtils.getInstance().put("selectPic", item.getCategory());
+                        SPUtils.getInstance().put("selectPic_id", selet.get(position).getId());
+                        SPUtils.getInstance().put("selectPic_zllx", selet.get(position).getZllx());
+                        SPUtils.getInstance().put("selectPic_sxsfzh", selet.get(position).getSxsfzh());
+                        PictureSelector
+                                .create(mFragment, 1007)
+                                .selectPicture(false, 200, 200, 1, 1);
+                    } else {
+                        SPUtils.getInstance().put("selectPic", item.getCategory());
+                        SPUtils.getInstance().put("selectPic_id", selet.get(position).getId());
+                        SPUtils.getInstance().put("selectPic_zllx", selet.get(position).getZllx());
+                        SPUtils.getInstance().put("selectPic_sxsfzh", selet.get(position).getSxsfzh());
+                        EventBus.getDefault().post(selet.get(position));
+                    }
                 }
             }
         });

@@ -39,4 +39,13 @@ public class OcrBean {
     public void setResultCode(int resultCode) {
         this.resultCode = resultCode;
     }
+
+    @Override
+    public String toString() {
+        return "OcrBean{" +
+                "data=" + data +
+                ", title='" + title + '\'' +
+                ", resultCode=" + resultCode +
+                '}';
+    }
 }

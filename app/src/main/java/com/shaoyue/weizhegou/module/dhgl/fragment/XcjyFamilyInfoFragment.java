@@ -113,6 +113,7 @@ public class XcjyFamilyInfoFragment extends BaseAppFragment implements BGARefres
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 List<FamilyBean> mlist = adapter.getData();
+
                 for (FamilyBean data : mlist) {
                     data.setClick(false);
                 }
@@ -140,14 +141,14 @@ public class XcjyFamilyInfoFragment extends BaseAppFragment implements BGARefres
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
 
-        if (page == pages) {
+        if (page == pages+1) {
             mRefreshLayout.endLoadingMore();
             ToastUtil.showBlackToastSucess("没有更多的数据了");
             return false;
         }
 
 
-        DhApi.getFamilyInfo(page, "12", new BaseCallback<BaseResponse<FamilyListBean>>() {
+        DhApi.getFamilyInfo(page+1, "12", new BaseCallback<BaseResponse<FamilyListBean>>() {
             @Override
             public void onSucc(BaseResponse<FamilyListBean> result) {
 
@@ -216,6 +217,7 @@ public class XcjyFamilyInfoFragment extends BaseAppFragment implements BGARefres
             @Override
             public void onSucc(BaseResponse<FamilyListBean> result) {
 
+                pages = result.data.getPages();
                 if (result.data.getData().size() > 0) {
                     mEmptyRelative.setVisibility(View.GONE);
                     SPUtils.getInstance().put(UserMgr.SP_IS_PO, false);

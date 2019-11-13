@@ -47,15 +47,6 @@ public class FullCreditProcessFragment extends BaseAppFragment {
     @Override
     protected void initView(View rootView) {
         super.initView(rootView);
-//        mlist.add(new MainClickBean("待办任务", R.drawable.icon_credit_nav_1));
-//        mlist.add(new MainClickBean("授信申请", R.drawable.icon_credit_nav_2));
-//        mlist.add(new MainClickBean("授信调查", R.drawable.icon_credit_nav_3));
-//        mlist.add(new MainClickBean("授信审批", R.drawable.icon_credit_nav_4));
-//        mlist.add(new MainClickBean("授信记录查询", R.drawable.icon_credit_nav_5));
-//        mlist.add(new MainClickBean("阳光信贷", R.drawable.icon_credit_nav_6));
-//        mlist.add(new MainClickBean("征信查询申请", R.drawable.icon_credit_nav_7));
-//        mlist.add(new MainClickBean("征信查询审批", R.drawable.icon_credit_nav_8));
-//        mlist.add(new MainClickBean("贷款利率测算", R.drawable.icon_credit_nav_9));
         CeditApi.getTitleName("ygxt", new BaseCallback<BaseResponse<MenuBean>>() {
             @Override
             public void onSucc(BaseResponse<MenuBean> result) {

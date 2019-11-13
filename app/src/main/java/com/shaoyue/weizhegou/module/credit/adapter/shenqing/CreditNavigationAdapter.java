@@ -7,6 +7,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.entity.user.MainClickBean;
+import com.shaoyue.weizhegou.manager.DomainMgr;
 import com.shaoyue.weizhegou.util.GlideNewImageLoader;
 
 /**
@@ -26,7 +27,7 @@ public class CreditNavigationAdapter extends BaseQuickAdapter<MainClickBean, Bas
     protected void convert(final BaseViewHolder helper, final MainClickBean item) {
         helper.addOnClickListener(R.id.iv_icon);
         ImageView iv = helper.getView(R.id.iv_icon);
-        String imgUrl = "http://212.129.138.235:8080/jeecg-boot/" + item.getPicPath();
+        String imgUrl = DomainMgr.getInstance().getBaseUrl()+ "jeecg-boot/" + item.getPicPath();
 
         GlideNewImageLoader.displayImageNoDefault(mContext,iv, imgUrl);
         helper.setText(R.id.tv_title, item.getTitle());

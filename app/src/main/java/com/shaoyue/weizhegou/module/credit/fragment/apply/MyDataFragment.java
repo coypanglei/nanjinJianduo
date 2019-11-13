@@ -231,10 +231,10 @@ public class MyDataFragment extends BaseFragment {
                             mListTwo.add(new InquiryDetailsBean("近一年存款日均(万元)", myHangBean.getJynckrj() + "", myHangPeiOu.getJynckrj() + ""));
                             mListTwo.add(new InquiryDetailsBean("活期存款年日均(万元)", myHangBean.getHqcknrj() + "", myHangPeiOu.getHqcknrj() + ""));
                             mListTwo.add(new InquiryDetailsBean("定期存款年日均(万元)", myHangBean.getDqcknrj() + "", myHangPeiOu.getDqcknrj() + ""));
-                            mListTwo.add(new InquiryDetailsBean("理财(万元)", myHangBean.getLc() + "", myHangPeiOu.getLc() + ""));
-                            mListTwo.add(new InquiryDetailsBean("", "", ""));
-                            mListTwo.add(new InquiryDetailsBean("", "", ""));
-                            mListTwo.add(new InquiryDetailsBean("", "", ""));
+//                            mListTwo.add(new InquiryDetailsBean("理财(万元)", myHangBean.getLc() + "", myHangPeiOu.getLc() + ""));
+//                            mListTwo.add(new InquiryDetailsBean("", "", ""));
+//                            mListTwo.add(new InquiryDetailsBean("", "", ""));
+//                            mListTwo.add(new InquiryDetailsBean("", "", ""));
 
 
                             mListThree.add(new InquiryDetailsBean("月均电费(元)", myHangBean.getYjdf(), myHangPeiOu.getYjdf()));

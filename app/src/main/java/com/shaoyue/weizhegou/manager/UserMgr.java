@@ -18,7 +18,9 @@ import com.shaoyue.weizhegou.interfac.CommCallBack;
 import org.greenrobot.eventbus.EventBus;
 
 
-public class UserMgr {
+public class
+
+UserMgr {
 
 
     // 登录类型: 0,没有登录; 1:三方登录; 2:手机号登录

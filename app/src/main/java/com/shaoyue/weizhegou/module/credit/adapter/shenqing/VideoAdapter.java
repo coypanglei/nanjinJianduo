@@ -2,7 +2,6 @@ package com.shaoyue.weizhegou.module.credit.adapter.shenqing;
 
 import android.widget.ImageView;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.RegexUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -11,7 +10,6 @@ import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.entity.cedit.VideoMaterialBean;
 import com.shaoyue.weizhegou.manager.DomainMgr;
 import com.shaoyue.weizhegou.util.GlideNewImageLoader;
-import com.shaoyue.weizhegou.widget.HorizontalRecyclerView;
 
 
 public class VideoAdapter extends BaseQuickAdapter<VideoMaterialBean.ListBean, BaseViewHolder> {
@@ -34,7 +32,7 @@ public class VideoAdapter extends BaseQuickAdapter<VideoMaterialBean.ListBean, B
             if (item.getZllx().contains("法人客户") || item.getZllx().contains("工薪类客户") || item.getZllx().contains("个体经营户")) {
                 helper.setText(R.id.tv_title, item.getZllx());
             } else {
-                helper.setText(R.id.tv_title,RegexUtils.getReplaceFirst(item.getZllx(), "\\(.*?\\)", ""));
+                helper.setText(R.id.tv_title, RegexUtils.getReplaceFirst(item.getZllx(), "\\(.*?\\)", ""));
             }
         }
         ImageView iv = helper.getView(R.id.iv_update);

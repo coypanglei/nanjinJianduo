@@ -48,7 +48,7 @@ public class XcjyVideoDetailsFragment extends BaseAppFragment {
     RecyclerView mRvVideo;
 
     private VideoListAdapter mAdapter;
-
+    private VideoMaterialBean.ListBean listBean;
     private String title;
 
     //有图片
@@ -90,7 +90,6 @@ public class XcjyVideoDetailsFragment extends BaseAppFragment {
         mRvVideo.setAdapter(mAdapter);
     }
 
-
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(final OcrBean ocrBean) {
         String mTitle = SPUtils.getInstance().getString("selectPic");
@@ -101,15 +100,19 @@ public class XcjyVideoDetailsFragment extends BaseAppFragment {
         LogUtils.e(mTitle);
         LogUtils.e(title);
 //        if (mTitle.contains(title)) {
-            addPic(ocrBean);
+        addPic(ocrBean);
 //        }
     }
+
 
     private void addPic(final OcrBean ocrBean) {
 
         /*结果回调*/
         if (ocrBean.getResultCode() == 1007) {
-            if (ObjectUtils.isEmpty(mAdapter.getSelet())) {
+
+            String id =SPUtils.getInstance().getString("selectPic_zllx");
+//            LogUtils.e(id);
+            if (ObjectUtils.isEmpty(id)) {
                 return;
             }
             //4m大小 支持
@@ -136,18 +139,17 @@ public class XcjyVideoDetailsFragment extends BaseAppFragment {
 
                             @Override
                             public void onSuccess(final File file) {
-
-                                LogUtils.e(mAdapter.getSelet().getZllx());
-                                final String zllx = mAdapter.getSelet().getZllx().replace("反", "").replace("正", "").replace("面", "");
+                                final String zllx = SPUtils.getInstance().getString("selectPic_zllx").replace("反", "").replace("正", "").replace("面", "");
 //                                //上传头像
 
                                 UserApi.updatePic(file, new BaseCallback<BaseResponse<String>>() {
                                     @Override
                                     public void onSucc(BaseResponse<String> result) {
-                                        VideoMaterialBean.ListBean mdata = mAdapter.getSelet();
+                                        VideoMaterialBean.ListBean mdata = new VideoMaterialBean.ListBean();
                                         mdata.setZldz(result.msg);
                                         mdata.setZllx(zllx);
-                                        mAdapter.setSelet(new VideoMaterialBean.ListBean());
+                                        mdata.setSxsfzh(SPUtils.getInstance().getString("selectPic_sxsfzh"));
+
                                         DhApi.addVideo(mdata, new BaseCallback<BaseResponse<Void>>() {
                                             @Override
                                             public void onSucc(BaseResponse<Void> result) {
@@ -182,32 +184,27 @@ public class XcjyVideoDetailsFragment extends BaseAppFragment {
         }
 
 
-
-
-
-
-
     }
 
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(final VideoMaterialBean.ListBean listBean) {
-
-        if (mAdapter.getSelet().getId().equals(listBean.getId())) {
+        String id =SPUtils.getInstance().getString("selectPic_id");
+        if (id.equals(listBean.getId())) {
             VideoMaterialBean videoMaterialBean = new VideoMaterialBean();
             unPic.clear();
             for (VideoMaterialBean bean : mAdapter.getData()) {
 //                if (bean.getTitle().contains(title)) {
 
-                    if (ObjectUtils.isNotEmpty(bean.getList())) {
-                        for (VideoMaterialBean.ListBean data : bean.getList()) {
-                            if (ObjectUtils.isNotEmpty(data.getZldz())) {
-                                if (!unPic.contains(data.getZldz())) {
-                                    unPic.add(data);
-                                }
+                if (ObjectUtils.isNotEmpty(bean.getList())) {
+                    for (VideoMaterialBean.ListBean data : bean.getList()) {
+                        if (ObjectUtils.isNotEmpty(data.getZldz())) {
+                            if (!unPic.contains(data.getZldz())) {
+                                unPic.add(data);
                             }
                         }
                     }
+                }
 
 //                }
 
@@ -215,7 +212,7 @@ public class XcjyVideoDetailsFragment extends BaseAppFragment {
             videoMaterialBean.setList(unPic);
             int select = 0;
             for (int i = 0; i < unPic.size(); i++) {
-                if (unPic.get(i).getId().equals(mAdapter.getSelet().getId())) {
+                if (unPic.get(i).getId().equals(id)) {
                     select = i;
                 }
             }
@@ -259,19 +256,16 @@ public class XcjyVideoDetailsFragment extends BaseAppFragment {
 
                     for (VideoMaterialBean bean : mlist) {
 //                        if (bean.getTitle().contains(title)) {
-                            mDataListBean.add(bean);
-                            if (ObjectUtils.isNotEmpty(bean.getList())) {
-                                for (VideoMaterialBean.ListBean data : bean.getList()) {
-                                    if (ObjectUtils.isNotEmpty(data.getZldz())) {
-                                        if (!unPic.contains(data.getZldz())) {
-                                            unPic.add(data);
-                                        }
+                        mDataListBean.add(bean);
+                        if (ObjectUtils.isNotEmpty(bean.getList())) {
+                            for (VideoMaterialBean.ListBean data : bean.getList()) {
+                                if (ObjectUtils.isNotEmpty(data.getZldz())) {
+                                    if (!unPic.contains(data.getZldz())) {
+                                        unPic.add(data);
                                     }
                                 }
                             }
-
-
-
+                        }
                     }
                     mAdapter.setNewData(mDataListBean);
 

@@ -61,6 +61,7 @@ public class NewOkCancelFragment extends DialogFragment implements DialogInterfa
 
                             @Override
                             public void onFail(ApiException apiError) {
+                                super.onFail(apiError);
                                 dismiss();
                             }
                         }, this);
@@ -76,6 +77,7 @@ public class NewOkCancelFragment extends DialogFragment implements DialogInterfa
 
                             @Override
                             public void onFail(ApiException apiError) {
+                                super.onFail(apiError);
                                 dismiss();
                             }
                         }, this);

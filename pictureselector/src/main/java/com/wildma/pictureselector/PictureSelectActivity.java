@@ -20,16 +20,16 @@ public class PictureSelectActivity extends Activity {
 
     private final int PERMISSION_CODE_FIRST = 0x14;//权限请求码
     private PictureSelectDialog mSelectPictureDialog;
-    private             boolean isToast      = true;//是否弹吐司，为了保证for循环只弹一次
-    public static final String  CROP_WIDTH   = "crop_width";
-    public static final String  CROP_HEIGHT  = "crop_Height";
-    public static final String  RATIO_WIDTH  = "ratio_Width";
-    public static final String  RATIO_HEIGHT = "ratio_Height";
-    public static final String  ENABLE_CROP  = "enable_crop";
-    private int     mCropWidth;
-    private int     mCropHeight;
-    private int     mRatioWidth;
-    private int     mRatioHeight;
+    private boolean isToast = true;//是否弹吐司，为了保证for循环只弹一次
+    public static final String CROP_WIDTH = "crop_width";
+    public static final String CROP_HEIGHT = "crop_Height";
+    public static final String RATIO_WIDTH = "ratio_Width";
+    public static final String RATIO_HEIGHT = "ratio_Height";
+    public static final String ENABLE_CROP = "enable_crop";
+    private int mCropWidth;
+    private int mCropHeight;
+    private int mRatioWidth;
+    private int mRatioHeight;
     private boolean mCropEnabled;
 
     @Override
@@ -81,6 +81,14 @@ public class PictureSelectActivity extends Activity {
             Log.d("onRequestPermission", "onRequestPermissionsResult: " + "有权限不允许");
             finish();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mSelectPictureDialog.cancel();
+        mSelectPictureDialog.dismiss();
+
     }
 
     /**

@@ -430,6 +430,7 @@ public class shouXinShenQingFragment extends BaseAppFragment implements BGARefre
         CeditApi.getApplicationList(page, "12", mNameOrId, approvalFlag, lczt, new BaseCallback<BaseResponse<ApplicationListBean>>() {
             @Override
             public void onSucc(BaseResponse<ApplicationListBean> result) {
+                pages = result.data.getPages();
                 mAdapter.setNewData(result.data.getmBaseBean());
                 mAdapter.notifyDataSetChanged();
                 if (result.data.getmBaseBean().size() > 0) {
@@ -444,14 +445,14 @@ public class shouXinShenQingFragment extends BaseAppFragment implements BGARefre
 
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
-        if (page == pages) {
+        if (page == pages+1) {
             mRefreshLayout.endLoadingMore();
             ToastUtil.showBlackToastSucess("没有更多的数据了");
             return false;
         }
         String mNameOrId = mEtName.getText().toString().trim();
 
-        CeditApi.getApplicationList(page, "12", mNameOrId, approvalFlag, lczt, new BaseCallback<BaseResponse<ApplicationListBean>>() {
+        CeditApi.getApplicationList(page+1, "12", mNameOrId, approvalFlag, lczt, new BaseCallback<BaseResponse<ApplicationListBean>>() {
             @Override
             public void onSucc(final BaseResponse<ApplicationListBean> result) {
 
