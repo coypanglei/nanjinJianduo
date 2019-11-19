@@ -102,8 +102,6 @@ public class CeditApi {
     private static final String INFO_BY_IDSTRING = "jeecg-boot/business/sxsqJbxx/queryById";
 
 
-
-
     //暂存基本信息
     private static final String INFO_SAVEORUPDATEHIS = "jeecg-boot/business/sxsqJbxx/saveOrUpdateHis";
 
@@ -190,6 +188,24 @@ public class CeditApi {
 
     //权限管理
     private static final String PERMISSION_GET_MENU = "jeecg-boot/sys/permission/getUserShouyeByToken";
+
+
+    //评级指标
+    private static final String PJZB = "jeecg-boot/business/pjmxZbpz/getPjmx";
+
+
+    /**
+     * 评级指标
+     *
+     * @param callback
+     * @param tag
+     */
+    public static void getPjzb(Map<String, String> params, BaseCallback<BaseResponse<Void>> callback, Object tag) {
+
+        params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        ApiHttpClient.putJson(PJZB, params, callback, tag);
+    }
+
 
     /**
      * 类型 用于获取权限btn
@@ -359,6 +375,7 @@ public class CeditApi {
      * @param tag
      */
     public static void lookInfo(Map<String, String> params, BaseCallback<BaseResponse<MyHangBean>> callback, Object tag) {
+        params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
         ApiHttpClient.post(MY_DATA, params, callback, tag);
 
     }
@@ -628,7 +645,8 @@ public class CeditApi {
     public static void detelProcessInstance(String id, BaseCallback<BaseResponse<Void>> callback, Object tag) {
         Map<String, String> params = new HashMap<>();
 //        params.put("token", UserMgr.getInstance().getSessionId());
-        params.put("id", id);
+        params.put("sxid", id);
+
         ApiHttpClient.detel(DETEL_PROCESS_INSTANCE, params, callback, tag);
     }
 

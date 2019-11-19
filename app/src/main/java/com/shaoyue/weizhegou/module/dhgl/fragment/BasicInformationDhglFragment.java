@@ -159,8 +159,9 @@ public class BasicInformationDhglFragment extends BaseAppFragment {
                         } else if (bean.getCategory().equals("风险信息")) {
                             if ("是否有负面信息".equals(bean.getTitile())) {
                                 bean.setParamtype("select_chang");
+                                bean.setType("noedit");
                             }
-                            if ("客户风险预警系统信息".equals(bean.getTitile())) {
+                            if ("客户风险预警系统信息".equals(bean.getTitile())||"其他负面信息".equals(bean.getTitile())||"汇法网信息".equals(bean.getTitile())) {
                                 bean.setType("noedit");
                             }
 
@@ -254,7 +255,7 @@ public class BasicInformationDhglFragment extends BaseAppFragment {
 
 
             }
-        }, this);
+        },this);
     }
 
     @OnClick({R.id.sb_edit})

@@ -17,7 +17,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.api.callback.BaseCallback;
 import com.shaoyue.weizhegou.api.model.BaseResponse;
-import com.shaoyue.weizhegou.api.remote.CeditApi;
 import com.shaoyue.weizhegou.api.remote.DhApi;
 import com.shaoyue.weizhegou.base.BaseAppFragment;
 import com.shaoyue.weizhegou.entity.cedit.XcjyBean;
@@ -168,7 +167,7 @@ public class XcjyFragment extends BaseAppFragment implements BGARefreshLayout.BG
      * 更多弹出框
      */
     private void setPopupBigPhoto() {
-        popupBigPhotoview = getLayoutInflater().inflate(R.layout.popwindow_credit_application, null);
+        popupBigPhotoview = getLayoutInflater().inflate(R.layout.popwindow_credit_application_three, null);
         popupBigPhotoview.findViewById(R.id.tv_detail).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -206,8 +205,48 @@ public class XcjyFragment extends BaseAppFragment implements BGARefreshLayout.BG
 
             }
         });
+        popupBigPhotoview.findViewById(R.id.tv_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (popupBigPhoto.isShowing()) {
+                    popupBigPhoto.dismiss();
+                }
+                if (ObjectUtils.isNotEmpty(getSelect())) {
+                    if ("1".equals(getSelect().getLczt())) {
+
+                        UIHelper.showOkClearDialog(getActivity(), "确定要退回吗");
+                    } else {
+                        ToastUtil.showBlackToastSucess("请选择流程状态为待现场检验的数据");
+                    }
+                } else {
+                    ToastUtil.showBlackToastSucess("暂未选取数据");
+                }
 
 
+            }
+        });
+
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(OkOrCancelEvent event) {
+        if (event.getmType().equals("确定要退回吗")) {
+
+            if (ObjectUtils.isEmpty(getSelect())) {
+                ToastUtil.showBlackToastSucess("请选择需要删除的消息");
+                return;
+            }
+            String ids = getSelect().getId();
+            DhApi.cancelRl(ids, new BaseCallback<BaseResponse<Void>>() {
+                @Override
+                public void onSucc(BaseResponse<Void> result) {
+                    ToastUtil.showBlackToastSucess("取消认领成功");
+                    initData();
+                }
+            }, this);
+        }
     }
 
     private void setPopupSelectView() {
@@ -282,26 +321,6 @@ public class XcjyFragment extends BaseAppFragment implements BGARefreshLayout.BG
         });
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(OkOrCancelEvent event) {
-        if (event.getmType().equals("是否取消申请?")) {
-            XcjyBean item = null;
-            for (XcjyBean data : mAdapter.getData()) {
-                if (data.isClick()) {
-                    item = data;
-                }
-            }
-            if (ObjectUtils.isNotEmpty(item)) {
-                CeditApi.detelProcessInstance(item.getId(), new BaseCallback<BaseResponse<Void>>() {
-                    @Override
-                    public void onSucc(BaseResponse<Void> result) {
-                        initData();
-                    }
-                }, this);
-            }
-
-        }
-    }
 
     private XcjyBean getSelect() {
         for (XcjyBean data : mAdapter.getData()) {

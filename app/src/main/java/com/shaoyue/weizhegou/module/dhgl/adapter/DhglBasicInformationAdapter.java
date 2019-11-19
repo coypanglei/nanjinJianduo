@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -96,7 +97,7 @@ DhglBasicInformationAdapter extends BaseQuickAdapter<BasicInformationBean.Record
             if ("noedit".equals(item.getType())) {
                 mDdvXB.setClickable(false);
                 mDdvXB.setBackground(mContext.getResources().getDrawable(R.drawable.bg_edit_shadow));
-            }else {
+            } else {
                 mDdvXB.setClickable(true);
             }
             if ("国际行业分类".equals(item.getTitile())) {
@@ -145,6 +146,8 @@ DhglBasicInformationAdapter extends BaseQuickAdapter<BasicInformationBean.Record
                 });
 
             } else {
+                LogUtils.e(item.getParamtype());
+                LogUtils.e(item.getTitile());
                 final EditText mDdvXB = helper.getView(R.id.et_name);
 
                 if ("number".equals(item.getParamtype())) {
@@ -154,8 +157,7 @@ DhglBasicInformationAdapter extends BaseQuickAdapter<BasicInformationBean.Record
                     mDdvXB.setKeyListener(DigitsKeyListener.getInstance("0123456789xyzXYZ"));
                     InputFilter[] filters = {new InputFilter.LengthFilter(18)};
                     mDdvXB.setFilters(filters);
-                }
-                else if ("noedit".equals(item.getParamtype())) {
+                } else if ("noedit".equals(item.getType()) || "noedit".equals(item.getParamtype())) {
                     mDdvXB.setEnabled(false);
                     mDdvXB.setBackground(mContext.getResources().getDrawable(R.drawable.bg_edit_shadow));
                 }

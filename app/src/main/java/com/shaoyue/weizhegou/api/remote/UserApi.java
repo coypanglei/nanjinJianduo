@@ -1,12 +1,10 @@
 package com.shaoyue.weizhegou.api.remote;
 
 
-import com.blankj.utilcode.util.LogUtils;
 import com.lzy.okgo.callback.BitmapCallback;
 import com.shaoyue.weizhegou.api.callback.BaseCallback;
 import com.shaoyue.weizhegou.api.helper.ApiHttpClient;
 import com.shaoyue.weizhegou.api.model.BaseResponse;
-
 import com.shaoyue.weizhegou.entity.cedit.IDCardBack;
 import com.shaoyue.weizhegou.entity.cedit.IDCardFrontBean;
 import com.shaoyue.weizhegou.entity.user.CommissionBalanceBean;
@@ -14,8 +12,6 @@ import com.shaoyue.weizhegou.entity.user.CommissionListBean;
 import com.shaoyue.weizhegou.entity.user.DistributionNumBean;
 import com.shaoyue.weizhegou.entity.user.OrdererNumBean;
 import com.shaoyue.weizhegou.entity.user.SafeInfoBean;
-import com.shaoyue.weizhegou.entity.user.SubordinateOrdererListBean;
-import com.shaoyue.weizhegou.entity.user.SuperiorInfoBean;
 import com.shaoyue.weizhegou.entity.user.UserInfoBean;
 import com.shaoyue.weizhegou.entity.user.UserMsgBean;
 import com.shaoyue.weizhegou.entity.user.WalletDetailsBean;
@@ -24,7 +20,6 @@ import com.shaoyue.weizhegou.manager.UserMgr;
 
 import java.io.File;
 import java.util.HashMap;
-
 import java.util.Map;
 
 public class UserApi extends BaseApi {
@@ -107,6 +102,10 @@ public class UserApi extends BaseApi {
     //身份证识别
     private static final String API_OCR = "jeecg-boot/business/common/idCard";
 
+    //系统版本-获取版本
+    private static final String SYSVERSION_VERSION = "jeecg-boot/system/sysVersion/version";
+
+
 
     public static void getInfoMsg(int pageNo, String pageSize, BaseCallback<BaseResponse<UserMsgBean>> callback, Object tag) {
         Map<String, String> params = new HashMap<>();
@@ -150,32 +149,8 @@ public class UserApi extends BaseApi {
     }
 
 
-    /**
-     * 获取下级分销商列表
-     *
-     * @param callback
-     * @param tag
-     */
-    public static void getGetSonsaleList(int level, int page, BaseCallback<BaseResponse<SubordinateOrdererListBean>> callback, Object tag) {
-        Map<String, String> params = new HashMap<>();
-        params.put("level", level + "");
-        params.put("page", page + "");
-        ApiHttpClient.post(API_GET_SONSALE, params, callback, tag);
-    }
 
 
-    /**
-     * 获取分销商会员列表
-     *
-     * @param callback
-     * @param tag
-     */
-    public static void getDistributorMemberList(int level, int page, BaseCallback<BaseResponse<SubordinateOrdererListBean>> callback, Object tag) {
-        Map<String, String> params = new HashMap<>();
-        params.put("level", level + "");
-        params.put("page", page + "");
-        ApiHttpClient.post(API_GET_SONUSER, params, callback, tag);
-    }
 
     /**
      * 是否绑定微信
@@ -204,38 +179,9 @@ public class UserApi extends BaseApi {
     }
 
 
-    /**
-     * 获取下级订货商列表
-     *
-     * @param callback
-     * @param tag
-     */
-    public static void getSonuserList(int page, BaseCallback<BaseResponse<SubordinateOrdererListBean>> callback, Object tag) {
-        Map<String, String> params = new HashMap<>();
-        params.put("page", page + "");
-        ApiHttpClient.post(API_SONUSER_LIST, params, callback, tag);
-    }
-
-    /**
-     * 获取下级会员列表
-     *
-     * @param callback
-     * @param tag
-     */
-    public static void getSubordinateMember(int page, BaseCallback<BaseResponse<SubordinateOrdererListBean>> callback, Object tag) {
-        Map<String, String> params = new HashMap<>();
-        params.put("page", page + "");
-        ApiHttpClient.post(API_USER_SONBUYUSER, params, callback, tag);
-    }
 
 
-    /**
-     * 我的上级
-     */
-    public static void getSuperiorInfo(BaseCallback<BaseResponse<SuperiorInfoBean>> callback, Object tag) {
-        Map<String, String> params = new HashMap<>();
-        ApiHttpClient.post(API_USER_PARENT_INFO, params, callback, tag);
-    }
+
 
     /**
      * 完善个人信息

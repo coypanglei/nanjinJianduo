@@ -85,6 +85,7 @@ public class DcInfoFragment extends BaseTitleFragment {
         mMenuList.add(new MainClickBean("担保抵押", false));
         mMenuList.add(new MainClickBean("现金流", false));
         mMenuList.add(new MainClickBean("影像资料", false));
+        mMenuList.add(new MainClickBean("评级指标", false));
 
         for (int i = 0; i < mMenuList.size(); i++) {
             if ("家庭信息".equals(mMenuList.get(i).getTitle())) {
@@ -99,8 +100,10 @@ public class DcInfoFragment extends BaseTitleFragment {
                 fragmentList.add(MyDataFragment.newInstance());
             } else if ("担保抵押".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(DiyadanbaoFragment.newInstance());
-            }else if("现金流".equals(mMenuList.get(i).getTitle())){
+            } else if ("现金流".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(DcMoneyFragment.newInstance());
+            } else if ("评级指标".equals(mMenuList.get(i).getTitle())) {
+                fragmentList.add(DcPjzbFragment.newInstance());
             }
         }
         mMenuList.get(0).setSelect(true);

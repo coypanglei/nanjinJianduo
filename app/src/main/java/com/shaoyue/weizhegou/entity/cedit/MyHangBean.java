@@ -130,17 +130,33 @@ public class MyHangBean extends BaseBean {
          * bdqb : 未开通
          * dwdb : 11.0
          */
+
+
         @SerializedName("sxrq")
         private String sxrq;
         private String sycsxqsrq;
+        @SerializedName("dfkh")
         private String df;
         private String nqf;
+        @SerializedName("sxje")
         private double ysxje;
+        private String mt;
+        @SerializedName("mqkh")
         private String rqf;
         private double cksdye;
         private String xtshjl;
         private String ysf;
+
+        public String getMt() {
+            return mt;
+        }
+
+        public void setMt(String mt) {
+            this.mt = mt;
+        }
+
         private String sjyh;
+        @SerializedName("wyzx")
         private String yl;
         private int blcs;
         private double jynckrj;
@@ -166,10 +182,12 @@ public class MyHangBean extends BaseBean {
         private String delFlag;
         private double bwbldk;
         private double yxye;
+        @SerializedName("sfkh")
         private String sf;
         private double hqcknrj;
         private String pos;
         private String updateBy;
+        @SerializedName("jd")
         private String jdzf;
         private String wsyh;
         private String wx;
@@ -186,6 +204,7 @@ public class MyHangBean extends BaseBean {
         private String sxid;
         private double lc;
         private String sqjjnj;
+        @SerializedName("bfb")
         private String bdqb;
         private double dwdb;
 

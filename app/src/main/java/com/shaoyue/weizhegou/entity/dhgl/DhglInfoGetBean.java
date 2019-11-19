@@ -44,6 +44,15 @@ public class DhglInfoGetBean {
     private String updateBy;
     private String updateTime;
     private String description;
+    private String hfwxx;
+
+    public String getHfwxx() {
+        return hfwxx;
+    }
+
+    public void setHfwxx(String hfwxx) {
+        this.hfwxx = hfwxx;
+    }
 
     public String getId() {
         return id;

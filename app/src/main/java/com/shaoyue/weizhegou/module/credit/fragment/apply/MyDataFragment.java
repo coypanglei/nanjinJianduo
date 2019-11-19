@@ -146,7 +146,6 @@ public class MyDataFragment extends BaseFragment {
      */
     private void initData() {
         Map<String, String> map = new HashMap<>();
-        map.put("sxid", "120");
         CeditApi.lookInfo(map, new BaseCallback<BaseResponse<MyHangBean>>() {
             @Override
             public void onSucc(BaseResponse<MyHangBean> result) {
@@ -244,70 +243,75 @@ public class MyDataFragment extends BaseFragment {
 
                             List<String> mSelectList = new ArrayList<>();
                             List<String> unmSelectList = new ArrayList<>();
-                            if ("开通".equals(myHangBean.getWx())) {
+                            if ("1".equals(myHangBean.getWx())) {
                                 mSelectList.add("wx1.png");
                             } else {
                                 unmSelectList.add("wx2.png");
                             }
+                            if ("1".equals(myHangPeiOu.getMt())) {
+                                mSelectList.add("mt1.png");
+                            } else {
+                                unmSelectList.add("mt2.png");
+                            }
 
-                            if ("开通".equals(myHangBean.getJdzf())) {
+                            if ("1".equals(myHangBean.getJdzf())) {
                                 mSelectList.add("jd1.png");
                             } else {
                                 unmSelectList.add("jd2.png");
                             }
 
 
-                            if ("开通".equals(myHangBean.getZfb())) {
+                            if ("1".equals(myHangBean.getZfb())) {
                                 mSelectList.add("zfb1.png");
                             } else {
                                 unmSelectList.add("zfb2.png");
                             }
 
 
-                            if ("开通".equals(myHangBean.getYl())) {
+                            if ("1".equals(myHangBean.getYl())) {
                                 mSelectList.add("yl1.png");
                             } else {
                                 unmSelectList.add("yl2.png");
                             }
 
 
-                            if ("开通".equals(myHangBean.getYsf())) {
+                            if ("1".equals(myHangBean.getYsf())) {
                                 mSelectList.add("ysf1.png");
                             } else {
                                 unmSelectList.add("ysf2.png");
                             }
 
-                            if ("开通".equals(myHangBean.getBdqb())) {
+                            if ("1".equals(myHangBean.getBdqb())) {
                                 mSelectList.add("bdqb1.png");
                             } else {
                                 unmSelectList.add("bdqb2.png");
                             }
 
-                            if ("开通".equals(myHangBean.getCft())) {
+                            if ("1".equals(myHangBean.getCft())) {
                                 mSelectList.add("cft1.png");
                             } else {
                                 unmSelectList.add("cft2.png");
                             }
 
-                            if ("开通".equals(myHangBean.getSf())) {
+                            if ("1".equals(myHangBean.getSf())) {
                                 mSelectList.add("sf1.png");
                             } else {
                                 unmSelectList.add("sf2.png");
                             }
 
-                            if ("开通".equals(myHangBean.getSjyh())) {
+                            if ("1".equals(myHangBean.getSjyh())) {
                                 mSelectList.add("sjyh1.png");
                             } else {
                                 unmSelectList.add("sjyh2.png");
                             }
 
-                            if ("开通".equals(myHangBean.getRqf())) {
+                            if ("1".equals(myHangBean.getRqf())) {
                                 mSelectList.add("rq1.png");
                             } else {
                                 unmSelectList.add("rq2.png");
                             }
 
-                            if ("开通".equals(myHangBean.getDf())) {
+                            if ("1".equals(myHangBean.getDf())) {
                                 mSelectList.add("df1.png");
                             } else {
                                 unmSelectList.add("df2.png");
@@ -318,74 +322,79 @@ public class MyDataFragment extends BaseFragment {
                             unmSelectList.clear();
                             myDataIconAdapter.setNewData(mlistFour);
                             myDataIconAdapter.notifyDataSetChanged();
-                            if ("开通".equals(myHangPeiOu.getWx())) {
+                            if ("1".equals(myHangPeiOu.getWx())) {
                                 mSelectList.add("wx1.png");
                             } else {
                                 unmSelectList.add("wx2.png");
                             }
-
-                            if ("开通".equals(myHangPeiOu.getJdzf())) {
+                            if ("1".equals(myHangPeiOu.getMt())) {
+                                mSelectList.add("mt1.png");
+                            } else {
+                                unmSelectList.add("mt2.png");
+                            }
+                            if ("1".equals(myHangPeiOu.getJdzf())) {
                                 mSelectList.add("jd1.png");
                             } else {
                                 unmSelectList.add("jd2.png");
                             }
 
 
-                            if ("开通".equals(myHangPeiOu.getZfb())) {
+                            if ("1".equals(myHangPeiOu.getZfb())) {
                                 mSelectList.add("zfb1.png");
                             } else {
                                 unmSelectList.add("zfb2.png");
                             }
 
 
-                            if ("开通".equals(myHangPeiOu.getYl())) {
+                            if ("1".equals(myHangPeiOu.getYl())) {
                                 mSelectList.add("yl1.png");
                             } else {
                                 unmSelectList.add("yl2.png");
                             }
 
 
-                            if ("开通".equals(myHangPeiOu.getYsf())) {
+                            if ("1".equals(myHangPeiOu.getYsf())) {
                                 mSelectList.add("ysf1.png");
                             } else {
                                 unmSelectList.add("ysf2.png");
                             }
 
-                            if ("开通".equals(myHangPeiOu.getBdqb())) {
+                            if ("1".equals(myHangPeiOu.getBdqb())) {
                                 mSelectList.add("bdqb1.png");
                             } else {
                                 unmSelectList.add("bdqb2.png");
                             }
 
-                            if ("开通".equals(myHangPeiOu.getCft())) {
+                            if ("1".equals(myHangPeiOu.getCft())) {
                                 mSelectList.add("cft1.png");
                             } else {
                                 unmSelectList.add("cft2.png");
                             }
 
-                            if ("开通".equals(myHangPeiOu.getSf())) {
+                            if ("1".equals(myHangPeiOu.getSf())) {
                                 mSelectList.add("sf1.png");
                             } else {
                                 unmSelectList.add("sf2.png");
                             }
 
-                            if ("开通".equals(myHangPeiOu.getSjyh())) {
+                            if ("1".equals(myHangPeiOu.getSjyh())) {
                                 mSelectList.add("sjyh1.png");
                             } else {
                                 unmSelectList.add("sjyh2.png");
                             }
 
-                            if ("开通".equals(myHangPeiOu.getRqf())) {
+                            if ("1".equals(myHangPeiOu.getRqf())) {
                                 mSelectList.add("rq1.png");
                             } else {
                                 unmSelectList.add("rq2.png");
                             }
 
-                            if ("开通".equals(myHangPeiOu.getDf())) {
+                            if ("1".equals(myHangPeiOu.getDf())) {
                                 mSelectList.add("df1.png");
                             } else {
                                 unmSelectList.add("df2.png");
                             }
+
                             mlistFive.addAll(mSelectList);
                             mlistFive.addAll(unmSelectList);
                             mSelectList.clear();

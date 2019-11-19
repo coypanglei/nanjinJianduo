@@ -102,6 +102,23 @@ public class DhApi {
 
     //数据采集分析结论
     private static final String SJCJ_FXJL = "jeecg-boot/business/dhglJjCjfxjl/queryByZjhm";
+    //取消认领
+    private static final String CANCEL_RL = "jeecg-boot/business/dhglJjXcjydx/qxrl";
+
+
+
+    /**
+     * 取消认领
+     */
+
+
+    public static void cancelRl(String id, BaseCallback<BaseResponse<Void>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("id", id);
+        ApiHttpClient.post(CANCEL_RL, params, callback, tag);
+    }
+
+
     /**
      * 添加分析结论
      *
