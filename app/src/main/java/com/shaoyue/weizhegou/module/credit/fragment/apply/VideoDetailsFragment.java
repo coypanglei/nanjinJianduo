@@ -70,17 +70,30 @@ public class VideoDetailsFragment extends BaseAppFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EventBus.getDefault().register(this);
+
         if (ObjectUtils.isNotEmpty(getArguments())) {
             title = getArguments().getString("title");
         }
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
+    public void onStart() {
+        super.onStart();
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
+        }
+    }
+
+
+
 
     @Override
     protected void initView(View rootView) {
@@ -88,6 +101,7 @@ public class VideoDetailsFragment extends BaseAppFragment {
         mAdapter = new VideoListAdapter(getActivity());
         mRvVideo.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvVideo.setAdapter(mAdapter);
+        resh();
     }
 
 
@@ -193,6 +207,7 @@ public class VideoDetailsFragment extends BaseAppFragment {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(final VideoMaterialBean.ListBean listBean) {
         String id =SPUtils.getInstance().getString("selectPic_id");
+
         if (id.equals(listBean.getId())) {
             VideoMaterialBean videoMaterialBean = new VideoMaterialBean();
             unPic.clear();
@@ -227,15 +242,21 @@ public class VideoDetailsFragment extends BaseAppFragment {
             }
             videoMaterialBean.setList(unPic);
             int select = 0;
+            boolean re=false;
             for (int i = 0; i < unPic.size(); i++) {
                 if (unPic.get(i).getId().equals(id)) {
                     select = i;
+                    re =true;
                 }
+
             }
-            //更换接口
-            videoMaterialBean.setUrl("SXSQ");
-            videoMaterialBean.setSelect(select);
-            UIHelper.showPicDialog(getActivity(), videoMaterialBean);
+            if(re) {
+                //更换接口
+                videoMaterialBean.setUrl("SXSQ");
+                videoMaterialBean.setSelect(select);
+
+                UIHelper.showPicDialog(getActivity(), videoMaterialBean);
+            }
         }
 
     }
@@ -248,12 +269,12 @@ public class VideoDetailsFragment extends BaseAppFragment {
     }
 
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        resh();
-
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        resh();
+//
+//    }
 
 
     /**

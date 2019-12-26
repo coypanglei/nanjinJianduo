@@ -18,8 +18,9 @@ public class XcjyActivity extends BaseCommonActivity {
 
     private String mContentType;
 
-
     private String type;
+
+
 
     public static Intent newInstance(Context context, String contentType, String type) {
         Intent intent = new Intent(context, XcjyActivity.class);
@@ -37,16 +38,6 @@ public class XcjyActivity extends BaseCommonActivity {
 
     @Override
     protected BaseFragment getFirstFragment() {
-        //if ("调查".equals(type)) {
-        //            Intent intent = DcInfoActivity.newInstance(activity, contentType);
-        //            activity.startActivity(intent);
-        //        } else if ("现场检验".equals(type)) {
-        //            Intent intent = XcjyActivity.newInstance(activity, contentType);
-        //            activity.startActivity(intent);
-        //        }else if("数据采集".equals(type)){
-        //            Intent intent = XcjyActivity.newInstance(activity, contentType);
-        //            activity.startActivity(intent);
-        //        }
         switch (type) {
             case "调查":
                 return DcInfoFragment.newInstance(mContentType);

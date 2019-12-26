@@ -34,6 +34,17 @@ public class VideoMaterialBean extends BaseBean {
     private String title;
     private List<ListBean> list;
 
+    private String visable;
+
+
+    public String getVisable() {
+        return visable;
+    }
+
+    public void setVisable(String visable) {
+        this.visable = visable;
+    }
+
     private int select;
 
     public int getSelect() {

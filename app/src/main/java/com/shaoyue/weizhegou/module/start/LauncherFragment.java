@@ -20,13 +20,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.lzy.okgo.OkGo;
+import com.shaoyue.weizhegou.BuildConfig;
 import com.shaoyue.weizhegou.R;
+import com.shaoyue.weizhegou.api.callback.BaseCallback;
+import com.shaoyue.weizhegou.api.model.BaseResponse;
+import com.shaoyue.weizhegou.api.remote.CommApi;
 import com.shaoyue.weizhegou.base.BaseAppFragment;
+import com.shaoyue.weizhegou.entity.VersionBean;
 import com.shaoyue.weizhegou.entity.home.HomeInitBean;
 import com.shaoyue.weizhegou.interfac.CommCallBack;
 import com.shaoyue.weizhegou.manager.AppMgr;
+import com.shaoyue.weizhegou.manager.DomainMgr;
 import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.router.UIHelper;
 import com.shaoyue.weizhegou.util.ToastUtil;
@@ -74,6 +81,11 @@ public class LauncherFragment extends BaseAppFragment implements StartListener {
     TextView hintTV;
     @BindView(R.id.tv_accout)
     TextView mTvAccout;
+    @BindView(R.id.tv_version)
+    TextView tvVersion;
+    @BindView(R.id.tv_sb)
+    TextView tvSb;
+
     private Boolean isFingerprint, isGesture;
     /**
      * 最大解锁次数
@@ -99,9 +111,6 @@ public class LauncherFragment extends BaseAppFragment implements StartListener {
     }
 
 
-
-
-
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_start;
@@ -112,6 +121,9 @@ public class LauncherFragment extends BaseAppFragment implements StartListener {
     protected void initView(View rootView) {
         super.initView(rootView);
         setLoginType();
+
+        tvVersion.setText("版本: V"+ BuildConfig.VERSION_CODE);
+        tvSb.setText("设备号："+AppMgr.getInstance().getDeviceId());
         fingerprintManagerCompat = FingerprintManagerCompat.from(mActivity);
         mTvAccout.setText("账号:" + SPUtils.getInstance().getString(UserMgr.getInstance().SP_LOGIN_NAME, ""));
         isFingerprint = SPUtils.getInstance().getBoolean(UserMgr.ISFINGERPRINT_KEY, false);
@@ -143,6 +155,24 @@ public class LauncherFragment extends BaseAppFragment implements StartListener {
 
         setLoginType();
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        CommApi.checkUpdate(new BaseCallback<BaseResponse<VersionBean>>() {
+            @Override
+            public void onSucc(BaseResponse<VersionBean> result) {
+
+                if (!result.data.getIsUpdate().equals("false")) { // 已经是最新版本
+                    // 需要更新
+                    VersionBean versionBean = result.data;
+                    versionBean.setPackageUrl(DomainMgr.getInstance().getBaseUrl() + "jeecg-boot/sys/common/download/" + versionBean.getPackageUrl());
+                    LogUtils.e(versionBean.getPackageUrl());
+                    AppMgr.getInstance().showUpdateDialog(versionBean);
+                }
+            }
+        }, this);
     }
 
     @Override
@@ -299,7 +329,7 @@ public class LauncherFragment extends BaseAppFragment implements StartListener {
                     ToastUtil.showBlackToastSucess(msg);
                 }
             }
-        },this);
+        }, this);
     }
 
     /**
@@ -314,6 +344,7 @@ public class LauncherFragment extends BaseAppFragment implements StartListener {
         fingerprintManagerCompat.authenticate(cryptoObject, 0, mCancellationSignal, new MyCallBack(), null);
 
     }
+
 
     /**
      * 指纹回调
@@ -365,7 +396,7 @@ public class LauncherFragment extends BaseAppFragment implements StartListener {
                         }
 
                     }
-                },this);
+                }, this);
             } catch (BadPaddingException e) {
 
                 e.printStackTrace();
@@ -373,7 +404,6 @@ public class LauncherFragment extends BaseAppFragment implements StartListener {
                 e.printStackTrace();
 
             }
-
 
 
         }
@@ -425,7 +455,7 @@ public class LauncherFragment extends BaseAppFragment implements StartListener {
                                 ToastUtil.showBlackToastSucess(msg);
                             }
                         }
-                    },this);
+                    }, this);
                 } else {
                     hintTV.setVisibility(View.VISIBLE);
                     mNumber = --mNumber;
@@ -456,7 +486,6 @@ public class LauncherFragment extends BaseAppFragment implements StartListener {
             }
         }, 300);
     }
-
 
 
 }

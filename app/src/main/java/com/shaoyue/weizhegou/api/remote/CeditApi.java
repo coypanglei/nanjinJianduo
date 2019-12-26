@@ -1,7 +1,9 @@
 package com.shaoyue.weizhegou.api.remote;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
+import com.google.gson.JsonObject;
 import com.shaoyue.weizhegou.api.callback.BaseCallback;
 import com.shaoyue.weizhegou.api.helper.ApiHttpClient;
 import com.shaoyue.weizhegou.api.model.BaseResponse;
@@ -11,17 +13,18 @@ import com.shaoyue.weizhegou.entity.cedit.DiyaDanBaoListBean;
 import com.shaoyue.weizhegou.entity.cedit.FaceBean;
 import com.shaoyue.weizhegou.entity.cedit.FamilyListBean;
 import com.shaoyue.weizhegou.entity.cedit.GongsiDanbao;
-import com.shaoyue.weizhegou.entity.cedit.InfoGetBean;
 import com.shaoyue.weizhegou.entity.cedit.MyHangBean;
 import com.shaoyue.weizhegou.entity.cedit.ProgressBean;
 import com.shaoyue.weizhegou.entity.cedit.QiYeDanBaoBean;
 import com.shaoyue.weizhegou.entity.cedit.QianziBean;
+import com.shaoyue.weizhegou.entity.cedit.SxykhListBean;
 import com.shaoyue.weizhegou.entity.cedit.TiJiaoBean;
 import com.shaoyue.weizhegou.entity.cedit.VideoBean;
 import com.shaoyue.weizhegou.entity.cedit.VideoMaterialBean;
 import com.shaoyue.weizhegou.entity.cedit.XtPerssionBean;
 import com.shaoyue.weizhegou.entity.cedit.ZiRanDanBaoListBean;
 import com.shaoyue.weizhegou.entity.cedit.applyBean;
+import com.shaoyue.weizhegou.entity.dhgl.XjlBean;
 import com.shaoyue.weizhegou.entity.diaocha.AddressSelectBean;
 import com.shaoyue.weizhegou.entity.user.MenuBean;
 import com.shaoyue.weizhegou.manager.UserMgr;
@@ -68,6 +71,9 @@ public class CeditApi {
     //查询家庭信息
     private static final String FIND_FAMILY_INFO = "jeecg-boot/business/sxsqJtxx/queryJtxx";
 
+    //担保人家庭信息
+    private static final String DB_FIND_FAMILY_INFO = "jeecg-boot/business/sxsqDbrxx/queryJtxx";
+
     //人脸识别信息查询
     private static final String FACE_FIND = "jeecg-boot/business/sxsqJtxx/authJtxx";
 
@@ -84,6 +90,9 @@ public class CeditApi {
     //编辑授信人签名
     private static final String EDUT_QINAMING = "jeecg-boot/business/sxsqCxsqs/edit";
 
+
+    //人脸验证
+    private static final String SXSQRLSB_AUTHRLSB = "jeecg-boot/business/sxsqRlsb/authRlsb";
 
     //影像资料列表
     private static final String VIDEO_DETAILS_LIST = "jeecg-boot/business/sxsqYxzl/listMobile";
@@ -158,6 +167,29 @@ public class CeditApi {
 
     //新增担保人信息
     public static final String DANBAOREN_ADD = "jeecg-boot/business/sxsqDbrxx/add";
+    /**
+     * 上游客户
+     */
+    public static final String SXYKH_SY = "jeecg-boot/business/sxdcSygys/list";
+    /**
+     * 下游客户
+     */
+    public static final String XYKH_SY = "jeecg-boot/business/sxdcXykh/list";
+    //删除下游客户信息
+    public static final String XYKH_DELETE = "jeecg-boot/business/sxdcXykh/delete";
+
+
+    //删除上游客户信息
+    public static final String SYKH_DELETE = "jeecg-boot/business/sxdcSygys/delete";
+
+    //新增下游客户信息
+    public static final String XYKH_ADD = "jeecg-boot/business/sxdcXykh/add";
+    //新增上游游客户信息
+    public static final String SYKH_ADD = "jeecg-boot/business/sxdcSygys/add";
+    //修改下游客户信息
+    public static final String SYKH_EDIT = "jeecg-boot/business/sxdcSygys/edit";
+    //修改下游客户
+    public static final String XYKH_EDIT = "jeecg-boot/business/sxdcXykh/edit";
 
 
     //新增公司担保信息
@@ -186,26 +218,53 @@ public class CeditApi {
     //发起流程
     public static final String INITIATION_PROCESS = "jeecg-boot/process/startProcess";
 
+    //发起流程
+    public static final String LCSP_PROCESS = "jeecg-boot/process/approval";
+
     //权限管理
     private static final String PERMISSION_GET_MENU = "jeecg-boot/sys/permission/getUserShouyeByToken";
 
 
-    //评级指标
-    private static final String PJZB = "jeecg-boot/business/pjmxZbpz/getPjmx";
-
-
+    //现金流
+    private static final String XCJY_XJL = "jeecg-boot/business/sxdcXxjl/listMobile";
     /**
-     * 评级指标
+     * 获取现金流信息
      *
      * @param callback
      * @param tag
      */
-    public static void getPjzb(Map<String, String> params, BaseCallback<BaseResponse<Void>> callback, Object tag) {
-
-        params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
-        ApiHttpClient.putJson(PJZB, params, callback, tag);
+    public static void getXjlInfo(BaseCallback<BaseResponse<XjlBean>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+//        params.put("token", UserMgr.getInstance().getSessionId());
+        params.put("zjhm", SPUtils.getInstance().getString(UserMgr.SP_ID_CARD));
+        params.put("jcjd", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        ApiHttpClient.post(XCJY_XJL, params, callback, tag);
     }
 
+    /**
+     * 人脸识别验证
+     *
+     * @param callback
+     * @param tag
+     */
+    public static void putRljy(Map<String, String> params, BaseCallback<BaseResponse<Void>> callback, Object tag) {
+        params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        ApiHttpClient.post(SXSQRLSB_AUTHRLSB, params, callback, tag);
+    }
+
+    /**
+     * 发起审批流程
+     *
+     * @param callback
+     * @param tag
+     */
+    public static void putSplc(Map<String, String> params, BaseCallback<BaseResponse<Void>> callback, Object tag) {
+        LogUtils.e(SPUtils.getInstance().getString(UserMgr.SP_DC_TASKID));
+        params.put("taskId", SPUtils.getInstance().getString(UserMgr.SP_DC_TASKID));
+        params.put("instid", SPUtils.getInstance().getString(UserMgr.SP_DC_INSTID));
+        params.put("sxsqid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        ApiHttpClient.postJson(LCSP_PROCESS, params, callback, tag);
+    }
 
     /**
      * 类型 用于获取权限btn
@@ -251,6 +310,20 @@ public class CeditApi {
         ApiHttpClient.post(DANBAOSQ_PANDUAN, params, callback, tag);
     }
 
+
+    /**
+     * 提交申请判断
+     *
+     * @param callback
+     * @param tag
+     */
+    public static void putDanbaoInfo(String id, String instid, BaseCallback<BaseResponse<TiJiaoBean>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("taskid", id);
+        params.put("instid", instid);
+        params.put("sxsqid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        ApiHttpClient.post(DANBAOSQ_PANDUAN, params, callback, tag);
+    }
 
     /**
      * 编辑自然人担保
@@ -332,6 +405,21 @@ public class CeditApi {
         ApiHttpClient.post(DANBAO_FENXI_DIYA, params, callback, tag);
     }
 
+
+    /**
+     * 获取上游信息
+     *
+     * @param callback
+     * @param tag
+     */
+    public static void getSykhInfo(String address, int pageNum, String pageSize, BaseCallback<BaseResponse<SxykhListBean>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        params.put("pageNo", pageNum + "");
+        params.put("pageSize", pageSize);
+        ApiHttpClient.post(address, params, callback, tag);
+    }
+
     /**
      * 获取自然人担保信息
      *
@@ -354,6 +442,7 @@ public class CeditApi {
      * @param tag
      */
     public static void editMyData(Map<String, String> params, BaseCallback<BaseResponse<Void>> callback, Object tag) {
+        params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
         ApiHttpClient.putJson(MY_DATA_EDIT, params, callback, tag);
 
     }
@@ -365,7 +454,8 @@ public class CeditApi {
      * @param tag
      */
     public static void addInfo(Map<String, String> params, BaseCallback<BaseResponse<Void>> callback, Object tag) {
-        ApiHttpClient.post(INFO_ADD, params, callback, tag);
+        params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        ApiHttpClient.postJson(INFO_ADD, params, callback, tag);
     }
 
     /**
@@ -400,6 +490,7 @@ public class CeditApi {
      * @param tag
      */
     public static void editINfo(Map<String, String> params, BaseCallback<BaseResponse<Void>> callback, Object tag) {
+        params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
         ApiHttpClient.putJson(INFO_EDIT, params, callback, tag);
 
     }
@@ -410,7 +501,7 @@ public class CeditApi {
      * @param callback
      * @param tag
      */
-    public static void searchById(BaseCallback<BaseResponse<InfoGetBean>> callback, Object tag) {
+    public static void searchById(BaseCallback<BaseResponse<JsonObject>> callback, Object tag) {
         Map<String, String> params = new HashMap<>();
         params.put("id", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
         ApiHttpClient.post(INFO_BY_IDSTRING, params, callback, tag);
@@ -561,6 +652,20 @@ public class CeditApi {
         params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
         params.put("sxsfzh", SPUtils.getInstance().getString(UserMgr.SP_ID_CARD));
         ApiHttpClient.post(FIND_FAMILY_INFO, params, callback, tag);
+    }
+
+    /**
+     * 查询担保人家庭信息
+     *
+     * @param callback
+     * @param tag
+     */
+    public static void findDbFamilyInfo(String id, BaseCallback<BaseResponse<List<QianziBean>>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("id", id);
+        params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        params.put("sxsfzh", SPUtils.getInstance().getString(UserMgr.SP_ID_CARD));
+        ApiHttpClient.post(DB_FIND_FAMILY_INFO, params, callback, tag);
     }
 
 

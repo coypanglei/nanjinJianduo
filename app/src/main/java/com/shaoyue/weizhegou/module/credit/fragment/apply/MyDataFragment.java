@@ -21,7 +21,6 @@ import com.shaoyue.weizhegou.base.BaseFragment;
 import com.shaoyue.weizhegou.entity.cedit.InquiryDetailsBean;
 import com.shaoyue.weizhegou.entity.cedit.MyHangBean;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.InquiryDetailsAdapter;
-import com.shaoyue.weizhegou.module.credit.adapter.shenqing.InquiryDetailsTwoAdapter;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.MyDataIconAdapter;
 import com.shaoyue.weizhegou.util.ToastUtil;
 import com.shaoyue.weizhegou.widget.YStarView;
@@ -64,6 +63,13 @@ public class MyDataFragment extends BaseFragment {
     Unbinder unbinder;
     @BindView(R.id.tv_error)
     TextView tvError;
+    @BindView(R.id.ll_peiou_cp)
+    LinearLayout llPeiouCp;
+    @BindView(R.id.ll_peiou_zj)
+    LinearLayout llPeiouZj;
+
+    @BindView(R.id.rv_credit_six)
+    RecyclerView rvCreditSix;
 
 
     private boolean click = true;
@@ -71,17 +77,20 @@ public class MyDataFragment extends BaseFragment {
 
     private InquiryDetailsAdapter mAdapter;
     private InquiryDetailsAdapter mAdapterTwo;
-    private InquiryDetailsTwoAdapter mAdapterThree;
+    private MyDataIconAdapter mAdapterThree;
     private List<InquiryDetailsBean> mList = new ArrayList<>();
     private List<InquiryDetailsBean> mListTwo = new ArrayList<>();
-    private List<InquiryDetailsBean> mListThree = new ArrayList<>();
 
+    private List<String> mlistThree = new ArrayList<>();
     private List<String> mlistFour = new ArrayList<>();
     private List<String> mlistFive = new ArrayList<>();
-
+    private List<String> mlistSix = new ArrayList<>();
+    private String xtshjl;
     private MyDataIconAdapter myDataIconAdapter;
 
     private MyDataIconAdapter myDataIconAdapterTwo;
+    private MyDataIconAdapter myDataIconAdapterThree;
+
 
     public static MyDataFragment newInstance() {
 
@@ -103,11 +112,11 @@ public class MyDataFragment extends BaseFragment {
         super.initView(rootView);
 
         starBar.setStarCount(5);//星星总数
-
+        starBar.setHalf(true);
         starBar.setChange(false);//设置星星是否可以点击和滑动改变
         mAdapter = new InquiryDetailsAdapter("申请人", "配偶");
         mAdapterTwo = new InquiryDetailsAdapter("申请人", "配偶");
-        mAdapterThree = new InquiryDetailsTwoAdapter();
+        mAdapterThree = new MyDataIconAdapter();
 
         mRvCredit.setLayoutManager(new GridLayoutManager(getActivity(), 4));
         mRvCredit.setAdapter(mAdapter);
@@ -115,12 +124,11 @@ public class MyDataFragment extends BaseFragment {
         mRvCreditTwo.setLayoutManager(new GridLayoutManager(getActivity(), 4));
         mRvCreditTwo.setAdapter(mAdapterTwo);
         mRvCreditTwo.setNestedScrollingEnabled(false);//禁止滑动
-        mRvCreditThree.setLayoutManager(new GridLayoutManager(getActivity(), 4));
-        mRvCreditThree.setAdapter(mAdapterThree);
-        mRvCreditThree.setNestedScrollingEnabled(false);//禁止滑动
+
 
         myDataIconAdapter = new MyDataIconAdapter();
         myDataIconAdapterTwo = new MyDataIconAdapter();
+        myDataIconAdapterThree = new MyDataIconAdapter();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         rvCreditFour.setLayoutManager(linearLayoutManager);
@@ -128,10 +136,19 @@ public class MyDataFragment extends BaseFragment {
         rvCreditFour.setNestedScrollingEnabled(false);
         LinearLayoutManager linearLayoutManagerTwo = new LinearLayoutManager(getActivity());
         linearLayoutManagerTwo.setOrientation(LinearLayoutManager.HORIZONTAL);
-        rvCreditFive.setLayoutManager(linearLayoutManagerTwo);
+        mRvCreditThree.setLayoutManager(linearLayoutManagerTwo);
+        mRvCreditThree.setAdapter(mAdapterThree);
+        mRvCreditThree.setNestedScrollingEnabled(false);//禁止滑动
+        LinearLayoutManager linearLayoutManagerThree = new LinearLayoutManager(getActivity());
+        linearLayoutManagerThree.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rvCreditFive.setLayoutManager(linearLayoutManagerThree);
         rvCreditFive.setAdapter(myDataIconAdapterTwo);
         rvCreditFive.setNestedScrollingEnabled(false);
-
+        LinearLayoutManager linearLayoutManagerFour = new LinearLayoutManager(getActivity());
+        linearLayoutManagerFour.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rvCreditSix.setLayoutManager(linearLayoutManagerFour);
+        rvCreditSix.setAdapter(myDataIconAdapterThree);
+        rvCreditSix.setNestedScrollingEnabled(false);//禁止滑动
     }
 
 
@@ -140,6 +157,8 @@ public class MyDataFragment extends BaseFragment {
         super.onResume();
         initData();
     }
+
+    private MyHangBean.RecordsBean myHangBean;
 
     /**
      * 刷新数据
@@ -153,17 +172,17 @@ public class MyDataFragment extends BaseFragment {
 
                 mList.clear();
                 mListTwo.clear();
-                mListThree.clear();
+                mlistThree.clear();
                 mlistFour.clear();
                 mlistFive.clear();
                 if (ObjectUtils.isNotEmpty(result.data)) {
                     if (null != result.data.getRecords()) {
                         if (result.data.getRecords().size() > 0) {
-                            MyHangBean.RecordsBean myHangBean = result.data.getRecords().get(0);
+                            myHangBean = result.data.getRecords().get(0);
                             MyHangBean.RecordsBean myHangPeiOu = new MyHangBean.RecordsBean();
-
+                            xtshjl = myHangBean.getXtshjl();
                             //我行评级
-                            starBar.setRating(myHangBean.getWhpj());//设置星星亮的颗数
+                            starBar.setRating(myHangBean.getWhpj() / 2);//设置星星亮的颗数
                             etBuliang.setText(myHangBean.getWhblyycs());
 //                            if (ObjectUtils.isNotEmpty(myHangBean.getId())) {
 //                                click = false;
@@ -210,7 +229,10 @@ public class MyDataFragment extends BaseFragment {
                                 tvTg.setTextColor(getResources().getColor(R.color.color_49a0ed));
                             }
                             if (result.data.getRecords().size() > 1) {
-                                myHangPeiOu = result.data.getRecords().get(0);
+                                myHangPeiOu = result.data.getRecords().get(1);
+                                llPeiouCp.setVisibility(View.VISIBLE);
+                                llPeiouZj.setVisibility(View.VISIBLE);
+
                             }
                             mList.add(new InquiryDetailsBean("原授信额度(万元)", myHangBean.getYsxje() + "", myHangPeiOu.getYsxje() + ""));
                             mList.add(new InquiryDetailsBean("用信余额(万元)", myHangBean.getYxye() + "", myHangPeiOu.getYxye() + ""));
@@ -230,16 +252,11 @@ public class MyDataFragment extends BaseFragment {
                             mListTwo.add(new InquiryDetailsBean("近一年存款日均(万元)", myHangBean.getJynckrj() + "", myHangPeiOu.getJynckrj() + ""));
                             mListTwo.add(new InquiryDetailsBean("活期存款年日均(万元)", myHangBean.getHqcknrj() + "", myHangPeiOu.getHqcknrj() + ""));
                             mListTwo.add(new InquiryDetailsBean("定期存款年日均(万元)", myHangBean.getDqcknrj() + "", myHangPeiOu.getDqcknrj() + ""));
-//                            mListTwo.add(new InquiryDetailsBean("理财(万元)", myHangBean.getLc() + "", myHangPeiOu.getLc() + ""));
-//                            mListTwo.add(new InquiryDetailsBean("", "", ""));
-//                            mListTwo.add(new InquiryDetailsBean("", "", ""));
-//                            mListTwo.add(new InquiryDetailsBean("", "", ""));
+                            mListTwo.add(new InquiryDetailsBean("理财(万元)", myHangBean.getLc() + "", myHangPeiOu.getLc() + ""));
+                            mListTwo.add(new InquiryDetailsBean("", "", ""));
+                            mListTwo.add(new InquiryDetailsBean("", "", ""));
+                            mListTwo.add(new InquiryDetailsBean("", "", ""));
 
-
-                            mListThree.add(new InquiryDetailsBean("月均电费(元)", myHangBean.getYjdf(), myHangPeiOu.getYjdf()));
-                            mListThree.add(new InquiryDetailsBean("月均水费(元)", myHangBean.getYjsf(), myHangPeiOu.getYjsf()));
-                            mListThree.add(new InquiryDetailsBean("", "", ""));
-                            mListThree.add(new InquiryDetailsBean("", "", ""));
 
                             List<String> mSelectList = new ArrayList<>();
                             List<String> unmSelectList = new ArrayList<>();
@@ -293,11 +310,6 @@ public class MyDataFragment extends BaseFragment {
                                 unmSelectList.add("cft2.png");
                             }
 
-                            if ("1".equals(myHangBean.getSf())) {
-                                mSelectList.add("sf1.png");
-                            } else {
-                                unmSelectList.add("sf2.png");
-                            }
 
                             if ("1".equals(myHangBean.getSjyh())) {
                                 mSelectList.add("sjyh1.png");
@@ -305,23 +317,36 @@ public class MyDataFragment extends BaseFragment {
                                 unmSelectList.add("sjyh2.png");
                             }
 
-                            if ("1".equals(myHangBean.getRqf())) {
-                                mSelectList.add("rq1.png");
-                            } else {
-                                unmSelectList.add("rq2.png");
-                            }
-
-                            if ("1".equals(myHangBean.getDf())) {
-                                mSelectList.add("df1.png");
-                            } else {
-                                unmSelectList.add("df2.png");
-                            }
                             mlistFour.addAll(mSelectList);
                             mlistFour.addAll(unmSelectList);
                             mSelectList.clear();
                             unmSelectList.clear();
                             myDataIconAdapter.setNewData(mlistFour);
                             myDataIconAdapter.notifyDataSetChanged();
+                            if ("1".equals(myHangBean.getSf())) {
+                                mSelectList.add("sf1.png");
+                            } else {
+                                unmSelectList.add("sf2.png");
+                            }
+//                            if ("1".equals(myHangBean.getRqf())) {
+//                                mSelectList.add("rq1.png");
+//                            } else {
+//                                unmSelectList.add("rq2.png");
+//                            }
+
+                            if ("1".equals(myHangBean.getDf())) {
+                                mSelectList.add("df1.png");
+                            } else {
+                                unmSelectList.add("df2.png");
+                            }
+                            mlistThree.addAll(mSelectList);
+                            mlistThree.addAll(unmSelectList);
+                            mSelectList.clear();
+                            unmSelectList.clear();
+                            mAdapterThree.setNewData(mlistThree);
+                            mAdapterThree.notifyDataSetChanged();
+
+
                             if ("1".equals(myHangPeiOu.getWx())) {
                                 mSelectList.add("wx1.png");
                             } else {
@@ -371,28 +396,11 @@ public class MyDataFragment extends BaseFragment {
                                 unmSelectList.add("cft2.png");
                             }
 
-                            if ("1".equals(myHangPeiOu.getSf())) {
-                                mSelectList.add("sf1.png");
-                            } else {
-                                unmSelectList.add("sf2.png");
-                            }
 
                             if ("1".equals(myHangPeiOu.getSjyh())) {
                                 mSelectList.add("sjyh1.png");
                             } else {
                                 unmSelectList.add("sjyh2.png");
-                            }
-
-                            if ("1".equals(myHangPeiOu.getRqf())) {
-                                mSelectList.add("rq1.png");
-                            } else {
-                                unmSelectList.add("rq2.png");
-                            }
-
-                            if ("1".equals(myHangPeiOu.getDf())) {
-                                mSelectList.add("df1.png");
-                            } else {
-                                unmSelectList.add("df2.png");
                             }
 
                             mlistFive.addAll(mSelectList);
@@ -402,12 +410,38 @@ public class MyDataFragment extends BaseFragment {
 
                             myDataIconAdapterTwo.setNewData(mlistFive);
                             myDataIconAdapterTwo.notifyDataSetChanged();
+
+                            if ("1".equals(myHangPeiOu.getSf())) {
+                                mSelectList.add("sf1.png");
+                            } else {
+                                unmSelectList.add("sf2.png");
+                            }
+
+//                            if ("1".equals(myHangPeiOu.getRqf())) {
+//                                mSelectList.add("rq1.png");
+//                            } else {
+//                                unmSelectList.add("rq2.png");
+//                            }
+
+                            if ("1".equals(myHangPeiOu.getDf())) {
+                                mSelectList.add("df1.png");
+                            } else {
+                                unmSelectList.add("df2.png");
+                            }
+                            mlistSix.addAll(mSelectList);
+                            mlistSix.addAll(unmSelectList);
+                            mSelectList.clear();
+                            unmSelectList.clear();
+
+                            myDataIconAdapterThree.setNewData(mlistSix);
+                            myDataIconAdapterThree.notifyDataSetChanged();
+
                         }
 
 
                         mAdapter.setNewData(mList);
                         mAdapterTwo.setNewData(mListTwo);
-                        mAdapterThree.setNewData(mListThree);
+
                     }
 
                 }
@@ -427,17 +461,28 @@ public class MyDataFragment extends BaseFragment {
             drawable2.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
             switch (view.getId()) {
                 case R.id.tv_tg:
+                    xtshjl = "通过";
+                    if (!myHangBean.getYxtshjl().equals("通过")) {
+                        tvError.setVisibility(View.VISIBLE);
+                        tvError.setText("系统未通过，人工干预已通过!!");
+                    } else {
+                        tvError.setVisibility(View.GONE);
+                    }
 
-                    tvError.setVisibility(View.VISIBLE);
-                    tvError.setText("系统未通过，人工干预已通过!!");
                     tvWtg.setCompoundDrawables(drawable, null, null, null);
                     tvWtg.setTextColor(getResources().getColor(R.color.color_b9b8b8));
                     tvTg.setCompoundDrawables(drawable2, null, null, null);
                     tvTg.setTextColor(getResources().getColor(R.color.color_49a0ed));
                     break;
                 case R.id.tv_wtg:
-                    tvError.setVisibility(View.VISIBLE);
-                    tvError.setText("系统已通过，人工干预未通过!!");
+                    xtshjl = "未通过";
+                    if (myHangBean.getYxtshjl().equals("通过")) {
+                        tvError.setVisibility(View.VISIBLE);
+                        tvError.setText("系统已通过，人工干预未通过!!");
+                    } else {
+                        tvError.setVisibility(View.GONE);
+                    }
+
 
                     tvTg.setCompoundDrawables(drawable, null, null, null);
                     tvTg.setTextColor(getResources().getColor(R.color.color_b9b8b8));
@@ -456,8 +501,11 @@ public class MyDataFragment extends BaseFragment {
                     String whblyycs = etBuliang.getText().toString().trim();
                     String description = tvError.getText().toString();
                     Map<String, String> map = new HashMap<>();
-                    map.put("description", description);
-                    map.put("sxid", "120");
+                    map.put("xtshjl", xtshjl);
+                    if (tvError.getVisibility() == View.VISIBLE) {
+                        map.put("description", description);
+                    }
+
                     map.put("whblyycs", whblyycs);
 
                     CeditApi.editMyData(map, new BaseCallback<BaseResponse<Void>>() {
@@ -472,7 +520,6 @@ public class MyDataFragment extends BaseFragment {
 
         }
     }
-
 
 
 }

@@ -21,6 +21,7 @@ import com.shaoyue.weizhegou.entity.cedit.DiyaDanBaoListBean;
 import com.shaoyue.weizhegou.entity.cedit.GoAllSelect;
 import com.shaoyue.weizhegou.entity.cedit.RefreshBean;
 import com.shaoyue.weizhegou.event.OkOrCancelEvent;
+import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.module.credit.fragment.apply.diyao.adapter.ZiRanDanBaoTwoAdapter;
 import com.shaoyue.weizhegou.router.UIHelper;
 import com.shaoyue.weizhegou.util.ThreadUtil;
@@ -56,6 +57,9 @@ public class DiyadanbaoDetailsTwoFragment extends BaseAppFragment implements BGA
     @BindView(R.id.sb_detel)
     StateButton sbDetel;
     Unbinder unbinder;
+    @BindView(R.id.rl_all)
+    RelativeLayout rlAll;
+
     private int page = 1;
     private int pages = 1;
 
@@ -95,7 +99,8 @@ public class DiyadanbaoDetailsTwoFragment extends BaseAppFragment implements BGA
     @Override
     protected void initView(View rootView) {
         super.initView(rootView);
-        if ("查看详情".equals(SPUtils.getInstance().getString("status"))) {
+        if ("查看详情".equals(SPUtils.getInstance().getString("status")) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
+            rlAll.setVisibility(View.GONE);
             sbAdd.setVisibility(View.GONE);
             sbEdit.setVisibility(View.GONE);
             sbDetel.setVisibility(View.GONE);
@@ -198,7 +203,7 @@ public class DiyadanbaoDetailsTwoFragment extends BaseAppFragment implements BGA
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
 
-        if (page == pages+1) {
+        if (page == pages + 1) {
             mRefreshLayout.endLoadingMore();
             ToastUtil.showBlackToastSucess("没有更多的数据了");
             return false;

@@ -17,13 +17,16 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.base.BaseTitleFragment;
 import com.shaoyue.weizhegou.entity.user.MainClickBean;
+import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.MenuAdapter;
-import com.shaoyue.weizhegou.module.credit.fragment.apply.BasicInformationFragment;
 import com.shaoyue.weizhegou.module.credit.fragment.apply.CreditInquiryFragment;
 import com.shaoyue.weizhegou.module.credit.fragment.apply.DiyadanbaoFragment;
 import com.shaoyue.weizhegou.module.credit.fragment.apply.FamilyInfoFragment;
 import com.shaoyue.weizhegou.module.credit.fragment.apply.MyDataFragment;
 import com.shaoyue.weizhegou.module.credit.fragment.apply.VideoMaterialFragment;
+import com.shaoyue.weizhegou.module.sxdc.fragment.BasicInformationDcFragment;
+import com.shaoyue.weizhegou.module.sxdc.fragment.SxdcInfoDcFragment;
+import com.shaoyue.weizhegou.module.sxdc.fragment.SxykhFragment;
 import com.shaoyue.weizhegou.widget.NoScrollViewPager;
 
 import java.util.ArrayList;
@@ -75,27 +78,78 @@ public class DcInfoFragment extends BaseTitleFragment {
     protected void initView(View rootView) {
         super.initView(rootView);
         setCommonTitle("家庭信息").hideLeftButtonV2();
-
-
+        type = SPUtils.getInstance().getString(UserMgr.SP_DC_TYPE);
+        SPUtils.getInstance()
+                .put(UserMgr.SP_XT_TYPE, "调查");
         final List<MainClickBean> mMenuList = new ArrayList<>();
-        mMenuList.add(new MainClickBean("家庭信息", true));
-        mMenuList.add(new MainClickBean("基本信息", false));
-        mMenuList.add(new MainClickBean("系统数据", false));
-        mMenuList.add(new MainClickBean("征信查询", false));
-        mMenuList.add(new MainClickBean("担保抵押", false));
-        mMenuList.add(new MainClickBean("现金流", false));
-        mMenuList.add(new MainClickBean("影像资料", false));
-        mMenuList.add(new MainClickBean("评级指标", false));
+        switch (type) {
+            case "简化经营":
+                mMenuList.add(new MainClickBean("家庭信息", true));
+                mMenuList.add(new MainClickBean("基本信息", false));
+                mMenuList.add(new MainClickBean("系统数据", false));
+                mMenuList.add(new MainClickBean("征信查询", false));
+                mMenuList.add(new MainClickBean("实地调查", false));
+                mMenuList.add(new MainClickBean("担保抵押", false));
+                mMenuList.add(new MainClickBean("现金流", false));
+                mMenuList.add(new MainClickBean("影像资料", false));
+                mMenuList.add(new MainClickBean("评级指标", false));
+                mMenuList.add(new MainClickBean("授信结论", false));
+                break;
+            case "工薪类":
+                mMenuList.add(new MainClickBean("家庭信息", true));
+                mMenuList.add(new MainClickBean("基本信息", false));
+                mMenuList.add(new MainClickBean("系统数据", false));
+                mMenuList.add(new MainClickBean("征信查询", false));
+                mMenuList.add(new MainClickBean("年收入情况", false));
+                mMenuList.add(new MainClickBean("实地调查", false));
+                mMenuList.add(new MainClickBean("资产负债", false));
+                mMenuList.add(new MainClickBean("担保抵押", false));
+                mMenuList.add(new MainClickBean("现金流", false));
+                mMenuList.add(new MainClickBean("影像资料", false));
+                mMenuList.add(new MainClickBean("评级指标", false));
+                mMenuList.add(new MainClickBean("授信结论", false));
+
+                break;
+            case "经营":
+                mMenuList.add(new MainClickBean("家庭信息", true));
+                mMenuList.add(new MainClickBean("基本信息", false));
+                mMenuList.add(new MainClickBean("系统数据", false));
+                mMenuList.add(new MainClickBean("征信查询", false));
+                mMenuList.add(new MainClickBean("实地调查", false));
+                mMenuList.add(new MainClickBean("上下游客户", false));
+                mMenuList.add(new MainClickBean("现金流", false));
+                mMenuList.add(new MainClickBean("损益简表", false));
+                mMenuList.add(new MainClickBean("财务简表", false));
+                mMenuList.add(new MainClickBean("担保抵押", false));
+                mMenuList.add(new MainClickBean("影像资料", false));
+                mMenuList.add(new MainClickBean("评级指标", false));
+                mMenuList.add(new MainClickBean("授信结论", false));
+                break;
+            case "农户":
+                mMenuList.add(new MainClickBean("家庭信息", true));
+                mMenuList.add(new MainClickBean("基本信息", false));
+                mMenuList.add(new MainClickBean("系统数据", false));
+                mMenuList.add(new MainClickBean("征信查询", false));
+                mMenuList.add(new MainClickBean("实地调查", false));
+                mMenuList.add(new MainClickBean("种植、养殖户", false));
+                mMenuList.add(new MainClickBean("担保抵押", false));
+                mMenuList.add(new MainClickBean("现金流", false));
+                mMenuList.add(new MainClickBean("影像资料", false));
+                mMenuList.add(new MainClickBean("评级指标", false));
+                mMenuList.add(new MainClickBean("授信结论", false));
+                break;
+        }
+
 
         for (int i = 0; i < mMenuList.size(); i++) {
             if ("家庭信息".equals(mMenuList.get(i).getTitle())) {
-                fragmentList.add(FamilyInfoFragment.newInstance(mMenuList.get(i).getTitle()));
+                fragmentList.add(FamilyInfoFragment.newInstance("调查"));
             } else if ("征信查询".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(CreditInquiryFragment.newInstance());
             } else if ("影像资料".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(VideoMaterialFragment.newInstance());
             } else if ("基本信息".equals(mMenuList.get(i).getTitle())) {
-                fragmentList.add(BasicInformationFragment.newInstance());
+                fragmentList.add(BasicInformationDcFragment.newInstance());
             } else if ("系统数据".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(MyDataFragment.newInstance());
             } else if ("担保抵押".equals(mMenuList.get(i).getTitle())) {
@@ -104,6 +158,22 @@ public class DcInfoFragment extends BaseTitleFragment {
                 fragmentList.add(DcMoneyFragment.newInstance());
             } else if ("评级指标".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(DcPjzbFragment.newInstance());
+            } else if ("实地调查".equals(mMenuList.get(i).getTitle())) {
+                fragmentList.add(DcSddcFragment.newInstance());
+            } else if ("种植、养殖户".equals(mMenuList.get(i).getTitle())) {
+                fragmentList.add(DcZYFragment.newInstance());
+            } else if ("资产负债".equals(mMenuList.get(i).getTitle())) {
+                fragmentList.add(DcZCFZFragment.newInstance());
+            } else if ("损益简表".equals(mMenuList.get(i).getTitle())) {
+                fragmentList.add(DcSyjbFragment.newInstance());
+            } else if ("财务简表".equals(mMenuList.get(i).getTitle())) {
+                fragmentList.add(DcCwjbFragment.newInstance());
+            } else if ("授信结论".equals(mMenuList.get(i).getTitle())) {
+                fragmentList.add(SxdcInfoDcFragment.newInstance());
+            } else if ("上下游客户".equals(mMenuList.get(i).getTitle())) {
+                fragmentList.add(SxykhFragment.newInstance());
+            } else if ("年收入情况".equals(mMenuList.get(i).getTitle())) {
+                fragmentList.add(DcnsrFragment.newInstance());
             }
         }
         mMenuList.get(0).setSelect(true);
@@ -114,6 +184,8 @@ public class DcInfoFragment extends BaseTitleFragment {
         menuAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(final BaseQuickAdapter adapter, View view, final int position) {
+                mRvMenu.setVisibility(View.GONE);
+                mTvVisible.setText("显示菜单");
                 if (currentPage != position) {
                     refresh(position, adapter);
 

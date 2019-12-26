@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingTop="@dimen/dp_10"
+    android:paddingBottom="@dimen/dp_10">
+
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="货币性资金"
+        android:textColor="@color/color_0d1730"
+        android:textSize="@dimen/dp_11" />
+
+    <EditText
+        android:id="@+id/et_1"
+        style="@style/AddEditStyle"
+        android:layout_width="0dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="9dp"
+        android:layout_weight="1"
+        android:imeOptions="actionDone"
+
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textColorHint="@color/color_666666" />
+
+    <EditText
+        android:id="@+id/et_2"
+        style="@style/AddEditStyle"
+        android:layout_width="0dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:imeOptions="actionDone"
+
+        android:textColor="@color/black"
+        android:textColorHint="@color/color_666666" />
+
+    <EditText
+        android:id="@+id/et_3"
+        style="@style/AddEditStyle"
+        android:layout_width="0dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:gravity="center"
+        android:layout_weight="2"
+        android:imeOptions="actionDone"
+
+        android:textColor="@color/black"
+        android:textColorHint="@color/color_666666" />
+</LinearLayout>

@@ -178,7 +178,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     compile 'com.android.support:multidex:1.0.0'
     // gson
-    implementation 'com.google.code.gson:gson:2.7'
+    implementation 'com.google.code.gson:gson:2.8.6'
 
     //高斯模糊
     implementation 'jp.wasabeef:glide-transformations:4.0.1'

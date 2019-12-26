@@ -19,6 +19,7 @@ import com.shaoyue.weizhegou.api.remote.UserApi;
 import com.shaoyue.weizhegou.base.BaseAppFragment;
 import com.shaoyue.weizhegou.entity.cedit.FaceBean;
 import com.shaoyue.weizhegou.entity.cedit.OcrBean;
+import com.shaoyue.weizhegou.entity.cedit.RefreshBean;
 import com.shaoyue.weizhegou.manager.AppMgr;
 import com.shaoyue.weizhegou.manager.DomainMgr;
 import com.shaoyue.weizhegou.util.GlideNewImageLoader;
@@ -86,6 +87,11 @@ public class FaceRecognitionFragment extends BaseAppFragment {
         initView();
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(RefreshBean event) {
+        initView();
+    }
+
     /**
      * 刷新界面
      */
@@ -94,12 +100,13 @@ public class FaceRecognitionFragment extends BaseAppFragment {
         CeditApi.findFaceInfo(new BaseCallback<BaseResponse<List<FaceBean>>>() {
             @Override
             public void onSucc(BaseResponse<List<FaceBean>> result) {
+
                 mFaceBeans = result.data;
                 if (ObjectUtils.isNotEmpty(mFaceBeans) && mFaceBeans.size() > 0) {
 
                     if (mFaceBeans.size() == 1) {
                         mLlpo.setVisibility(View.GONE);
-                    }else {
+                    } else {
                         mLlpo.setVisibility(View.VISIBLE);
 
                     }
@@ -108,14 +115,14 @@ public class FaceRecognitionFragment extends BaseAppFragment {
                         GlideNewImageLoader.displayOwnerImageHeadNoCache(getActivity(), mIvPo, DomainMgr.getInstance().getBaseUrlImg() + mFaceBeans.get(1).getTxdz(), R.drawable.icon_face);
                         if (ObjectUtils.isNotEmpty(mFaceBeans.get(1).getJl())) {
                             mLlBottom.setVisibility(View.VISIBLE);
-                            mTvPo.setText(mFaceBeans.get(1).getJl());
+                            mTvPo.setText("配偶:" + mFaceBeans.get(1).getJl());
                         }
                     }
 
 
                     if (ObjectUtils.isNotEmpty(mFaceBeans.get(0).getJl())) {
                         mLlBottom.setVisibility(View.VISIBLE);
-                        mTvGr.setText(mFaceBeans.get(0).getJl());
+                        mTvGr.setText("本人:" + mFaceBeans.get(0).getJl());
                     }
                 }
             }

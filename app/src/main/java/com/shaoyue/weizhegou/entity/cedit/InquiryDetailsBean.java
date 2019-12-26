@@ -30,6 +30,7 @@ public class InquiryDetailsBean extends BaseBean {
         return content2;
     }
 
+
     public void setContent2(String content2) {
         this.content2 = content2;
     }

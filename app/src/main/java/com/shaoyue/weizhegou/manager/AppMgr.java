@@ -227,29 +227,29 @@ public class AppMgr {
      * 检测更新
      */
     private void handleCheckUpdate() {
-        CommApi.checkUpdate(new BaseCallback<BaseResponse<VersionBean>>() {
-            @Override
-            public void onSucc(BaseResponse<VersionBean> result) {
+//        CommApi.checkUpdate(new BaseCallback<BaseResponse<VersionBean>>() {
+//            @Override
+//            public void onSucc(BaseResponse<VersionBean> result) {
 //                LogUtils.e(result.data);
-                if (result.data.getIs_update().equals("1")) { // 已经是最新版本
-                    // 需要更新
-                    VersionBean versionBean = result.data;
-                    showUpdateDialog(versionBean);
-
-                } else {
-                    mStartStep = StartStep.HOME_PAGE_SWITCH;
-                    handleStart();
-                }
-
-            }
-
-            @Override
-            public void onFail(ApiException apiError) {
-
-                nofityStartState(apiError.getErrCode(), apiError.getErrMsg());
-
-            }
-        }, this);
+//                if (result.data.getIs_update().equals("1")) { // 已经是最新版本
+//                    // 需要更新
+//                    VersionBean versionBean = result.data;
+//                    showUpdateDialog(versionBean);
+//
+//                } else {
+//                    mStartStep = StartStep.HOME_PAGE_SWITCH;
+//                    handleStart();
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onFail(ApiException apiError) {
+//
+//                nofityStartState(apiError.getErrCode(), apiError.getErrMsg());
+//
+//            }
+//        }, this);
     }
 
     /**
@@ -307,7 +307,7 @@ public class AppMgr {
     }
 
 
-    private void showUpdateDialog(VersionBean version) {
+    public void showUpdateDialog(VersionBean version) {
         Activity activity = AppContext.getTopActivity();
         UIHelper.showUpdateDialog(activity, version);
     }

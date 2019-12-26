@@ -15,7 +15,7 @@
 
         <com.libracore.lib.widget.StateButton
             android:id="@+id/sb_edit"
-            android:visibility="invisible"
+
             android:layout_width="83dp"
             android:layout_height="25dp"
             android:layout_alignParentRight="true"
@@ -36,7 +36,7 @@
 
         <com.libracore.lib.widget.StateButton
             android:id="@+id/sb_zancun"
-            android:visibility="invisible"
+
             android:layout_width="83dp"
             android:layout_height="25dp"
             android:layout_centerVertical="true"

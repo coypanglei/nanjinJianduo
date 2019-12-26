@@ -22,7 +22,7 @@ public class CreditNavActivity extends BaseAppActivity {
     @BindView(R.id.viewpager)
     ViewPager mViewpager;
     private final String[] mTitles = {
-            "授信全流程", "年检"
+            "授信全流程"
     };
 
     private ArrayList<Fragment> mFragments = new ArrayList<>();
@@ -37,10 +37,8 @@ public class CreditNavActivity extends BaseAppActivity {
     protected void initView() {
         super.initView();
         mFragments.add(FullCreditProcessFragment.newInstance());
-        mFragments.add(FullCreditProcessFragment.newInstance());
         mTl1.setViewPager(mViewpager, mTitles, this, mFragments);
     }
-
 
 
 }

@@ -11,11 +11,13 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.api.callback.BaseCallback;
+import com.shaoyue.weizhegou.api.exception.ApiException;
 import com.shaoyue.weizhegou.api.model.BaseResponse;
 import com.shaoyue.weizhegou.api.remote.DhApi;
 import com.shaoyue.weizhegou.base.BaseAppFragment;
@@ -151,10 +153,11 @@ public class XcjyFragment extends BaseAppFragment implements BGARefreshLayout.BG
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 List<XcjyBean> mlist = adapter.getData();
-                for (XcjyBean data : mlist) {
-                    data.setClick(false);
+                if (!mlist.get(position).isClick()) {
+                    mlist.get(position).setClick(true);
+                } else {
+                    mlist.get(position).setClick(false);
                 }
-                mlist.get(position).setClick(true);
                 adapter.setNewData(mlist);
             }
         });
@@ -171,10 +174,16 @@ public class XcjyFragment extends BaseAppFragment implements BGARefreshLayout.BG
         popupBigPhotoview.findViewById(R.id.tv_detail).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if (popupBigPhoto.isShowing()) {
                     popupBigPhoto.dismiss();
                 }
+
                 if (ObjectUtils.isNotEmpty(getSelect())) {
+                    if (!isOne()) {
+                        ToastUtil.showBlackToastSucess("只能选择一条数据");
+                        return;
+                    }
                     if (ObjectUtils.isNotEmpty(getSelect().getId())) {
                         //请求id 身份证
                         SPUtils.getInstance().put(UserMgr.SP_APPLY_ID, getSelect().getZjhm());
@@ -193,7 +202,12 @@ public class XcjyFragment extends BaseAppFragment implements BGARefreshLayout.BG
                 if (popupBigPhoto.isShowing()) {
                     popupBigPhoto.dismiss();
                 }
+
                 if (ObjectUtils.isNotEmpty(getSelect())) {
+                    if (!isOne()) {
+                        ToastUtil.showBlackToastSucess("只能选择一条数据");
+                        return;
+                    }
                     //请求id 身份证
                     SPUtils.getInstance().put(UserMgr.SP_APPLY_ID, getSelect().getZjhm());
                     SPUtils.getInstance().put(UserMgr.SP_ID_CARD, getSelect().getJcjd());
@@ -212,6 +226,21 @@ public class XcjyFragment extends BaseAppFragment implements BGARefreshLayout.BG
                 if (popupBigPhoto.isShowing()) {
                     popupBigPhoto.dismiss();
                 }
+
+                for (XcjyBean mMessageBean : mAdapter.getData()) {
+                    if (mMessageBean.isClick()) {
+
+                        if ("1".equals(mMessageBean.getLczt())) {
+                            continue;
+                        } else {
+                            ToastUtil.showBlackToastSucess("请选择流程状态为待现场检验的数据");
+                            return;
+                        }
+                    }
+
+
+                }
+
                 if (ObjectUtils.isNotEmpty(getSelect())) {
                     if ("1".equals(getSelect().getLczt())) {
 
@@ -233,16 +262,34 @@ public class XcjyFragment extends BaseAppFragment implements BGARefreshLayout.BG
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(OkOrCancelEvent event) {
         if (event.getmType().equals("确定要退回吗")) {
+            StringBuilder sb = new StringBuilder();
+            for (XcjyBean mMessageBean : mAdapter.getData()) {
+                if (mMessageBean.isClick()) {
+                    sb.append(",");
+                    sb.append(mMessageBean.getId());
 
-            if (ObjectUtils.isEmpty(getSelect())) {
-                ToastUtil.showBlackToastSucess("请选择需要删除的消息");
-                return;
+                    if (mMessageBean.getLczt().equals("1")) {
+
+                        continue;
+                    } else {
+                        ToastUtil.showBlackToastSucess("请选择环节为待现场检验的数据");
+                        return;
+
+                    }
+                }
+
             }
-            String ids = getSelect().getId();
-            DhApi.cancelRl(ids, new BaseCallback<BaseResponse<Void>>() {
+            String selectSb = sb.toString().substring(1);
+            DhApi.cancelRl(selectSb, new BaseCallback<BaseResponse<Void>>() {
                 @Override
                 public void onSucc(BaseResponse<Void> result) {
                     ToastUtil.showBlackToastSucess("取消认领成功");
+                    initData();
+                }
+
+                @Override
+                public void onFail(ApiException apiError) {
+                    super.onFail(apiError);
                     initData();
                 }
             }, this);
@@ -331,6 +378,30 @@ public class XcjyFragment extends BaseAppFragment implements BGARefreshLayout.BG
         return null;
     }
 
+
+    private boolean isOne() {
+        StringBuilder sb = new StringBuilder();
+        for (XcjyBean mMessageBean : mAdapter.getData()) {
+            if (mMessageBean.isClick()) {
+                sb.append(",");
+                sb.append(mMessageBean.getId());
+            }
+
+        }
+        if (ObjectUtils.isEmpty(sb.toString())) {
+            return false;
+        }
+        String selectSb = sb.toString().substring(1);
+        LogUtils.e(selectSb);
+        if (ObjectUtils.isEmpty(selectSb.split(",")) || selectSb.split(",").length > 1) {
+
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
     @SingleClick
     @OnClick({R.id.sb_find, R.id.tv_more, R.id.sb_start_test
             , R.id.iv_clear, R.id.tv_status})
@@ -338,15 +409,36 @@ public class XcjyFragment extends BaseAppFragment implements BGARefreshLayout.BG
         switch (view.getId()) {
             case R.id.sb_start_test:
                 if (ObjectUtils.isNotEmpty(getSelect())) {
-                    if (getSelect().getLczt().equals("1")) {
-                        if (ObjectUtils.isNotEmpty(getSelect().getZjhm())) {
-                            //请求id 身份证
-                            SPUtils.getInstance().put(UserMgr.SP_APPLY_ID, getSelect().getZjhm());
-                            SPUtils.getInstance().put(UserMgr.SP_ID_CARD, getSelect().getJcjd());
-                            UIHelper.showDcCommonActivity("现场检验", getActivity(), "申请");
+                    StringBuilder sb = new StringBuilder();
+                    for (XcjyBean mMessageBean : mAdapter.getData()) {
+                        if (mMessageBean.isClick()) {
+                            sb.append(",");
+                            sb.append(mMessageBean.getId());
+
+                            if (mMessageBean.getLczt().equals("1")) {
+
+                                continue;
+                            } else {
+                                ToastUtil.showBlackToastSucess("请选择环节为待现场检验的数据");
+                                return;
+
+                            }
                         }
+
+                    }
+                    String selectSb = sb.toString().substring(1);
+                    LogUtils.e(selectSb);
+                    if (ObjectUtils.isEmpty(selectSb.split(",")) || selectSb.split(",").length > 1) {
+                        ToastUtil.showBlackToastSucess("只能选择一条任务检验");
+                        return;
+                    }
+                    if (ObjectUtils.isNotEmpty(getSelect().getZjhm())) {
+                        //请求id 身份证
+                        SPUtils.getInstance().put(UserMgr.SP_APPLY_ID, getSelect().getZjhm());
+                        SPUtils.getInstance().put(UserMgr.SP_ID_CARD, getSelect().getJcjd());
+                        UIHelper.showDcCommonActivity("现场检验", getActivity(), "申请");
                     } else {
-                        ToastUtil.showBlackToastSucess("请选择环节为待现场检验的数据");
+                        ToastUtil.showBlackToastSucess("证件号码为空");
                     }
                 } else {
                     ToastUtil.showBlackToastSucess("暂未选取数据");

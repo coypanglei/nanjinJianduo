@@ -4,8 +4,10 @@ import com.blankj.utilcode.util.SPUtils;
 import com.shaoyue.weizhegou.api.callback.BaseCallback;
 import com.shaoyue.weizhegou.api.helper.ApiHttpClient;
 import com.shaoyue.weizhegou.api.model.BaseResponse;
+import com.shaoyue.weizhegou.entity.ZxcxListBean;
 import com.shaoyue.weizhegou.entity.cedit.FamilyListBean;
 import com.shaoyue.weizhegou.entity.cedit.MyHangBean;
+import com.shaoyue.weizhegou.entity.cedit.SxspListBean;
 import com.shaoyue.weizhegou.entity.cedit.VideoBean;
 import com.shaoyue.weizhegou.entity.cedit.VideoMaterialBean;
 import com.shaoyue.weizhegou.entity.cedit.XcjyListBean;
@@ -84,9 +86,16 @@ public class DhApi {
     //征信查询
     private static final String XCJY_ZXCX = "jeecg-boot/business/dhglJjZxjx/queryById";
 
+    //授信征信查询
+    private static final String XCJY_SXCX = "jeecg-boot/business/sxsqZxcx/list";
+
+
     //审批列表查询
     private static final String SP_LIST_CX = "jeecg-boot/business/dhglJjXcjydx/splist";
 
+
+    //授信审批列表查询
+    private static final String SX_SP_LIST_CX = "jeecg-boot/process/sxspApprovalList";
     //预审批
     private static final String SP_YUN = "jeecg-boot/business/dhglJjXcjydx/presp";
 
@@ -100,11 +109,29 @@ public class DhApi {
     //征信查询任务添加
     private static final String ZXCC_ADD = "jeecg-boot/zx/dhglJjZx/add";
 
+    //征信查询任务添加
+    private static final String SXCC_ADD = "jeecg-boot/business/sxsqZx/add";
+
+    //征信查询任务添加
+    private static final String DB_SXCC_ADD = "jeecg-boot/business/sxsqZx/dbAdd";
     //数据采集分析结论
     private static final String SJCJ_FXJL = "jeecg-boot/business/dhglJjCjfxjl/queryByZjhm";
     //取消认领
-    private static final String CANCEL_RL = "jeecg-boot/business/dhglJjXcjydx/qxrl";
+    private static final String CANCEL_RL = "jeecg-boot/business/dhglJjXcjydx/qxrlpl";
 
+    /**
+     * 获取授信审批列表
+     */
+    public static void getSxSpList(int pageNum, String pageSize, String khmc
+            , String lczt
+            , BaseCallback<BaseResponse<SxspListBean>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("pageNo", pageNum + "");
+        params.put("pageSize", pageSize);
+        params.put("khxm", khmc);
+        params.put("lczt", lczt);
+        ApiHttpClient.post(SX_SP_LIST_CX, params, callback, tag);
+    }
 
 
     /**
@@ -114,7 +141,7 @@ public class DhApi {
 
     public static void cancelRl(String id, BaseCallback<BaseResponse<Void>> callback, Object tag) {
         Map<String, String> params = new HashMap<>();
-        params.put("id", id);
+        params.put("ids", id);
         ApiHttpClient.post(CANCEL_RL, params, callback, tag);
     }
 
@@ -224,7 +251,59 @@ public class DhApi {
         ApiHttpClient.post(SP_LIST_CX, params, callback, tag);
     }
 
+    /**
+     * 授信征信查询
+     *
+     * @param callback
+     * @param tag
+     */
+    public static void sxjyZxcx(String id,BaseCallback<BaseResponse<ZxcxListBean>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        params.put("description",id);
+        ApiHttpClient.post(XCJY_SXCX, params, callback, tag);
 
+    }
+
+    /**
+     * 授信征信查询
+     *
+     * @param callback
+     * @param tag
+     */
+    public static void sxjyZxcx(BaseCallback<BaseResponse<ZxcxListBean>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        ApiHttpClient.post(XCJY_SXCX, params, callback, tag);
+
+    }
+
+    /**
+     * 添加征信查询按钮
+     *
+     * @param callback
+     * @param tag
+     */
+    public static void addsqZxcx(BaseCallback<BaseResponse<Void>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        ApiHttpClient.post(SXCC_ADD, params, callback, tag);
+
+    }
+
+
+    /**
+     * 添加抵押担保征信查询按钮
+     *
+     * @param callback
+     * @param tag
+     */
+    public static void adddbsqZxcx(String id,BaseCallback<BaseResponse<Void>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("id", id);
+        ApiHttpClient.post(DB_SXCC_ADD, params, callback, tag);
+
+    }
     /**
      * 现场征信查询
      *

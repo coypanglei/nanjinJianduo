@@ -1,8 +1,10 @@
 package com.shaoyue.weizhegou.entity.cedit;
 
+import com.shaoyue.weizhegou.base.BaseBean;
+
 import java.util.List;
 
-public class ZiRanDanBaoListBean {
+public class ZiRanDanBaoListBean extends BaseBean {
 
 
     /**

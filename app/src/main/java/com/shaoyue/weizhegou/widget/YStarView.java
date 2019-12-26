@@ -9,12 +9,13 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.shaoyue.weizhegou.R;
 
 public class YStarView extends View {
 
     private int starCount;  //星星个数
-    private int rating;     //亮星星的个数，默认为0
+    private double rating;     //亮星星的个数，默认为0
     private int ratingH;    //星星的余数，控制半星
     private boolean change;    //是否可以滑动
     private boolean half;    //是否开启半星
@@ -54,10 +55,19 @@ public class YStarView extends View {
 
         //画图
         for (int i = 0; i < starCount; i++) {//画多少颗星星
-            if (rating > i) canvas.drawBitmap(starT, starSize * i, 0, mPaint);//画亮的星星
-            else if (half && ratingH < 40 && ratingH > 5 && rating == i)
+
+            double hf = i + 0.5;
+
+
+            if (rating == hf) {
                 canvas.drawBitmap(starH, starSize * i, 0, mPaint);//画半的星星
-            else canvas.drawBitmap(starF, starSize * i, 0, mPaint);//画暗的的星星
+            } else if (rating > i) {
+                canvas.drawBitmap(starT, starSize * i, 0, mPaint);//画亮的星星
+
+            } else {
+                canvas.drawBitmap(starF, starSize * i, 0, mPaint);//画暗的的星星
+            }
+
         }
     }
 
@@ -67,12 +77,14 @@ public class YStarView extends View {
      */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (change ) {//是否可以点击或者滑动
+        if (change) {//是否可以点击或者滑动
             int x = (int) event.getX();
             if (x < 0) x = 0;
             if (x > getMeasuredWidth()) x = getMeasuredWidth();
             rating = x / starSize;
+
             ratingH = x % starSize;
+            LogUtils.e(ratingH);
             if (ratingH > 40) rating++;
             invalidate();//重新绘制
             return true;
@@ -96,7 +108,7 @@ public class YStarView extends View {
         //这两个自行改成自己的图标
         fillStar = this.getResources().getDrawable(R.drawable.icon_star_light);//亮星星的图标
         emptyStar = this.getResources().getDrawable(R.drawable.icon_star_black);//暗星星的图标
-        halfStar = this.getResources().getDrawable(R.drawable.icon_star_black);//半星星的图标
+        halfStar = this.getResources().getDrawable(R.drawable.icon_star_half);//半星星的图标
     }
 
 
@@ -140,8 +152,9 @@ public class YStarView extends View {
     /**
      * 设置星星亮的颗数
      */
-    public void setRating(int rating) {
+    public void setRating(double rating) {
         this.rating = rating;
+        invalidate();
     }
 
     /**
@@ -169,7 +182,7 @@ public class YStarView extends View {
     /**
      * 获取亮星星的颗数
      */
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 

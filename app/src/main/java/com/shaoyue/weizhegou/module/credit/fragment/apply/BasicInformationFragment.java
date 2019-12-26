@@ -7,8 +7,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
+import com.google.gson.JsonObject;
 import com.libracore.lib.widget.StateButton;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.api.callback.BaseCallback;
@@ -17,7 +19,6 @@ import com.shaoyue.weizhegou.api.model.BaseResponse;
 import com.shaoyue.weizhegou.api.remote.CeditApi;
 import com.shaoyue.weizhegou.base.BaseAppFragment;
 import com.shaoyue.weizhegou.entity.cedit.BasicInformationBean;
-import com.shaoyue.weizhegou.entity.cedit.InfoGetBean;
 import com.shaoyue.weizhegou.entity.cedit.TimeSelect;
 import com.shaoyue.weizhegou.entity.diaocha.AddressSelectBean;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.BasicInformationAdapter;
@@ -29,6 +30,8 @@ import com.shaoyue.weizhegou.widget.datepicker.DateFormatUtils;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -66,7 +69,8 @@ public class BasicInformationFragment extends BaseAppFragment {
     private String timeTitle;
 
     private String id;
-
+    private String gbhyflmc;
+    private String gbhyfl;
 
     private List<BasicInformationBean.RecordsBean> mlist1 = new ArrayList<>();
 
@@ -138,10 +142,14 @@ public class BasicInformationFragment extends BaseAppFragment {
         List<BasicInformationBean.RecordsBean> list = mAdapter.getData();
         if (ObjectUtils.isNotEmpty(list)) {
             for (BasicInformationBean.RecordsBean bean : list) {
-                if ("国际行业分类".equals(bean.getTitile())) {
-                      bean.setDefaultvalue(addressSelectBean.getTitle());
+                if (bean.getName().equals("gjhyfl")) {
+                    bean.setDefaultvalue(addressSelectBean.getTitle());
+                    gbhyfl = addressSelectBean.getKey();
+
                 }
             }
+
+
             mAdapter.setNewData(list);
             mAdapter.notifyDataSetChanged();
         }
@@ -238,63 +246,87 @@ public class BasicInformationFragment extends BaseAppFragment {
      * 获取界面数据byid
      */
     private void getListById() {
-        CeditApi.searchById(new BaseCallback<BaseResponse<InfoGetBean>>() {
+        CeditApi.searchById(new BaseCallback<BaseResponse<JsonObject>>() {
             @Override
-            public void onSucc(BaseResponse<InfoGetBean> result) {
-//                if (ObjectUtils.isNotEmpty(result.data.getId())) {
-//
-//                } else {
-//                    sbEdit.setVisibility(View.VISIBLE);
-//                    sbZancun.setVisibility(View.VISIBLE);
-                    if ("查看详情".equals(SPUtils.getInstance().getString("status"))) {
+            public void onSucc(BaseResponse<JsonObject> result) {
+                JsonObject jsonObject = result.data;
+                try {
+                    id = jsonObject.get("id").getAsString();
+                } catch (java.lang.UnsupportedOperationException e) {
+                    LogUtils.e(e);
+                }
+
+                if ("查看详情".equals(SPUtils.getInstance().getString("status"))) {
+                    sbZancun.setVisibility(View.GONE);
+                    sbEdit.setVisibility(View.GONE);
+                } else {
+                    if (ObjectUtils.isNotEmpty(id)) {
+                        sbEdit.setVisibility(View.VISIBLE);
                         sbZancun.setVisibility(View.GONE);
-                        sbEdit.setVisibility(View.GONE);
-                    }
-//                }
-                id = result.data.getId();
+                    } else {
+                        LogUtils.e(id);
+                        sbEdit.setVisibility(View.VISIBLE);
+                        sbZancun.setVisibility(View.VISIBLE);
 
-                Map<String, String> map = ObjectToMapUtils.str2Map(result.data);
-                List<BasicInformationBean.RecordsBean> list = mAdapter.getData();
-                if (ObjectUtils.isNotEmpty(list)) {
-                    for (BasicInformationBean.RecordsBean bean : list) {
-                        if (map.containsKey(bean.getName())) {
-                            bean.setEdit(true);
-                            bean.setDefaultvalue(map.get(bean.getName()));
-                        }
                     }
-                    mAdapter.setNewData(list);
-                    mAdapter.notifyDataSetChanged();
                 }
-                List<BasicInformationBean.RecordsBean> list2 = mAdapter2.getData();
-                if (ObjectUtils.isNotEmpty(list2)) {
-                    for (BasicInformationBean.RecordsBean bean : list2) {
-                        if (map.containsKey(bean.getName())) {
-                            bean.setEdit(true);
-                            bean.setDefaultvalue(map.get(bean.getName()));
-                        }
-                    }
-                    mAdapter2.setNewData(list2);
-                    mAdapter2.notifyDataSetChanged();
+                try {
+                    gbhyflmc = jsonObject.get("gjhyflmc").getAsString();
+                } catch (java.lang.UnsupportedOperationException e) {
+                    LogUtils.e(e);
                 }
-                List<BasicInformationBean.RecordsBean> list3 = mAdapter3.getData();
-                if (ObjectUtils.isNotEmpty(list3)) {
-                    for (BasicInformationBean.RecordsBean bean : list3) {
-                        if (map.containsKey(bean.getName())) {
-                            bean.setEdit(true);
-                            bean.setDefaultvalue(map.get(bean.getName()));
-                        }
-                    }
-                    mAdapter3.setNewData(list3);
-                    mAdapter3.notifyDataSetChanged();
-                }
+                try {
 
+                    JSONObject jsonObject1 = new JSONObject(jsonObject.toString());
+                    Map<String, String> map = ObjectToMapUtils.JsonToMap(jsonObject1);
+
+                    List<BasicInformationBean.RecordsBean> list = mAdapter.getData();
+                    if (ObjectUtils.isNotEmpty(list)) {
+                        for (BasicInformationBean.RecordsBean bean : list) {
+                            if (bean.getName().equals("gjhyfl")) {
+
+
+                                bean.setDefaultvalue(gbhyflmc);
+                                gbhyfl = map.get(bean.getName());
+
+                            } else {
+                                bean.setDefaultvalue(map.get(bean.getName()));
+                            }
+                        }
+                        mAdapter.setNewData(list);
+                        mAdapter.notifyDataSetChanged();
+                    }
+                    List<BasicInformationBean.RecordsBean> list2 = mAdapter2.getData();
+                    if (ObjectUtils.isNotEmpty(list2)) {
+                        for (BasicInformationBean.RecordsBean bean : list2) {
+                            if (map.containsKey(bean.getName())) {
+                                bean.setEdit(true);
+                                bean.setDefaultvalue(map.get(bean.getName()));
+                            }
+                        }
+                        mAdapter2.setNewData(list2);
+                        mAdapter2.notifyDataSetChanged();
+                    }
+                    List<BasicInformationBean.RecordsBean> list3 = mAdapter3.getData();
+                    if (ObjectUtils.isNotEmpty(list3)) {
+                        for (BasicInformationBean.RecordsBean bean : list3) {
+                            if (map.containsKey(bean.getName())) {
+                                bean.setEdit(true);
+                                bean.setDefaultvalue(map.get(bean.getName()));
+                            }
+                        }
+                        mAdapter3.setNewData(list3);
+                        mAdapter3.notifyDataSetChanged();
+                    }
+                } catch (JSONException e) {
+                    LogUtils.e(e);
+                }
             }
         }, this);
     }
 
     @OnClick({R.id.sb_zancun, R.id.sb_edit})
     public void onViewClicked(View view) {
-
         switch (view.getId()) {
             case R.id.sb_zancun:
                 setSqJe();
@@ -338,7 +370,12 @@ public class BasicInformationFragment extends BaseAppFragment {
         if (ObjectUtils.isNotEmpty(list)) {
             for (BasicInformationBean.RecordsBean bean : list) {
                 if (ObjectUtils.isNotEmpty(bean.getDefaultvalue())) {
-                    map.put(bean.getName(), bean.getDefaultvalue());
+                    if (bean.getName().equals("gjhyfl")) {
+
+                        map.put(bean.getName(), gbhyfl);
+                    } else {
+                        map.put(bean.getName(), bean.getDefaultvalue());
+                    }
                 }
             }
 

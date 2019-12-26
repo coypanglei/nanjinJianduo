@@ -1,5 +1,6 @@
 package com.shaoyue.weizhegou.entity.cedit;
 
+import com.blankj.utilcode.util.ObjectUtils;
 import com.google.gson.annotations.SerializedName;
 import com.shaoyue.weizhegou.base.BaseBean;
 
@@ -33,12 +34,50 @@ public class ApplicationBean extends BaseBean {
     //   "createTime": "2019-08-16 15:08:59",
     //   "sqsx": null,
     //   "slr": null
+    //    "sqr":sqr
     //  }],
+
+    private String taskid;
+
+    public String getTaskid() {
+        if (ObjectUtils.isEmpty(taskid)) {
+            return "";
+        }
+        return taskid;
+    }
+
+    public void setTaskid(String taskid) {
+        this.taskid = taskid;
+    }
+
+    private String sqr;
+
+    public String getSqr() {
+        return sqr;
+    }
+
+    public void setSqr(String sqr) {
+        this.sqr = sqr;
+    }
+
+    private String slrq;
+
+    public String getSlrq() {
+        return slrq;
+    }
+
+    public void setSlrq(String slrq) {
+        this.slrq = slrq;
+    }
 
     @SerializedName("instid")
     private String instid;
 
     public String getInstid() {
+
+        if (ObjectUtils.isEmpty(instid)) {
+            return "";
+        }
         return instid;
     }
 

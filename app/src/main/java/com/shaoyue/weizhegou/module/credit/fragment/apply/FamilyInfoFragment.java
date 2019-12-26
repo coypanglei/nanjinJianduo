@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -99,8 +98,9 @@ public class FamilyInfoFragment extends BaseAppFragment implements BGARefreshLay
     @Override
     protected void initView(View rootView) {
         super.initView(rootView);
-        LogUtils.e(SPUtils.getInstance().getString("status"));
-        if ("查看详情".equals(SPUtils.getInstance().getString("status"))) {
+//        LogUtils.e(SPUtils.getInstance().getString("status"));
+
+        if ("查看详情".equals(SPUtils.getInstance().getString("status")) || "调查".equals(title)) {
             sbAdd.setVisibility(View.GONE);
             sbDetel.setVisibility(View.GONE);
             sbEdit.setVisibility(View.GONE);
@@ -140,14 +140,14 @@ public class FamilyInfoFragment extends BaseAppFragment implements BGARefreshLay
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
 
-        if (page == pages + 1) {
+        if (page == pages+1) {
             mRefreshLayout.endLoadingMore();
             ToastUtil.showBlackToastSucess("没有更多的数据了");
             return false;
         }
 
 
-        CeditApi.getFamilyInfo(page, "12", new BaseCallback<BaseResponse<FamilyListBean>>() {
+        CeditApi.getFamilyInfo(page+1, "12", new BaseCallback<BaseResponse<FamilyListBean>>() {
             @Override
             public void onSucc(BaseResponse<FamilyListBean> result) {
 
@@ -225,6 +225,8 @@ public class FamilyInfoFragment extends BaseAppFragment implements BGARefreshLay
                         SPUtils.getInstance().put(UserMgr.SP_IS_PO, true);
                     }
                 } else {
+
+
                     mEmptyRelative.setVisibility(View.VISIBLE);
 
                 }

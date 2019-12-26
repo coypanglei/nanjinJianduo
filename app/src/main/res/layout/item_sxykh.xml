@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_36"
+        android:background="@color/color_f7f7f7"
+        android:orientation="horizontal"
+        android:id="@+id/ll_top"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp">
+
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="序号"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11"
+
+            />
+
+        <TextView
+            android:id="@+id/tv_mc"
+            android:layout_width="@dimen/dp_70"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="名称"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+
+        <TextView
+            android:id="@+id/tv_sfzh"
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="身份证号码(机构代码)"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11"
+            android:visibility="visible" />
+
+
+        <TextView
+            android:id="@+id/tv_xsbl"
+            android:layout_width="@dimen/dp_70"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="销售比例"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+
+        <TextView
+            android:id="@+id/tv_jsqd"
+            android:layout_width="@dimen/dp_70"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingRight="@dimen/dp_6"
+            android:text="结算渠道"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+
+        <TextView
+            android:id="@+id/tv_jszq"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="结算周期"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_wlsj"
+            android:layout_width="@dimen/dp_70"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="往来时间"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+
+        <TextView
+            android:id="@+id/tv_sfwhkh"
+            android:layout_width="@dimen/dp_70"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="是否我行客户"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_jydz"
+            android:layout_width="@dimen/dp_120"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="经营地址"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+
+
+        <TextView
+            android:id="@+id/tv_jyxm"
+            android:layout_width="@dimen/dp_70"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="经营项目"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+
+
+        <TextView
+            android:id="@+id/tv_jzc"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="净资产(万元)"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+
+        <TextView
+
+            android:id="@+id/tv_phone_num"
+            android:layout_width="@dimen/dp_90"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="联系电话"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+
+        <TextView
+            android:id="@+id/tv_ms"
+
+            android:layout_width="@dimen/dp_120"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="描述"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

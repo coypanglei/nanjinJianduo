@@ -38,7 +38,6 @@ public class DiyadanbaoFragment extends BaseAppFragment {
     public static DiyadanbaoFragment newInstance() {
 
         Bundle args = new Bundle();
-
         DiyadanbaoFragment fragment = new DiyadanbaoFragment();
         fragment.setArguments(args);
         return fragment;
@@ -56,7 +55,6 @@ public class DiyadanbaoFragment extends BaseAppFragment {
         mTitles.add("抵(质)押分析");
         mTitles.add("公司担保分析");
         mTitles.add("企业担保分析");
-
         mFragments.add(DiyadanbaoDetailsOneFragment.newInstance());
         mFragments.add(DiyadanbaoDetailsTwoFragment.newInstance());
         mFragments.add(DiyadanbaoDetailsThreeFragment.newInstance());

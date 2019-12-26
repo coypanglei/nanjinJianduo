@@ -129,6 +129,7 @@
 
             <com.libracore.lib.widget.StateButton
                 android:id="@+id/sb_synchronize"
+                android:visibility="gone"
                 android:layout_width="83dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center_horizontal"

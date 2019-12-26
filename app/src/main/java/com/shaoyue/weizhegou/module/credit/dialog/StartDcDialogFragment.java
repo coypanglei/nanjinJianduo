@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ObjectUtils;
+import com.blankj.utilcode.util.SPUtils;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.api.callback.BaseCallback;
 import com.shaoyue.weizhegou.api.exception.ApiException;
@@ -23,7 +24,9 @@ import com.shaoyue.weizhegou.api.remote.CeditApi;
 import com.shaoyue.weizhegou.api.remote.DiaoChaApi;
 import com.shaoyue.weizhegou.entity.cedit.BasicInformationBean;
 import com.shaoyue.weizhegou.entity.diaocha.StartDiaochaBean;
+import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.module.credit.adapter.diaocha.StartDCAdapter;
+import com.shaoyue.weizhegou.router.UIHelper;
 import com.shaoyue.weizhegou.util.ObjectToMapUtils;
 import com.shaoyue.weizhegou.util.ToastUtil;
 import com.shaoyue.weizhegou.widget.DropDownView;
@@ -190,17 +193,19 @@ public class StartDcDialogFragment extends DialogFragment {
                     ToastUtil.showBlackToastSucess("没有选择授信调查模板");
                     return;
                 }
+
                 DiaoChaApi.getUpdateMx(startDiaochaBean.getId(), sxmx, new BaseCallback<BaseResponse<Void>>() {
                     @Override
                     public void onSucc(BaseResponse<Void> result) {
                         dismiss();
+                        SPUtils.getInstance().put(UserMgr.SP_DC_TYPE, sxmx);
+                        UIHelper.showDcCommonActivity("调查", getActivity(), "开始调查");
                     }
                 }, this);
                 break;
 
         }
     }
-
 
 
 }

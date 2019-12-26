@@ -1,4 +1,4 @@
-package com.shaoyue.weizhegou.module.credit.fragment;
+package com.shaoyue.weizhegou.module.sxdc.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -63,7 +63,8 @@ public class shouXinSurveyFragment extends BaseAppFragment implements BGARefresh
     StateButton sbUpdate;
     @BindView(R.id.tv_dc_status)
     TextView tvDcStatus;
-
+    @BindView(R.id.sb_diaocha)
+    StateButton sbDc;
     private int page = 1;
     View popupSelectView;
     PopupWindow popupSelect;
@@ -302,9 +303,14 @@ public class shouXinSurveyFragment extends BaseAppFragment implements BGARefresh
                 if (ObjectUtils.isNotEmpty(getSelect())) {
                     if (ObjectUtils.isNotEmpty(getSelect().getId())) {
                         //请求id 身份证
-                        SPUtils.getInstance().put(UserMgr.SP_APPLY_ID, getSelect().getSxid());
-                        SPUtils.getInstance().put(UserMgr.SP_ID_CARD, getSelect().getSxsfzh());
-                        UIHelper.showDcCommonActivity("调查", getActivity(), "查看详情");
+
+                        if (ObjectUtils.isNotEmpty(getSelect().getSxlx())) {
+                            SPUtils.getInstance().put(UserMgr.SP_APPLY_ID, getSelect().getSxid());
+                            SPUtils.getInstance().put(UserMgr.SP_ID_CARD, getSelect().getSxsfzh());
+                            UIHelper.showDcCommonActivity("调查", getActivity(), "查看详情");
+                        } else {
+                            ToastUtil.showBlackToastSucess("没有选择模型");
+                        }
                     }
                 } else {
                     ToastUtil.showBlackToastSucess("暂未选取数据");
@@ -344,6 +350,7 @@ public class shouXinSurveyFragment extends BaseAppFragment implements BGARefresh
                 if (popupSelect.isShowing()) {
                     popupSelect.dismiss();
                 }
+                sbDc.setVisibility(View.VISIBLE);
                 approvalFlag = "Y";
                 lczt = "";
                 initData();
@@ -355,6 +362,7 @@ public class shouXinSurveyFragment extends BaseAppFragment implements BGARefresh
                 if (popupSelect.isShowing()) {
                     popupSelect.dismiss();
                 }
+                sbDc.setVisibility(View.INVISIBLE);
                 approvalFlag = "N";
                 lczt = "已处理";
                 initData();
@@ -367,6 +375,7 @@ public class shouXinSurveyFragment extends BaseAppFragment implements BGARefresh
                 if (popupSelect.isShowing()) {
                     popupSelect.dismiss();
                 }
+                sbDc.setVisibility(View.INVISIBLE);
                 approvalFlag = "N";
                 lczt = "审批中";
                 initData();
@@ -378,6 +387,7 @@ public class shouXinSurveyFragment extends BaseAppFragment implements BGARefresh
                 if (popupSelect.isShowing()) {
                     popupSelect.dismiss();
                 }
+                sbDc.setVisibility(View.INVISIBLE);
                 approvalFlag = "N";
                 lczt = "已终止";
                 initData();
@@ -389,6 +399,7 @@ public class shouXinSurveyFragment extends BaseAppFragment implements BGARefresh
                 if (popupSelect.isShowing()) {
                     popupSelect.dismiss();
                 }
+                sbDc.setVisibility(View.INVISIBLE);
                 approvalFlag = "N";
                 lczt = "已完成";
                 initData();
@@ -434,7 +445,11 @@ public class shouXinSurveyFragment extends BaseAppFragment implements BGARefresh
         switch (view.getId()) {
             case R.id.sb_diaocha:
                 if (ObjectUtils.isNotEmpty(getSelect())) {
-                    if (ObjectUtils.isEmpty(getSelect().getSxlx())) {
+                    if (ObjectUtils.isEmpty(getSelect().getSxlx())) {   //请求id 身份证
+                        SPUtils.getInstance().put(UserMgr.SP_APPLY_ID, getSelect().getSxid());
+                        SPUtils.getInstance().put(UserMgr.SP_ID_CARD, getSelect().getSxsfzh());
+                        SPUtils.getInstance().put(UserMgr.SP_DC_TASKID, getSelect().getTaskid());
+                        SPUtils.getInstance().put(UserMgr.SP_DC_INSTID, getSelect().getInstid());
                         DiaoChaApi.getMxData(getSelect().getSxid(), new BaseCallback<BaseResponse<StartDiaochaBean>>() {
                             @Override
                             public void onSucc(BaseResponse<StartDiaochaBean> result) {
@@ -443,6 +458,14 @@ public class shouXinSurveyFragment extends BaseAppFragment implements BGARefresh
                                 UIHelper.showStartDiaoCha(getActivity(), bean);
                             }
                         }, this);
+                    } else {
+                        //请求id 身份证 模型
+                        SPUtils.getInstance().put(UserMgr.SP_DC_TYPE, getSelect().getSxlx());
+                        SPUtils.getInstance().put(UserMgr.SP_APPLY_ID, getSelect().getSxid());
+                        SPUtils.getInstance().put(UserMgr.SP_ID_CARD, getSelect().getSxsfzh());
+                        SPUtils.getInstance().put(UserMgr.SP_DC_TASKID, getSelect().getTaskid());
+                        SPUtils.getInstance().put(UserMgr.SP_DC_INSTID, getSelect().getInstid());
+                        UIHelper.showDcCommonActivity("调查", getActivity(), "开始调查");
                     }
                 } else {
                     ToastUtil.showBlackToastSucess("暂未选取数据");
@@ -571,6 +594,7 @@ public class shouXinSurveyFragment extends BaseAppFragment implements BGARefresh
                 final ImageView ivDtj = popupSelectView.findViewById(R.id.iv_dtj);
 
                 if ("Y".equals(approvalFlag)) {
+
                     ivDcl.setVisibility(View.VISIBLE);
                     ivYcl.setVisibility(View.GONE);
                     ivSpz.setVisibility(View.GONE);

@@ -111,6 +111,8 @@ public class SjcjInfoFragment extends BaseTitleFragment {
         menuAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(final BaseQuickAdapter adapter, View view, final int position) {
+                mRvMenu.setVisibility(View.GONE);
+                mTvVisible.setText("显示菜单");
                 if (currentPage != position) {
                     refresh(position, adapter);
 

@@ -16,7 +16,6 @@ import com.f1reking.signatureview.SignatureView;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.api.callback.BaseCallback;
 import com.shaoyue.weizhegou.api.model.BaseResponse;
-import com.shaoyue.weizhegou.api.remote.CeditApi;
 import com.shaoyue.weizhegou.api.remote.UserApi;
 import com.shaoyue.weizhegou.entity.cedit.QianziBean;
 import com.shaoyue.weizhegou.manager.UserMgr;
@@ -36,8 +35,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-
-import static com.shaoyue.weizhegou.util.ObjectToMapUtils.str2Map;
 
 /**
  * 作者：PangLei on 2019/5/15 0015 10:25
@@ -152,23 +149,25 @@ public class QianziDialogFragment extends DialogFragment {
                                             } else {
                                                 qianziBean.setSqrjbkhjlqm(result.msg);
                                             }
-                                            if (ObjectUtils.isEmpty(qianziBean.getId())) {
-                                                CeditApi.updateQianMing(str2Map(qianziBean), new BaseCallback<BaseResponse<QianziBean>>() {
-                                                    @Override
-                                                    public void onSucc(BaseResponse<QianziBean> result) {
-                                                        EventBus.getDefault().post(result.data);
-                                                        dismiss();
-                                                    }
-                                                }, this);
-                                            } else {
-                                                CeditApi.editQianMing(str2Map(qianziBean), new BaseCallback<BaseResponse<QianziBean>>() {
-                                                    @Override
-                                                    public void onSucc(BaseResponse<QianziBean> result) {
-                                                        EventBus.getDefault().post(result.data);
-                                                        dismiss();
-                                                    }
-                                                }, this);
-                                            }
+                                            EventBus.getDefault().post(qianziBean);
+                                            dismiss();
+//                                            if (ObjectUtils.isEmpty(qianziBean.getId())) {
+//                                                CeditApi.updateQianMing(str2Map(qianziBean), new BaseCallback<BaseResponse<QianziBean>>() {
+//                                                    @Override
+//                                                    public void onSucc(BaseResponse<QianziBean> result) {
+//                                                        EventBus.getDefault().post(result.data);
+//                                                        dismiss();
+//                                                    }
+//                                                }, this);
+//                                            } else {
+//                                                CeditApi.editQianMing(str2Map(qianziBean), new BaseCallback<BaseResponse<QianziBean>>() {
+//                                                    @Override
+//                                                    public void onSucc(BaseResponse<QianziBean> result) {
+//                                                        EventBus.getDefault().post(result.data);
+//                                                        dismiss();
+//                                                    }
+//                                                }, this);
+//                                            }
 
                                         }
                                     }, this);

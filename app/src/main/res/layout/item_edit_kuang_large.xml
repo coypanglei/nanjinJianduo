@@ -16,6 +16,7 @@
             android:id="@+id/et_name"
             style="@style/AddEditStyle"
             android:layout_width="@dimen/dp_350"
+            android:layout_marginRight="@dimen/dp_16"
             android:layout_height="83dp"
             android:singleLine="false"
             android:layout_alignParentRight="true"

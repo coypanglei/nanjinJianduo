@@ -144,6 +144,9 @@ public class MyHangBean extends BaseBean {
         @SerializedName("mqkh")
         private String rqf;
         private double cksdye;
+        private String yxtshjl;
+
+
         private String xtshjl;
         private String ysf;
 
@@ -209,6 +212,14 @@ public class MyHangBean extends BaseBean {
         private double dwdb;
 
         private String dbbldk;
+
+        public String getYxtshjl() {
+            return yxtshjl;
+        }
+
+        public void setYxtshjl(String yxtshjl) {
+            this.yxtshjl = yxtshjl;
+        }
 
         public String getSxrq() {
             return sxrq;

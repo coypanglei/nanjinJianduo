@@ -8,12 +8,15 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ObjectUtils;
+import com.blankj.utilcode.util.SPUtils;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.api.callback.BaseCallback;
 import com.shaoyue.weizhegou.api.model.BaseResponse;
+import com.shaoyue.weizhegou.api.remote.CeditApi;
 import com.shaoyue.weizhegou.api.remote.DhApi;
 import com.shaoyue.weizhegou.base.BaseAppFragment;
 import com.shaoyue.weizhegou.entity.dhgl.XjlBean;
+import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.module.dhgl.adapter.XjlAdapter;
 import com.shaoyue.weizhegou.widget.lineTU.LineView;
 
@@ -70,37 +73,130 @@ public class DcMoneyFragment extends BaseAppFragment {
         managerTwo.setOrientation(LinearLayoutManager.HORIZONTAL);
         rlListTwo.setLayoutManager(managerTwo);
         rlListTwo.setAdapter(mAdapterTwo);
+        if ("调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
+            CeditApi.getXjlInfo(new BaseCallback<BaseResponse<XjlBean>>() {
+                @Override
+                public void onSucc(BaseResponse<XjlBean> result) {
+                    if (ObjectUtils.isNotEmpty(result.data)) {
+                        ArrayList<ArrayList<Double>> dataListFs = new ArrayList<>();
+                        if (ObjectUtils.isNotEmpty(result.data.get近一年现金流入()) && ObjectUtils.isNotEmpty(result.data.get近一年现金流出())) {
+                            dataListFs.add(result.data.get近一年现金流入());
+                            dataListFs.add(result.data.get近一年现金流出());
+                            lineViewFloat.setFloatDataList(dataListFs);
+                        }
 
-        DhApi.getXjlInfo(new BaseCallback<BaseResponse<XjlBean>>() {
-            @Override
-            public void onSucc(BaseResponse<XjlBean> result) {
-                if (ObjectUtils.isNotEmpty(result.data)) {
-                    ArrayList<ArrayList<Double>> dataListFs = new ArrayList<>();
-                    if (ObjectUtils.isNotEmpty(result.data.get近一年现金流入()) && ObjectUtils.isNotEmpty(result.data.get近一年现金流出())) {
-                        dataListFs.add(result.data.get近一年现金流入());
-                        dataListFs.add(result.data.get近一年现金流出());
-                        lineViewFloat.setFloatDataList(dataListFs);
-                    }
+                        mAdapter.setNewData(result.data.get近一年现金流入());
+                        mAdapterTwo.setNewData(result.data.get近一年现金流出());
+                        Double liuru = 0.00;
+                        Double liucu = 0.00;
+                        for (Double bean : result.data.get近一年现金流入()) {
+                            liuru = liuru + bean;
+                        }
+                        for (Double bean : result.data.get近一年现金流出()) {
+                            liucu = liucu + bean;
+                        }
+                        tvLiuru.setText(String.format("%.2f", liuru));
+                        tvLiucu.setText(String.format("%.2f", liucu));
+                        tvContent.setText(result.data.getDesc());
 
-                    mAdapter.setNewData(result.data.get近一年现金流入());
-                    mAdapterTwo.setNewData(result.data.get近一年现金流出());
-                    Double liuru = 0.00;
-                    Double liucu = 0.00;
-                    for (Double bean : result.data.get近一年现金流入()) {
-                        liuru = liuru + bean;
                     }
-                    for (Double bean : result.data.get近一年现金流出()) {
-                        liucu = liucu + bean;
-                    }
-                    tvLiuru.setText(String.format("%.2f", liuru));
-                    tvLiucu.setText(String.format("%.2f", liucu));
-                    tvContent.setText(result.data.getDesc());
-
                 }
-            }
-        }, this);
+            }, this);
+        }else {
+            DhApi.getXjlInfo(new BaseCallback<BaseResponse<XjlBean>>() {
+                @Override
+                public void onSucc(BaseResponse<XjlBean> result) {
+                    if (ObjectUtils.isNotEmpty(result.data)) {
+                        ArrayList<ArrayList<Double>> dataListFs = new ArrayList<>();
+                        if (ObjectUtils.isNotEmpty(result.data.get近一年现金流入()) && ObjectUtils.isNotEmpty(result.data.get近一年现金流出())) {
+                            dataListFs.add(result.data.get近一年现金流入());
+                            dataListFs.add(result.data.get近一年现金流出());
+                            lineViewFloat.setFloatDataList(dataListFs);
+                        }
+
+                        mAdapter.setNewData(result.data.get近一年现金流入());
+                        mAdapterTwo.setNewData(result.data.get近一年现金流出());
+                        Double liuru = 0.00;
+                        Double liucu = 0.00;
+                        for (Double bean : result.data.get近一年现金流入()) {
+                            liuru = liuru + bean;
+                        }
+                        for (Double bean : result.data.get近一年现金流出()) {
+                            liucu = liucu + bean;
+                        }
+                        tvLiuru.setText(String.format("%.2f", liuru));
+                        tvLiucu.setText(String.format("%.2f", liucu));
+                        tvContent.setText(result.data.getDesc());
+
+                    }
+                }
+            }, this);
+        }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if ("调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
+            CeditApi.getXjlInfo(new BaseCallback<BaseResponse<XjlBean>>() {
+                @Override
+                public void onSucc(BaseResponse<XjlBean> result) {
+                    if (ObjectUtils.isNotEmpty(result.data)) {
+                        ArrayList<ArrayList<Double>> dataListFs = new ArrayList<>();
+                        if (ObjectUtils.isNotEmpty(result.data.get近一年现金流入()) && ObjectUtils.isNotEmpty(result.data.get近一年现金流出())) {
+                            dataListFs.add(result.data.get近一年现金流入());
+                            dataListFs.add(result.data.get近一年现金流出());
+                            lineViewFloat.setFloatDataList(dataListFs);
+                        }
+
+                        mAdapter.setNewData(result.data.get近一年现金流入());
+                        mAdapterTwo.setNewData(result.data.get近一年现金流出());
+                        Double liuru = 0.00;
+                        Double liucu = 0.00;
+                        for (Double bean : result.data.get近一年现金流入()) {
+                            liuru = liuru + bean;
+                        }
+                        for (Double bean : result.data.get近一年现金流出()) {
+                            liucu = liucu + bean;
+                        }
+                        tvLiuru.setText(String.format("%.2f", liuru));
+                        tvLiucu.setText(String.format("%.2f", liucu));
+                        tvContent.setText(result.data.getDesc());
+
+                    }
+                }
+            }, this);
+        }else {
+            DhApi.getXjlInfo(new BaseCallback<BaseResponse<XjlBean>>() {
+                @Override
+                public void onSucc(BaseResponse<XjlBean> result) {
+                    if (ObjectUtils.isNotEmpty(result.data)) {
+                        ArrayList<ArrayList<Double>> dataListFs = new ArrayList<>();
+                        if (ObjectUtils.isNotEmpty(result.data.get近一年现金流入()) && ObjectUtils.isNotEmpty(result.data.get近一年现金流出())) {
+                            dataListFs.add(result.data.get近一年现金流入());
+                            dataListFs.add(result.data.get近一年现金流出());
+                            lineViewFloat.setFloatDataList(dataListFs);
+                        }
+
+                        mAdapter.setNewData(result.data.get近一年现金流入());
+                        mAdapterTwo.setNewData(result.data.get近一年现金流出());
+                        Double liuru = 0.00;
+                        Double liucu = 0.00;
+                        for (Double bean : result.data.get近一年现金流入()) {
+                            liuru = liuru + bean;
+                        }
+                        for (Double bean : result.data.get近一年现金流出()) {
+                            liucu = liucu + bean;
+                        }
+                        tvLiuru.setText(String.format("%.2f", liuru));
+                        tvLiucu.setText(String.format("%.2f", liucu));
+                        tvContent.setText(result.data.getDesc());
+
+                    }
+                }
+            }, this);
+        }
+    }
 
     private void initLineView(LineView lineView) {
         ArrayList<String> test = new ArrayList<String>();

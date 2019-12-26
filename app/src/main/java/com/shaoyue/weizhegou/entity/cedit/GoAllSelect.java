@@ -7,7 +7,24 @@ public class GoAllSelect extends BaseBean {
     private QiYeDanBaoBean.RecordsBean mQiYeDanBao;
     private GongsiDanbao.RecordsBean mGongsiDanBao;
 
-    public GoAllSelect( boolean isAdd, String title,QiYeDanBaoBean.RecordsBean mQiYeDanBao) {
+    private SxykhListBean.RecordsBean mSxykhlistBean;
+
+
+    public SxykhListBean.RecordsBean getmSxykhlistBean() {
+        return mSxykhlistBean;
+    }
+
+    public void setmSxykhlistBean(SxykhListBean.RecordsBean mSxykhlistBean) {
+        this.mSxykhlistBean = mSxykhlistBean;
+    }
+
+    public GoAllSelect(boolean isAdd, String title, SxykhListBean.RecordsBean mSxykhlistBean) {
+        this.mSxykhlistBean = mSxykhlistBean;
+        this.isAdd = isAdd;
+        this.title = title;
+    }
+
+    public GoAllSelect(boolean isAdd, String title, QiYeDanBaoBean.RecordsBean mQiYeDanBao) {
         this.mQiYeDanBao = mQiYeDanBao;
         this.isAdd = isAdd;
         this.title = title;

@@ -2,7 +2,7 @@ package com.shaoyue.weizhegou.api.remote;
 
 import android.text.TextUtils;
 
-
+import com.blankj.utilcode.util.AppUtils;
 import com.shaoyue.weizhegou.api.callback.BaseCallback;
 import com.shaoyue.weizhegou.api.helper.ApiHttpClient;
 import com.shaoyue.weizhegou.api.model.BaseResponse;
@@ -21,7 +21,7 @@ import java.util.Map;
 public class CommApi {
 
 
-    private static final String API_CHECK_UPDATE = "system/getVersionInfo";
+    private static final String API_CHECK_UPDATE = "jeecg-boot/system/sysVersion/version";
 
     // 获取初始化参数
     private static final String API_GET_INIT_DATA = "api/system/init";
@@ -52,7 +52,9 @@ public class CommApi {
 
 
     public static void checkUpdate(BaseCallback<BaseResponse<VersionBean>> callback, Object tag) {
-        ApiHttpClient.post(API_CHECK_UPDATE, callback, tag);
+        Map<String, String> params = new HashMap<>();
+        params.put("version", AppUtils.getAppVersionCode() + "");
+        ApiHttpClient.post(API_CHECK_UPDATE, params,callback, tag);
     }
 
 

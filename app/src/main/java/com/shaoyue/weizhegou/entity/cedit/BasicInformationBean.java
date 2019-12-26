@@ -12,12 +12,11 @@ public class BasicInformationBean extends BaseBean {
 
     public static final int TIME = 2;
 
-    public static final int EDIT_LARGE =3;
+    public static final int EDIT_LARGE = 3;
 
-    public static final int SELECT_CHANGE =5;
+    public static final int SELECT_CHANGE = 5;
 
-    public static final int TITLE =4;
-
+    public static final int TITLE = 4;
 
 
     /**
@@ -45,7 +44,9 @@ public class BasicInformationBean extends BaseBean {
     }
 
     public static class RecordsBean {
+        public RecordsBean() {
 
+        }
         public RecordsBean(String require, String paramtype, String titile) {
             this.require = require;
             this.paramtype = paramtype;
@@ -101,8 +102,17 @@ public class BasicInformationBean extends BaseBean {
         private int ordernum;
         private String type;
         private String category;
-        private Object dateformat;
+        private String dateformat;
         private List<OptionlistBean> optionlist;
+        private List<BasicInformationBean.RecordsBean> list;
+
+        public List<RecordsBean> getList() {
+            return list;
+        }
+
+        public void setList(List<RecordsBean> list) {
+            this.list = list;
+        }
 
         public String getParamtype() {
             return paramtype;
@@ -160,11 +170,11 @@ public class BasicInformationBean extends BaseBean {
             this.category = category;
         }
 
-        public Object getDateformat() {
+        public String getDateformat() {
             return dateformat;
         }
 
-        public void setDateformat(Object dateformat) {
+        public void setDateformat(String dateformat) {
             this.dateformat = dateformat;
         }
 
@@ -174,6 +184,24 @@ public class BasicInformationBean extends BaseBean {
 
         public void setOptionlist(List<OptionlistBean> optionlist) {
             this.optionlist = optionlist;
+        }
+
+        @Override
+        public String toString() {
+            return "RecordsBean{" +
+                    "SpanSize=" + SpanSize +
+                    ", edit=" + edit +
+                    ", require='" + require + '\'' +
+                    ", paramtype='" + paramtype + '\'' +
+                    ", titile='" + titile + '\'' +
+                    ", name='" + name + '\'' +
+                    ", defaultvalue='" + defaultvalue + '\'' +
+                    ", ordernum=" + ordernum +
+                    ", type='" + type + '\'' +
+                    ", category='" + category + '\'' +
+                    ", dateformat=" + dateformat +
+                    ", optionlist=" + optionlist +
+                    '}';
         }
 
         public static class OptionlistBean {

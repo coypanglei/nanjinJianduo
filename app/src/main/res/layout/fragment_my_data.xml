@@ -117,7 +117,7 @@
                 android:drawablePadding="10dp"
                 android:gravity="left|center_vertical"
                 android:paddingLeft="@dimen/dp_24"
-                android:text="中间业务"
+                android:text="申请人中间业务"
                 android:textColor="@color/color_23a7f0"
                 android:textSize="@dimen/dp_13" />
 
@@ -125,6 +125,36 @@
                 android:id="@+id/rv_credit_three"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:id="@+id/ll_peiou_zj"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp"
+                    android:background="@color/color_f2f2f2" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@color/white"
+                    android:drawableLeft="@drawable/icon_cedit_search"
+                    android:drawablePadding="10dp"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="@dimen/dp_24"
+                    android:text="配偶中间业务"
+                    android:textColor="@color/color_23a7f0"
+                    android:textSize="@dimen/dp_13" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_credit_six"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -159,28 +189,38 @@
                 android:layout_height="6dp"
                 android:background="@color/color_f2f2f2" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@color/white"
-                android:drawableLeft="@drawable/icon_cedit_search"
-                android:drawablePadding="10dp"
-                android:gravity="left|center_vertical"
-                android:paddingLeft="@dimen/dp_24"
-                android:text="配偶持有产品"
-                android:textColor="@color/color_23a7f0"
-                android:textSize="@dimen/dp_13" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/color_959595" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_credit_five"
+            <LinearLayout
+                android:id="@+id/ll_peiou_cp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white" />
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@color/white"
+                    android:drawableLeft="@drawable/icon_cedit_search"
+                    android:drawablePadding="10dp"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="@dimen/dp_24"
+                    android:text="配偶持有产品"
+                    android:textColor="@color/color_23a7f0"
+                    android:textSize="@dimen/dp_13" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_959595" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_credit_five"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white" />
+
+            </LinearLayout>
+
 
             <View
                 android:layout_width="match_parent"
@@ -256,15 +296,14 @@
                     android:id="@+id/tv_error"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/dp_30"
-                    tools:text="系统未通过，人工干预通过"
-                    android:visibility="invisible"
-                    android:textColor="@color/color_ff4747"
-                    android:gravity="center"
-                    android:paddingRight="12dp"
-                    android:paddingLeft="12dp"
-                    android:background="@drawable/icon_ff4747_frame_5dp"
                     android:layout_marginLeft="@dimen/dp_330"
-                    />
+                    android:background="@drawable/icon_ff4747_frame_5dp"
+                    android:gravity="center"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:textColor="@color/color_ff4747"
+                    android:visibility="invisible"
+                    tools:text="系统未通过，人工干预通过" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <com.flyco.tablayout.SlidingTabLayout
+            android:id="@+id/tl_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="130dp"
+            android:background="@color/white"
+            android:paddingTop="25dp"
+            android:paddingBottom="4dp"
+            tl:tl_indicator_color="#46a5fe"
+            tl:tl_indicator_gravity="BOTTOM"
+            tl:tl_tab_padding="@dimen/dp_12"
+            tl:tl_indicator_height="1dp"
+            tl:tl_indicator_width_equal_title="true"
+            tl:tl_textSelectColor="#46a5fe"
+            tl:tl_textUnselectColor="@color/color_333333"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_12"
+            android:layout_below="@id/tl_1"
+            android:background="@color/color_f2f2f2"
+            />
+    </RelativeLayout>
+
+
+    <com.shaoyue.weizhegou.widget.NoScrollViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_f2f2f2"
+        android:layout_below="@id/rl_1"/>
+
+</RelativeLayout>

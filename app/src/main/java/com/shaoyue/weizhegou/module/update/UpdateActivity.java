@@ -11,8 +11,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.libracore.lib.widget.NumberProgressBar;
-import com.libracore.lib.widget.StateButton;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.entity.VersionBean;
 import com.shaoyue.weizhegou.manager.AppMgr;
@@ -92,8 +92,7 @@ public class UpdateActivity extends AppCompatActivity {
     }
 
     private void initView() {
-
-        if (mVersion.getForce().equals("1")) {
+        if (mVersion.getIsForceUpdate().equals("1")) {
             mLayoutClose.setVisibility(View.GONE);
         }
 
@@ -104,16 +103,18 @@ public class UpdateActivity extends AppCompatActivity {
             mTextTitle.setText("发现新版本");
         }
 
-        String updateLog = mVersion.getDesc();
+        mNumberProgressBar.setMax(mVersion.getUpdateSize());
+
+        String updateLog = mVersion.getUpdateContent();
         if (!TextUtils.isEmpty(updateLog)) {
             mTextUpdateInfo.setText(updateLog);
         }
 
-        String targetSize = mVersion.getSize();
-        if (!TextUtils.isEmpty(targetSize)) {
-            mTextTargetSize.setText("新版本大小: " + targetSize);
-            mTextTargetSize.setVisibility(View.VISIBLE);
-        }
+//        String targetSize = mVersion.getUpdateSize() + "";
+//        if (!TextUtils.isEmpty(targetSize)) {
+//            mTextTargetSize.setText("新版本大小: " + targetSize);
+//            mTextTargetSize.setVisibility(View.VISIBLE);
+//        }
 
 
         mBtnUpdate.setOnClickListener(new View.OnClickListener() {
@@ -152,12 +153,14 @@ public class UpdateActivity extends AppCompatActivity {
                 @Override
                 public void onStart() {
                     if (!UpdateActivity.this.isFinishing()) {
+                        LogUtils.e("start");
                         mNumberProgressBar.setVisibility(View.VISIBLE);
                     }
                 }
 
                 @Override
                 public void onProgress(float progress) {
+
                     if (!UpdateActivity.this.isFinishing()) {
                         mNumberProgressBar.setProgress((int) progress);
                     }
@@ -166,7 +169,8 @@ public class UpdateActivity extends AppCompatActivity {
                 @Override
                 public void setMax(float total) {
                     if (!UpdateActivity.this.isFinishing()) {
-                        mNumberProgressBar.setMax((int) total);
+
+
                     }
                 }
 

@@ -15,6 +15,16 @@ public class OkOrCancelEvent extends BaseBean {
 
     private String url;
 
+    @Override
+    public String toString() {
+        return "OkOrCancelEvent{" +
+                "mType='" + mType + '\'' +
+                ", id='" + id + '\'' +
+                ", url='" + url + '\'' +
+                ", mBind=" + mBind +
+                '}';
+    }
+
     public OkOrCancelEvent(String mType, String id, String url) {
         this.mType = mType;
         this.id = id;

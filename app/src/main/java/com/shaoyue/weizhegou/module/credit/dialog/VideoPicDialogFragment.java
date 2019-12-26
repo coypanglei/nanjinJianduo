@@ -45,7 +45,6 @@ public class VideoPicDialogFragment extends DialogFragment {
     private VideoMaterialBean videoMaterialBean;
 
 
-
     @BindView(R.id.tv_my_info)
     TextView mTvInfo;
 
@@ -59,6 +58,9 @@ public class VideoPicDialogFragment extends DialogFragment {
         final LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_video, null);
         unbinder = ButterKnife.bind(this, view);
+//        if ("查看详情".equals(SPUtils.getInstance().getString("status")) || ("invisable".equals(videoMaterialBean.getVisable()))) {
+//            ivDetele.setVisibility(View.GONE);
+//        }
         List<String> mPicList = new ArrayList<>();
         List<String> mPicList2 = new ArrayList<>();
         for (VideoMaterialBean.ListBean bean : videoMaterialBean.getList()) {
@@ -109,6 +111,7 @@ public class VideoPicDialogFragment extends DialogFragment {
 
 
     public static VideoPicDialogFragment newInstance(VideoMaterialBean data) {
+
         Bundle args = new Bundle();
         args.putSerializable("picList", data);
         VideoPicDialogFragment fragment = new VideoPicDialogFragment();
@@ -121,7 +124,7 @@ public class VideoPicDialogFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
         if (ObjectUtils.isNotEmpty(getArguments())) {
             videoMaterialBean = (VideoMaterialBean) getArguments().getSerializable("picList");
-            url =videoMaterialBean.getUrl();
+            url = videoMaterialBean.getUrl();
         }
     }
 
@@ -170,4 +173,5 @@ public class VideoPicDialogFragment extends DialogFragment {
                 break;
         }
     }
+
 }

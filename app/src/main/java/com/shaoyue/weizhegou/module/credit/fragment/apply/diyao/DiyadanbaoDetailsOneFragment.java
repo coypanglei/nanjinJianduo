@@ -22,6 +22,7 @@ import com.shaoyue.weizhegou.entity.cedit.GoAllSelect;
 import com.shaoyue.weizhegou.entity.cedit.RefreshBean;
 import com.shaoyue.weizhegou.entity.cedit.ZiRanDanBaoListBean;
 import com.shaoyue.weizhegou.event.OkOrCancelEvent;
+import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.module.credit.fragment.apply.diyao.adapter.ZiRanDanBaoAdapter;
 import com.shaoyue.weizhegou.router.UIHelper;
 import com.shaoyue.weizhegou.util.ThreadUtil;
@@ -58,6 +59,9 @@ public class DiyadanbaoDetailsOneFragment extends BaseAppFragment implements BGA
 
     @BindView(R.id.ll_visable)
     LinearLayout llVisable;
+    @BindView(R.id.rl_all)
+    RelativeLayout rlAll;
+
 
     private int page = 1;
     private int pages = 1;
@@ -99,7 +103,8 @@ public class DiyadanbaoDetailsOneFragment extends BaseAppFragment implements BGA
     @Override
     protected void initView(View rootView) {
         super.initView(rootView);
-        if ("查看详情".equals(SPUtils.getInstance().getString("status"))) {
+        if ("查看详情".equals(SPUtils.getInstance().getString("status")) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
+           rlAll.setVisibility(View.GONE);
             llVisable.setVisibility(View.GONE);
         }
         mEmptyText.setText("未添加信息");
@@ -200,7 +205,7 @@ public class DiyadanbaoDetailsOneFragment extends BaseAppFragment implements BGA
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
 
-        if (page == pages+1) {
+        if (page == pages + 1) {
             mRefreshLayout.endLoadingMore();
             ToastUtil.showBlackToastSucess("没有更多的数据了");
             return false;
@@ -227,7 +232,7 @@ public class DiyadanbaoDetailsOneFragment extends BaseAppFragment implements BGA
         return true;
     }
 
-    @OnClick({R.id.sb_add, R.id.sb_edit, R.id.sb_detel,R.id.tv_rlsb})
+    @OnClick({R.id.sb_add, R.id.sb_edit, R.id.sb_detel, R.id.tv_rlsb, R.id.tv_zxsq, R.id.zxcx})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.sb_add:
@@ -256,9 +261,27 @@ public class DiyadanbaoDetailsOneFragment extends BaseAppFragment implements BGA
                 }
 
                 break;
+            //征信授权
+            case R.id.tv_zxsq:
+                if (ObjectUtils.isNotEmpty(getSelect())) {
+                    UIHelper.showZxsqCommonActivity(getActivity(), getSelect().getId());
+                } else {
+                    ToastUtil.showBlackToastSucess("未选中担保人");
+                }
+                break;
+
+            //征信查询
+            case R.id.zxcx:
+                if (ObjectUtils.isNotEmpty(getSelect())) {
+                    UIHelper.showZxcxCommonActivity(getActivity(), getSelect().getId());
+                } else {
+                    ToastUtil.showBlackToastSucess("未选中担保人");
+                }
+
+                break;
 
         }
     }
-
-
 }
+
+

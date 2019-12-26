@@ -5,6 +5,11 @@
 
     <com.bin.david.form.core.SmartTable
         android:id="@+id/table"
+        android:layout_marginTop="@dimen/dp_11"
+
+        android:layout_marginLeft="@dimen/dp_11"
+        android:layout_marginBottom="@dimen/dp_11"
+        android:layout_marginRight="@dimen/dp_11"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />

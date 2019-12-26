@@ -42,6 +42,8 @@ import com.shaoyue.weizhegou.module.account.dialog.RuleFragment;
 import com.shaoyue.weizhegou.module.account.dialog.VerifiedDialogFragment;
 import com.shaoyue.weizhegou.module.credit.activity.ApplyInfoActivity;
 import com.shaoyue.weizhegou.module.credit.activity.DyFaceActivity;
+import com.shaoyue.weizhegou.module.credit.activity.DyZxcxActivity;
+import com.shaoyue.weizhegou.module.credit.activity.DyZxsqActivity;
 import com.shaoyue.weizhegou.module.credit.dialog.ApplicationProgressDialogFragment;
 import com.shaoyue.weizhegou.module.credit.dialog.DiYaDialogFragment;
 import com.shaoyue.weizhegou.module.credit.dialog.FamilyInfoDialogFragment;
@@ -50,6 +52,8 @@ import com.shaoyue.weizhegou.module.credit.dialog.ProvincialIdentificationDialog
 import com.shaoyue.weizhegou.module.credit.dialog.QianziDialogFragment;
 import com.shaoyue.weizhegou.module.credit.dialog.SpDialogFragment;
 import com.shaoyue.weizhegou.module.credit.dialog.StartDcDialogFragment;
+import com.shaoyue.weizhegou.module.credit.dialog.SxSpDialogFragment;
+import com.shaoyue.weizhegou.module.credit.dialog.SykhDialogFragment;
 import com.shaoyue.weizhegou.module.credit.dialog.VideoPicDialogFragment;
 import com.shaoyue.weizhegou.module.credit.dialog.XcjyProgressDialogFragment;
 import com.shaoyue.weizhegou.module.credit.dialog.ZhuChaFragment;
@@ -172,6 +176,21 @@ public class UIHelper {
     public static final String TI_JIAO = "tijiao";
 
     public static final String SP_DIALOG = "sp_dialog";
+    public static final String SX_SP_DIALOG = "sp_dialog";
+
+    /**
+     * 授信审批弹窗
+     *
+     * @param activity
+     */
+    public static void showSxSpDialog(FragmentActivity activity, TiJiaoBean id) {
+        FragmentManager fm = activity.getSupportFragmentManager();
+        Fragment fragment = fm.findFragmentByTag(SX_SP_DIALOG);
+        if (fragment == null) {
+            DialogFragment dialog = SxSpDialogFragment.newInstance(id);
+            dialog.show(fm, SX_SP_DIALOG);
+        }
+    }
 
 
     /**
@@ -350,6 +369,7 @@ public class UIHelper {
      * @param activity
      */
     public static void showPicDialog(FragmentActivity activity, VideoMaterialBean data) {
+
         FragmentManager fm = activity.getSupportFragmentManager();
         Fragment fragment = fm.findFragmentByTag(USER_PIC);
         if (fragment == null) {
@@ -400,6 +420,20 @@ public class UIHelper {
         }
     }
 
+
+    /**
+     * 新增上游客户
+     *
+     * @param activity
+     */
+    public static void showAddSykhFragment(FragmentActivity activity, GoAllSelect goAllSelect) {
+        FragmentManager fm = activity.getSupportFragmentManager();
+        Fragment fragment = fm.findFragmentByTag(FAMILY_DIYA);
+        if (fragment == null) {
+            DialogFragment dialog = SykhDialogFragment.newInstance(goAllSelect);
+            dialog.show(fm, FAMILY_DIYA);
+        }
+    }
 
     /**
      * 新增抵押担保
@@ -560,7 +594,25 @@ public class UIHelper {
         activity.startActivity(intent);
     }
 
+    /**
+     * 跳转授信申请抵押activity
+     */
 
+    public static void showZxsqCommonActivity(Activity activity, String contentType) {
+        Intent intent = DyZxsqActivity.newInstance(activity, contentType);
+        activity.startActivity(intent);
+    }
+
+
+
+    /**
+     * 跳转征查询抵押activity
+     */
+
+    public static void showZxcxCommonActivity(Activity activity, String contentType) {
+        Intent intent = DyZxcxActivity.newInstance(activity, contentType);
+        activity.startActivity(intent);
+    }
     /**
      * 跳转授信调查activity
      */

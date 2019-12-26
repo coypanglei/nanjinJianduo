@@ -2,6 +2,8 @@ package com.shaoyue.weizhegou.util.XClick;
 
 import android.view.View;
 
+import com.blankj.utilcode.util.LogUtils;
+
 /**
  * 作者：PangLei on 2019/6/11 0011 10:16
  * <p>
@@ -26,9 +28,12 @@ public final class XClickUtil {
      * @return  true:是，false:不是
      */
     public static boolean isFastDoubleClick(View v, long intervalMillis) {
+
+
         int viewId = v.getId();
         long time = System.currentTimeMillis();
         long timeInterval = Math.abs(time - mLastClickTime);
+        LogUtils.e(viewId);
         if (timeInterval < intervalMillis && viewId == mLastClickViewId) {
             return true;
         } else {

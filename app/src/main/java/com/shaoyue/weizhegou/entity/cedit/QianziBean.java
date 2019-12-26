@@ -22,7 +22,51 @@ public class QianziBean extends BaseBean {
      * updateBy :
      * updateTime :
      * zjhm :
+     * isQianMing：
      */
+
+    private String uploadImg;
+
+    @Override
+    public String toString() {
+        return "QianziBean{" +
+                "uploadImg='" + uploadImg + '\'' +
+                ", isQianMing='" + isQianMing + '\'' +
+                ", cxlx='" + cxlx + '\'' +
+                ", delFlag='" + delFlag + '\'' +
+                ", description='" + description + '\'' +
+                ", id='" + id + '\'' +
+                ", js='" + js + '\'' +
+                ", sqrjbkhjlqm='" + sqrjbkhjlqm + '\'' +
+                ", sqrqm='" + sqrqm + '\'' +
+                ", sxid='" + sxid + '\'' +
+                ", sxrq='" + sxrq + '\'' +
+                ", sxsfzh='" + sxsfzh + '\'' +
+                ", txrq='" + txrq + '\'' +
+                ", updateBy='" + updateBy + '\'' +
+                ", updateTime='" + updateTime + '\'' +
+                ", zjhm='" + zjhm + '\'' +
+                ", type=" + type +
+                '}';
+    }
+
+    public String getUploadImg() {
+        return uploadImg;
+    }
+
+    public void setUploadImg(String uploadImg) {
+        this.uploadImg = uploadImg;
+    }
+
+    private String isQianMing;
+
+    public String getIsQianMing() {
+        return isQianMing;
+    }
+
+    public void setIsQianMing(String isQianMing) {
+        this.isQianMing = isQianMing;
+    }
 
     private String cxlx;
     private String delFlag;

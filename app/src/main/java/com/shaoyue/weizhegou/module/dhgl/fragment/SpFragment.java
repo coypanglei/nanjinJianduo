@@ -240,18 +240,6 @@ public class SpFragment extends BaseAppFragment implements BGARefreshLayout.BGAR
                 } else {
                     ToastUtil.showBlackToastSucess("请选择需要审批的任务");
                 }
-//                StringBuilder sb = new StringBuilder();
-//                for (XcjyBean mMessageBean : mAdapter.getData()) {
-//                    if (mMessageBean.isClick()) {
-//                        sb.append(mMessageBean.getId());
-//                        sb.append(",");
-//                    }
-//                }
-//                String selectSb = sb.toString();
-//                if (ObjectUtils.isEmpty(selectSb) && selectSb.length() == 0) {
-//                    ToastUtil.showBlackToastSucess("请选择需要审批的任务");
-//                    return;
-//                }
 
                 break;
 

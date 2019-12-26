@@ -83,6 +83,18 @@ UserMgr {
     //身份证id
     public static final String SP_ID_CARD = "sp_id_card";
 
+    //调查类型
+    public static final String SP_DC_TYPE = "sp_dc_type";
+
+    //taskid
+    public static final String SP_DC_TASKID = "sp_dc_taskid";
+
+    //instid
+    public static final String SP_DC_INSTID = "sp_dc_instid";
+
+    //系统类型
+    public static final String SP_XT_TYPE = "sp_xt_type";
+
     public static final String SP_IS_PO = "sp_is_po";
 
 
@@ -224,7 +236,7 @@ UserMgr {
      * @param password
      * @param callback
      */
-    public void doLoginByPhone(final String phone, final String password, final CommCallBack callback,Object object) {
+    public void doLoginByPhone(final String phone, final String password, final CommCallBack callback, Object object) {
         AccountApi.loginByPhone(phone, password, new BaseCallback<BaseResponse<LoginBean>>() {
             @Override
             public void onSucc(BaseResponse<LoginBean> result) {

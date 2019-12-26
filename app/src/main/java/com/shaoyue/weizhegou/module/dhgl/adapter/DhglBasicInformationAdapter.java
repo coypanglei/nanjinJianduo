@@ -12,13 +12,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.util.MultiTypeDelegate;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.entity.cedit.BasicInformationBean;
+import com.shaoyue.weizhegou.entity.cedit.RefreshBean;
 import com.shaoyue.weizhegou.entity.cedit.TimeSelect;
 import com.shaoyue.weizhegou.router.UIHelper;
 import com.shaoyue.weizhegou.widget.DropDownView;
@@ -100,7 +100,7 @@ DhglBasicInformationAdapter extends BaseQuickAdapter<BasicInformationBean.Record
             } else {
                 mDdvXB.setClickable(true);
             }
-            if ("国际行业分类".equals(item.getTitile())) {
+            if ("国际行业分类".equals(item.getTitile())||"国标行业分类".equals(item.getTitile())) {
                 mDdvXB.setSelectName(item.getDefaultvalue());
                 mDdvXB.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -146,8 +146,7 @@ DhglBasicInformationAdapter extends BaseQuickAdapter<BasicInformationBean.Record
                 });
 
             } else {
-                LogUtils.e(item.getParamtype());
-                LogUtils.e(item.getTitile());
+
                 final EditText mDdvXB = helper.getView(R.id.et_name);
 
                 if ("number".equals(item.getParamtype())) {
@@ -188,6 +187,7 @@ DhglBasicInformationAdapter extends BaseQuickAdapter<BasicInformationBean.Record
                         } else {
 
                             mDdvXB.removeTextChangedListener(textWatcher);
+                            EventBus.getDefault().post(new RefreshBean());
                         }
                     }
                 });

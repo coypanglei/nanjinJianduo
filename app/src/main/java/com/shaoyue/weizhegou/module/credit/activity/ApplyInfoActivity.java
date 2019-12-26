@@ -42,6 +42,8 @@ public class ApplyInfoActivity extends BaseCommonActivity {
             case 1005:
                 //音像资料
             case 1007:
+                //征信授权书
+            case 1008:
                 //我这里使用的是根据结果码获取数据，然后加上下面一句代码，其
                 //他的什么都不用做
                 EventBus.getDefault().post(new OcrBean(data, requestCode));

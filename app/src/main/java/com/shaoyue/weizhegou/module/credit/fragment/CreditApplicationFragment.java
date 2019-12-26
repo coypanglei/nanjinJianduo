@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.shaoyue.weizhegou.R;
@@ -23,6 +24,8 @@ import com.shaoyue.weizhegou.module.dhgl.fragment.SjcjFragment;
 import com.shaoyue.weizhegou.module.dhgl.fragment.SpFragment;
 import com.shaoyue.weizhegou.module.dhgl.fragment.XcjyFragment;
 import com.shaoyue.weizhegou.module.dhgl.fragment.XzRlFragment;
+import com.shaoyue.weizhegou.module.sxdc.fragment.SxDcSpFragment;
+import com.shaoyue.weizhegou.module.sxdc.fragment.shouXinSurveyFragment;
 import com.shaoyue.weizhegou.widget.NoScrollViewPager;
 
 import java.util.ArrayList;
@@ -77,12 +80,13 @@ public class CreditApplicationFragment extends BaseTitleFragment {
         hideLeftButtonV2();
         final List<MainClickBean> mMenuList = profileBean.getMainClickBeans();
         for (int i = 0; i < mMenuList.size(); i++) {
+            LogUtils.e(mMenuList.get(i).getTitle());
             if ("授信申请".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(shouXinShenQingFragment.newInstance(mMenuList.get(i).getTitle()));
             } else if ("授信调查".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(shouXinSurveyFragment.newInstance(mMenuList.get(i).getTitle()));
             } else if ("授信审批".equals(mMenuList.get(i).getTitle())) {
-                fragmentList.add(shouXinShenQingFragment.newInstance(mMenuList.get(i).getTitle()));
+                fragmentList.add(SxDcSpFragment.newInstance(mMenuList.get(i).getTitle()));
             } else if ("待办事项".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(shouXinShenQingFragment.newInstance(mMenuList.get(i).getTitle()));
             } else if ("现场检验".equals(mMenuList.get(i).getTitle())) {
@@ -161,8 +165,6 @@ public class CreditApplicationFragment extends BaseTitleFragment {
         adapter.setNewData(mainClickBeans);
         adapter.notifyDataSetChanged();
     }
-
-
 
 
     @OnClick({R.id.viewpager, R.id.tv_visible})

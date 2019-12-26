@@ -65,10 +65,6 @@ public class CreditInquiryFragment extends BaseAppFragment {
         if (SPUtils.getInstance().getBoolean(UserMgr.SP_IS_PO)) {
             size = 2;
         }
-        mFragments.clear();
-        for (int i = 0; i < size; i++) {
-            mFragments.add(CreditInquiryDetailsFragment.newInstance());
-        }
         if (size == 1) {
             mTitles.add("申请人征信数据");
         }
@@ -76,6 +72,11 @@ public class CreditInquiryFragment extends BaseAppFragment {
             mTitles.add("申请人征信数据");
             mTitles.add("配偶征信数据");
         }
+        mFragments.clear();
+        for (int i = 0; i < size; i++) {
+            mFragments.add(CreditInquiryDetailsFragmentTwo.newInstance(mTitles.get(i)));
+        }
+
 
         myPagerAdapter = new MyPagerAdapter(getChildFragmentManager());
         mViewpager.setAdapter(myPagerAdapter);

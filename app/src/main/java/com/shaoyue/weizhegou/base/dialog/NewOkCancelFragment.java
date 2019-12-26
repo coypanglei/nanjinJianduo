@@ -82,6 +82,13 @@ public class NewOkCancelFragment extends DialogFragment implements DialogInterfa
                             }
                         }, this);
                         break;
+
+                    case "ZXSQ":
+
+                        EventBus.getDefault().post(mOk);
+                        dismiss();
+                        break;
+
                     default:
                         break;
                 }

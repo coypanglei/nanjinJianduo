@@ -1,7 +1,14 @@
 package com.shaoyue.weizhegou.util;
 
+import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.ObjectUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class ObjectToMapUtils {
@@ -36,7 +43,7 @@ public class ObjectToMapUtils {
         for (int i = 0; i < fields.length; i++) {
             String varName = fields[i].getName();
 
-            varName = varName.toLowerCase();///将key置为大写，默认为对象的属性
+            ///将key置为大写，默认为对象的属性
             boolean accessFlag = fields[i].isAccessible(); // 获取原来的访问控制权限
             fields[i].setAccessible(true);// 修改访问控制权限
             try {
@@ -57,4 +64,25 @@ public class ObjectToMapUtils {
         }
         return map;
     }
+
+    public static Map<String, String> JsonToMap(JSONObject json) {
+        Map<String, String> map = new HashMap<String, String>();
+        try {
+            Iterator it = json.keys();
+            while (it.hasNext()) {
+                String key = (String) it.next();
+                //得到value的值
+                String value = json.get(key).toString();
+                //System.out.println(value);
+                if (ObjectUtils.isNotEmpty(value) && !"null".equals(value)) {
+                    map.put(key, value);
+                }
+
+            }
+        } catch (JSONException e) {
+            LogUtils.e(e);
+        }
+        return map;
+    }
+
 }

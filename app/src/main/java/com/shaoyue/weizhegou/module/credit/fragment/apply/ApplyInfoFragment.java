@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -21,13 +22,18 @@ import com.shaoyue.weizhegou.api.model.BaseResponse;
 import com.shaoyue.weizhegou.api.remote.CeditApi;
 import com.shaoyue.weizhegou.base.BaseTitleFragment;
 import com.shaoyue.weizhegou.entity.cedit.FaceBean;
-import com.shaoyue.weizhegou.entity.cedit.QianziBean;
+import com.shaoyue.weizhegou.entity.cedit.RefreshBean;
 import com.shaoyue.weizhegou.entity.user.MainClickBean;
+import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.MenuAdapter;
 import com.shaoyue.weizhegou.widget.NoScrollViewPager;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -75,7 +81,8 @@ public class ApplyInfoFragment extends BaseTitleFragment {
     protected void initView(View rootView) {
         super.initView(rootView);
         setCommonTitle("家庭信息").hideLeftButtonV2();
-
+        SPUtils.getInstance()
+                .put(UserMgr.SP_XT_TYPE, "申请");
 
         final List<MainClickBean> mMenuList = new ArrayList<>();
         mMenuList.add(new MainClickBean("家庭信息", true));
@@ -91,7 +98,7 @@ public class ApplyInfoFragment extends BaseTitleFragment {
 
         for (int i = 0; i < mMenuList.size(); i++) {
             if ("家庭信息".equals(mMenuList.get(i).getTitle())) {
-                fragmentList.add(FamilyInfoFragment.newInstance(mMenuList.get(i).getTitle()));
+                fragmentList.add(FamilyInfoFragment.newInstance("申请"));
             } else if ("人脸识别".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(FaceRecognitionFragment.newInstance());
             } else if ("征信授权书".equals(mMenuList.get(i).getTitle())) {
@@ -121,33 +128,42 @@ public class ApplyInfoFragment extends BaseTitleFragment {
                 mRvMenu.setVisibility(View.GONE);
                 mTvVisible.setText("显示菜单");
                 if (currentPage != position) {
-                    if (position == 1) {
-                        CeditApi.findFaceInfo(new BaseCallback<BaseResponse<List<FaceBean>>>() {
-                            @Override
-                            public void onSucc(BaseResponse<List<FaceBean>> result) {
-                                refresh(position, adapter);
-                            }
+                    EventBus.getDefault().post(new RefreshBean());
+                    LogUtils.e(position);
+                    if (position != 0) {
+                        if (position == 1) {
+                            CeditApi.findFaceInfo(new BaseCallback<BaseResponse<List<FaceBean>>>() {
+                                @Override
+                                public void onSucc(BaseResponse<List<FaceBean>> result) {
+                                    refresh(position, adapter);
+                                }
 
-                            @Override
-                            public void onFail(ApiException apiError) {
-                                super.onFail(apiError);
-                                mViewpager.setCurrentItem(0);
-                            }
-                        }, this);
-                    } else if (position == 2) {
-                        CeditApi.findFamilyInfo(new BaseCallback<BaseResponse<List<QianziBean>>>() {
-                            @Override
-                            public void onSucc(BaseResponse<List<QianziBean>> result) {
-                                refresh(position, adapter);
-                            }
+                                @Override
+                                public void onFail(ApiException apiError) {
+                                    super.onFail(apiError);
+                                    mViewpager.setCurrentItem(0);
+                                }
+                            }, this);
+                        } else {
+                            Map<String, String> params = new HashMap<>();
+                            CeditApi.putRljy(params, new BaseCallback<BaseResponse<Void>>() {
+                                @Override
+                                public void onSucc(BaseResponse<Void> result) {
+                                    refresh(position, adapter);
+                                }
 
-                            @Override
-                            public void onFail(ApiException apiError) {
-                                super.onFail(apiError);
-                                mViewpager.setCurrentItem(0);
-                            }
-                        }, this);
-                    } else {
+                                @Override
+                                public void onFail(ApiException apiError) {
+                                    super.onFail(apiError);
+                                    if (apiError.getErrMsg().contains("人脸识别")) {
+                                        mViewpager.setCurrentItem(1);
+                                    } else {
+                                        mViewpager.setCurrentItem(0);
+                                    }
+                                }
+                            }, this);
+                        }
+                    }else {
                         refresh(position, adapter);
                     }
 

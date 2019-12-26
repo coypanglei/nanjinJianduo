@@ -9,10 +9,12 @@
     <RelativeLayout
         android:layout_width="520dp"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:layout_centerHorizontal="true">
 
 
         <EditText
+            android:layout_marginRight="@dimen/dp_16"
             android:id="@+id/et_name"
             style="@style/AddEditStyle"
             android:layout_width="@dimen/dp_350"

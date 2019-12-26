@@ -12,8 +12,10 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.blankj.utilcode.util.ObjectUtils;
+import com.blankj.utilcode.util.SPUtils;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.api.callback.BaseCallback;
 import com.shaoyue.weizhegou.api.model.BaseResponse;
@@ -21,6 +23,7 @@ import com.shaoyue.weizhegou.api.remote.CeditApi;
 import com.shaoyue.weizhegou.entity.cedit.NewQianZiBean;
 import com.shaoyue.weizhegou.entity.cedit.TiJiaoBean;
 import com.shaoyue.weizhegou.manager.DomainMgr;
+import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.router.UIHelper;
 import com.shaoyue.weizhegou.util.GlideNewImageLoader;
 import com.shaoyue.weizhegou.util.ToastUtil;
@@ -57,6 +60,9 @@ public class ZhuChaFragment extends DialogFragment {
     ImageView ivQianzi;
     @BindView(R.id.et_ms)
     EditText etMs;
+    @BindView(R.id.tv_my_info)
+    TextView tvMyInfo;
+
 
     private String id;
 
@@ -70,6 +76,9 @@ public class ZhuChaFragment extends DialogFragment {
         final LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_tijiao, null);
         unbinder = ButterKnife.bind(this, view);
+        if (ObjectUtils.isNotEmpty(tiJiaoBean.getNextNodeName())) {
+            tvMyInfo.setText(tiJiaoBean.getNextNodeName());
+        }
         List<Map<String, Object>> dataList = new ArrayList<>();
         if (ObjectUtils.isNotEmpty(tiJiaoBean.isSelectApprovalUser()) && tiJiaoBean.isSelectApprovalUser()) {
             rlSelect.setVisibility(View.VISIBLE);
@@ -177,11 +186,11 @@ public class ZhuChaFragment extends DialogFragment {
             //保存
             case R.id.tv_add:
                 String ms = etMs.getText().toString().trim();
-                if(ObjectUtils.isEmpty(id)){
+                if (ObjectUtils.isEmpty(id)) {
                     ToastUtil.showBlackToastSucess("未填写下环节审核人员");
                     return;
                 }
-                if(ObjectUtils.isEmpty(img)){
+                if (ObjectUtils.isEmpty(img)) {
                     ToastUtil.showBlackToastSucess("未签名");
                     return;
                 }
@@ -191,14 +200,24 @@ public class ZhuChaFragment extends DialogFragment {
                 params.put("attachmentsUrl", "[\"" + img + "\"]");
                 params.put("description", ms);
                 params.put(tiJiaoBean.getVariableName(), id);
-
-                CeditApi.putInitiationProcess(params, new BaseCallback<BaseResponse<Void>>() {
-                    @Override
-                    public void onSucc(BaseResponse<Void> result) {
-                        ToastUtil.showBlackToastSucess("保存成功");
-                        dismiss();
-                    }
-                }, this);
+                String instid = SPUtils.getInstance().getString(UserMgr.SP_DC_INSTID);
+                if (ObjectUtils.isEmpty(instid)) {
+                    CeditApi.putInitiationProcess(params, new BaseCallback<BaseResponse<Void>>() {
+                        @Override
+                        public void onSucc(BaseResponse<Void> result) {
+                            ToastUtil.showBlackToastSucess("保存成功");
+                            dismiss();
+                        }
+                    }, this);
+                } else {
+                    CeditApi.putSplc(params, new BaseCallback<BaseResponse<Void>>() {
+                        @Override
+                        public void onSucc(BaseResponse<Void> result) {
+                            ToastUtil.showBlackToastSucess("保存成功");
+                            dismiss();
+                        }
+                    }, this);
+                }
                 break;
         }
     }

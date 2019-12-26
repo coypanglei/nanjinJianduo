@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tl="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -10,6 +10,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white">
+
+        <com.libracore.lib.widget.StateButton
+            android:id="@+id/sb_edit"
+            android:layout_width="83dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_27"
+            android:drawableLeft="@drawable/icon_sb_copy"
+            android:paddingLeft="6dp"
+            android:paddingTop="1dp"
+            android:paddingRight="6dp"
+            android:paddingBottom="1dp"
+            android:text="保存"
+            android:textSize="12dp"
+            app:normalBackgroundColor="@color/color_23a7f0"
+            app:normalTextColor="@color/white"
+            app:pressedBackgroundColor="@color/color_48b2ed"
+            app:pressedTextColor="@color/white"
+            app:radius="2dp" />
+
+        <com.libracore.lib.widget.StateButton
+            android:id="@+id/sb_sc"
+            android:layout_width="83dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_27"
+            android:layout_toLeftOf="@id/sb_edit"
+            android:paddingLeft="6dp"
+            android:visibility="gone"
+            android:paddingTop="1dp"
+            android:paddingRight="6dp"
+            android:paddingBottom="1dp"
+            android:text="上传"
+            android:textSize="12dp"
+            app:normalBackgroundColor="@color/color_17c295"
+            app:normalTextColor="@color/white"
+            app:pressedBackgroundColor="@color/color_17c295"
+            app:pressedTextColor="@color/white"
+            app:radius="2dp" />
 
         <com.flyco.tablayout.SlidingTabLayout
             android:id="@+id/tl_1"
@@ -21,18 +62,18 @@
             android:paddingBottom="4dp"
             tl:tl_indicator_color="#46a5fe"
             tl:tl_indicator_gravity="BOTTOM"
-            tl:tl_tab_padding="@dimen/dp_12"
             tl:tl_indicator_height="1dp"
             tl:tl_indicator_width_equal_title="true"
+            tl:tl_tab_padding="@dimen/dp_12"
             tl:tl_textSelectColor="#46a5fe"
-            tl:tl_textUnselectColor="@color/color_333333"/>
+            tl:tl_textUnselectColor="@color/color_333333" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_12"
             android:layout_below="@id/tl_1"
-            android:background="@color/color_f2f2f2"
-            />
+            android:background="@color/color_f2f2f2" />
+
     </RelativeLayout>
 
 
@@ -40,7 +81,7 @@
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_f2f2f2"
-        android:layout_below="@id/rl_1"/>
+        android:layout_below="@id/rl_1"
+        android:background="@color/color_f2f2f2" />
 
 </RelativeLayout>

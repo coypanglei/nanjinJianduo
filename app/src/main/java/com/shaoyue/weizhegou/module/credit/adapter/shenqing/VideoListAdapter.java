@@ -34,7 +34,7 @@ public class VideoListAdapter extends BaseQuickAdapter<VideoMaterialBean, BaseVi
 
     @Override
     protected void convert(final BaseViewHolder helper, final VideoMaterialBean item) {
-        final VideoAdapter mAdapter = new VideoAdapter();
+        VideoAdapter mAdapter = new VideoAdapter();
         final HorizontalRecyclerView mRecyler = helper.getView(R.id.rv_hor);
         LinearLayoutManager manager = new LinearLayoutManager(mContext);
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -121,6 +121,7 @@ public class VideoListAdapter extends BaseQuickAdapter<VideoMaterialBean, BaseVi
                         SPUtils.getInstance().put("selectPic_id", selet.get(position).getId());
                         SPUtils.getInstance().put("selectPic_zllx", selet.get(position).getZllx());
                         SPUtils.getInstance().put("selectPic_sxsfzh", selet.get(position).getSxsfzh());
+                        selet.get(position).setDelFlag(true);
                         EventBus.getDefault().post(selet.get(position));
                     }
                 }

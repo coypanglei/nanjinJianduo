@@ -36,7 +36,7 @@ public class ApiHttpClient {
         Map<String, String> postParamsHead = new HashMap<>();
         //        if (UserMgr.getInstance().isLogin()) {
 //        LogUtils.e(UserMgr.getInstance().getSessionId());
-        LogUtils.e(UserMgr.getInstance().getSessionId());
+
         postParamsHead.put("X-Access-Token", UserMgr.getInstance().getSessionId());
         for (Map.Entry<String, String> entry : postParamsHead.entrySet()) {
             postRequest.headers(entry.getKey(), entry.getValue());

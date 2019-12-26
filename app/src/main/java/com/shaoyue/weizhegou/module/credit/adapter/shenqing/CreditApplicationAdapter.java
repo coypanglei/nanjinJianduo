@@ -24,13 +24,13 @@ public class CreditApplicationAdapter extends BaseQuickAdapter<ApplicationBean, 
     protected void convert(final BaseViewHolder helper, final ApplicationBean item) {
         helper.setText(R.id.tv_id_card, item.getSfzh());
         helper.setText(R.id.tv_xuhao, helper.getAdapterPosition() + 1 + "");
-        helper.setText(R.id.tv_time, item.getSlr());
+        helper.setText(R.id.tv_time, item.getSlrq());
         helper.setText(R.id.tv_sxsq, item.getSqsx());
         helper.setText(R.id.tv_lczt, item.getLczt());
         helper.setText(R.id.tv_dqhj, item.getDqhj());
         helper.setText(R.id.tv_sxjg, item.getSxjg());
         helper.setText(R.id.tv_sxjl, item.getSxjl());
-        helper.setText(R.id.tv_slr, item.getSlr());
+        helper.setText(R.id.tv_slr, item.getSqr());
         helper.setText(R.id.tv_csjg, item.getCsjl());
         helper.setText(R.id.tv_name, item.getKhmc());
 

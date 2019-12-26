@@ -132,9 +132,9 @@ public class VideoJinyingFragment extends BaseAppFragment {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(final OcrBean ocrBean) {
         String mTitle = SPUtils.getInstance().getString("selectPic");
-        String id =SPUtils.getInstance().getString("selectPic_zllx");
+        String id = SPUtils.getInstance().getString("selectPic_zllx");
         if (mTitle.equals("经营相关材料")) {
-            if (id.contains("法人客户") || id.contains("工薪类客户") ||id.contains("个体经营户")) {
+            if (id.contains("法人客户") || id.contains("工薪类客户") || id.contains("个体经营户")) {
                 /*结果回调*/
                 if (ocrBean.getResultCode() == 1007) {
 
@@ -219,36 +219,42 @@ public class VideoJinyingFragment extends BaseAppFragment {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(final VideoMaterialBean.ListBean listBean) {
 
-        String id =SPUtils.getInstance().getString("selectPic_id");
+        String id = SPUtils.getInstance().getString("selectPic_id");
         if (id.equals(listBean.getId())) {
             VideoMaterialBean videoMaterialBean = new VideoMaterialBean();
             unPic.clear();
             for (VideoMaterialBean bean : mAdapter.getData()) {
 
 
-                    if (ObjectUtils.isNotEmpty(bean.getList())) {
-                        for (VideoMaterialBean.ListBean data : bean.getList()) {
-                            if (ObjectUtils.isNotEmpty(data.getZldz())) {
-                                if (!unPic.contains(data.getZldz())) {
-                                    unPic.add(data);
-                                }
+                if (ObjectUtils.isNotEmpty(bean.getList())) {
+                    for (VideoMaterialBean.ListBean data : bean.getList()) {
+                        if (ObjectUtils.isNotEmpty(data.getZldz())) {
+                            if (!unPic.contains(data.getZldz())) {
+                                unPic.add(data);
                             }
                         }
                     }
+                }
 
             }
             videoMaterialBean.setList(unPic);
             int select = 0;
+            boolean re = false;
             for (int i = 0; i < unPic.size(); i++) {
                 if (unPic.get(i).getId().equals(id)) {
                     select = i;
+                    re = true;
                 }
-            }
 
-            videoMaterialBean.setSelect(select);
-            //更换接口
-            videoMaterialBean.setUrl("SXSQ");
-            UIHelper.showPicDialog(getActivity(), videoMaterialBean);
+            }
+            if (re) {
+
+                videoMaterialBean.setSelect(select);
+                //更换接口
+                videoMaterialBean.setUrl("SXSQ");
+                LogUtils.e("saddasd");
+                UIHelper.showPicDialog(getActivity(), videoMaterialBean);
+            }
         }
 
     }

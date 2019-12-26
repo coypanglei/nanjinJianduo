@@ -654,3 +654,11 @@
 #-------------------沉浸式----------#
 -keep class com.gyf.barlibrary.* {*;}
 -dontwarn com.gyf.barlibrary.**
+
+
+#SmartTable
+-keepattributes Annotation
+-keepclassmembers class ** {
+@com.bin.david.form.annotation.SmartTable;
+}
+-keep enum com.bin.david.form.annotation.ColumnType { *; }

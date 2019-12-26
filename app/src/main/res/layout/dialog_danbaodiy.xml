@@ -48,14 +48,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/iv_close"
+            android:layout_above="@id/ll_bottom"
             android:layout_centerHorizontal="true" />
 
         <LinearLayout
             android:id="@+id/ll_bottom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-            android:layout_below="@id/rv_list"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
 
             android:layout_marginTop="@dimen/dp_10"

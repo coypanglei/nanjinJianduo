@@ -91,7 +91,7 @@ public class DownloadService extends Service {
      * 下载模块
      */
     private void startDownload(VersionBean updateBean, final DownloadCallback callback) {
-        String apkUrl = updateBean.getDownloadUrl();
+        String apkUrl = updateBean.getPackageUrl();
         if (TextUtils.isEmpty(apkUrl)) {
             String contentText = "新版本下载路径错误";
             stop(contentText);

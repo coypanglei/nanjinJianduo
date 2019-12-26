@@ -285,18 +285,25 @@ public class shouXinShenQingFragment extends BaseAppFragment implements BGARefre
                 initData();
                 break;
             case R.id.sb_application:
+
+                SPUtils.getInstance().put(UserMgr.SP_DC_TASKID, "");
+                SPUtils.getInstance().put(UserMgr.SP_DC_INSTID, "");
                 UIHelper.showIDCardDialog(getActivity());
                 break;
             case R.id.sb_edit:
-                if ("N".equals(approvalFlag)) {
-                    ToastUtil.showBlackToastSucess("当前流程状态无法修改");
-                    return;
-                }
+
                 if (ObjectUtils.isNotEmpty(getSelect())) {
+                    if ("N".equals(approvalFlag)) {
+                        ToastUtil.showBlackToastSucess("当前流程状态无法修改");
+                        return;
+                    }
+
                     if (ObjectUtils.isNotEmpty(getSelect().getId())) {
                         //请求id 身份证
                         SPUtils.getInstance().put(UserMgr.SP_APPLY_ID, getSelect().getId());
                         SPUtils.getInstance().put(UserMgr.SP_ID_CARD, getSelect().getSfzh());
+                        SPUtils.getInstance().put(UserMgr.SP_DC_TASKID, getSelect().getTaskid());
+                        SPUtils.getInstance().put(UserMgr.SP_DC_INSTID, getSelect().getInstid());
                         UIHelper.showApplyCommonActivity(getActivity(), "修改");
                     }
                 } else {
@@ -306,15 +313,16 @@ public class shouXinShenQingFragment extends BaseAppFragment implements BGARefre
 
                 break;
             case R.id.sb_cancel:
-                if ("已终止".equals(getSelect().getLczt()) || "已完成".equals(getSelect().getLczt())) {
-                    ToastUtil.showBlackToastSucess("当前流程状态无法修取消");
-                    return;
-                }
+
                 if (ObjectUtils.isEmpty(getSelect())) {
                     ToastUtil.showBlackToastSucess("请选择数据");
                     return;
                 }
 
+                if ("已终止".equals(getSelect().getLczt()) || "已完成".equals(getSelect().getLczt())) {
+                    ToastUtil.showBlackToastSucess("当前流程状态无法修取消");
+                    return;
+                }
                 UIHelper.showOkClearDialog(getActivity(), "是否取消申请?");
 
                 break;
@@ -445,14 +453,14 @@ public class shouXinShenQingFragment extends BaseAppFragment implements BGARefre
 
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
-        if (page == pages+1) {
+        if (page == pages + 1) {
             mRefreshLayout.endLoadingMore();
             ToastUtil.showBlackToastSucess("没有更多的数据了");
             return false;
         }
         String mNameOrId = mEtName.getText().toString().trim();
 
-        CeditApi.getApplicationList(page+1, "12", mNameOrId, approvalFlag, lczt, new BaseCallback<BaseResponse<ApplicationListBean>>() {
+        CeditApi.getApplicationList(page + 1, "12", mNameOrId, approvalFlag, lczt, new BaseCallback<BaseResponse<ApplicationListBean>>() {
             @Override
             public void onSucc(final BaseResponse<ApplicationListBean> result) {
 

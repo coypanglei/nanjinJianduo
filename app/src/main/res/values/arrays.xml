@@ -52,7 +52,7 @@
         <item>op3_选项3</item>
     </string-array>
     <string-array name="dropdown_array_start_dc">
-        <item>工薪</item>
+        <item>工薪类</item>
         <item>简化经营</item>
         <item>经营</item>
         <item>农户</item>

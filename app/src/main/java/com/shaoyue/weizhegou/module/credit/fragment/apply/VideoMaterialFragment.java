@@ -66,6 +66,8 @@ public class VideoMaterialFragment extends BaseAppFragment {
         mViewpager.setAdapter(myPagerAdapter);
         mTl1.setViewPager(mViewpager);
 
+
+
     }
 
 

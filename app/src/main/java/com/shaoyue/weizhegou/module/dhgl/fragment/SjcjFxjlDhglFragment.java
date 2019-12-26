@@ -255,9 +255,8 @@ public class SjcjFxjlDhglFragment extends BaseAppFragment {
                 } else {
                     firstAdd();
                 }
-
-
                 break;
+
         }
     }
 
