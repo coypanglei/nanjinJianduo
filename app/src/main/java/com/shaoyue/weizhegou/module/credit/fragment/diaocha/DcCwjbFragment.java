@@ -110,7 +110,7 @@ public class DcCwjbFragment extends BaseAppFragment {
         long endTimestamp = DateFormatUtils.str2Long("2119-05-01", false);
 
 
-        mEtStartTime.setText(DateFormatUtils.long2Str(System.currentTimeMillis(), false));
+//        mEtStartTime.setText(DateFormatUtils.long2Str(System.currentTimeMillis(), false));
 
         // 通过时间戳初始化日期，毫秒级别
         mDatePicker = new CustomDatePicker(getActivity(), new CustomDatePicker.Callback() {

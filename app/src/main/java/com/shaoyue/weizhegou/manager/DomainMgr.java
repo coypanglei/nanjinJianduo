@@ -47,9 +47,9 @@ public class DomainMgr {
      */
     public String getBaseUrl() {
         if (baseUrl == null) {
-            baseUrl = "http://221.226.157.160:8087/";
-//
-            //baseUrl = "http://212.129.130.163:8080/";
+         baseUrl = "http://221.226.157.160:8087/";
+
+       //     baseUrl = "http://212.129.130.163:8080/";
 //
 //            baseUrl = "http://192.168.2.102:8080/";
 //            baseUrl = "http://ddns.zmapi.com:6501/";

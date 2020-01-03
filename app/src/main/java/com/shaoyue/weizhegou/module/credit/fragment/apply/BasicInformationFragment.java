@@ -2,7 +2,7 @@ package com.shaoyue.weizhegou.module.credit.fragment.apply;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -18,10 +18,11 @@ import com.shaoyue.weizhegou.api.exception.ApiException;
 import com.shaoyue.weizhegou.api.model.BaseResponse;
 import com.shaoyue.weizhegou.api.remote.CeditApi;
 import com.shaoyue.weizhegou.base.BaseAppFragment;
+import com.shaoyue.weizhegou.entity.BasicTitle;
 import com.shaoyue.weizhegou.entity.cedit.BasicInformationBean;
 import com.shaoyue.weizhegou.entity.cedit.TimeSelect;
 import com.shaoyue.weizhegou.entity.diaocha.AddressSelectBean;
-import com.shaoyue.weizhegou.module.credit.adapter.shenqing.BasicInformationAdapter;
+import com.shaoyue.weizhegou.module.sxdc.adapter.BasicInformationAdapter;
 import com.shaoyue.weizhegou.util.ObjectToMapUtils;
 import com.shaoyue.weizhegou.util.ToastUtil;
 import com.shaoyue.weizhegou.widget.datepicker.CustomDatePicker;
@@ -48,13 +49,8 @@ public class BasicInformationFragment extends BaseAppFragment {
 
     @BindView(R.id.id_jiben_1)
     RecyclerView mIdJiben1;
-    BasicInformationAdapter mAdapter;
-    BasicInformationAdapter mAdapter2;
-    BasicInformationAdapter mAdapter3;
-    @BindView(R.id.id_jiben_2)
-    RecyclerView mIdJiben2;
-    @BindView(R.id.id_jiben_3)
-    RecyclerView mIdJiben3;
+
+
     @BindView(R.id.ll_all)
     LinearLayout llAll;
     @BindView(R.id.sb_zancun)
@@ -63,6 +59,9 @@ public class BasicInformationFragment extends BaseAppFragment {
     StateButton sbEdit;
     Unbinder unbinder;
 
+    BasicInformationAdapter mAdapter;
+    //标题集合
+    private List<BasicTitle> titles = new ArrayList<>();
 
     private CustomDatePicker mDatePicker;
 
@@ -72,11 +71,7 @@ public class BasicInformationFragment extends BaseAppFragment {
     private String gbhyflmc;
     private String gbhyfl;
 
-    private List<BasicInformationBean.RecordsBean> mlist1 = new ArrayList<>();
 
-    private List<BasicInformationBean.RecordsBean> mlist2 = new ArrayList<>();
-
-    private List<BasicInformationBean.RecordsBean> mlist3 = new ArrayList<>();
 
 
     public static BasicInformationFragment newInstance() {
@@ -96,22 +91,16 @@ public class BasicInformationFragment extends BaseAppFragment {
             sbEdit.setVisibility(View.GONE);
         }
 
-
+        titles.add(new BasicTitle("基本信息", new ArrayList<BasicInformationBean.RecordsBean>()));
+        titles.add(new BasicTitle("导入信息", new ArrayList<BasicInformationBean.RecordsBean>()));
+        titles.add(new BasicTitle("其他信息", new ArrayList<BasicInformationBean.RecordsBean>()));
         initDatePicker();
         mAdapter = new BasicInformationAdapter();
         mAdapter.setActivity(getActivity());
-        mIdJiben1.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+        mIdJiben1.setLayoutManager(new LinearLayoutManager(getActivity()));
         mIdJiben1.setAdapter(mAdapter);
-        mIdJiben1.setNestedScrollingEnabled(false);//禁止滑动
 
-        mAdapter2 = new BasicInformationAdapter();
-        mIdJiben2.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-        mIdJiben2.setAdapter(mAdapter2);
-        mIdJiben2.setNestedScrollingEnabled(false);//禁止滑动
-        mAdapter3 = new BasicInformationAdapter();
-        mIdJiben3.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-        mIdJiben3.setAdapter(mAdapter3);
-        mIdJiben3.setNestedScrollingEnabled(false);//禁止滑动
+
         startProgressDialog(true);
         initview();
 
@@ -139,17 +128,19 @@ public class BasicInformationFragment extends BaseAppFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(final AddressSelectBean addressSelectBean) {
-        List<BasicInformationBean.RecordsBean> list = mAdapter.getData();
+        List<BasicTitle> list = mAdapter.getData();
+
         if (ObjectUtils.isNotEmpty(list)) {
-            for (BasicInformationBean.RecordsBean bean : list) {
-                if (bean.getName().equals("gjhyfl")) {
-                    bean.setDefaultvalue(addressSelectBean.getTitle());
-                    gbhyfl = addressSelectBean.getKey();
+            for (BasicTitle title : list) {
+                for (BasicInformationBean.RecordsBean bean : title.getMlist()) {
+                    if (bean.getName().equals("gjhyfl")) {
+                        bean.setDefaultvalue(addressSelectBean.getTitle());
+                        gbhyfl = addressSelectBean.getKey();
+
+                    }
 
                 }
             }
-
-
             mAdapter.setNewData(list);
             mAdapter.notifyDataSetChanged();
         }
@@ -177,21 +168,15 @@ public class BasicInformationFragment extends BaseAppFragment {
             public void onSucc(BaseResponse<BasicInformationBean> result) {
                 llAll.setVisibility(View.VISIBLE);
                 stopProgressDialog();
-                mlist1.clear();
-                mlist2.clear();
-                mlist3.clear();
-                for (BasicInformationBean.RecordsBean bean : result.data.getRecords()) {
-                    if (bean.getCategory().equals("基本信息")) {
-                        mlist1.add(bean);
-                    } else if (bean.getCategory().equals("导入信息")) {
-                        mlist2.add(bean);
-                    } else if (bean.getCategory().equals("其他信息")) {
-                        mlist3.add(bean);
+                for (BasicTitle title : titles) {
+                    for (BasicInformationBean.RecordsBean bean : result.data.getRecords()) {
+                        if (bean.getCategory().equals(title.getTitle())) {
+                            title.getMlist().add(bean);
+                        }
                     }
                 }
-                mAdapter.setNewData(mlist1);
-                mAdapter2.setNewData(mlist2);
-                mAdapter3.setNewData(mlist3);
+                mAdapter.setNewData(titles);
+
 
                 getListById();
             }
@@ -221,10 +206,15 @@ public class BasicInformationFragment extends BaseAppFragment {
         mDatePicker = new CustomDatePicker(getActivity(), new CustomDatePicker.Callback() {
             @Override
             public void onTimeSelected(long timestamp) {
-                List<BasicInformationBean.RecordsBean> list = mAdapter.getData();
-                for (BasicInformationBean.RecordsBean recordsBean : list) {
-                    if (recordsBean.getTitile().equals(timeTitle)) {
-                        recordsBean.setDefaultvalue(DateFormatUtils.long2Str(timestamp, false));
+                List<BasicTitle> list = mAdapter.getData();
+
+                if (ObjectUtils.isNotEmpty(list)) {
+                    for (BasicTitle title : list) {
+                        for (BasicInformationBean.RecordsBean bean : title.getMlist()) {
+                            if (bean.getTitile().equals(timeTitle)) {
+                                bean.setDefaultvalue(DateFormatUtils.long2Str(timestamp, false));
+                            }
+                        }
                     }
                 }
                 mAdapter.setNewData(list);
@@ -280,44 +270,28 @@ public class BasicInformationFragment extends BaseAppFragment {
                     JSONObject jsonObject1 = new JSONObject(jsonObject.toString());
                     Map<String, String> map = ObjectToMapUtils.JsonToMap(jsonObject1);
 
-                    List<BasicInformationBean.RecordsBean> list = mAdapter.getData();
+                    List<BasicTitle> list = mAdapter.getData();
+
                     if (ObjectUtils.isNotEmpty(list)) {
-                        for (BasicInformationBean.RecordsBean bean : list) {
-                            if (bean.getName().equals("gjhyfl")) {
+                        for (BasicTitle title : list) {
+                            for (BasicInformationBean.RecordsBean bean : title.getMlist()) {
+                                if (map.containsKey(bean.getName())) {
+                                    bean.setEdit(true);
+                                    if (bean.getName().equals("gjhyfl")) {
+                                        LogUtils.e(gbhyflmc);
+                                        bean.setDefaultvalue(gbhyflmc);
+                                        gbhyfl = map.get(bean.getName());
 
-
-                                bean.setDefaultvalue(gbhyflmc);
-                                gbhyfl = map.get(bean.getName());
-
-                            } else {
-                                bean.setDefaultvalue(map.get(bean.getName()));
+                                    } else {
+                                        bean.setDefaultvalue(map.get(bean.getName()));
+                                    }
+                                }
                             }
                         }
                         mAdapter.setNewData(list);
                         mAdapter.notifyDataSetChanged();
                     }
-                    List<BasicInformationBean.RecordsBean> list2 = mAdapter2.getData();
-                    if (ObjectUtils.isNotEmpty(list2)) {
-                        for (BasicInformationBean.RecordsBean bean : list2) {
-                            if (map.containsKey(bean.getName())) {
-                                bean.setEdit(true);
-                                bean.setDefaultvalue(map.get(bean.getName()));
-                            }
-                        }
-                        mAdapter2.setNewData(list2);
-                        mAdapter2.notifyDataSetChanged();
-                    }
-                    List<BasicInformationBean.RecordsBean> list3 = mAdapter3.getData();
-                    if (ObjectUtils.isNotEmpty(list3)) {
-                        for (BasicInformationBean.RecordsBean bean : list3) {
-                            if (map.containsKey(bean.getName())) {
-                                bean.setEdit(true);
-                                bean.setDefaultvalue(map.get(bean.getName()));
-                            }
-                        }
-                        mAdapter3.setNewData(list3);
-                        mAdapter3.notifyDataSetChanged();
-                    }
+
                 } catch (JSONException e) {
                     LogUtils.e(e);
                 }
@@ -366,37 +340,24 @@ public class BasicInformationFragment extends BaseAppFragment {
      */
     private Map<String, String> getMap() {
         Map<String, String> map = new HashMap<>();
-        List<BasicInformationBean.RecordsBean> list = mAdapter.getData();
-        if (ObjectUtils.isNotEmpty(list)) {
-            for (BasicInformationBean.RecordsBean bean : list) {
-                if (ObjectUtils.isNotEmpty(bean.getDefaultvalue())) {
-                    if (bean.getName().equals("gjhyfl")) {
+        List<BasicTitle> list = mAdapter.getData();
 
-                        map.put(bean.getName(), gbhyfl);
-                    } else {
-                        map.put(bean.getName(), bean.getDefaultvalue());
+        if (ObjectUtils.isNotEmpty(list)) {
+            for (BasicTitle title : list) {
+                for (BasicInformationBean.RecordsBean bean : title.getMlist()) {
+                    if (ObjectUtils.isNotEmpty(bean.getDefaultvalue())) {
+                        if (bean.getName().equals("gjhyfl")) {
+                            LogUtils.e(gbhyfl);
+                            map.put(bean.getName(), gbhyfl);
+                        } else {
+                            map.put(bean.getName(), bean.getDefaultvalue());
+                        }
                     }
                 }
-            }
 
-        }
-        List<BasicInformationBean.RecordsBean> list2 = mAdapter2.getData();
-        if (ObjectUtils.isNotEmpty(list2)) {
-            for (BasicInformationBean.RecordsBean bean : list2) {
-                if (ObjectUtils.isNotEmpty(bean.getDefaultvalue())) {
-                    map.put(bean.getName(), bean.getDefaultvalue());
-                }
             }
+        }
 
-        }
-        List<BasicInformationBean.RecordsBean> list3 = mAdapter3.getData();
-        if (ObjectUtils.isNotEmpty(list3)) {
-            for (BasicInformationBean.RecordsBean bean : list3) {
-                if (ObjectUtils.isNotEmpty(bean.getDefaultvalue())) {
-                    map.put(bean.getName(), bean.getDefaultvalue());
-                }
-            }
-        }
         return map;
     }
 
@@ -405,49 +366,31 @@ public class BasicInformationFragment extends BaseAppFragment {
      */
     private void firstAdd() {
         Map<String, String> map = new HashMap<>();
-        List<BasicInformationBean.RecordsBean> list = mAdapter.getData();
+        List<BasicTitle> list = mAdapter.getData();
+
         if (ObjectUtils.isNotEmpty(list)) {
-            for (BasicInformationBean.RecordsBean bean : list) {
-                if (ObjectUtils.isNotEmpty(bean.getDefaultvalue())) {
-                    map.put(bean.getName(), bean.getDefaultvalue());
-                } else {
-                    if (bean.getRequire().equals("true")) {
-                        ToastUtil.showBlackToastSucess(bean.getTitile() + "不能为空");
-                        return;
+            for (BasicTitle title : list) {
+                for (BasicInformationBean.RecordsBean bean : title.getMlist()) {
+                    if (ObjectUtils.isNotEmpty(bean.getDefaultvalue())) {
+                        if (bean.getName().equals("gjhyfl")) {
+                            map.put(bean.getName(), gbhyfl);
+                        } else {
+                            map.put(bean.getName(), bean.getDefaultvalue());
+                        }
+                    } else {
+                        if (bean.getRequire().equals("true")) {
+                            ToastUtil.showBlackToastSucess(bean.getTitile() + "不能为空");
+                            return;
+                        }
+
+
                     }
+
                 }
 
             }
-
         }
-        List<BasicInformationBean.RecordsBean> list2 = mAdapter2.getData();
-        if (ObjectUtils.isNotEmpty(list2)) {
-            for (BasicInformationBean.RecordsBean bean : list2) {
-                if (ObjectUtils.isNotEmpty(bean.getDefaultvalue())) {
-                    map.put(bean.getName(), bean.getDefaultvalue());
-                } else {
-                    if (bean.getRequire().equals("true")) {
-                        ToastUtil.showBlackToastSucess(bean.getTitile() + "不能为空");
-                        return;
-                    }
-                }
 
-            }
-
-        }
-        List<BasicInformationBean.RecordsBean> list3 = mAdapter3.getData();
-        if (ObjectUtils.isNotEmpty(list3)) {
-            for (BasicInformationBean.RecordsBean bean : list3) {
-                if (ObjectUtils.isNotEmpty(bean.getDefaultvalue())) {
-                    map.put(bean.getName(), bean.getDefaultvalue());
-                } else {
-                    if (bean.getRequire().equals("true")) {
-                        ToastUtil.showBlackToastSucess(bean.getTitile() + "不能为空");
-                        return;
-                    }
-                }
-            }
-        }
         CeditApi.addInfo(map, new BaseCallback<BaseResponse<Void>>() {
             @Override
             public void onSucc(BaseResponse<Void> result) {
@@ -464,29 +407,36 @@ public class BasicInformationFragment extends BaseAppFragment {
      */
     private void setSqJe() {
         int sqje = 0;
-        List<BasicInformationBean.RecordsBean> list = mAdapter.getData();
-        for (BasicInformationBean.RecordsBean bean : list) {
-            if ("抵押(万元)".equals(bean.getTitile())) {
-                if (ObjectUtils.isNotEmpty(bean.getDefaultvalue())) {
-                    sqje = sqje + Integer.parseInt(bean.getDefaultvalue());
-                }
-            } else if ("质押(万元)".equals(bean.getTitile())) {
-                if (ObjectUtils.isNotEmpty(bean.getDefaultvalue())) {
-                    sqje = sqje + Integer.parseInt(bean.getDefaultvalue());
-                }
-            } else if ("保证(万元)".equals(bean.getTitile())) {
-                if (ObjectUtils.isNotEmpty(bean.getDefaultvalue())) {
-                    sqje = sqje + Integer.parseInt(bean.getDefaultvalue());
-                }
-            } else if ("信用(万元)".equals(bean.getTitile())) {
-                if (ObjectUtils.isNotEmpty(bean.getDefaultvalue())) {
-                    sqje = sqje + Integer.parseInt(bean.getDefaultvalue());
+        List<BasicTitle> list = mAdapter.getData();
+
+        if (ObjectUtils.isNotEmpty(list)) {
+            for (BasicTitle title : list) {
+                for (BasicInformationBean.RecordsBean bean : title.getMlist()) {
+                    if ("抵押(万元)".equals(bean.getTitile())) {
+                        if (ObjectUtils.isNotEmpty(bean.getDefaultvalue())) {
+                            sqje = sqje + Integer.parseInt(bean.getDefaultvalue());
+                        }
+                    } else if ("质押(万元)".equals(bean.getTitile())) {
+                        if (ObjectUtils.isNotEmpty(bean.getDefaultvalue())) {
+                            sqje = sqje + Integer.parseInt(bean.getDefaultvalue());
+                        }
+                    } else if ("保证(万元)".equals(bean.getTitile())) {
+                        if (ObjectUtils.isNotEmpty(bean.getDefaultvalue())) {
+                            sqje = sqje + Integer.parseInt(bean.getDefaultvalue());
+                        }
+                    } else if ("信用(万元)".equals(bean.getTitile())) {
+                        if (ObjectUtils.isNotEmpty(bean.getDefaultvalue())) {
+                            sqje = sqje + Integer.parseInt(bean.getDefaultvalue());
+                        }
+                    }
                 }
             }
-        }
-        for (BasicInformationBean.RecordsBean bean : list) {
-            if ("申请金额(万元)".equals(bean.getTitile())) {
-                bean.setDefaultvalue(sqje + "");
+            for (BasicTitle title : list) {
+                for (BasicInformationBean.RecordsBean bean : title.getMlist()) {
+                    if ("申请金额(万元)".equals(bean.getTitile())) {
+                        bean.setDefaultvalue(sqje + "");
+                    }
+                }
             }
         }
         mAdapter.setNewData(list);

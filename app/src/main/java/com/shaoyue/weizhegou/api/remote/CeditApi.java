@@ -9,6 +9,7 @@ import com.shaoyue.weizhegou.api.helper.ApiHttpClient;
 import com.shaoyue.weizhegou.api.model.BaseResponse;
 import com.shaoyue.weizhegou.entity.cedit.ApplicationListBean;
 import com.shaoyue.weizhegou.entity.cedit.BasicInformationBean;
+import com.shaoyue.weizhegou.entity.cedit.ChuShenBean;
 import com.shaoyue.weizhegou.entity.cedit.DiyaDanBaoListBean;
 import com.shaoyue.weizhegou.entity.cedit.FaceBean;
 import com.shaoyue.weizhegou.entity.cedit.FamilyListBean;
@@ -27,6 +28,7 @@ import com.shaoyue.weizhegou.entity.cedit.applyBean;
 import com.shaoyue.weizhegou.entity.dhgl.XjlBean;
 import com.shaoyue.weizhegou.entity.diaocha.AddressSelectBean;
 import com.shaoyue.weizhegou.entity.user.MenuBean;
+import com.shaoyue.weizhegou.entity.user.SxsqDanBean;
 import com.shaoyue.weizhegou.manager.UserMgr;
 
 import java.util.HashMap;
@@ -128,6 +130,11 @@ public class CeditApi {
     private static final String MY_DATA = "jeecg-boot/business/sxsqWhkhxx/list";
     //修改我行数据
     private static final String MY_DATA_EDIT = "jeecg-boot/business/sxsqWhkhxx/editSys";
+    //授信申请单
+    private static final String SX_SQ_DAN = "jeecg-boot/business/sxsqSxsqd/queryById";
+
+    //保存征信查询
+    private static final String SAVE_ZXCX = "jeecg-boot/business/sxsqZxcx/editPl";
 
 
     /**
@@ -190,6 +197,11 @@ public class CeditApi {
     public static final String SYKH_EDIT = "jeecg-boot/business/sxdcSygys/edit";
     //修改下游客户
     public static final String XYKH_EDIT = "jeecg-boot/business/sxdcXykh/edit";
+    //授信申请单添加
+    public static final String SXSQD_ADD = "jeecg-boot/business/sxsqSxsqd/add";
+
+    //授信申请单编辑
+    public static final String SXSQD_EDIT = "jeecg-boot/business/sxsqSxsqd/edit";
 
 
     //新增公司担保信息
@@ -227,6 +239,35 @@ public class CeditApi {
 
     //现金流
     private static final String XCJY_XJL = "jeecg-boot/business/sxdcXxjl/listMobile";
+    // 初审结果
+    private static final String CSJG_CX = "jeecg-boot/business/sxsqCsjg/list";
+
+
+    /**
+     * 初审结果
+     *
+     * @param callback
+     * @param tag
+     */
+    public static void getCsjg(BaseCallback<BaseResponse<ChuShenBean>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        ApiHttpClient.post(CSJG_CX, params, callback, tag);
+    }
+
+    /**
+     * 获取授信申请单
+     *
+     * @param callback
+     * @param tag
+     */
+    public static void getSxsqDan(BaseCallback<BaseResponse<SxsqDanBean>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("id", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        ApiHttpClient.post(SX_SQ_DAN, params, callback, tag);
+    }
+
+
     /**
      * 获取现金流信息
      *
@@ -344,7 +385,6 @@ public class CeditApi {
      */
     public static void addDanbaoInfo(String address, Map<String, String> params, BaseCallback<BaseResponse<Void>> callback, Object tag) {
 
-//        params.put("token", UserMgr.getInstance().getSessionId());
         params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
         ApiHttpClient.postJson(address, params, callback, tag);
     }
@@ -433,7 +473,41 @@ public class CeditApi {
         params.put("pageSize", pageSize);
         ApiHttpClient.post(DANBAO_FENXI_ZIRAN, params, callback, tag);
     }
+    /**
+     * 编辑授信申请单
+     *
+     * @param callback
+     * @param tag
+     */
+    public static void editSxsqDan(String address, Map<String, String> params, BaseCallback<BaseResponse<Void>> callback, Object tag) {
+        params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        ApiHttpClient.putJson(address, params, callback, tag);
+    }
 
+    /**
+     * 新增授信申请单
+     *
+     * @param callback
+     * @param tag
+     */
+    public static void addSxsqDan(String address, Map<String, String> params, BaseCallback<BaseResponse<Void>> callback, Object tag) {
+
+        params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        ApiHttpClient.postJson(address, params, callback, tag);
+    }
+
+
+    /**
+     * 保存征信数据
+     *
+     * @param callback
+     * @param tag
+     */
+    public static void saveZxcx(Map<String, String> params, BaseCallback<BaseResponse<Void>> callback, Object tag) {
+        params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        ApiHttpClient.postJson(SAVE_ZXCX, params, callback, tag);
+
+    }
 
     /**
      * 编辑我行数据

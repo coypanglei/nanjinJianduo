@@ -210,6 +210,15 @@ public class MyHangBean extends BaseBean {
         @SerializedName("bfb")
         private String bdqb;
         private double dwdb;
+        private String cs;
+
+        public String getCs() {
+            return cs;
+        }
+
+        public void setCs(String cs) {
+            this.cs = cs;
+        }
 
         private String dbbldk;
 

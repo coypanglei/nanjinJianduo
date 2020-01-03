@@ -10,9 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ObjectUtils;
+import com.blankj.utilcode.util.SPUtils;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.entity.cedit.VideoMaterialBean;
 import com.shaoyue.weizhegou.event.OkOrCancelEvent;
@@ -47,7 +49,8 @@ public class VideoPicDialogFragment extends DialogFragment {
 
     @BindView(R.id.tv_my_info)
     TextView mTvInfo;
-
+    @BindView(R.id.iv_detele)
+    ImageView ivDetele;
     private String id;
     private String url;
 
@@ -58,9 +61,9 @@ public class VideoPicDialogFragment extends DialogFragment {
         final LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_video, null);
         unbinder = ButterKnife.bind(this, view);
-//        if ("查看详情".equals(SPUtils.getInstance().getString("status")) || ("invisable".equals(videoMaterialBean.getVisable()))) {
-//            ivDetele.setVisibility(View.GONE);
-//        }
+        if ("查看详情".equals(SPUtils.getInstance().getString("status")) || ("invisable".equals(videoMaterialBean.getVisable()))) {
+            ivDetele.setVisibility(View.GONE);
+        }
         List<String> mPicList = new ArrayList<>();
         List<String> mPicList2 = new ArrayList<>();
         for (VideoMaterialBean.ListBean bean : videoMaterialBean.getList()) {

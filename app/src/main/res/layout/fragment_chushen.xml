@@ -33,7 +33,7 @@
 
     </RelativeLayout>
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="none">
@@ -96,103 +96,14 @@
                         android:layout_height="1px"
                         android:background="@color/color_959595" />
 
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/dp_30">
-
-                        <ImageView
-
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/icon_chushen_pass" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginTop="@dimen/dp_16"
-                            android:text="我行数据审核结论"
-                            android:textColor="@color/white" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginTop="@dimen/dp_72"
-                            android:text="申请人"
-                            android:textColor="@color/white" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/dp_30">
-
-                        <ImageView
-
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/icon_chushen_no_pass" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginTop="@dimen/dp_16"
-                            android:text="我行数据审核结论"
-                            android:textColor="@color/white" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginTop="@dimen/dp_72"
-
-                            android:text="配偶"
-                            android:textColor="@color/white" />
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_9"
-                    android:layout_weight="1"
-                    android:background="@color/white"
-                    android:orientation="vertical"
-                    android:paddingBottom="@dimen/dp_30">
-
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/dp_30"
-                        android:gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <View
-                            android:layout_width="@dimen/dp_8"
-                            android:layout_height="@dimen/dp_16"
-                            android:layout_marginLeft="@dimen/dp_23"
-                            android:background="@color/color_23a7f0" />
-
-                        <TextView
-
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dp_12"
-                            android:text="数据审核结果"
-                            android:textColor="@color/color_23a7f0" />
 
                     </LinearLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1px"
-                        android:background="@color/color_959595" />
-
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -200,7 +111,7 @@
                         android:layout_marginTop="@dimen/dp_30">
 
                         <ImageView
-
+                            android:id="@+id/iv_whsj"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/icon_chushen_pass" />
@@ -229,17 +140,17 @@
                         android:layout_marginTop="@dimen/dp_30">
 
                         <ImageView
-
+                            android:id="@+id/iv_zxsj"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/icon_chushen_no_pass" />
+                            android:src="@drawable/icon_chushen_pass" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="16dp"
                             android:layout_marginTop="@dimen/dp_16"
-                            android:text="我行数据审核结论"
+                            android:text="征信数据审核结论"
                             android:textColor="@color/white" />
 
                         <TextView
@@ -247,19 +158,18 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="16dp"
                             android:layout_marginTop="@dimen/dp_72"
-
-                            android:text="配偶"
+                            android:text="申请人"
                             android:textColor="@color/white" />
                     </RelativeLayout>
 
                 </LinearLayout>
+
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:background="@color/white"
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/dp_30">
@@ -281,7 +191,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_12"
-                        android:text="初审结果"
+                        android:text="不良原因陈述"
                         android:textColor="@color/color_23a7f0" />
 
                 </LinearLayout>
@@ -291,71 +201,174 @@
                     android:layout_height="1px"
                     android:background="@color/color_959595" />
 
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/dp_30">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_chusheng" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:text="申请人我行数据不良陈述"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:id="@+id/tv_sqr_blcs"
+                        android:layout_width="280dp"
+                        android:layout_height="140dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="@dimen/dp_52"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:paddingRight="@dimen/dp_10"
+                        android:scrollbars="vertical"
+
+                        android:textColor="@color/white" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/dp_30">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_chusheng" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:text="申请人数据征信不良原因陈述"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:id="@+id/tv_sqr_sj_blcs"
+                        android:layout_width="280dp"
+                        android:layout_height="140dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="@dimen/dp_52"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:paddingRight="@dimen/dp_10"
+                        android:scrollbars="vertical"
+
+                        android:textColor="@color/white" />
+                </RelativeLayout>
+
                 <LinearLayout
+                    android:layout_marginTop="@dimen/dp_10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginLeft="@dimen/dp_30"
-                    android:layout_marginTop="@dimen/dp_30">
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:scaleType="fitXY"
-                        android:layout_marginRight="13dp"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/dp_30">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dp_30"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:layout_width="@dimen/dp_8"
+                            android:layout_height="@dimen/dp_16"
+                            android:layout_marginLeft="@dimen/dp_23"
+                            android:background="@color/color_23a7f0" />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dp_12"
+                            android:text="陈述"
+                            android:textColor="@color/color_23a7f0" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@color/color_959595" />
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icon_xiao_tongguo" />
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="@dimen/dp_115"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginLeft="@dimen/dp_13"
-                        android:layout_marginRight="13dp"
-                        android:layout_toRightOf="@id/tv_leave_a_message"
-                        android:background="@drawable/bg_bu_liang"
-                        android:padding="10dp">
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/dp_30">
 
-                        <EditText
-
-                            android:layout_width="match_parent"
+                        <ImageView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@null"
-                            android:hint="人工准入说明"
-                            android:maxLength="200"
-                            android:textColor="@color/color_0d1730"
-                            android:textColorHint="@color/color_6f6f6f"
-                            android:textSize="13dp" />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/dp_115"
-                        android:layout_weight="1"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginLeft="@dimen/dp_17"
-                        android:layout_marginRight="14dp"
-                        android:layout_toRightOf="@id/tv_leave_a_message"
-                        android:background="@drawable/bg_bu_liang"
-                        android:padding="10dp">
+                            android:src="@drawable/icon_chusheng" />
 
-                        <EditText
-                            android:id="@+id/et_buliang"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@null"
-                            android:hint="申请人系统未通过原因陈述"
-                            android:maxLength="200"
-                            android:textColor="@color/color_0d1730"
-                            android:textColorHint="@color/color_6f6f6f"
-                            android:textSize="13dp" />
-                    </LinearLayout>
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="@dimen/dp_16"
+                            android:text="申请人我行数据陈述"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:id="@+id/tv_sqr_wh_sjcs"
+                            android:layout_width="280dp"
+                            android:layout_height="140dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="@dimen/dp_52"
+                            android:paddingLeft="@dimen/dp_10"
+                            android:paddingRight="@dimen/dp_10"
+                            android:scrollbars="vertical"
+
+                            android:textColor="@color/white" />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/dp_30">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/icon_chusheng" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="@dimen/dp_16"
+                            android:text="申请人征信数据陈述"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:id="@+id/tv_sqr_zx_sjcs"
+                            android:layout_width="280dp"
+                            android:layout_height="140dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="@dimen/dp_52"
+                            android:paddingLeft="@dimen/dp_10"
+                            android:paddingRight="@dimen/dp_10"
+                            android:scrollbars="vertical"
+
+                            android:textColor="@color/white" />
+                    </RelativeLayout>
+
 
                 </LinearLayout>
-
-
             </LinearLayout>
 
+
         </LinearLayout>
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 
 
 </LinearLayout>

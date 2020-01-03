@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ObjectUtils;
@@ -58,8 +59,7 @@ public class MyDataFragment extends BaseFragment {
     EditText etBuliang;
     @BindView(R.id.sb_edit)
     StateButton sbEdit;
-    @BindView(R.id.tv_leave_a_message)
-    TextView tvLeaveAMessage;
+
     Unbinder unbinder;
     @BindView(R.id.tv_error)
     TextView tvError;
@@ -70,6 +70,10 @@ public class MyDataFragment extends BaseFragment {
 
     @BindView(R.id.rv_credit_six)
     RecyclerView rvCreditSix;
+    @BindView(R.id.et_cs)
+    EditText etCs;
+    @BindView(R.id.ll_cs)
+    RelativeLayout llCs;
 
 
     private boolean click = true;
@@ -184,6 +188,7 @@ public class MyDataFragment extends BaseFragment {
                             //我行评级
                             starBar.setRating(myHangBean.getWhpj() / 2);//设置星星亮的颗数
                             etBuliang.setText(myHangBean.getWhblyycs());
+                            etCs.setText(myHangBean.getCs());
 //                            if (ObjectUtils.isNotEmpty(myHangBean.getId())) {
 //                                click = false;
 //                            } else {
@@ -202,6 +207,7 @@ public class MyDataFragment extends BaseFragment {
                             //提示信息
                             if (ObjectUtils.isNotEmpty(myHangBean.getDescription())) {
                                 tvError.setVisibility(View.VISIBLE);
+                                llCs.setVisibility(View.VISIBLE);
                                 tvError.setText(myHangBean.getDescription());
                             }
                             //通过未通过
@@ -462,13 +468,14 @@ public class MyDataFragment extends BaseFragment {
             switch (view.getId()) {
                 case R.id.tv_tg:
                     xtshjl = "通过";
-                    if (!myHangBean.getYxtshjl().equals("通过")) {
+                    if (!"通过".equals(myHangBean.getYxtshjl())) {
                         tvError.setVisibility(View.VISIBLE);
+                        llCs.setVisibility(View.VISIBLE);
                         tvError.setText("系统未通过，人工干预已通过!!");
                     } else {
                         tvError.setVisibility(View.GONE);
+                        llCs.setVisibility(View.GONE);
                     }
-
                     tvWtg.setCompoundDrawables(drawable, null, null, null);
                     tvWtg.setTextColor(getResources().getColor(R.color.color_b9b8b8));
                     tvTg.setCompoundDrawables(drawable2, null, null, null);
@@ -476,18 +483,16 @@ public class MyDataFragment extends BaseFragment {
                     break;
                 case R.id.tv_wtg:
                     xtshjl = "未通过";
-                    if (myHangBean.getYxtshjl().equals("通过")) {
+                    if ("通过".equals(myHangBean.getYxtshjl())) {
                         tvError.setVisibility(View.VISIBLE);
+                        llCs.setVisibility(View.VISIBLE);
                         tvError.setText("系统已通过，人工干预未通过!!");
                     } else {
                         tvError.setVisibility(View.GONE);
+                        llCs.setVisibility(View.GONE);
                     }
-
-
                     tvTg.setCompoundDrawables(drawable, null, null, null);
                     tvTg.setTextColor(getResources().getColor(R.color.color_b9b8b8));
-
-
                     tvWtg.setCompoundDrawables(drawable2, null, null, null);
                     tvWtg.setTextColor(getResources().getColor(R.color.color_49a0ed));
                     break;
@@ -504,6 +509,18 @@ public class MyDataFragment extends BaseFragment {
                     map.put("xtshjl", xtshjl);
                     if (tvError.getVisibility() == View.VISIBLE) {
                         map.put("description", description);
+                    }else {
+                        map.put("description","");
+                    }
+                    if (llCs.getVisibility() == View.VISIBLE) {
+                        String cs = etCs.getText().toString().trim();
+                        if (ObjectUtils.isNotEmpty(cs)) {
+                            map.put("cs", etCs.getText().toString().trim());
+                        } else {
+                            ToastUtil.showBlackToastSucess("请填写陈述");
+                            return;
+                        }
+
                     }
 
                     map.put("whblyycs", whblyycs);

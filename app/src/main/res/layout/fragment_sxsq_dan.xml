@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:background="@color/white">
+
+        <com.libracore.lib.widget.StateButton
+            android:id="@+id/sb_edit"
+
+            android:layout_width="83dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_27"
+            android:drawableLeft="@drawable/icon_sb_copy"
+            android:paddingLeft="6dp"
+            android:paddingTop="1dp"
+            android:paddingRight="6dp"
+            android:paddingBottom="1dp"
+            android:text="保存"
+            android:textSize="12dp"
+            app:normalBackgroundColor="@color/color_23a7f0"
+            app:normalTextColor="@color/white"
+            app:pressedBackgroundColor="@color/color_48b2ed"
+            app:pressedTextColor="@color/white"
+            app:radius="2dp" />
+
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_c0c0c0" />
+
+    <ScrollView
+        android:id="@+id/sc_all"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_top"
+
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_5"
+                android:background="@color/color_f2f2f2" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_30">
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="14dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12dp"
+                    android:background="@color/color_1e88e5" />
+
+                <TextView
+                    android:id="@+id/tv_my_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="22dp"
+                    android:drawablePadding="3dp"
+                    android:gravity="center"
+                    android:text="申请信息"
+                    android:textColor="@color/color_23a7f0"
+                    android:textSize="@dimen/dp_13" />
+            </RelativeLayout>
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_click"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_5"
+                android:background="@color/color_f2f2f2" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_30">
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="14dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12dp"
+                    android:background="@color/color_1e88e5" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="22dp"
+                    android:drawablePadding="3dp"
+                    android:gravity="center"
+                    android:text="借款人承诺"
+                    android:textColor="@color/color_23a7f0"
+                    android:textSize="@dimen/dp_13" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:lineSpacingMultiplier="1.4"
+                android:text="1、本人在业务申请、办理过程中所提供的资料及所述事项均真实、有效，并授权你行进行调查；\n2、本人保证按合同约定的用途使用你行贷款资金，按合同约定的还款计划还本付息\n3、以上申请内容，本人同意最终以你行审批结果为准。\n"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/dp_10"
+
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="invisible">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginTop="20dp"
+                        android:text="授权人(签字):"
+                        android:textColor="@color/color_333333"
+                        android:textSize="10dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:text="身份证件类型：身份证"
+                        android:textColor="@color/color_333333"
+
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/tv_sfzh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:text="证件号码："
+                        android:textColor="@color/color_333333"
+
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/tv_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:text="授权日期："
+                        android:textColor="@color/color_333333"
+                        android:textSize="10dp" />
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_qian"
+                    android:layout_width="@dimen/dp_250"
+                    android:layout_height="@dimen/dp_120"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dp_100"
+                    android:background="@drawable/icon_click_qianzi">
+
+                    <ImageView
+                        android:id="@+id/iv_geren_qian"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="6dp"
+                        android:paddingBottom="@dimen/dp_10" />
+
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rl_qian"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/tv_rq"
+                    android:layout_marginTop="@dimen/dp_11"
+                    android:layout_marginRight="@dimen/dp_120"
+                    android:text="日期："
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dp_11" />
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/iv_gz_qian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                android:src="@drawable/icon_xuxian" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_120"
+                android:layout_marginRight="@dimen/dp_120"
+                android:layout_marginBottom="@dimen/dp_50"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_13"
+                    android:gravity="center"
+                    android:text="面签确认书"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dp_13"
+
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_13"
+                    android:gravity="center"
+                    android:text="江苏东海农村商业银行股份有限公司信贷人员参与上述申请人的谈话，已见证其签字的真实有效性。"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dp_11" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_13"
+                    android:gravity="right"
+                    android:text="客户经理："
+                    android:id="@+id/tv_khjl"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dp_11" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_khrq"
+                    android:layout_marginTop="@dimen/dp_13"
+                    android:gravity="right"
+                    android:text="日期："
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dp_11" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

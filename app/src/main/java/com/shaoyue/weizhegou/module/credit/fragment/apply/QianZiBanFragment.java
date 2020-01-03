@@ -176,6 +176,7 @@ public class QianZiBanFragment extends BaseAppFragment {
         if (ObjectUtils.isNotEmpty(qianziBean)) {
             mTvSfzh.setText("证件号码:" + qianziBean.getZjhm());
 
+            
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");// HH:mm:ss
 //获取当前时间
             Date date = new Date(System.currentTimeMillis());

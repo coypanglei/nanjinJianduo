@@ -94,6 +94,7 @@ public class ApplyInfoFragment extends BaseTitleFragment {
         mMenuList.add(new MainClickBean("我行数据", false));
         mMenuList.add(new MainClickBean("担保抵押", false));
         mMenuList.add(new MainClickBean("初审结果", false));
+        mMenuList.add(new MainClickBean("授信申请单", false));
 
 
         for (int i = 0; i < mMenuList.size(); i++) {
@@ -115,6 +116,8 @@ public class ApplyInfoFragment extends BaseTitleFragment {
                 fragmentList.add(DiyadanbaoFragment.newInstance());
             } else if ("初审结果".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(ChuShenFragment.newInstance());
+            } else if ("授信申请单".equals(mMenuList.get(i).getTitle())) {
+                fragmentList.add(SxsqDanQianziFragment.newInstance());
             }
         }
         mMenuList.get(0).setSelect(true);
@@ -163,7 +166,7 @@ public class ApplyInfoFragment extends BaseTitleFragment {
                                 }
                             }, this);
                         }
-                    }else {
+                    } else {
                         refresh(position, adapter);
                     }
 

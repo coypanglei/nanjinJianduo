@@ -84,8 +84,8 @@ public class UserInfoDialogFragment extends DialogFragment {
         unbinder = ButterKnife.bind(this, view);
         initView(dialog, view);
         fetchUserInfo();
-        mEtBranch.setText(SPUtils.getInstance().getString(UserMgr.SP_LOGIN_POSITION));
-        mEtPosition.setText(SPUtils.getInstance().getString(UserMgr.SP_LOGIN_BRANCH));
+        mEtBranch.setText(SPUtils.getInstance().getString(UserMgr.SP_LOGIN_BRANCH));
+        mEtPosition.setText(SPUtils.getInstance().getString(UserMgr.SP_LOGIN_POSITION));
         return dialog;
     }
 

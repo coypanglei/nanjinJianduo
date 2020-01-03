@@ -72,57 +72,61 @@ public class ZxcxListBean extends BaseBean {
     }
 
     public static class RecordsBean {
+
         /**
-         * zxqkms : 11
-         * xykljyqcs : 11.0
-         * jyxwhye : 11.0
-         * xykzs : 11.0
-         * zxshjl : 11
-         * dbsfyq : 是
-         * dbwjfl : 正常
-         * dbje : 11.0
+         * zxqkms : 12
+         * xykljyqcs : 12.0
+         * jyxwhye : 12.0
+         * xykzs : 1.0
+         * zxshjl : 未通过
+         * dbsfyq : 12
+         * dbwjfl : 12
+         * dbje : 12.0
          * id : 1
-         * jyxthdkjgs : 11
-         * sxsfzh : 320304198804012414
-         * jyxthye : 11.0
-         * fjyxyqcs : 11
-         * jyxyqcs : 11
-         * fjyxthye : 11.0
-         * cs1 : 11.0
-         * cs3 : 11.0
-         * cs2 : 11.0
-         * jyxwjfl : 正常
-         * jyxblye : 11.0
+         * yzxshjl : 未通过
+         * jyxthdkjgs : 1
+         * sxsfzh : 110101199003072877
+         * jyxthye : 12.0
+         * fjyxyqcs : 12
+         * jyxyqcs : 12
+         * fjyxthye : 12.0
+         * cs1 : 12.0
+         * cs3 : 12.0
+         * cs2 : 12.0
+         * jyxwjfl : 12
+         * jyxblye : null
          * js : 本人
-         * description : null
-         * delFlag : null
-         * xykdqyqcs : 11.0
-         * jyxgrxyjlpj : 良好
-         * fjyxgrxyjlpj : 一般
-         * fjyxthdkjgs : 11
-         * updateBy : null
-         * je2 : 11.0
-         * grxyjlpj : 良好
-         * je1 : 11.0
-         * fjyxwhye : 11.0
-         * je3 : 11.0
-         * xykzgyqje : 11.0
-         * fjyxwjfl : 正常
-         * xykyyje : 11.0
-         * fjyxblye : 11.0
-         * xyksxje : 11.0
-         * updateTime : null
-         * fjyxyqje : 11.0
-         * wjfl : 正常
-         * xykzgyqcs : 11.0
-         * createBy : null
-         * createTime : null
-         * sxid : 120
-         * blye : 11.0
-         * yqqj3 : 11
-         * yqqj1 : 11
-         * jyxyqje : 11.0
-         * yqqj2 : 11
+         * description : 
+         * delFlag : 1
+         * xykdqyqcs : 12.0
+         * jyxgrxyjlpj : 1
+         * fjyxgrxyjlpj : 21
+         * fjyxthdkjgs : 12
+         * updateBy : 1
+         * je2 : 12.0
+         * grxyjlpj : 12
+         * je1 : 12.0
+         * fjyxwhye : 12.0
+         * je3 : 12.0
+         * xykzgyqje : 12.0
+         * fjyxwjfl : 12
+         * xykyyje : 12.0
+         * fjyxblye : null
+         * xyksxje : 212.0
+         * updateTime : 2019-24-27 16:24:56
+         * fjyxyqje : null
+         * wjfl : 12
+         * xykzgyqcs : 12.0
+         * cs : 啊实打实大苏打撒旦发射点发射点啊啊旦发射点发射点啊啊实打实大苏打撒旦发射点发射点啊啊实打实大苏打撒旦发射点发啊实打实大苏打撒旦发
+         * createBy : 1
+         * createTime : 2019-25-27 16:25:02
+         * blyyms : 似的发射点
+         * sxid : d0fd82770ea5e6ca1f61bd6c5b2f9ca4
+         * blye : 12.0
+         * yqqj3 : 12
+         * yqqj1 : 12
+         * jyxyqje : null
+         * yqqj2 : 12
          */
 
         private String zxqkms;
@@ -134,6 +138,7 @@ public class ZxcxListBean extends BaseBean {
         private String dbwjfl;
         private double dbje;
         private String id;
+        private String yzxshjl;
         private String jyxthdkjgs;
         private String sxsfzh;
         private double jyxthye;
@@ -144,7 +149,7 @@ public class ZxcxListBean extends BaseBean {
         private double cs3;
         private double cs2;
         private String jyxwjfl;
-        private double jyxblye;
+        private String jyxblye;
         private String js;
         private String description;
         private String delFlag;
@@ -161,19 +166,21 @@ public class ZxcxListBean extends BaseBean {
         private double xykzgyqje;
         private String fjyxwjfl;
         private double xykyyje;
-        private double fjyxblye;
+        private String fjyxblye;
         private double xyksxje;
         private String updateTime;
-        private double fjyxyqje;
+        private String fjyxyqje;
         private String wjfl;
         private double xykzgyqcs;
+        private String cs;
         private String createBy;
         private String createTime;
+        private String blyyms;
         private String sxid;
         private double blye;
         private String yqqj3;
         private String yqqj1;
-        private double jyxyqje;
+        private String jyxyqje;
         private String yqqj2;
 
         public String getZxqkms() {
@@ -246,6 +253,14 @@ public class ZxcxListBean extends BaseBean {
 
         public void setId(String id) {
             this.id = id;
+        }
+
+        public String getYzxshjl() {
+            return yzxshjl;
+        }
+
+        public void setYzxshjl(String yzxshjl) {
+            this.yzxshjl = yzxshjl;
         }
 
         public String getJyxthdkjgs() {
@@ -328,11 +343,11 @@ public class ZxcxListBean extends BaseBean {
             this.jyxwjfl = jyxwjfl;
         }
 
-        public double getJyxblye() {
+        public String getJyxblye() {
             return jyxblye;
         }
 
-        public void setJyxblye(double jyxblye) {
+        public void setJyxblye(String jyxblye) {
             this.jyxblye = jyxblye;
         }
 
@@ -464,11 +479,11 @@ public class ZxcxListBean extends BaseBean {
             this.xykyyje = xykyyje;
         }
 
-        public double getFjyxblye() {
+        public String getFjyxblye() {
             return fjyxblye;
         }
 
-        public void setFjyxblye(double fjyxblye) {
+        public void setFjyxblye(String fjyxblye) {
             this.fjyxblye = fjyxblye;
         }
 
@@ -488,11 +503,11 @@ public class ZxcxListBean extends BaseBean {
             this.updateTime = updateTime;
         }
 
-        public double getFjyxyqje() {
+        public String getFjyxyqje() {
             return fjyxyqje;
         }
 
-        public void setFjyxyqje(double fjyxyqje) {
+        public void setFjyxyqje(String fjyxyqje) {
             this.fjyxyqje = fjyxyqje;
         }
 
@@ -512,6 +527,14 @@ public class ZxcxListBean extends BaseBean {
             this.xykzgyqcs = xykzgyqcs;
         }
 
+        public String getCs() {
+            return cs;
+        }
+
+        public void setCs(String cs) {
+            this.cs = cs;
+        }
+
         public String getCreateBy() {
             return createBy;
         }
@@ -526,6 +549,14 @@ public class ZxcxListBean extends BaseBean {
 
         public void setCreateTime(String createTime) {
             this.createTime = createTime;
+        }
+
+        public String getBlyyms() {
+            return blyyms;
+        }
+
+        public void setBlyyms(String blyyms) {
+            this.blyyms = blyyms;
         }
 
         public String getSxid() {
@@ -560,11 +591,11 @@ public class ZxcxListBean extends BaseBean {
             this.yqqj1 = yqqj1;
         }
 
-        public double getJyxyqje() {
+        public String getJyxyqje() {
             return jyxyqje;
         }
 
-        public void setJyxyqje(double jyxyqje) {
+        public void setJyxyqje(String jyxyqje) {
             this.jyxyqje = jyxyqje;
         }
 

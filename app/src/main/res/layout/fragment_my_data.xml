@@ -331,7 +331,7 @@
                         android:layout_marginLeft="@dimen/dp_17"
                         android:layout_marginRight="14dp"
                         android:layout_toRightOf="@id/tv_leave_a_message"
-                        android:background="@drawable/bg_bu_liang"
+                        android:background="@drawable/bg_bu_liang_hui"
                         android:padding="10dp">
 
                         <EditText
@@ -339,7 +339,55 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
+                            android:enabled="false"
                             android:hint="请描述不良原因"
+                            android:maxLength="200"
+                            android:textColor="@color/color_0d1730"
+                            android:textColorHint="@color/color_6f6f6f"
+                            android:textSize="13dp" />
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/ll_cs"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal"
+                    android:paddingBottom="18dp">
+
+                    <TextView
+                        android:id="@+id/tv_leave_a_message_cs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top"
+
+                        android:layout_marginTop="10dp"
+                        android:drawableLeft="@drawable/icon_left_xing"
+                        android:gravity="center"
+                        android:text="人工干预陈述"
+                        android:textColor="@color/color_0d1730"
+                        android:textSize="13dp" />
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_100"
+                        android:layout_marginLeft="@dimen/dp_17"
+                        android:layout_marginRight="14dp"
+                        android:layout_toRightOf="@id/tv_leave_a_message_cs"
+                        android:background="@drawable/bg_bu_liang"
+                        android:padding="10dp">
+
+                        <EditText
+                            android:id="@+id/et_cs"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:hint="陈述"
                             android:maxLength="200"
                             android:textColor="@color/color_0d1730"
                             android:textColorHint="@color/color_6f6f6f"

@@ -119,7 +119,7 @@ public class BasicInformationAdapter extends BaseQuickAdapter<BasicInformationBe
             if ("date".equals(item.getParamtype())) {
                 final TextView textView = helper.getView(R.id.tv_time);
                 if (ObjectUtils.isEmpty(item.getDefaultvalue())) {
-                    textView.setText("2099-12-31");
+                    textView.setText("");
                 } else {
                     textView.setText(item.getDefaultvalue());
                 }
