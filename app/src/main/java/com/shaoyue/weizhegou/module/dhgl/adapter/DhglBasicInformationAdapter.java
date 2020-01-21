@@ -65,6 +65,8 @@ DhglBasicInformationAdapter extends BaseQuickAdapter<BasicInformationBean.Record
                     return BasicInformationBean.EDIT_LARGE;
                 } else if ("select_chang".equals(entity.getParamtype())) {
                     return BasicInformationBean.SELECT_CHANGE;
+                } else if ("full".equals(entity.getParamtype())) {
+                    return BasicInformationBean.EDIT_FULL;
                 } else {
                     return BasicInformationBean.EDIT;
                 }
@@ -76,7 +78,9 @@ DhglBasicInformationAdapter extends BaseQuickAdapter<BasicInformationBean.Record
                 .registerItemType(BasicInformationBean.TIME, R.layout.item_time_kuang)
                 .registerItemType(BasicInformationBean.EDIT, R.layout.item_edit_kuang)
                 .registerItemType(BasicInformationBean.EDIT_LARGE, R.layout.item_edit_kuang_large)
+                .registerItemType(BasicInformationBean.EDIT_FULL, R.layout.item_edit_full)
                 .registerItemType(BasicInformationBean.SELECT_CHANGE, R.layout.item_select_chang_kuang);
+
     }
 
     @Override
@@ -100,7 +104,7 @@ DhglBasicInformationAdapter extends BaseQuickAdapter<BasicInformationBean.Record
             } else {
                 mDdvXB.setClickable(true);
             }
-            if ("国际行业分类".equals(item.getTitile())||"国标行业分类".equals(item.getTitile())) {
+            if ("国际行业分类".equals(item.getTitile()) || "国标行业分类".equals(item.getTitile())) {
                 mDdvXB.setSelectName(item.getDefaultvalue());
                 mDdvXB.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -147,8 +151,16 @@ DhglBasicInformationAdapter extends BaseQuickAdapter<BasicInformationBean.Record
 
             } else {
 
+
                 final EditText mDdvXB = helper.getView(R.id.et_name);
 
+                if ("blank".equals(item.getParamtype())) {
+                    mDdvXB.setVisibility(View.INVISIBLE);
+                    helper.setVisible(R.id.tv_name_title, false);
+                } else {
+                    mDdvXB.setVisibility(View.VISIBLE);
+                    helper.setVisible(R.id.tv_name_title, true);
+                }
                 if ("number".equals(item.getParamtype())) {
                     mDdvXB.setInputType(InputType.TYPE_CLASS_NUMBER);
 

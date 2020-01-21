@@ -294,6 +294,8 @@ public class shouXinSurveyFragment extends BaseAppFragment implements BGARefresh
      */
     private void setPopupBigPhoto() {
         popupBigPhotoview = getLayoutInflater().inflate(R.layout.popwindow_credit_application, null);
+        TextView tv = popupBigPhotoview.findViewById(R.id.tv_detail);
+        tv.setText("查看调查");
         popupBigPhotoview.findViewById(R.id.tv_detail).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -440,9 +442,22 @@ public class shouXinSurveyFragment extends BaseAppFragment implements BGARefresh
 
     @SingleClick
     @OnClick({R.id.sb_find, R.id.tv_more, R.id.sb_diaocha, R.id.iv_clear, R.id.sb_update, R.id.tv_dc_status
-            , R.id.tv_status})
+            , R.id.tv_status, R.id.tv_ckcj})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.tv_ckcj:
+                if (ObjectUtils.isNotEmpty(getSelect())) {
+                    if (ObjectUtils.isNotEmpty(getSelect().getId())) {
+                        //请求id 身份证
+                        SPUtils.getInstance().put(UserMgr.SP_APPLY_ID, getSelect().getSxid());
+                        SPUtils.getInstance().put(UserMgr.SP_ID_CARD, getSelect().getSxsfzh());
+                        UIHelper.showApplyCommonActivity(getActivity(), "查看详情");
+                    }
+                } else {
+                    ToastUtil.showBlackToastSucess("暂未选取数据");
+                }
+                break;
+
             case R.id.sb_diaocha:
                 if (ObjectUtils.isNotEmpty(getSelect())) {
                     if (ObjectUtils.isEmpty(getSelect().getSxlx())) {   //请求id 身份证

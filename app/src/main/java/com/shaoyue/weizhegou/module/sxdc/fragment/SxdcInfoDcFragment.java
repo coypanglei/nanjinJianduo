@@ -367,7 +367,8 @@ public class SxdcInfoDcFragment extends BaseAppFragment {
                     CeditApi.putDanbaoInfo(taskid, instid, new BaseCallback<BaseResponse<TiJiaoBean>>() {
                         @Override
                         public void onSucc(BaseResponse<TiJiaoBean> result) {
-                            UIHelper.showSxSpDialog(getActivity(), result.data);
+                            UIHelper.showSxSpDialog(getActivity(), result.data, false);
+                            
                         }
 
                         @Override

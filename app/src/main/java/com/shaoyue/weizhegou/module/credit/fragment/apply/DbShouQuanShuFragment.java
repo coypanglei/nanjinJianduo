@@ -25,6 +25,7 @@ import com.shaoyue.weizhegou.entity.cedit.OcrBean;
 import com.shaoyue.weizhegou.entity.cedit.QianziBean;
 import com.shaoyue.weizhegou.event.OkOrCancelEvent;
 import com.shaoyue.weizhegou.manager.AppMgr;
+import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.util.ToastUtil;
 import com.wildma.pictureselector.PictureSelector;
 
@@ -105,8 +106,7 @@ public class DbShouQuanShuFragment extends BaseTitleFragment {
                         if (i == 0) {
                             mTitles.add("申请人");
 
-
-                            if (ObjectUtils.isNotEmpty(mlist.get(0).getId()) || "查看详情".equals(SPUtils.getInstance().getString("status"))) {
+                            if (ObjectUtils.isNotEmpty(mlist.get(0).getId()) || "查看详情".equals(SPUtils.getInstance().getString("status")) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
                                 sbEdit.setVisibility(View.GONE);
                                 sbSc.setVisibility(View.GONE);
                             } else {
@@ -142,7 +142,6 @@ public class DbShouQuanShuFragment extends BaseTitleFragment {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
-
 
 
     private QianziBean qianziBean;

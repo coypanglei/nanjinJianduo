@@ -10,26 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
         android:background="@color/white">
-        <com.libracore.lib.widget.StateButton
-            android:id="@+id/sb_edit"
-            android:layout_width="83dp"
-            android:layout_height="25dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dp_27"
-            android:drawableLeft="@drawable/icon_sb_copy"
-            android:paddingLeft="6dp"
-            android:paddingTop="1dp"
-            android:paddingRight="6dp"
-            android:paddingBottom="1dp"
-            android:text="保存"
-            android:textSize="12dp"
-            app:normalBackgroundColor="@color/color_23a7f0"
-            app:normalTextColor="@color/white"
-            app:pressedBackgroundColor="@color/color_48b2ed"
-            app:pressedTextColor="@color/white"
-            app:radius="2dp" />
-
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"

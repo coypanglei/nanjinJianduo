@@ -1,6 +1,5 @@
 package com.shaoyue.weizhegou.api.remote;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.google.gson.JsonObject;
@@ -242,6 +241,20 @@ public class CeditApi {
     // 初审结果
     private static final String CSJG_CX = "jeecg-boot/business/sxsqCsjg/list";
 
+    //现金流编辑
+    private static final String XJLBJ = "jeecg-boot/business/sxdcXjlpl/saveOrUpdate";
+
+    /**
+     * 编辑现金流
+     *
+     * @param params
+     * @param callback
+     * @param tag
+     */
+    public static void editXjl(Map<String, String> params, BaseCallback<BaseResponse<Void>> callback, Object tag) {
+        params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        ApiHttpClient.putJson(XJLBJ, params, callback, tag);
+    }
 
     /**
      * 初审结果
@@ -279,6 +292,7 @@ public class CeditApi {
 //        params.put("token", UserMgr.getInstance().getSessionId());
         params.put("zjhm", SPUtils.getInstance().getString(UserMgr.SP_ID_CARD));
         params.put("jcjd", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
         ApiHttpClient.post(XCJY_XJL, params, callback, tag);
     }
 
@@ -300,11 +314,12 @@ public class CeditApi {
      * @param tag
      */
     public static void putSplc(Map<String, String> params, BaseCallback<BaseResponse<Void>> callback, Object tag) {
-        LogUtils.e(SPUtils.getInstance().getString(UserMgr.SP_DC_TASKID));
         params.put("taskId", SPUtils.getInstance().getString(UserMgr.SP_DC_TASKID));
         params.put("instid", SPUtils.getInstance().getString(UserMgr.SP_DC_INSTID));
         params.put("sxsqid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
         ApiHttpClient.postJson(LCSP_PROCESS, params, callback, tag);
+
+        
     }
 
     /**
@@ -473,6 +488,7 @@ public class CeditApi {
         params.put("pageSize", pageSize);
         ApiHttpClient.post(DANBAO_FENXI_ZIRAN, params, callback, tag);
     }
+
     /**
      * 编辑授信申请单
      *
@@ -593,6 +609,22 @@ public class CeditApi {
         if (ObjectUtils.isNotEmpty(category)) {
             params.put("category", category);
         }
+        ApiHttpClient.post(INFO_LISTALL, params, callback, tag);
+    }
+
+    /**
+     * 获取可配置参数
+     *
+     * @param callback
+     * @param tag
+     */
+    public static void getListAll(String type, String category, String title, BaseCallback<BaseResponse<BasicInformationBean>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("type", type);
+        if (ObjectUtils.isNotEmpty(category)) {
+            params.put("category", category);
+        }
+        params.put("title", title);
         ApiHttpClient.post(INFO_LISTALL, params, callback, tag);
     }
 

@@ -285,7 +285,6 @@ public class shouXinShenQingFragment extends BaseAppFragment implements BGARefre
                 initData();
                 break;
             case R.id.sb_application:
-
                 SPUtils.getInstance().put(UserMgr.SP_DC_TASKID, "");
                 SPUtils.getInstance().put(UserMgr.SP_DC_INSTID, "");
                 UIHelper.showIDCardDialog(getActivity());

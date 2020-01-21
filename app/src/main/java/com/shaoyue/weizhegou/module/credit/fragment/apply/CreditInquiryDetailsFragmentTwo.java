@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.libracore.lib.widget.StateButton;
@@ -173,44 +172,49 @@ public class CreditInquiryDetailsFragmentTwo extends BaseAppFragment {
                 }
 
                 if ("申请人征信数据".equals(title)) {
-                    myHangBean = result.data.getRecords().get(0);
-                    sbSave.setVisibility(View.VISIBLE);
-                    llWhpj.setVisibility(View.VISIBLE);
-                    etBuliang.setText(myHangBean.getBlyyms());
-                    etCs.setText(myHangBean.getCs());
-                    //提示信息
-                    if (ObjectUtils.isNotEmpty(myHangBean.getDescription())) {
-                        tvError.setVisibility(View.VISIBLE);
-                        llCs.setVisibility(View.VISIBLE);
-                        tvError.setText(myHangBean.getDescription());
-                    }
-                    //通过未通过
-                    if ("未通过".equals(myHangBean.getZxshjl())) {
-                        Drawable drawable = getResources().getDrawable(R.drawable.icon_left_star_black);
-                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                    if (ObjectUtils.isNotEmpty(result.data.getRecords())) {
+                        if (ObjectUtils.isNotEmpty(result.data.getRecords().get(0))) {
+                            myHangBean = result.data.getRecords().get(0);
 
-                        tvTg.setCompoundDrawables(drawable, null, null, null);
-                        tvTg.setTextColor(getResources().getColor(R.color.color_b9b8b8));
-                        Drawable drawable2 = getResources().getDrawable(R.drawable.icon_left_blue);
-                        drawable2.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                            sbSave.setVisibility(View.VISIBLE);
+                            llWhpj.setVisibility(View.VISIBLE);
+                            etBuliang.setText(myHangBean.getBlyyms());
+                            etCs.setText(myHangBean.getCs());
+                            //提示信息
+                            if (ObjectUtils.isNotEmpty(myHangBean.getDescription())) {
+                                tvError.setVisibility(View.VISIBLE);
+                                llCs.setVisibility(View.VISIBLE);
+                                tvError.setText(myHangBean.getDescription());
+                            }
+                            //通过未通过
+                            if ("未通过".equals(myHangBean.getZxshjl())) {
+                                Drawable drawable = getResources().getDrawable(R.drawable.icon_left_star_black);
+                                drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
 
-                        tvWtg.setCompoundDrawables(drawable2, null, null, null);
-                        tvWtg.setTextColor(getResources().getColor(R.color.color_49a0ed));
-                    } else {
-                        Drawable drawable = getResources().getDrawable(R.drawable.icon_left_star_black);
-                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                                tvTg.setCompoundDrawables(drawable, null, null, null);
+                                tvTg.setTextColor(getResources().getColor(R.color.color_b9b8b8));
+                                Drawable drawable2 = getResources().getDrawable(R.drawable.icon_left_blue);
+                                drawable2.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
 
-                        tvWtg.setCompoundDrawables(drawable, null, null, null);
-                        tvWtg.setTextColor(getResources().getColor(R.color.color_b9b8b8));
-                        Drawable drawable2 = getResources().getDrawable(R.drawable.icon_left_blue);
-                        drawable2.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                                tvWtg.setCompoundDrawables(drawable2, null, null, null);
+                                tvWtg.setTextColor(getResources().getColor(R.color.color_49a0ed));
+                            } else {
+                                Drawable drawable = getResources().getDrawable(R.drawable.icon_left_star_black);
+                                drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
 
-                        tvTg.setCompoundDrawables(drawable2, null, null, null);
-                        tvTg.setTextColor(getResources().getColor(R.color.color_49a0ed));
+                                tvWtg.setCompoundDrawables(drawable, null, null, null);
+                                tvWtg.setTextColor(getResources().getColor(R.color.color_b9b8b8));
+                                Drawable drawable2 = getResources().getDrawable(R.drawable.icon_left_blue);
+                                drawable2.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+
+                                tvTg.setCompoundDrawables(drawable2, null, null, null);
+                                tvTg.setTextColor(getResources().getColor(R.color.color_49a0ed));
+                            }
+                        }
                     }
                 }
 
-                if ("查看详情".equals(SPUtils.getInstance().getString("status"))){
+                if ("查看详情".equals(SPUtils.getInstance().getString("status"))) {
                     sbSave.setVisibility(View.GONE);
                 }
                 mList.clear();
@@ -314,7 +318,7 @@ public class CreditInquiryDetailsFragmentTwo extends BaseAppFragment {
                 break;
             case R.id.tv_wtg:
                 xtshjl = "未通过";
-                LogUtils.e(myHangBean.getYzxshjl());
+
                 if ("通过".equals(myHangBean.getYzxshjl())) {
                     tvError.setVisibility(View.VISIBLE);
                     llCs.setVisibility(View.VISIBLE);

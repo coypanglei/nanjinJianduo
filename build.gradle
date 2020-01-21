@@ -38,8 +38,8 @@ task clean(type: Delete) {
 
 ext {
 
-    versionName = "1.0.10"
-    versionCode = 10
+    versionName = "1.0.11"
+    versionCode = 11
 
     compileSdkVersion = 28
 

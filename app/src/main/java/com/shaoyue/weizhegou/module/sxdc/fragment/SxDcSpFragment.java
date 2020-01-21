@@ -245,7 +245,12 @@ public class SxDcSpFragment extends BaseAppFragment implements BGARefreshLayout.
                         CeditApi.putDanbaoInfo(getSelect().getTaskid(), getSelect().getInstid(), new BaseCallback<BaseResponse<TiJiaoBean>>() {
                             @Override
                             public void onSucc(BaseResponse<TiJiaoBean> result) {
-                                UIHelper.showSxSpDialog(getActivity(), result.data);
+                                if("分发岗".equals(getSelect().getDqhj())){
+                                    UIHelper.showSxSpDialog(getActivity(), result.data, true);
+                                }else {
+                                    UIHelper.showSxSpDialog(getActivity(), result.data, false);
+                                }
+
                             }
 
                             @Override

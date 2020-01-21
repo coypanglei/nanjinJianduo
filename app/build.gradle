@@ -156,7 +156,7 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'org.aspectj:aspectjrt:1.8.10'
+    implementation 'org.aspectj:aspectjrt:1.8.10'
     //noinspection GradleCompatible
     implementation "com.android.support:appcompat-v7:$supportVersion"
     implementation "com.android.support:support-v4:$supportVersion"
@@ -276,5 +276,8 @@ dependencies {
     implementation 'top.zibin:Luban:1.1.8'
     //表格
     implementation 'com.github.huangyanbin:SmartTable:2.2.0'
+    //xcrash 异常
+    implementation 'com.iqiyi.xcrash:xcrash-android-lib:2.4.6'
+
 }
 

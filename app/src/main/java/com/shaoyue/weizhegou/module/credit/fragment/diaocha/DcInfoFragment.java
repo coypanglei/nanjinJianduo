@@ -22,7 +22,6 @@ import com.shaoyue.weizhegou.module.credit.adapter.shenqing.MenuAdapter;
 import com.shaoyue.weizhegou.module.credit.fragment.apply.CreditInquiryFragment;
 import com.shaoyue.weizhegou.module.credit.fragment.apply.DiyadanbaoFragment;
 import com.shaoyue.weizhegou.module.credit.fragment.apply.FamilyInfoFragment;
-import com.shaoyue.weizhegou.module.credit.fragment.apply.MyDataFragment;
 import com.shaoyue.weizhegou.module.credit.fragment.apply.VideoMaterialFragment;
 import com.shaoyue.weizhegou.module.sxdc.fragment.BasicInformationDcFragment;
 import com.shaoyue.weizhegou.module.sxdc.fragment.SxdcInfoDcFragment;
@@ -151,11 +150,11 @@ public class DcInfoFragment extends BaseTitleFragment {
             } else if ("基本信息".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(BasicInformationDcFragment.newInstance());
             } else if ("系统数据".equals(mMenuList.get(i).getTitle())) {
-                fragmentList.add(MyDataFragment.newInstance());
+                fragmentList.add(MyDataDcFragment.newInstance());
             } else if ("担保抵押".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(DiyadanbaoFragment.newInstance());
             } else if ("现金流".equals(mMenuList.get(i).getTitle())) {
-                fragmentList.add(DcMoneyFragment.newInstance());
+                fragmentList.add(DcMoneyLiuFragment.newInstance());
             } else if ("评级指标".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(DcPjzbFragment.newInstance());
             } else if ("实地调查".equals(mMenuList.get(i).getTitle())) {

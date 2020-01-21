@@ -26,6 +26,7 @@ import com.shaoyue.weizhegou.entity.cedit.RefreshBean;
 import com.shaoyue.weizhegou.entity.user.MainClickBean;
 import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.MenuAdapter;
+import com.shaoyue.weizhegou.module.credit.fragment.diaocha.MyDataDcFragment;
 import com.shaoyue.weizhegou.widget.NoScrollViewPager;
 
 import org.greenrobot.eventbus.EventBus;
@@ -111,7 +112,7 @@ public class ApplyInfoFragment extends BaseTitleFragment {
             } else if ("基本信息".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(BasicInformationFragment.newInstance());
             } else if ("我行数据".equals(mMenuList.get(i).getTitle())) {
-                fragmentList.add(MyDataFragment.newInstance());
+                fragmentList.add(MyDataDcFragment.newInstance());
             } else if ("担保抵押".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(DiyadanbaoFragment.newInstance());
             } else if ("初审结果".equals(mMenuList.get(i).getTitle())) {

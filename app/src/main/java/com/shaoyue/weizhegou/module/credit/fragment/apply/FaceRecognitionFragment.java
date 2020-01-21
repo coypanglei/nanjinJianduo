@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.shaoyue.weizhegou.R;
@@ -31,6 +32,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.List;
 
 import butterknife.BindView;
@@ -86,7 +88,19 @@ public class FaceRecognitionFragment extends BaseAppFragment {
         super.onResume();
         initView();
     }
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
+        mFaceBeans =(List<FaceBean>) getArguments().getSerializable("key");
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        getArguments().putSerializable("key", (Serializable) mFaceBeans);
+    }
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(RefreshBean event) {
         initView();
@@ -136,8 +150,10 @@ public class FaceRecognitionFragment extends BaseAppFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(final OcrBean ocrBean) {
+        LogUtils.e(ocrBean);
         /*结果回调*/
         if (ocrBean.getResultCode() == 1004 || ocrBean.getResultCode() == 1005) {
+            LogUtils.e(mFaceBeans);
             if (ObjectUtils.isEmpty(mFaceBeans)) {
                 return;
             }

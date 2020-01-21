@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.shaoyue.weizhegou.base.BaseCommonActivity;
 import com.shaoyue.weizhegou.base.BaseFragment;
 import com.shaoyue.weizhegou.entity.cedit.OcrBean;
@@ -46,6 +47,9 @@ public class ApplyInfoActivity extends BaseCommonActivity {
             case 1008:
                 //我这里使用的是根据结果码获取数据，然后加上下面一句代码，其
                 //他的什么都不用做
+
+                LogUtils.e(requestCode);
+                LogUtils.e(data);
                 EventBus.getDefault().post(new OcrBean(data, requestCode));
                 break;
 

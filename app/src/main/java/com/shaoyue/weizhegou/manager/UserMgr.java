@@ -1,7 +1,6 @@
 package com.shaoyue.weizhegou.manager;
 
 
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.shaoyue.weizhegou.api.callback.BaseCallback;
@@ -249,13 +248,12 @@ UserMgr {
 
                 updateLoginInfo(result.data);
                 callback.complete(0, "登录成功");
-                LogUtils.e(result.msg);
+
             }
 
             @Override
             public void onFail(ApiException apiError) {
-                LogUtils.e(apiError.getErrCode());
-                LogUtils.e(apiError.getErrMsg());
+
                 callback.complete(apiError.getErrCode(), apiError.getErrMsg());
             }
         }, object);

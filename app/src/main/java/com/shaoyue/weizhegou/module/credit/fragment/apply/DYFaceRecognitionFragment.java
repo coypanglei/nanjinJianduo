@@ -22,6 +22,7 @@ import com.shaoyue.weizhegou.entity.cedit.FaceBean;
 import com.shaoyue.weizhegou.entity.cedit.OcrBean;
 import com.shaoyue.weizhegou.manager.AppMgr;
 import com.shaoyue.weizhegou.manager.DomainMgr;
+import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.util.GlideNewImageLoader;
 import com.shaoyue.weizhegou.util.ToastUtil;
 import com.wildma.pictureselector.PictureSelector;
@@ -104,7 +105,7 @@ public class DYFaceRecognitionFragment extends BaseTitleFragment {
      */
     private void initView() {
 
-        CeditApi.findFaceInfo(sfzh,new BaseCallback<BaseResponse<List<FaceBean>>>() {
+        CeditApi.findFaceInfo(sfzh, new BaseCallback<BaseResponse<List<FaceBean>>>() {
             @Override
             public void onSucc(BaseResponse<List<FaceBean>> result) {
                 LogUtils.e(result.data);
@@ -228,7 +229,7 @@ public class DYFaceRecognitionFragment extends BaseTitleFragment {
 
     @OnClick({R.id.ll_gr, R.id.ll_po})
     public void onViewClicked(View view) {
-        if ("查看详情".equals(SPUtils.getInstance().getString("status"))) {
+        if ("查看详情".equals(SPUtils.getInstance().getString("status")) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
             return;
         }
         switch (view.getId()) {

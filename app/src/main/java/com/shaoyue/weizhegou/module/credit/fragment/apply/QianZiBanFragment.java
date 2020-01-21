@@ -1,11 +1,15 @@
 package com.shaoyue.weizhegou.module.credit.fragment.apply;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -16,13 +20,16 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.base.BaseAppFragment;
 import com.shaoyue.weizhegou.entity.cedit.QianziBean;
+import com.shaoyue.weizhegou.entity.cedit.ScreenObject;
 import com.shaoyue.weizhegou.entity.cedit.VideoMaterialBean;
 import com.shaoyue.weizhegou.entity.user.MainClickBean;
 import com.shaoyue.weizhegou.event.OkOrCancelEvent;
 import com.shaoyue.weizhegou.manager.DomainMgr;
+import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.QianzibanAdapter;
 import com.shaoyue.weizhegou.router.UIHelper;
 import com.shaoyue.weizhegou.util.GlideNewImageLoader;
+import com.shaoyue.weizhegou.util.ThreadUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -35,6 +42,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 
 public class QianZiBanFragment extends BaseAppFragment {
@@ -58,8 +66,11 @@ public class QianZiBanFragment extends BaseAppFragment {
     ImageView ivImg;
     @BindView(R.id.sc_all)
     ScrollView scAll;
+    @BindView(R.id.ll_9)
+    LinearLayout ll9;
+    Unbinder unbinder;
 
-
+    private Bitmap bitmap;
     private List<MainClickBean> mlist = new ArrayList<>();
     private int title;
     private QianziBean qianziBean;
@@ -106,6 +117,14 @@ public class QianZiBanFragment extends BaseAppFragment {
             if (qianziBean.getJs().equals(event.getJs())) {
                 qianziBean = event;
                 initData();
+                ThreadUtil.runInUIThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (ObjectUtils.isNotEmpty(qianziBean.getSqrqm()) && ObjectUtils.isNotEmpty(qianziBean.getSqrjbkhjlqm())&&ObjectUtils.isEmpty(qianziBean.getUploadImg())) {
+                            EventBus.getDefault().post(new ScreenObject(scrollViewScreenShot(ll9), qianziBean.getJs()));
+                        }
+                    }
+                }, 1000);
             }
         }
     }
@@ -156,6 +175,25 @@ public class QianZiBanFragment extends BaseAppFragment {
 //                adapter.notifyDataSetChanged();
             }
         });
+        //ViewTreeObserver.OnTouchModeChangeListener
+//        scAll.getViewTreeObserver().OnTouchModeChangeListener
+//                bitmap = Bitmap.createBitmap(scAll.getWidth(), scAll.getChildAt(0).getHeight(), Bitmap.Config.RGB_565);
+//
+//                final Canvas canvas = new Canvas(bitmap);
+//                scAll.draw(canvas);
+
+//        int h = 0;
+//        Bitmap bitmap = null;
+//        for (int i = 0; i < scrollView.getChildCount(); i++) {
+//            h += scrollView.getChildAt(i).getHeight();
+//            scrollView.getChildAt(i).setBackgroundColor(Color.parseColor("#ffffff"));
+//        }
+//        bitmap = Bitmap.createBitmap(scrollView.getWidth(), h, Bitmap.Config.RGB_565);
+//        final Canvas canvas = new Canvas(bitmap);
+//        scrollView.draw(canvas);
+//        return bitmap;
+
+
         initData();
     }
 
@@ -163,6 +201,7 @@ public class QianZiBanFragment extends BaseAppFragment {
      * 刷新数据
      */
     private void initData() {
+
         //签字版上传图片
 //        LogUtils.e(qianziBean.getUploadImg());
         if (ObjectUtils.isNotEmpty(qianziBean.getUploadImg())) {
@@ -176,7 +215,7 @@ public class QianZiBanFragment extends BaseAppFragment {
         if (ObjectUtils.isNotEmpty(qianziBean)) {
             mTvSfzh.setText("证件号码:" + qianziBean.getZjhm());
 
-            
+
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");// HH:mm:ss
 //获取当前时间
             Date date = new Date(System.currentTimeMillis());
@@ -203,6 +242,7 @@ public class QianZiBanFragment extends BaseAppFragment {
                 mAdapter.setNewData(mlist);
                 mAdapter.notifyDataSetChanged();
             }
+
 
         }
     }
@@ -231,20 +271,35 @@ public class QianZiBanFragment extends BaseAppFragment {
                 UIHelper.showPicDialog(getActivity(), videoMaterialBean);
                 break;
             case R.id.iv_geren_qian:
-                if ("查看详情".equals(SPUtils.getInstance().getString("status")) || (ObjectUtils.isNotEmpty(qianziBean.getId()))) {
+                if ("查看详情".equals(SPUtils.getInstance().getString("status")) || (ObjectUtils.isNotEmpty(qianziBean.getId())) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
                     return;
                 }
                 qianziBean.setType(true);
                 UIHelper.showXezibanDialog(getActivity(), qianziBean);
                 break;
             case R.id.iv_yh:
-                if ("查看详情".equals(SPUtils.getInstance().getString("status")) || (ObjectUtils.isNotEmpty(qianziBean.getId()))) {
+                if ("查看详情".equals(SPUtils.getInstance().getString("status")) || (ObjectUtils.isNotEmpty(qianziBean.getId())) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
                     return;
                 }
                 qianziBean.setType(false);
                 UIHelper.showXezibanDialog(getActivity(), qianziBean);
+
                 break;
         }
+    }
+
+    /**
+     * 获取scrollview的截屏
+     */
+    public static Bitmap scrollViewScreenShot(LinearLayout scrollView) {
+
+
+        Bitmap bitmap = null;
+        scrollView.setBackgroundColor(Color.parseColor("#F5F5F5"));
+        bitmap = Bitmap.createBitmap(scrollView.getWidth(),scrollView.getHeight(), Bitmap.Config.RGB_565);
+        final Canvas canvas = new Canvas(bitmap);
+        scrollView.draw(canvas);
+        return bitmap;
     }
 
 

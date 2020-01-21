@@ -183,11 +183,11 @@ public class UIHelper {
      *
      * @param activity
      */
-    public static void showSxSpDialog(FragmentActivity activity, TiJiaoBean id) {
+    public static void showSxSpDialog(FragmentActivity activity, TiJiaoBean id,boolean qianzi) {
         FragmentManager fm = activity.getSupportFragmentManager();
         Fragment fragment = fm.findFragmentByTag(SX_SP_DIALOG);
         if (fragment == null) {
-            DialogFragment dialog = SxSpDialogFragment.newInstance(id);
+            DialogFragment dialog = SxSpDialogFragment.newInstance(id,qianzi);
             dialog.show(fm, SX_SP_DIALOG);
         }
     }
@@ -881,6 +881,8 @@ public class UIHelper {
     }
 
     /**
+     *
+     * 
      * 支付失败
      *
      * @param activity

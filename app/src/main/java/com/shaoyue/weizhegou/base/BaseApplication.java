@@ -6,21 +6,17 @@ import android.support.multidex.MultiDexApplication;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.Utils;
+
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.https.HttpsUtils;
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
-
 import com.lzy.okgo.model.HttpHeaders;
 import com.shaoyue.weizhegou.BuildConfig;
 import com.shaoyue.weizhegou.common.CommConfig;
 import com.shaoyue.weizhegou.common.CommParam;
-import com.shaoyue.weizhegou.manager.UserMgr;
 import com.umeng.commonsdk.UMConfigure;
-import com.umeng.message.IUmengRegisterCallback;
-import com.umeng.message.PushAgent;
-import com.umeng.socialize.PlatformConfig;
 
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -59,16 +55,7 @@ public class BaseApplication extends MultiDexApplication {
         // 友盟初始化
         initUmeng();
 
-//        // 初始化proxy sdk
-//        SoProxy.getInstance().init(this);
-//        SoProxy.getInstance().setDNS("114.114.114.114");
 
-//        if (LeakCanary.isInAnalyzerProcess(this)) {
-//            // This process is dedicated to LeakCanary for heap analysis.
-//            // You should not init your app in this process.
-//            return;
-//        }
-//        LeakCanary.install(this);
     }
 
     /**
@@ -77,6 +64,8 @@ public class BaseApplication extends MultiDexApplication {
     private void initLog() {
         LogUtils.getConfig().setLogSwitch(BuildConfig.DEBUG);
     }
+
+
 
     /**
      * 初始化HTTP模块
@@ -121,27 +110,27 @@ public class BaseApplication extends MultiDexApplication {
      * 友盟初始化
      */
     private void initUmeng() {
-        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, "c6de5c99eb5bf05c2f5ad51475d19120");
+        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, "");
         // 日志开关
         UMConfigure.setLogEnabled(true);
         // 日志加密
         UMConfigure.setEncryptEnabled(true);
-        PlatformConfig.setWeixin(BuildConfig.WX_APP_ID, "8e6948e866422cec73cda41c22e1efa5");
-        PushAgent mPushAgent = PushAgent.getInstance(this);
-//注册推送服务，每次调用register方法都会回调该接口
-        mPushAgent.register(new IUmengRegisterCallback() {
-            @Override
-            public void onSuccess(String deviceToken) {
-                LogUtils.e(deviceToken);
-                UserMgr.getInstance().setmDeviceToken(deviceToken);
-                //注册成功会返回device token
-            }
-
-            @Override
-            public void onFailure(String s, String s1) {
-
-            }
-        });
+//        PlatformConfig.setWeixin(BuildConfig.WX_APP_ID, "8e6948e866422cec73cda41c22e1efa5");
+//        PushAgent mPushAgent = PushAgent.getInstance(this);
+////注册推送服务，每次调用register方法都会回调该接口
+//        mPushAgent.register(new IUmengRegisterCallback() {
+//            @Override
+//            public void onSuccess(String deviceToken) {
+//                LogUtils.e(deviceToken);
+//                UserMgr.getInstance().setmDeviceToken(deviceToken);
+//                //注册成功会返回device token
+//            }
+//
+//            @Override
+//            public void onFailure(String s, String s1) {
+//
+//            }
+//        });
 
     }
 

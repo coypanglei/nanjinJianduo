@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.api.callback.BaseCallback;
@@ -79,7 +80,7 @@ public class MainActivity extends BaseAppActivity {
             public void onSucc(BaseResponse<List<XtPerssionBean>> result) {
 
                 mNavigationAdapter.setNewData(result.data);
-
+                LogUtils.e(result.data.get(10));
             }
         }, this);
 

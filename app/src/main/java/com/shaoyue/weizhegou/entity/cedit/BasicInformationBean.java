@@ -17,7 +17,7 @@ public class BasicInformationBean extends BaseBean {
     public static final int SELECT_CHANGE = 5;
 
     public static final int TITLE = 4;
-
+    public static final int EDIT_FULL = 6;
 
     /**
      * total : 17

@@ -9,8 +9,6 @@ import android.support.v4.app.DialogFragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,6 +30,7 @@ import com.shaoyue.weizhegou.entity.cedit.applyBean;
 import com.shaoyue.weizhegou.manager.AppMgr;
 import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.router.UIHelper;
+import com.shaoyue.weizhegou.util.DialogInitUtil;
 import com.shaoyue.weizhegou.util.ToastUtil;
 import com.shaoyue.weizhegou.widget.datepicker.CustomDatePicker;
 import com.shaoyue.weizhegou.widget.datepicker.DateFormatUtils;
@@ -82,7 +81,7 @@ public class ProvincialIdentificationDialogFragment extends DialogFragment {
         View view = inflater.inflate(R.layout.dialog_id_card_identification, null);
         unbinder = ButterKnife.bind(this, view);
         initDatePicker();
-        initView(dialog, view);
+        DialogInitUtil.initView(dialog, view);
 
         return dialog;
     }
@@ -111,28 +110,6 @@ public class ProvincialIdentificationDialogFragment extends DialogFragment {
 
     }
 
-    /**
-     * 初始化View
-     *
-     * @param dialog
-     * @param view
-     */
-    private void initView(Dialog dialog, View view) {
-
-        //动画
-        dialog.getWindow().getAttributes().windowAnimations = R.style.dialogAnim;
-
-        Window window = dialog.getWindow();
-//// 把 DecorView 的默认 padding 取消，同时 DecorView 的默认大小也会取消
-        WindowManager.LayoutParams layoutParams = window.getAttributes();
-// 设置宽度
-        layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
-        layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        window.setAttributes(layoutParams);
-// 给 DecorView 设置背景颜色，很重要，不然导致 Dialog 内容显示不全，有一部分内容会充当 padding，上面例子有举出
-        dialog.setContentView(view, layoutParams);
-        dialog.setCanceledOnTouchOutside(false);
-    }
 
     @Override
     public void onDestroyView() {
@@ -144,7 +121,7 @@ public class ProvincialIdentificationDialogFragment extends DialogFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(OcrBean ocrBean) {
-
+        LogUtils.e(ocrBean.getData());
         /*结果回调*/
         if (ocrBean.getResultCode() == 1001) {
             //4m大小 支持
@@ -255,8 +232,11 @@ public class ProvincialIdentificationDialogFragment extends DialogFragment {
     }
 
 
+
     @OnClick({R.id.iv_zheng, R.id.iv_fan, R.id.iv_close, R.id.tv_shenqing, R.id.tv_restart, R.id.et_start_time})
     public void onViewClicked(View view) {
+
+
         switch (view.getId()) {
             case R.id.iv_zheng:
                 /**

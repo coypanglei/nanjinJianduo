@@ -17,6 +17,7 @@ public class MyHangBean extends BaseBean {
      * pages : 1
      */
 
+
     private int total;
     private int size;
     private int current;
@@ -130,7 +131,16 @@ public class MyHangBean extends BaseBean {
          * bdqb : 未开通
          * dwdb : 11.0
          */
+        @SerializedName("hzgx")
+        private String hzgx;
 
+        public String getHzgx() {
+            return hzgx;
+        }
+
+        public void setHzgx(String hzgx) {
+            this.hzgx = hzgx;
+        }
 
         @SerializedName("sxrq")
         private String sxrq;

@@ -84,19 +84,32 @@
                 android:layout_width="83dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginRight="12dp"
+
                 android:drawableLeft="@drawable/icon_edit_bt_white"
                 android:paddingLeft="6dp"
                 android:paddingTop="1dp"
                 android:paddingRight="6dp"
                 android:paddingBottom="1dp"
-                android:text="修改类型"
+                android:text="修改模型"
                 android:textSize="12dp"
                 app:normalBackgroundColor="@color/color_ff9e4d"
                 app:normalTextColor="@color/white"
                 app:pressedBackgroundColor="@color/color_ff9e4d"
                 app:pressedTextColor="@color/white"
                 app:radius="2dp" />
+
+            <TextView
+                android:id="@+id/tv_ckcj"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="12dp"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:autoLink="all"
+                android:gravity="center"
+                android:text="查看申请"
+                android:textColor="@color/color_23a7f0"
+                android:textSize="@dimen/dp_13" />
 
 
         </LinearLayout>

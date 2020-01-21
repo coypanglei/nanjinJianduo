@@ -80,6 +80,10 @@ public class ZhuChaFragment extends DialogFragment {
             tvMyInfo.setText(tiJiaoBean.getNextNodeName());
         }
         List<Map<String, Object>> dataList = new ArrayList<>();
+//        if ("
+//        分发岗".equals(tiJiaoBean.getCurrentTaskName())) {
+//            ivQianzi.setVisibility(View.GONE);
+//        }
         if (ObjectUtils.isNotEmpty(tiJiaoBean.isSelectApprovalUser()) && tiJiaoBean.isSelectApprovalUser()) {
             rlSelect.setVisibility(View.VISIBLE);
             if (ObjectUtils.isNotEmpty(tiJiaoBean.getUsers())) {
@@ -190,7 +194,7 @@ public class ZhuChaFragment extends DialogFragment {
                     ToastUtil.showBlackToastSucess("未填写下环节审核人员");
                     return;
                 }
-                if (ObjectUtils.isEmpty(img)) {
+                if (ObjectUtils.isEmpty(img) ) {
                     ToastUtil.showBlackToastSucess("未签名");
                     return;
                 }

@@ -9,6 +9,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.entity.BasicTitle;
+import com.shaoyue.weizhegou.entity.cedit.BasicInformationBean;
 import com.shaoyue.weizhegou.module.dhgl.adapter.DhglBasicInformationAdapter;
 
 /**
@@ -41,12 +42,32 @@ public class BasicInformationAdapter extends BaseQuickAdapter<BasicTitle, BaseVi
         mAdapter = new DhglBasicInformationAdapter();
         mAdapter.setActivity(getActivity());
         RecyclerView mIdJiben = helper.getView(R.id.ry);
-        mIdJiben.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+        GridLayoutManager layoutManage = new GridLayoutManager(getActivity(), 3);
+
+
+        mIdJiben.setLayoutManager(layoutManage);
         mIdJiben.setAdapter(mAdapter);
+        layoutManage.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                BasicInformationBean.RecordsBean bean = item.getMlist().get(position);
+                int count = 1;
+
+
+                if ("full".equals(bean.getParamtype())) {
+
+                    count = 3;
+                } else {
+                    count = 1;
+                }
+                return count;
+
+
+            }
+        });
         mIdJiben.setNestedScrollingEnabled(false);//禁止滑动
         //优化嵌套卡顿
         mIdJiben.setHasFixedSize(true);
-        mIdJiben.setNestedScrollingEnabled(false);
         mIdJiben.setItemViewCacheSize(600);
         RecyclerView.RecycledViewPool recycledViewPool = new
                 RecyclerView.RecycledViewPool();

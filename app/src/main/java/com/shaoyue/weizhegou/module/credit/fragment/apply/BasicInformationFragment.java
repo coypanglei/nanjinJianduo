@@ -75,9 +75,7 @@ public class BasicInformationFragment extends BaseAppFragment {
 
 
     public static BasicInformationFragment newInstance() {
-
         Bundle args = new Bundle();
-
         BasicInformationFragment fragment = new BasicInformationFragment();
         fragment.setArguments(args);
         return fragment;
@@ -127,9 +125,8 @@ public class BasicInformationFragment extends BaseAppFragment {
 
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(final AddressSelectBean addressSelectBean) {
+    public void onMessageEvent(final AddressSelectBean addressSelectBean){
         List<BasicTitle> list = mAdapter.getData();
-
         if (ObjectUtils.isNotEmpty(list)) {
             for (BasicTitle title : list) {
                 for (BasicInformationBean.RecordsBean bean : title.getMlist()) {
@@ -144,13 +141,10 @@ public class BasicInformationFragment extends BaseAppFragment {
             mAdapter.setNewData(list);
             mAdapter.notifyDataSetChanged();
         }
-
-
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(final TimeSelect timeSelect) {
-
         if (ObjectUtils.isNotEmpty(timeSelect.getTime())) {
             mDatePicker.show(timeSelect.getTime());
             timeTitle = timeSelect.getTitle();
@@ -176,8 +170,6 @@ public class BasicInformationFragment extends BaseAppFragment {
                     }
                 }
                 mAdapter.setNewData(titles);
-
-
                 getListById();
             }
 

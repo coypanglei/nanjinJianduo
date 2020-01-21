@@ -2,8 +2,6 @@ package com.shaoyue.weizhegou.util.XClick;
 
 import android.view.View;
 
-import com.blankj.utilcode.util.LogUtils;
-
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -47,7 +45,7 @@ public class SingleClickAspect {
         }
         // 取出方法的注解
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-        Method method = methodSignature.getMethod();
+        Method method =joinPoint.getTarget().getClass().getMethod(methodSignature.getName(), methodSignature.getParameterTypes());
         if (!method.isAnnotationPresent(SingleClick.class)) {
             return;
         }

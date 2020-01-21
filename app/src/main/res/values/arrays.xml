@@ -11,6 +11,7 @@
     </string-array>
 
     <string-array name="dropdown_array_xl">
+        <item>研究生</item>
         <item>大学本科</item>
         <item>大学专科</item>
         <item>中专/中等技校/高中</item>

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ObjectUtils;
+import com.blankj.utilcode.util.SPUtils;
 import com.libracore.lib.widget.StateButton;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.api.callback.BaseCallback;
@@ -21,6 +22,7 @@ import com.shaoyue.weizhegou.entity.ZxcxListBean;
 import com.shaoyue.weizhegou.entity.cedit.InquiryDetailsBean;
 import com.shaoyue.weizhegou.entity.cedit.RefreshBean;
 import com.shaoyue.weizhegou.entity.dhgl.XcjyZxcxBean;
+import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.InquiryDetailsTwoAdapter;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.InquiryProgressAdapter;
 
@@ -133,7 +135,7 @@ public class CreditInquiryDetailsFragmentThree extends BaseAppFragment {
         super.onResume();
         xcjyZxcx();
     }
-
+    private ZxcxListBean.RecordsBean myHangBean;
     /**
      * 现场检验征信查询
      */
@@ -141,13 +143,28 @@ public class CreditInquiryDetailsFragmentThree extends BaseAppFragment {
         DhApi.sxjyZxcx(id,new BaseCallback<BaseResponse<ZxcxListBean>>() {
             @Override
             public void onSucc(BaseResponse<ZxcxListBean> result) {
+
                 ZxcxListBean.RecordsBean bean = new ZxcxListBean.RecordsBean();
                 if ("配偶征信数据".equals(title) && result.data.getTotal() == 2) {
-                    bean = result.data.getRecords().get(1);
-                } else if (result
-                        .data.getTotal() == 1) {
+                    myHangBean = result.data.getRecords().get(1);
 
-                    bean = result.data.getRecords().get(0);
+
+                }
+
+                if ("申请人征信数据".equals(title)) {
+                    if (ObjectUtils.isNotEmpty(result.data.getRecords())) {
+                        if (ObjectUtils.isNotEmpty(result.data.getRecords().get(0))) {
+                            myHangBean = result.data.getRecords().get(0);
+
+                            //提示信息
+                            if (ObjectUtils.isNotEmpty(myHangBean.getDescription())) {
+                                tvDescription.setVisibility(View.VISIBLE);
+
+                                tvDescription.setText(myHangBean.getDescription());
+                            }
+
+                        }
+                    }
                 }
                 mList.clear();
                 mListTwo.clear();
@@ -220,6 +237,9 @@ public class CreditInquiryDetailsFragmentThree extends BaseAppFragment {
 
     @OnClick(R.id.sb_find)
     public void onViewClicked() {
+        if ("查看详情".equals(SPUtils.getInstance().getString("status")) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
+            return;
+        }
         DhApi.adddbsqZxcx(id, new BaseCallback<BaseResponse<Void>>() {
             @Override
             public void onSucc(BaseResponse<Void> result) {

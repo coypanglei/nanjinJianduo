@@ -1,9 +1,9 @@
 package com.shaoyue.weizhegou.api.callback;
 
+
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.lzy.okgo.model.Response;
-
 import com.shaoyue.weizhegou.AppContext;
 import com.shaoyue.weizhegou.api.exception.ApiException;
 import com.shaoyue.weizhegou.api.model.BaseResponse;
@@ -39,6 +39,7 @@ public abstract class BaseCallback<T> extends JsonCallback<T> implements ResultI
 
         if (response.body() instanceof BaseResponse) {
             onSucc(response.body());
+            LogUtils.e(response.body());
         } else {
             ApiException apiError = new ApiException(-1, "模型错误");
 

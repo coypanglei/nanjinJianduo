@@ -103,10 +103,17 @@ public class DiyadanbaoDetailsOneFragment extends BaseAppFragment implements BGA
     @Override
     protected void initView(View rootView) {
         super.initView(rootView);
-        if ("查看详情".equals(SPUtils.getInstance().getString("status")) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
-           rlAll.setVisibility(View.GONE);
+        if ("查看详情".equals(SPUtils.getInstance().getString("status"))) {
+            rlAll.setVisibility(View.GONE);
             llVisable.setVisibility(View.GONE);
+        } else {
+            if ("调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
+                sbAdd.setVisibility(View.GONE);
+                sbDetel.setVisibility(View.GONE);
+                sbEdit.setVisibility(View.GONE);
+            }
         }
+
         mEmptyText.setText("未添加信息");
         mAdapter = new ZiRanDanBaoAdapter();
         mRvApplication.setLayoutManager(new LinearLayoutManager(getActivity()));
