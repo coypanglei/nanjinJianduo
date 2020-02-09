@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_36"
+        android:background="@color/color_f7f7f7"
+        android:orientation="horizontal"
+
+        android:id="@+id/ll_top"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp">
+
+        <TextView
+            android:id="@+id/tv_xh"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="序号"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11"
+
+            />
+
+
+        <TextView
+            android:id="@+id/tv_khxm"
+            android:layout_width="@dimen/dp_70"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="客户姓名"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+
+        <TextView
+            android:id="@+id/tv_sxmx"
+            android:layout_width="@dimen/dp_70"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="授信模型"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingRight="@dimen/dp_6"
+            android:text="流程状态"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="审批状态"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_dqhj"
+            android:layout_width="@dimen/dp_120"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="当前环节"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+
+
+        <TextView
+            android:id="@+id/tv_xyhj"
+            android:layout_width="@dimen/dp_120"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:gravity="center"
+            android:text="下一环节"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+
+
+        <TextView
+            android:id="@+id/tv_clr"
+            android:layout_width="@dimen/dp_70"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="传来人"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+
+
+        <TextView
+            android:id="@+id/tv_clsj"
+            android:layout_width="@dimen/dp_120"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="传来时间"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+
+        <TextView
+            android:id="@+id/tv_clsj_t"
+            android:layout_width="@dimen/dp_120"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="处理时间"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11"
+            android:visibility="visible" />
+
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
