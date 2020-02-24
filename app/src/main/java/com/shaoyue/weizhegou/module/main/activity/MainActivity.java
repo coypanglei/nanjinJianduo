@@ -80,7 +80,7 @@ public class MainActivity extends BaseAppActivity {
             public void onSucc(BaseResponse<List<XtPerssionBean>> result) {
 
                 mNavigationAdapter.setNewData(result.data);
-                LogUtils.e(result.data.get(10));
+           
             }
         }, this);
 

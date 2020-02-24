@@ -26,11 +26,14 @@ public class PictureSelectActivity extends Activity {
     public static final String RATIO_WIDTH = "ratio_Width";
     public static final String RATIO_HEIGHT = "ratio_Height";
     public static final String ENABLE_CROP = "enable_crop";
+    public static final String ENABLE_CLOSE_SELECT ="enable_close_select";
+
     private int mCropWidth;
     private int mCropHeight;
     private int mRatioWidth;
     private int mRatioHeight;
     private boolean mCropEnabled;
+    private boolean mCloseSelectEnabled;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,7 @@ public class PictureSelectActivity extends Activity {
         setContentView(R.layout.activity_picture_select);
 
         mCropEnabled = getIntent().getBooleanExtra(ENABLE_CROP, true);
+        mCloseSelectEnabled =getIntent().getBooleanExtra(ENABLE_CLOSE_SELECT,true);
         mCropWidth = getIntent().getIntExtra(CROP_WIDTH, 200);
         mCropHeight = getIntent().getIntExtra(CROP_HEIGHT, 200);
         mRatioWidth = getIntent().getIntExtra(RATIO_WIDTH, 1);
@@ -96,6 +100,7 @@ public class PictureSelectActivity extends Activity {
      */
     public void selectPicture() {
         mSelectPictureDialog = new PictureSelectDialog(this, R.style.ActionSheetDialogStyle);
+        mSelectPictureDialog.setCloseSelect(mCloseSelectEnabled);
         mSelectPictureDialog.setOnItemClickListener(new PictureSelectDialog.OnItemClickListener() {
             @Override
             public void onItemClick(int type) {

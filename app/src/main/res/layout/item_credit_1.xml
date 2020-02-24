@@ -27,7 +27,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="经营性"
+            android:text="笔数"
             android:textColor="@color/color_696969"
             android:textSize="11dp"
             />
@@ -54,7 +54,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="非经营性"
+            android:text="余额(元)"
             android:textColor="@color/color_696969"
             android:textSize="11dp"
             />

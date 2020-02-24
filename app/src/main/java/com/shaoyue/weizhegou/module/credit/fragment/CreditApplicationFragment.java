@@ -24,6 +24,7 @@ import com.shaoyue.weizhegou.module.dhgl.fragment.SjcjFragment;
 import com.shaoyue.weizhegou.module.dhgl.fragment.SpFragment;
 import com.shaoyue.weizhegou.module.dhgl.fragment.XcjyFragment;
 import com.shaoyue.weizhegou.module.dhgl.fragment.XzRlFragment;
+import com.shaoyue.weizhegou.module.dhgl.jjnj.fragment.sdjcFragment;
 import com.shaoyue.weizhegou.module.sxdc.fragment.SxDcSpFragment;
 import com.shaoyue.weizhegou.module.sxdc.fragment.shouXinSurveyFragment;
 import com.shaoyue.weizhegou.widget.NoScrollViewPager;
@@ -97,6 +98,8 @@ public class CreditApplicationFragment extends BaseTitleFragment {
                 fragmentList.add(XzRlFragment.newInstance(mMenuList.get(i).getTitle()));
             } else if ("审批".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(SpFragment.newInstance(mMenuList.get(i).getTitle()));
+            } else if("首贷检查".equals(mMenuList.get(i).getTitle())){
+                fragmentList.add(sdjcFragment.newInstance(mMenuList.get(i).getTitle()));
             }
         }
         mMenuList.get(profileBean.getType()).setSelect(true);

@@ -93,7 +93,7 @@
             android:theme="@style/TestTheme" />
 
         <activity
-            android:name="com.shaoyue.weizhegou.module.main.activity.DhglNavActivity"
+            android:name="com.shaoyue.weizhegou.module.main.activity.DhglNewNavActivity"
             android:screenOrientation="landscape"
             android:theme="@style/TestTheme" />
 

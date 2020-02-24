@@ -10,6 +10,7 @@ import com.shaoyue.weizhegou.entity.cedit.OcrBean;
 import com.shaoyue.weizhegou.module.credit.fragment.diaocha.DcInfoFragment;
 import com.shaoyue.weizhegou.module.dhgl.fragment.SjcjInfoFragment;
 import com.shaoyue.weizhegou.module.dhgl.fragment.XcjyInfoFragment;
+import com.shaoyue.weizhegou.module.dhgl.fragment.dgdkjcFragment;
 import com.shaoyue.weizhegou.router.UIHelper;
 
 import org.greenrobot.eventbus.EventBus;
@@ -19,7 +20,6 @@ public class XcjyActivity extends BaseCommonActivity {
     private String mContentType;
 
     private String type;
-
 
 
     public static Intent newInstance(Context context, String contentType, String type) {
@@ -45,6 +45,8 @@ public class XcjyActivity extends BaseCommonActivity {
                 return XcjyInfoFragment.newInstance(mContentType);
             case "数据采集":
                 return SjcjInfoFragment.newInstance(mContentType);
+            case "首贷":
+                return dgdkjcFragment.newInstance(mContentType);
             default:
                 return null;
         }

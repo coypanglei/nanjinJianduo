@@ -74,114 +74,130 @@ public class ZxcxListBean extends BaseBean {
     public static class RecordsBean {
 
         /**
-         * zxqkms : 12
-         * xykljyqcs : 12.0
-         * jyxwhye : 12.0
-         * xykzs : 1.0
+         * zxqkms : null
+         * zfdkye : 82251
+         * dbze : 32665
+         * mspjxxbs : 3
+         * ssqkbs : --
+         * nhdkye : 30
+         * qcdkye : 151500
+         * qsxxbs : 3
          * zxshjl : 未通过
-         * dbsfyq : 12
-         * dbwjfl : 12
-         * dbje : 12.0
-         * id : 1
-         * yzxshjl : 未通过
-         * jyxthdkjgs : 1
-         * sxsfzh : 110101199003072877
-         * jyxthye : 12.0
-         * fjyxyqcs : 12
-         * jyxyqcs : 12
-         * fjyxthye : 12.0
-         * cs1 : 12.0
-         * cs3 : 12.0
-         * cs2 : 12.0
-         * jyxwjfl : 12
-         * jyxblye : null
-         * js : 本人
-         * description : 
-         * delFlag : 1
-         * xykdqyqcs : 12.0
-         * jyxgrxyjlpj : 1
-         * fjyxgrxyjlpj : 21
-         * fjyxthdkjgs : 12
-         * updateBy : 1
-         * je2 : 12.0
-         * grxyjlpj : 12
-         * je1 : 12.0
-         * fjyxwhye : 12.0
-         * je3 : 12.0
-         * xykzgyqje : 12.0
-         * fjyxwjfl : 12
-         * xykyyje : 12.0
-         * fjyxblye : null
-         * xyksxje : 212.0
-         * updateTime : 2019-24-27 16:24:56
-         * fjyxyqje : null
-         * wjfl : 12
-         * xykzgyqcs : 12.0
-         * cs : 啊实打实大苏打撒旦发射点发射点啊啊旦发射点发射点啊啊实打实大苏打撒旦发射点发射点啊啊实打实大苏打撒旦发射点发啊实打实大苏打撒旦发
-         * createBy : 1
-         * createTime : 2019-25-27 16:25:02
-         * blyyms : 似的发射点
-         * sxid : d0fd82770ea5e6ca1f61bd6c5b2f9ca4
-         * blye : 12.0
-         * yqqj3 : 12
-         * yqqj1 : 12
-         * jyxyqje : null
-         * yqqj2 : 12
+         * xykzhs : 33
+         * id : af52b4c24931e489c93f2342171cb553
+         * jydkye : 4015
+         * yzxshjl : null
+         * mspjxxje : 332
+         * lxyqzdqs_Android : ["7","7","7","7","7"]
+         * zdkye : 19516383
+         * xykjgs : 2
+         * zxdkbs : 9
+         * lxyqzdqs5 : 7
+         * lxyqzdqs4 : 7
+         * lxyqzdqs3 : 7
+         * lxyqzdqs2 : 7
+         * lxyqzdqs1 : 7
+         * dbqk : [{"担保五级分类":"未分类","担保总额":"700","担保余额":"100","币种":"人民币","对外担保机构数":"1"},{"担保五级分类":"损失","担保总额":"9003","担保余额":"60003","币种":"人民币","对外担保机构数":"3"},{"担保五级分类":"关注","担保总额":"4004","担保余额":"40004","币种":"美元","对外担保机构数":"1"},{"担保五级分类":"损失","担保总额":"--","担保余额":"10001","币种":"美元","对外担保机构数":"1"},{"担保五级分类":"正常","担保总额":"9012","担保余额":"70012","币种":"日元","对外担保机构数":"3"},{"担保五级分类":"正常","担保总额":"5002","担保余额":"2","币种":"美元","对外担保机构数":"2"}]
+         * fyhdkzbs : 10
+         * qsxxje : 3000
+         * zfdkbs : 40
+         * js : 配偶
+         * description : 系统审核结论为通过，人工修改为未通过
+         * xzcfje : 15000
+         * delFlag : null
+         * xyklxyq_Android : ["7","7","7","7","7"]
+         * dbqk_Android : [{"担保五级分类":"未分类","担保总额":"700","担保余额":"100","币种":"人民币","对外担保机构数":"1"},{"担保五级分类":"损失","担保总额":"9003","担保余额":"60003","币种":"人民币","对外担保机构数":"3"},{"担保五级分类":"关注","担保总额":"4004","担保余额":"40004","币种":"美元","对外担保机构数":"1"},{"担保五级分类":"损失","担保总额":"--","担保余额":"10001","币种":"美元","对外担保机构数":"1"},{"担保五级分类":"正常","担保总额":"9012","担保余额":"70012","币种":"日元","对外担保机构数":"3"},{"担保五级分类":"正常","担保总额":"5002","担保余额":"2","币种":"美元","对外担保机构数":"2"}]
+         * nhdkbs : 3
+         * dkyxze : 19544883
+         * yqbs : 是
+         * updateBy : admin
+         * fyhdkye : 1303
+         * xyklxyq5 : 7
+         * xyklxyq4 : 7
+         * dqyyed : 11606
+         * xyklxyq3 : 7
+         * xyklxyq2 : 7
+         * xyklxyq1 : 7
+         * sxjgs : 9
+         * xzcfbs : 8
+         * jydkbs : 4
+         * qcdkbs : 6
+         * zgsxed : 100002
+         * zxdkye : 6303
+         * dksxze : 640156
+         * updateTime : 2020-20-13 21:20:01
+         * sfwsxzxr : 是
+         * cs : sss
+         * createBy : admin
+         * ssqkje : --
+         * sfzh : 110101199003071807
+         * zdkbs : 123
+         * createTime : 2020-07-13 21:07:57
+         * blyyms : null
+         * sxid : 55efda762309212566c250b3fe30517b
          */
 
         private String zxqkms;
-        private double xykljyqcs;
-        private double jyxwhye;
-        private double xykzs;
+        private String zfdkye;
+        private String dbze;
+        private String mspjxxbs;
+        private String ssqkbs;
+        private String nhdkye;
+        private String qcdkye;
+        private String qsxxbs;
         private String zxshjl;
-        private String dbsfyq;
-        private String dbwjfl;
-        private double dbje;
+        private String xykzhs;
         private String id;
+        private String jydkye;
         private String yzxshjl;
-        private String jyxthdkjgs;
-        private String sxsfzh;
-        private double jyxthye;
-        private String fjyxyqcs;
-        private String jyxyqcs;
-        private double fjyxthye;
-        private double cs1;
-        private double cs3;
-        private double cs2;
-        private String jyxwjfl;
-        private String jyxblye;
+        private String mspjxxje;
+        private String zdkye;
+        private String xykjgs;
+        private String zxdkbs;
+        private String lxyqzdqs5;
+        private String lxyqzdqs4;
+        private String lxyqzdqs3;
+        private String lxyqzdqs2;
+        private String lxyqzdqs1;
+        private String dbqk;
+        private String fyhdkzbs;
+        private String qsxxje;
+        private String zfdkbs;
         private String js;
         private String description;
+        private String xzcfje;
         private String delFlag;
-        private double xykdqyqcs;
-        private String jyxgrxyjlpj;
-        private String fjyxgrxyjlpj;
-        private String fjyxthdkjgs;
+        private String nhdkbs;
+        private String dkyxze;
+        private String yqbs;
         private String updateBy;
-        private double je2;
-        private String grxyjlpj;
-        private double je1;
-        private double fjyxwhye;
-        private double je3;
-        private double xykzgyqje;
-        private String fjyxwjfl;
-        private double xykyyje;
-        private String fjyxblye;
-        private double xyksxje;
+        private String fyhdkye;
+        private String xyklxyq5;
+        private String xyklxyq4;
+        private String dqyyed;
+        private String xyklxyq3;
+        private String xyklxyq2;
+        private String xyklxyq1;
+        private String sxjgs;
+        private String xzcfbs;
+        private String jydkbs;
+        private String qcdkbs;
+        private String zgsxed;
+        private String zxdkye;
+        private String dksxze;
         private String updateTime;
-        private String fjyxyqje;
-        private String wjfl;
-        private double xykzgyqcs;
+        private String sfwsxzxr;
         private String cs;
         private String createBy;
+        private String ssqkje;
+        private String sfzh;
+        private String zdkbs;
         private String createTime;
         private String blyyms;
         private String sxid;
-        private double blye;
-        private String yqqj3;
-        private String yqqj1;
-        private String jyxyqje;
-        private String yqqj2;
+        private List<String> lxyqzdqs_Android;
+        private List<String> xyklxyq_Android;
+        private List<DbqkAndroidBean> dbqk_Android;
 
         public String getZxqkms() {
             return zxqkms;
@@ -191,28 +207,60 @@ public class ZxcxListBean extends BaseBean {
             this.zxqkms = zxqkms;
         }
 
-        public double getXykljyqcs() {
-            return xykljyqcs;
+        public String getZfdkye() {
+            return zfdkye;
         }
 
-        public void setXykljyqcs(double xykljyqcs) {
-            this.xykljyqcs = xykljyqcs;
+        public void setZfdkye(String zfdkye) {
+            this.zfdkye = zfdkye;
         }
 
-        public double getJyxwhye() {
-            return jyxwhye;
+        public String getDbze() {
+            return dbze;
         }
 
-        public void setJyxwhye(double jyxwhye) {
-            this.jyxwhye = jyxwhye;
+        public void setDbze(String dbze) {
+            this.dbze = dbze;
         }
 
-        public double getXykzs() {
-            return xykzs;
+        public String getMspjxxbs() {
+            return mspjxxbs;
         }
 
-        public void setXykzs(double xykzs) {
-            this.xykzs = xykzs;
+        public void setMspjxxbs(String mspjxxbs) {
+            this.mspjxxbs = mspjxxbs;
+        }
+
+        public String getSsqkbs() {
+            return ssqkbs;
+        }
+
+        public void setSsqkbs(String ssqkbs) {
+            this.ssqkbs = ssqkbs;
+        }
+
+        public String getNhdkye() {
+            return nhdkye;
+        }
+
+        public void setNhdkye(String nhdkye) {
+            this.nhdkye = nhdkye;
+        }
+
+        public String getQcdkye() {
+            return qcdkye;
+        }
+
+        public void setQcdkye(String qcdkye) {
+            this.qcdkye = qcdkye;
+        }
+
+        public String getQsxxbs() {
+            return qsxxbs;
+        }
+
+        public void setQsxxbs(String qsxxbs) {
+            this.qsxxbs = qsxxbs;
         }
 
         public String getZxshjl() {
@@ -223,28 +271,12 @@ public class ZxcxListBean extends BaseBean {
             this.zxshjl = zxshjl;
         }
 
-        public String getDbsfyq() {
-            return dbsfyq;
+        public String getXykzhs() {
+            return xykzhs;
         }
 
-        public void setDbsfyq(String dbsfyq) {
-            this.dbsfyq = dbsfyq;
-        }
-
-        public String getDbwjfl() {
-            return dbwjfl;
-        }
-
-        public void setDbwjfl(String dbwjfl) {
-            this.dbwjfl = dbwjfl;
-        }
-
-        public double getDbje() {
-            return dbje;
-        }
-
-        public void setDbje(double dbje) {
-            this.dbje = dbje;
+        public void setXykzhs(String xykzhs) {
+            this.xykzhs = xykzhs;
         }
 
         public String getId() {
@@ -255,6 +287,14 @@ public class ZxcxListBean extends BaseBean {
             this.id = id;
         }
 
+        public String getJydkye() {
+            return jydkye;
+        }
+
+        public void setJydkye(String jydkye) {
+            this.jydkye = jydkye;
+        }
+
         public String getYzxshjl() {
             return yzxshjl;
         }
@@ -263,92 +303,108 @@ public class ZxcxListBean extends BaseBean {
             this.yzxshjl = yzxshjl;
         }
 
-        public String getJyxthdkjgs() {
-            return jyxthdkjgs;
+        public String getMspjxxje() {
+            return mspjxxje;
         }
 
-        public void setJyxthdkjgs(String jyxthdkjgs) {
-            this.jyxthdkjgs = jyxthdkjgs;
+        public void setMspjxxje(String mspjxxje) {
+            this.mspjxxje = mspjxxje;
         }
 
-        public String getSxsfzh() {
-            return sxsfzh;
+        public String getZdkye() {
+            return zdkye;
         }
 
-        public void setSxsfzh(String sxsfzh) {
-            this.sxsfzh = sxsfzh;
+        public void setZdkye(String zdkye) {
+            this.zdkye = zdkye;
         }
 
-        public double getJyxthye() {
-            return jyxthye;
+        public String getXykjgs() {
+            return xykjgs;
         }
 
-        public void setJyxthye(double jyxthye) {
-            this.jyxthye = jyxthye;
+        public void setXykjgs(String xykjgs) {
+            this.xykjgs = xykjgs;
         }
 
-        public String getFjyxyqcs() {
-            return fjyxyqcs;
+        public String getZxdkbs() {
+            return zxdkbs;
         }
 
-        public void setFjyxyqcs(String fjyxyqcs) {
-            this.fjyxyqcs = fjyxyqcs;
+        public void setZxdkbs(String zxdkbs) {
+            this.zxdkbs = zxdkbs;
         }
 
-        public String getJyxyqcs() {
-            return jyxyqcs;
+        public String getLxyqzdqs5() {
+            return lxyqzdqs5;
         }
 
-        public void setJyxyqcs(String jyxyqcs) {
-            this.jyxyqcs = jyxyqcs;
+        public void setLxyqzdqs5(String lxyqzdqs5) {
+            this.lxyqzdqs5 = lxyqzdqs5;
         }
 
-        public double getFjyxthye() {
-            return fjyxthye;
+        public String getLxyqzdqs4() {
+            return lxyqzdqs4;
         }
 
-        public void setFjyxthye(double fjyxthye) {
-            this.fjyxthye = fjyxthye;
+        public void setLxyqzdqs4(String lxyqzdqs4) {
+            this.lxyqzdqs4 = lxyqzdqs4;
         }
 
-        public double getCs1() {
-            return cs1;
+        public String getLxyqzdqs3() {
+            return lxyqzdqs3;
         }
 
-        public void setCs1(double cs1) {
-            this.cs1 = cs1;
+        public void setLxyqzdqs3(String lxyqzdqs3) {
+            this.lxyqzdqs3 = lxyqzdqs3;
         }
 
-        public double getCs3() {
-            return cs3;
+        public String getLxyqzdqs2() {
+            return lxyqzdqs2;
         }
 
-        public void setCs3(double cs3) {
-            this.cs3 = cs3;
+        public void setLxyqzdqs2(String lxyqzdqs2) {
+            this.lxyqzdqs2 = lxyqzdqs2;
         }
 
-        public double getCs2() {
-            return cs2;
+        public String getLxyqzdqs1() {
+            return lxyqzdqs1;
         }
 
-        public void setCs2(double cs2) {
-            this.cs2 = cs2;
+        public void setLxyqzdqs1(String lxyqzdqs1) {
+            this.lxyqzdqs1 = lxyqzdqs1;
         }
 
-        public String getJyxwjfl() {
-            return jyxwjfl;
+        public String getDbqk() {
+            return dbqk;
         }
 
-        public void setJyxwjfl(String jyxwjfl) {
-            this.jyxwjfl = jyxwjfl;
+        public void setDbqk(String dbqk) {
+            this.dbqk = dbqk;
         }
 
-        public String getJyxblye() {
-            return jyxblye;
+        public String getFyhdkzbs() {
+            return fyhdkzbs;
         }
 
-        public void setJyxblye(String jyxblye) {
-            this.jyxblye = jyxblye;
+        public void setFyhdkzbs(String fyhdkzbs) {
+            this.fyhdkzbs = fyhdkzbs;
+        }
+
+        public String getQsxxje() {
+            return qsxxje;
+        }
+
+        public void setQsxxje(String qsxxje) {
+            this.qsxxje = qsxxje;
+        }
+
+        public String getZfdkbs() {
+            return zfdkbs;
+        }
+
+        public void setZfdkbs(String zfdkbs) {
+            this.zfdkbs = zfdkbs;
         }
 
         public String getJs() {
@@ -367,6 +423,14 @@ public class ZxcxListBean extends BaseBean {
             this.description = description;
         }
 
+        public String getXzcfje() {
+            return xzcfje;
+        }
+
+        public void setXzcfje(String xzcfje) {
+            this.xzcfje = xzcfje;
+        }
+
         public String getDelFlag() {
             return delFlag;
         }
@@ -375,36 +439,28 @@ public class ZxcxListBean extends BaseBean {
             this.delFlag = delFlag;
         }
 
-        public double getXykdqyqcs() {
-            return xykdqyqcs;
+        public String getNhdkbs() {
+            return nhdkbs;
         }
 
-        public void setXykdqyqcs(double xykdqyqcs) {
-            this.xykdqyqcs = xykdqyqcs;
+        public void setNhdkbs(String nhdkbs) {
+            this.nhdkbs = nhdkbs;
         }
 
-        public String getJyxgrxyjlpj() {
-            return jyxgrxyjlpj;
+        public String getDkyxze() {
+            return dkyxze;
         }
 
-        public void setJyxgrxyjlpj(String jyxgrxyjlpj) {
-            this.jyxgrxyjlpj = jyxgrxyjlpj;
+        public void setDkyxze(String dkyxze) {
+            this.dkyxze = dkyxze;
         }
 
-        public String getFjyxgrxyjlpj() {
-            return fjyxgrxyjlpj;
+        public String getYqbs() {
+            return yqbs;
         }
 
-        public void setFjyxgrxyjlpj(String fjyxgrxyjlpj) {
-            this.fjyxgrxyjlpj = fjyxgrxyjlpj;
-        }
-
-        public String getFjyxthdkjgs() {
-            return fjyxthdkjgs;
-        }
-
-        public void setFjyxthdkjgs(String fjyxthdkjgs) {
-            this.fjyxthdkjgs = fjyxthdkjgs;
+        public void setYqbs(String yqbs) {
+            this.yqbs = yqbs;
         }
 
         public String getUpdateBy() {
@@ -415,84 +471,116 @@ public class ZxcxListBean extends BaseBean {
             this.updateBy = updateBy;
         }
 
-        public double getJe2() {
-            return je2;
+        public String getFyhdkye() {
+            return fyhdkye;
         }
 
-        public void setJe2(double je2) {
-            this.je2 = je2;
+        public void setFyhdkye(String fyhdkye) {
+            this.fyhdkye = fyhdkye;
         }
 
-        public String getGrxyjlpj() {
-            return grxyjlpj;
+        public String getXyklxyq5() {
+            return xyklxyq5;
         }
 
-        public void setGrxyjlpj(String grxyjlpj) {
-            this.grxyjlpj = grxyjlpj;
+        public void setXyklxyq5(String xyklxyq5) {
+            this.xyklxyq5 = xyklxyq5;
         }
 
-        public double getJe1() {
-            return je1;
+        public String getXyklxyq4() {
+            return xyklxyq4;
         }
 
-        public void setJe1(double je1) {
-            this.je1 = je1;
+        public void setXyklxyq4(String xyklxyq4) {
+            this.xyklxyq4 = xyklxyq4;
         }
 
-        public double getFjyxwhye() {
-            return fjyxwhye;
+        public String getDqyyed() {
+            return dqyyed;
         }
 
-        public void setFjyxwhye(double fjyxwhye) {
-            this.fjyxwhye = fjyxwhye;
+        public void setDqyyed(String dqyyed) {
+            this.dqyyed = dqyyed;
         }
 
-        public double getJe3() {
-            return je3;
+        public String getXyklxyq3() {
+            return xyklxyq3;
         }
 
-        public void setJe3(double je3) {
-            this.je3 = je3;
+        public void setXyklxyq3(String xyklxyq3) {
+            this.xyklxyq3 = xyklxyq3;
         }
 
-        public double getXykzgyqje() {
-            return xykzgyqje;
+        public String getXyklxyq2() {
+            return xyklxyq2;
         }
 
-        public void setXykzgyqje(double xykzgyqje) {
-            this.xykzgyqje = xykzgyqje;
+        public void setXyklxyq2(String xyklxyq2) {
+            this.xyklxyq2 = xyklxyq2;
         }
 
-        public String getFjyxwjfl() {
-            return fjyxwjfl;
+        public String getXyklxyq1() {
+            return xyklxyq1;
         }
 
-        public void setFjyxwjfl(String fjyxwjfl) {
-            this.fjyxwjfl = fjyxwjfl;
+        public void setXyklxyq1(String xyklxyq1) {
+            this.xyklxyq1 = xyklxyq1;
         }
 
-        public double getXykyyje() {
-            return xykyyje;
+        public String getSxjgs() {
+            return sxjgs;
         }
 
-        public void setXykyyje(double xykyyje) {
-            this.xykyyje = xykyyje;
+        public void setSxjgs(String sxjgs) {
+            this.sxjgs = sxjgs;
         }
 
-        public String getFjyxblye() {
-            return fjyxblye;
+        public String getXzcfbs() {
+            return xzcfbs;
         }
 
-        public void setFjyxblye(String fjyxblye) {
-            this.fjyxblye = fjyxblye;
+        public void setXzcfbs(String xzcfbs) {
+            this.xzcfbs = xzcfbs;
         }
 
-        public double getXyksxje() {
-            return xyksxje;
+        public String getJydkbs() {
+            return jydkbs;
         }
 
-        public void setXyksxje(double xyksxje) {
-            this.xyksxje = xyksxje;
+        public void setJydkbs(String jydkbs) {
+            this.jydkbs = jydkbs;
+        }
+
+        public String getQcdkbs() {
+            return qcdkbs;
+        }
+
+        public void setQcdkbs(String qcdkbs) {
+            this.qcdkbs = qcdkbs;
+        }
+
+        public String getZgsxed() {
+            return zgsxed;
+        }
+
+        public void setZgsxed(String zgsxed) {
+            this.zgsxed = zgsxed;
+        }
+
+        public String getZxdkye() {
+            return zxdkye;
+        }
+
+        public void setZxdkye(String zxdkye) {
+            this.zxdkye = zxdkye;
+        }
+
+        public String getDksxze() {
+            return dksxze;
+        }
+
+        public void setDksxze(String dksxze) {
+            this.dksxze = dksxze;
         }
 
         public String getUpdateTime() {
@@ -503,28 +591,12 @@ public class ZxcxListBean extends BaseBean {
             this.updateTime = updateTime;
         }
 
-        public String getFjyxyqje() {
-            return fjyxyqje;
+        public String getSfwsxzxr() {
+            return sfwsxzxr;
         }
 
-        public void setFjyxyqje(String fjyxyqje) {
-            this.fjyxyqje = fjyxyqje;
-        }
-
-        public String getWjfl() {
-            return wjfl;
-        }
-
-        public void setWjfl(String wjfl) {
-            this.wjfl = wjfl;
-        }
-
-        public double getXykzgyqcs() {
-            return xykzgyqcs;
-        }
-
-        public void setXykzgyqcs(double xykzgyqcs) {
-            this.xykzgyqcs = xykzgyqcs;
+        public void setSfwsxzxr(String sfwsxzxr) {
+            this.sfwsxzxr = sfwsxzxr;
         }
 
         public String getCs() {
@@ -541,6 +613,30 @@ public class ZxcxListBean extends BaseBean {
 
         public void setCreateBy(String createBy) {
             this.createBy = createBy;
+        }
+
+        public String getSsqkje() {
+            return ssqkje;
+        }
+
+        public void setSsqkje(String ssqkje) {
+            this.ssqkje = ssqkje;
+        }
+
+        public String getSfzh() {
+            return sfzh;
+        }
+
+        public void setSfzh(String sfzh) {
+            this.sfzh = sfzh;
+        }
+
+        public String getZdkbs() {
+            return zdkbs;
+        }
+
+        public void setZdkbs(String zdkbs) {
+            this.zdkbs = zdkbs;
         }
 
         public String getCreateTime() {
@@ -567,44 +663,84 @@ public class ZxcxListBean extends BaseBean {
             this.sxid = sxid;
         }
 
-        public double getBlye() {
-            return blye;
+        public List<String> getLxyqzdqs_Android() {
+            return lxyqzdqs_Android;
         }
 
-        public void setBlye(double blye) {
-            this.blye = blye;
+        public void setLxyqzdqs_Android(List<String> lxyqzdqs_Android) {
+            this.lxyqzdqs_Android = lxyqzdqs_Android;
         }
 
-        public String getYqqj3() {
-            return yqqj3;
+        public List<String> getXyklxyq_Android() {
+            return xyklxyq_Android;
         }
 
-        public void setYqqj3(String yqqj3) {
-            this.yqqj3 = yqqj3;
+        public void setXyklxyq_Android(List<String> xyklxyq_Android) {
+            this.xyklxyq_Android = xyklxyq_Android;
         }
 
-        public String getYqqj1() {
-            return yqqj1;
+        public List<DbqkAndroidBean> getDbqk_Android() {
+            return dbqk_Android;
         }
 
-        public void setYqqj1(String yqqj1) {
-            this.yqqj1 = yqqj1;
+        public void setDbqk_Android(List<DbqkAndroidBean> dbqk_Android) {
+            this.dbqk_Android = dbqk_Android;
         }
 
-        public String getJyxyqje() {
-            return jyxyqje;
-        }
+        public static class DbqkAndroidBean {
+            /**
+             * 担保五级分类 : 未分类
+             * 担保总额 : 700
+             * 担保余额 : 100
+             * 币种 : 人民币
+             * 对外担保机构数 : 1
+             */
 
-        public void setJyxyqje(String jyxyqje) {
-            this.jyxyqje = jyxyqje;
-        }
+            private String 担保五级分类;
+            private String 担保总额;
+            private String 担保余额;
+            private String 币种;
+            private String 对外担保机构数;
 
-        public String getYqqj2() {
-            return yqqj2;
-        }
+            public String get担保五级分类() {
+                return 担保五级分类;
+            }
 
-        public void setYqqj2(String yqqj2) {
-            this.yqqj2 = yqqj2;
+            public void set担保五级分类(String 担保五级分类) {
+                this.担保五级分类 = 担保五级分类;
+            }
+
+            public String get担保总额() {
+                return 担保总额;
+            }
+
+            public void set担保总额(String 担保总额) {
+                this.担保总额 = 担保总额;
+            }
+
+            public String get担保余额() {
+                return 担保余额;
+            }
+
+            public void set担保余额(String 担保余额) {
+                this.担保余额 = 担保余额;
+            }
+
+            public String get币种() {
+                return 币种;
+            }
+
+            public void set币种(String 币种) {
+                this.币种 = 币种;
+            }
+
+            public String get对外担保机构数() {
+                return 对外担保机构数;
+            }
+
+            public void set对外担保机构数(String 对外担保机构数) {
+                this.对外担保机构数 = 对外担保机构数;
+            }
         }
     }
 }

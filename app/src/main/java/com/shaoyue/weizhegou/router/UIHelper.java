@@ -64,7 +64,7 @@ import com.shaoyue.weizhegou.module.goods.dialog.NewGoodsSpecificationFragment;
 import com.shaoyue.weizhegou.module.goods.dialog.ShareFragment;
 import com.shaoyue.weizhegou.module.goods.dialog.ShareQcCodeFragment;
 import com.shaoyue.weizhegou.module.main.activity.CreditNavActivity;
-import com.shaoyue.weizhegou.module.main.activity.DhglNavActivity;
+import com.shaoyue.weizhegou.module.main.activity.DhglNewNavActivity;
 import com.shaoyue.weizhegou.module.main.activity.MainActivity;
 import com.shaoyue.weizhegou.module.owner.dialog.ShopQcCodeFragment;
 import com.shaoyue.weizhegou.module.pay.dialog.NewPayPasswordFragment;
@@ -547,7 +547,7 @@ public class UIHelper {
      * @param activity
      */
     public static void showDhActivity(Activity activity) {
-        Intent intent = new Intent(activity, DhglNavActivity.class);
+        Intent intent = new Intent(activity, DhglNewNavActivity.class);
         activity.startActivity(intent);
     }
 

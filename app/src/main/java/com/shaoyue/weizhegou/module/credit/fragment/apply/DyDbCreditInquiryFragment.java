@@ -58,7 +58,7 @@ public class DyDbCreditInquiryFragment extends BaseTitleFragment {
     protected void initView(View rootView) {
         super.initView(rootView);
 
-        setCommonTitle("担保人征信授权");
+        setCommonTitle("担保人征信查询");
 
         CeditApi.findDbFamilyInfo(id, new BaseCallback<BaseResponse<List<QianziBean>>>() {
             @Override

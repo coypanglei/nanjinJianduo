@@ -68,7 +68,22 @@ public class NewOkCancelFragment extends DialogFragment implements DialogInterfa
 
                         break;
                     case "XCJY":
-                        DhApi.deteleVideo(mOk.getId(), new BaseCallback<BaseResponse<Void>>() {
+                        DhApi.deteleVideo(DhApi.XCJY_VIDEO_DETAILS_DETELE,mOk.getId(), new BaseCallback<BaseResponse<Void>>() {
+                            @Override
+                            public void onSucc(BaseResponse<Void> result) {
+                                EventBus.getDefault().post(mOk);
+                                dismiss();
+                            }
+
+                            @Override
+                            public void onFail(ApiException apiError) {
+                                super.onFail(apiError);
+                                dismiss();
+                            }
+                        }, this);
+                        break;
+                    case "SDJC":
+                        DhApi.deteleVideo(DhApi.DHSJ_VIDEO_DETAILS_DETELE,mOk.getId(), new BaseCallback<BaseResponse<Void>>() {
                             @Override
                             public void onSucc(BaseResponse<Void> result) {
                                 EventBus.getDefault().post(mOk);

@@ -12,6 +12,7 @@ import com.shaoyue.weizhegou.entity.cedit.VideoBean;
 import com.shaoyue.weizhegou.entity.cedit.VideoMaterialBean;
 import com.shaoyue.weizhegou.entity.cedit.XcjyListBean;
 import com.shaoyue.weizhegou.entity.dhgl.DhglInfoGetBean;
+import com.shaoyue.weizhegou.entity.dhgl.SdInfoListBean;
 import com.shaoyue.weizhegou.entity.dhgl.XcfxBean;
 import com.shaoyue.weizhegou.entity.dhgl.XcjyBBean;
 import com.shaoyue.weizhegou.entity.dhgl.XcjyProgressListBean;
@@ -53,11 +54,21 @@ public class DhApi {
     //影像资料列表
     private static final String XCJY_VIDEO_LIST = "jeecg-boot/business/dhglJjKhxcyxzl/listMobile";
 
+    //首贷影像资料列表
+    private static final String SD_VIDEO_LIST = "jeecg-boot/dhjcmb/dhScdhjcYxzl/queryByPidForAndroid";
+
     //影像资料添加
     private static final String XCJY_VIDEO_DETAILS_ADD = "jeecg-boot/business/dhglJjKhxcyxzl/add";
 
     //影像资料删除
-    private static final String XCJY_VIDEO_DETAILS_DETELE = "jeecg-boot/business/dhglJjKhxcyxzl/delete";
+    public static final String XCJY_VIDEO_DETAILS_DETELE = "jeecg-boot/business/dhglJjKhxcyxzl/delete";
+
+    //贷后影像资料删除
+    public static final String DHSJ_VIDEO_DETAILS_DETELE = "jeecg-boot/dhjcmb/dhScdhjcYxzl/delete";
+
+    //贷后影像资料添加
+    private static final String DHSJ_VIDEO_DETAILS_ADD = "jeecg-boot/dhjcmb/dhScdhjcYxzl/add";
+
 
     //系统数据
     private static final String XCJY_XTSJ = "jeecg-boot/business/dhglJjKhjbxx/queryXtsjByZjhm";
@@ -118,6 +129,21 @@ public class DhApi {
     private static final String SJCJ_FXJL = "jeecg-boot/business/dhglJjCjfxjl/queryByZjhm";
     //取消认领
     private static final String CANCEL_RL = "jeecg-boot/business/dhglJjXcjydx/qxrlpl";
+
+    //首次贷后检查基本信息-分页列表查询
+    private static final String SDJC_FY = "jeecg-boot/dhjcmb/dhScdhjcJbxx/list";
+    /**
+     * 首次贷后检查基本信息-分页列表查询
+     */
+    public static void getSDJCSpList(int pageNum, String pageSize, String khmc
+            , BaseCallback<BaseResponse<SdInfoListBean>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("pageNo", pageNum + "");
+        params.put("pageSize", pageSize);
+        params.put("khmcOrzjhm", khmc);
+        ApiHttpClient.post(SDJC_FY, params, callback, tag);
+    }
+
 
     /**
      * 获取授信审批列表
@@ -407,12 +433,15 @@ public class DhApi {
      * @param callback
      * @param tag
      */
-    public static void deteleVideo(String id, BaseCallback<BaseResponse<Void>> callback, Object tag) {
+    public static void deteleVideo(String address,String id, BaseCallback<BaseResponse<Void>> callback, Object tag) {
         Map<String, String> params = new HashMap<>();
         params.put("id", id);
         params.put("jcjd", SPUtils.getInstance().getString(UserMgr.SP_ID_CARD));
-        ApiHttpClient.detel(XCJY_VIDEO_DETAILS_DETELE, params, callback, tag);
+        ApiHttpClient.detel(address, params, callback, tag);
     }
+
+
+
 
     /**
      * 添加音像资料
@@ -445,6 +474,23 @@ public class DhApi {
         params.put("pageSize", "1000000");
         ApiHttpClient.post(XCJY_VIDEO_LIST, params, callback, tag);
     }
+
+    /**
+     * 查看影音资料列表
+     *
+     * @param callback
+     * @param tag
+     */
+    public static void getSdVideoDetailsList(BaseCallback<BaseResponse<VideoBean>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+//        params.put("token", UserMgr.getInstance().getSessionId());
+        params.put("zjhm", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        params.put("pid",SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        params.put("jcjd", SPUtils.getInstance().getString(UserMgr.SP_ID_CARD));
+        params.put("pageSize", "1000000");
+        ApiHttpClient.post(SD_VIDEO_LIST, params, callback, tag);
+    }
+
 
 
     /**

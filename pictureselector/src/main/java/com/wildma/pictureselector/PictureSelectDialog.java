@@ -27,6 +27,16 @@ public class PictureSelectDialog extends Dialog implements View.OnClickListener 
     private Button  mBtnAlbum;
     private Button  mBtnCancel;
 
+    public boolean isCloseSelect() {
+        return closeSelect;
+    }
+
+    public void setCloseSelect(boolean closeSelect) {
+        this.closeSelect = closeSelect;
+    }
+
+    private boolean closeSelect;
+
     public PictureSelectDialog(Context context) {
         super(context);
         this.mContext = context;
@@ -67,6 +77,9 @@ public class PictureSelectDialog extends Dialog implements View.OnClickListener 
         this.setContentView(R.layout.dialog_select_photo);
 
         initView();
+        if(!closeSelect){
+            mBtnAlbum.setVisibility(View.GONE);
+        }
         initListener();
     }
 
@@ -79,6 +92,8 @@ public class PictureSelectDialog extends Dialog implements View.OnClickListener 
         mBtnAlbum = (Button) findViewById(R.id.btn_album);
         mBtnCancel = (Button) findViewById(R.id.btn_cancel);
     }
+
+
 
     private void initListener() {
         mBtnCamera.setOnClickListener(this);

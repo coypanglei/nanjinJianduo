@@ -7,6 +7,7 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -27,8 +28,10 @@ import com.shaoyue.weizhegou.entity.ZxcxListBean;
 import com.shaoyue.weizhegou.entity.cedit.InquiryDetailsBean;
 import com.shaoyue.weizhegou.entity.cedit.RefreshBean;
 import com.shaoyue.weizhegou.entity.dhgl.XcjyZxcxBean;
+import com.shaoyue.weizhegou.module.credit.adapter.shenqing.InquiryDetailsAdapter;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.InquiryDetailsTwoAdapter;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.InquiryProgressAdapter;
+import com.shaoyue.weizhegou.module.credit.adapter.shenqing.zxdbInfoAdapter;
 import com.shaoyue.weizhegou.util.ToastUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -36,6 +39,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,6 +59,8 @@ public class CreditInquiryDetailsFragmentTwo extends BaseAppFragment {
     RecyclerView mRvCreditThree;
     @BindView(R.id.rv_credit_four)
     RecyclerView mRvCreditFour;
+    @BindView(R.id.rv_credit_five)
+    RecyclerView mRvCreditFive;
     @BindView(R.id.sb_find)
     StateButton sbFind;
     @BindView(R.id.nested_sc)
@@ -78,18 +84,28 @@ public class CreditInquiryDetailsFragmentTwo extends BaseAppFragment {
     TextView tvError;
     @BindView(R.id.sb_save)
     StateButton sbSave;
+    @BindView(R.id.tv_yqbz)
+    TextView tvYqbz;
+    @BindView(R.id.tv_sfsxzxr)
+    TextView tvSfsxzxr;
+    @BindView(R.id.tv_xykyq)
+    TextView tvXykyq;
+    @BindView(R.id.tv_yqqs)
+    TextView tvYqqs;
+
 
     private InquiryDetailsTwoAdapter mAdapter;
-    private InquiryDetailsTwoAdapter mAdapterTwo;
+    private InquiryDetailsAdapter mAdapterTwo;
     private String xtshjl;
     private InquiryDetailsTwoAdapter mAdapterThree;
 
-    private InquiryProgressAdapter mAdapterFour;
+    private zxdbInfoAdapter mAdapterFour;
+    private InquiryDetailsAdapter mAdapterFive;
     private List<InquiryDetailsBean> mList = new ArrayList<>();
     private List<InquiryDetailsBean> mListTwo = new ArrayList<>();
     private List<InquiryDetailsBean> mListThree = new ArrayList<>();
-
-    private List<XcjyZxcxBean.CxjlAndroidBean> mlistFour = new ArrayList<>();
+    private List<InquiryDetailsBean> mListFive = new ArrayList<>();
+    private List<ZxcxListBean.RecordsBean.DbqkAndroidBean> mlistFour = new ArrayList<>();
 
     private String title;
     private ZxcxListBean.RecordsBean myHangBean;
@@ -121,7 +137,7 @@ public class CreditInquiryDetailsFragmentTwo extends BaseAppFragment {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_credit_inquiry;
+        return R.layout.fragment_credit_inquiry_new;
     }
 
     @Override
@@ -129,10 +145,10 @@ public class CreditInquiryDetailsFragmentTwo extends BaseAppFragment {
         super.initView(rootView);
         myHangBean = new ZxcxListBean.RecordsBean();
         mAdapter = new InquiryDetailsTwoAdapter();
-        mAdapterTwo = new InquiryDetailsTwoAdapter();
+        mAdapterTwo = new InquiryDetailsAdapter("笔数", "余额(元)");
         mAdapterThree = new InquiryDetailsTwoAdapter();
-        mAdapterFour = new InquiryProgressAdapter();
-
+        mAdapterFour = new zxdbInfoAdapter();
+        mAdapterFive = new InquiryDetailsAdapter("笔数", "余额(元)");
 
         mRvCredit.setLayoutManager(new GridLayoutManager(getActivity(), 4));
         mRvCredit.setAdapter(mAdapter);
@@ -143,6 +159,12 @@ public class CreditInquiryDetailsFragmentTwo extends BaseAppFragment {
         mRvCreditThree.setLayoutManager(new GridLayoutManager(getActivity(), 4));
         mRvCreditThree.setAdapter(mAdapterThree);
         mRvCreditThree.setNestedScrollingEnabled(false);//禁止滑动
+
+        mRvCreditFive.setLayoutManager(new GridLayoutManager(getActivity(), 4));
+        mRvCreditFive.setAdapter(mAdapterFive);
+        mRvCreditFive.setNestedScrollingEnabled(false);//禁止滑动
+
+
         mRvCreditFour.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvCreditFour.setAdapter(mAdapterFour);
         mRvCreditFour.setNestedScrollingEnabled(false);//禁止滑动
@@ -160,11 +182,12 @@ public class CreditInquiryDetailsFragmentTwo extends BaseAppFragment {
      * 现场检验征信查询
      */
     private void xcjyZxcx() {
+        startProgressDialog(true);
         DhApi.sxjyZxcx(new BaseCallback<BaseResponse<ZxcxListBean>>() {
             @Override
             public void onSucc(BaseResponse<ZxcxListBean> result) {
-
-
+                nestedSc.setVisibility(View.VISIBLE);
+                stopProgressDialog();
                 ZxcxListBean.RecordsBean bean = new ZxcxListBean.RecordsBean();
                 if ("配偶征信数据".equals(title) && result.data.getTotal() == 2) {
                     myHangBean = result.data.getRecords().get(1);
@@ -221,35 +244,63 @@ public class CreditInquiryDetailsFragmentTwo extends BaseAppFragment {
                 mListTwo.clear();
                 mListThree.clear();
                 mlistFour.clear();
-//                mList.add(new InquiryDetailsBean("我行余额(元)", bean.getWhye(), ""));
-//                mList.add(new InquiryDetailsBean("他行余额(元)", result.data.getThye(), ""));
-//                mList.add(new InquiryDetailsBean("我行不良贷款笔数", result.data.getWhbldkbs(), ""));
-//                mList.add(new InquiryDetailsBean("我行不良贷款余额", result.data.getWhbldkye(), ""));
-//                mList.add(new InquiryDetailsBean("逾期次数", result.data.getYqcs(), ""));
-//                mList.add(new InquiryDetailsBean("逾期金额", result.data.getYqje(), ""));
-//                mList.add(new InquiryDetailsBean("他行贷款机构数", result.data.getThdkjgs(), ""));
-//                mList.add(new InquiryDetailsBean("", "", ""));
-//
-//                mListTwo.add(new InquiryDetailsBean("信用卡张数", result.data.getXykzs(), ""));
-//                mListTwo.add(new InquiryDetailsBean("信用卡累计逾期期数", result.data.getXykljyqqs(), ""));
-//                mListTwo.add(new InquiryDetailsBean("信用卡累计逾期期数", result.data.getXykzgyqqs(), ""));
-//                mListTwo.add(new InquiryDetailsBean("信用卡授信额度(元)", result.data.getXyksxed(), ""));
-//                mListTwo.add(new InquiryDetailsBean("信用卡已使用额度", result.data.getXykysyed(), ""));
-//                mListTwo.add(new InquiryDetailsBean("信用卡最高逾期金额(元)", result.data.getXykzgyqje(), ""));
-//                mListTwo.add(new InquiryDetailsBean("信用卡是否不良", result.data.getXyksfbl(), ""));
-//                mListTwo.add(new InquiryDetailsBean("", "", ""));
-//
-//                mListThree.add(new InquiryDetailsBean("担保金额(元)", result.data.getDbje(), ""));
-//                mListThree.add(new InquiryDetailsBean("担保笔数", result.data.getDbbs(), ""));
-//                mListThree.add(new InquiryDetailsBean("担保余额", result.data.getDbye(), ""));
-//                mListThree.add(new InquiryDetailsBean("担保是否不良", result.data.getDbsfbl(), ""));
-//                if (ObjectUtils.isNotEmpty(result.data.getCxjl_Android())) {
-//                    mlistFour.addAll(result.data.getCxjl_Android());
-//                }
-//                mAdapter.setNewData(mList);
-//                mAdapterTwo.setNewData(mListTwo);
-//                mAdapterThree.setNewData(mListThree);
-//                mAdapterFour.setNewData(mlistFour);
+
+                mList.add(new InquiryDetailsBean("授信机构数", myHangBean.getSxjgs(), ""));
+                mList.add(new InquiryDetailsBean("授信贷款总额", myHangBean.getDksxze(), ""));
+                mList.add(new InquiryDetailsBean("贷款用信总额(元)", myHangBean.getDkyxze(), ""));
+                mList.add(new InquiryDetailsBean("担保总额(元)", myHangBean.getDbze(), ""));
+
+                mListTwo.add(new InquiryDetailsBean("总贷款情况", myHangBean.getZdkbs(), myHangBean.getZdkye()));
+                mListTwo.add(new InquiryDetailsBean("住房贷款情况", myHangBean.getZfdkbs(), myHangBean.getZfdkye()));
+                mListTwo.add(new InquiryDetailsBean("经营贷款情况", myHangBean.getJydkbs(), myHangBean.getJydkye()));
+                mListTwo.add(new InquiryDetailsBean("农户贷款情况", myHangBean.getNhdkbs(), myHangBean.getNhdkye()));
+                mListTwo.add(new InquiryDetailsBean("助学贷款情况", myHangBean.getZxdkbs(), myHangBean.getZxdkye()));
+                mListTwo.add(new InquiryDetailsBean("汽车贷款情况", myHangBean.getQcdkbs(), myHangBean.getQcdkye()));
+                mListTwo.add(new InquiryDetailsBean("非银行贷款情况", myHangBean.getFyhdkzbs(), myHangBean.getFyhdkye()));
+                for (int i = 0; i < mListTwo.size() % 4; i++) {
+                    mListTwo.add(new InquiryDetailsBean("", "", ""));
+                }
+
+                mListThree.add(new InquiryDetailsBean("机构数", myHangBean.getXykjgs(), ""));
+                mListThree.add(new InquiryDetailsBean("最高授信额度(元)", myHangBean.getZgsxed(), ""));
+                mListThree.add(new InquiryDetailsBean("当前已用额度(元)", myHangBean.getDqyyed(), ""));
+                mListThree.add(new InquiryDetailsBean("账户数", myHangBean.getXykzhs(), ""));
+
+                mListFive.add(new InquiryDetailsBean("欠税信息", myHangBean.getQsxxbs(), myHangBean.getQsxxje()));
+                mListFive.add(new InquiryDetailsBean("行政处罚", myHangBean.getXzcfbs(), myHangBean.getXzcfje()));
+                mListFive.add(new InquiryDetailsBean("民事判决信息", myHangBean.getMspjxxbs(), myHangBean.getMspjxxje()));
+                mListFive.add(new InquiryDetailsBean("涉诉情况", myHangBean.getSsqkbs(), myHangBean.getSsqkje()));
+                //是否逾期
+                if (ObjectUtils.isNotEmpty(myHangBean.getYqbs())) {
+                    tvYqbz.setText(myHangBean.getYqbs());
+                }
+                //是否失信人
+                if (ObjectUtils.isNotEmpty(myHangBean.getSfwsxzxr())) {
+                    tvSfsxzxr.setText(myHangBean.getSfwsxzxr());
+                }
+//String str1=String.format("欢迎来到西说，<font color=\"#550000\">%s", "李先生");
+                String yqqs = "";
+                String xykyqqs = "";
+                Calendar c = Calendar.getInstance();
+                int year = c.get(Calendar.YEAR);   //获取年份
+                for (int i = 0; i < myHangBean.getLxyqzdqs_Android().size(); i++) {
+                    yqqs = yqqs + "<font color=\"#23a7f0\">" + myHangBean.getLxyqzdqs_Android().get(i) + "</font>&nbsp;&nbsp;(" + (year - i) + ")&nbsp;&nbsp;&nbsp;";
+                }
+                for (int i = 0; i < myHangBean.getXyklxyq_Android().size(); i++) {
+                    xykyqqs = xykyqqs + "<font color=\"#23a7f0\">" + myHangBean.getXyklxyq_Android().get(i) + "</font>&nbsp;&nbsp;(" + (year - i) + ")&nbsp;&nbsp;&nbsp;";
+                }
+
+                tvYqqs.setText(Html.fromHtml(yqqs));
+                tvXykyq.setText(Html.fromHtml(xykyqqs));
+
+                if (ObjectUtils.isNotEmpty(myHangBean.getDbqk_Android())) {
+                    mlistFour.addAll(myHangBean.getDbqk_Android());
+                }
+                mAdapter.setNewData(mList);
+                mAdapterTwo.setNewData(mListTwo);
+                mAdapterThree.setNewData(mListThree);
+                mAdapterFour.setNewData(mlistFour);
+                mAdapterFive.setNewData(mListFive);
                 sbFind.setVisibility(View.GONE);
                 tvDescription.setVisibility(View.GONE);
                 if (ObjectUtils.isNotEmpty(bean.getDescription())) {
@@ -267,6 +318,7 @@ public class CreditInquiryDetailsFragmentTwo extends BaseAppFragment {
 
             @Override
             public void onFail(ApiException apiError) {
+                stopProgressDialog();
                 String str = apiError.getErrMsg();
                 if (str.contains("没有相关查询任务")) {
                     sbFind.setVisibility(View.VISIBLE);

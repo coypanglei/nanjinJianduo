@@ -73,5 +73,32 @@ public class PictureSelector {
             activity.startActivityForResult(intent, mRequestCode);
         }
     }
+
+    /**
+     * 选择图片
+     *
+     * @param cropEnabled 是否裁剪
+     * @param cropWidth   裁剪宽
+     * @param cropHeight  裁剪高
+     * @param ratioWidth  宽比例
+     * @param ratioHeight 高比例
+     */
+    public void selectPicture(boolean select,boolean cropEnabled, int cropWidth, int cropHeight, int ratioWidth, int ratioHeight) {
+        Activity activity = this.mActivity.get();
+        Fragment fragment = this.mFragment.get();
+        Intent intent = new Intent(activity, PictureSelectActivity.class);
+        intent.putExtra(PictureSelectActivity.ENABLE_CROP, cropEnabled);
+        intent.putExtra(PictureSelectActivity.CROP_WIDTH, cropWidth);
+        intent.putExtra(PictureSelectActivity.CROP_HEIGHT, cropHeight);
+        intent.putExtra(PictureSelectActivity.RATIO_WIDTH, ratioWidth);
+        intent.putExtra(PictureSelectActivity.RATIO_HEIGHT, ratioHeight);
+        intent.putExtra(PictureSelectActivity.ENABLE_CLOSE_SELECT,select);
+        if (fragment != null) {
+            fragment.startActivityForResult(intent, mRequestCode);
+        } else {
+            activity.startActivityForResult(intent, mRequestCode);
+        }
+    }
+
 }
 
