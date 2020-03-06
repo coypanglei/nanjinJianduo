@@ -103,16 +103,16 @@ public class DiyadanbaoDetailsOneFragment extends BaseAppFragment implements BGA
     @Override
     protected void initView(View rootView) {
         super.initView(rootView);
-        if ("查看详情".equals(SPUtils.getInstance().getString("status"))) {
-            rlAll.setVisibility(View.GONE);
-            llVisable.setVisibility(View.GONE);
-        } else {
-            if ("调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
+//        if ("查看详情".equals(SPUtils.getInstance().getString("status"))) {
+//            rlAll.setVisibility(View.GONE);
+//            llVisable.setVisibility(View.GONE);
+//        } else {
+            if ("调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))||"查看详情".equals(SPUtils.getInstance().getString("status"))) {
                 sbAdd.setVisibility(View.GONE);
                 sbDetel.setVisibility(View.GONE);
                 sbEdit.setVisibility(View.GONE);
             }
-        }
+//        }
 
         mEmptyText.setText("未添加信息");
         mAdapter = new ZiRanDanBaoAdapter();
@@ -239,7 +239,7 @@ public class DiyadanbaoDetailsOneFragment extends BaseAppFragment implements BGA
         return true;
     }
 
-    @OnClick({R.id.sb_add, R.id.sb_edit, R.id.sb_detel, R.id.tv_rlsb, R.id.tv_zxsq, R.id.zxcx})
+    @OnClick({R.id.sb_add, R.id.sb_edit, R.id.sb_detel, R.id.tv_rlsb, R.id.tv_zxsq, R.id.zxcx,R.id.yxzl})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.sb_add:
@@ -281,6 +281,15 @@ public class DiyadanbaoDetailsOneFragment extends BaseAppFragment implements BGA
             case R.id.zxcx:
                 if (ObjectUtils.isNotEmpty(getSelect())) {
                     UIHelper.showZxcxCommonActivity(getActivity(), getSelect().getId());
+                } else {
+                    ToastUtil.showBlackToastSucess("未选中担保人");
+                }
+                break;
+            //影像资料
+            case R.id.yxzl:
+
+                if (ObjectUtils.isNotEmpty(getSelect())) {
+                    UIHelper.showYxzlCommonActivity(getActivity(), getSelect().getId());
                 } else {
                     ToastUtil.showBlackToastSucess("未选中担保人");
                 }

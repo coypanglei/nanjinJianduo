@@ -117,7 +117,7 @@ public class BasicInformationDcFragment extends BaseAppFragment {
     @Override
     protected void initView(View rootView) {
         super.initView(rootView);
-        if ("查看详情".equals(SPUtils.getInstance().getString("status"))) {
+        if ("查看详情".equals(SPUtils.getInstance().getString("status")) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
             sbZancun.setVisibility(View.GONE);
             sbEdit.setVisibility(View.GONE);
         }
@@ -229,7 +229,7 @@ public class BasicInformationDcFragment extends BaseAppFragment {
                 } catch (java.lang.UnsupportedOperationException e) {
                     LogUtils.e(e);
                 }
-                if ("查看详情".equals(SPUtils.getInstance().getString("status"))) {
+                if ("查看详情".equals(SPUtils.getInstance().getString("status"))|| "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
                     sbZancun.setVisibility(View.GONE);
                     sbEdit.setVisibility(View.GONE);
                 } else {

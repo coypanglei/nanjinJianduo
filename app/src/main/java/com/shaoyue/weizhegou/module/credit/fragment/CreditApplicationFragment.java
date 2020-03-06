@@ -12,7 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.shaoyue.weizhegou.R;
@@ -24,6 +23,8 @@ import com.shaoyue.weizhegou.module.dhgl.fragment.SjcjFragment;
 import com.shaoyue.weizhegou.module.dhgl.fragment.SpFragment;
 import com.shaoyue.weizhegou.module.dhgl.fragment.XcjyFragment;
 import com.shaoyue.weizhegou.module.dhgl.fragment.XzRlFragment;
+import com.shaoyue.weizhegou.module.dhgl.jjnj.fragment.DgdkjcFragment;
+import com.shaoyue.weizhegou.module.dhgl.jjnj.fragment.GdjcFragment;
 import com.shaoyue.weizhegou.module.dhgl.jjnj.fragment.sdjcFragment;
 import com.shaoyue.weizhegou.module.sxdc.fragment.SxDcSpFragment;
 import com.shaoyue.weizhegou.module.sxdc.fragment.shouXinSurveyFragment;
@@ -81,7 +82,7 @@ public class CreditApplicationFragment extends BaseTitleFragment {
         hideLeftButtonV2();
         final List<MainClickBean> mMenuList = profileBean.getMainClickBeans();
         for (int i = 0; i < mMenuList.size(); i++) {
-            LogUtils.e(mMenuList.get(i).getTitle());
+//            LogUtils.e(mMenuList.get(i).getTitle());
             if ("授信申请".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(shouXinShenQingFragment.newInstance(mMenuList.get(i).getTitle()));
             } else if ("授信调查".equals(mMenuList.get(i).getTitle())) {
@@ -98,8 +99,12 @@ public class CreditApplicationFragment extends BaseTitleFragment {
                 fragmentList.add(XzRlFragment.newInstance(mMenuList.get(i).getTitle()));
             } else if ("审批".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(SpFragment.newInstance(mMenuList.get(i).getTitle()));
-            } else if("首贷检查".equals(mMenuList.get(i).getTitle())){
+            } else if ("首贷检查".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(sdjcFragment.newInstance(mMenuList.get(i).getTitle()));
+            } else if ("个贷检查".equals(mMenuList.get(i).getTitle())) {
+                fragmentList.add(GdjcFragment.newInstance(mMenuList.get(i).getTitle()));
+            } else if ("对公贷款检查".equals(mMenuList.get(i).getTitle())) {
+                fragmentList.add(DgdkjcFragment.newInstance(mMenuList.get(i).getTitle()));
             }
         }
         mMenuList.get(profileBean.getType()).setSelect(true);

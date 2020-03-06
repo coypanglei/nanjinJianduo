@@ -15,6 +15,8 @@ public class VideoMaterialBean extends BaseBean {
 
     private String url;
 
+
+
     public String getUrl() {
         return url;
     }
@@ -115,6 +117,7 @@ public class VideoMaterialBean extends BaseBean {
         private String zllx;
         private Object zlsx;
         private Object zlmc;
+        private String type;
         private String zldz;
         private Object delFlag;
         private String createBy;
@@ -122,6 +125,14 @@ public class VideoMaterialBean extends BaseBean {
         private Object updateBy;
         private Object updateTime;
         private Object description;
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
 
         private boolean select;
 

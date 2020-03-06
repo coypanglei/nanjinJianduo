@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.api.callback.BaseCallback;
@@ -103,7 +102,7 @@ public class MainActivity extends BaseAppActivity {
                     case R.id.iv_icon:
                         if (data.getTitle().equals("信贷运营")) {
                             UIHelper.showCreditActivity(MainActivity.this);
-                        } else if (data.getTitle().equals("季检年检")) {
+                        } else if (data.getTitle().equals("贷后管理")) {
                             UIHelper.showDhActivity(MainActivity.this);
                         }
                         break;

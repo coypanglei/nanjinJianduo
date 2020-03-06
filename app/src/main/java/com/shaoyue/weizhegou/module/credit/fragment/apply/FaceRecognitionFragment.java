@@ -23,6 +23,7 @@ import com.shaoyue.weizhegou.entity.cedit.OcrBean;
 import com.shaoyue.weizhegou.entity.cedit.RefreshBean;
 import com.shaoyue.weizhegou.manager.AppMgr;
 import com.shaoyue.weizhegou.manager.DomainMgr;
+import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.util.GlideNewImageLoader;
 import com.shaoyue.weizhegou.util.ToastUtil;
 import com.wildma.pictureselector.PictureSelector;
@@ -88,11 +89,12 @@ public class FaceRecognitionFragment extends BaseAppFragment {
         super.onResume();
         initView();
     }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mFaceBeans =(List<FaceBean>) getArguments().getSerializable("key");
+        mFaceBeans = (List<FaceBean>) getArguments().getSerializable("key");
     }
 
 
@@ -101,6 +103,7 @@ public class FaceRecognitionFragment extends BaseAppFragment {
         super.onDestroyView();
         getArguments().putSerializable("key", (Serializable) mFaceBeans);
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(RefreshBean event) {
         initView();
@@ -114,31 +117,36 @@ public class FaceRecognitionFragment extends BaseAppFragment {
         CeditApi.findFaceInfo(new BaseCallback<BaseResponse<List<FaceBean>>>() {
             @Override
             public void onSucc(BaseResponse<List<FaceBean>> result) {
+                try {
+                    mFaceBeans = result.data;
+                    if (ObjectUtils.isNotEmpty(mFaceBeans) && mFaceBeans.size() > 0) {
 
-                mFaceBeans = result.data;
-                if (ObjectUtils.isNotEmpty(mFaceBeans) && mFaceBeans.size() > 0) {
+                        if (mFaceBeans.size() == 1) {
+                            mLlpo.setVisibility(View.GONE);
+                        } else {
+                            mLlpo.setVisibility(View.VISIBLE);
 
-                    if (mFaceBeans.size() == 1) {
-                        mLlpo.setVisibility(View.GONE);
-                    } else {
-                        mLlpo.setVisibility(View.VISIBLE);
+                        }
+                        GlideNewImageLoader.displayOwnerImageHeadNoCache(getActivity(), mIvSqr, DomainMgr.getInstance().getBaseUrlImg() + mFaceBeans.get(0).getTxdz(), R.drawable.icon_face);
+                        if (mFaceBeans.size() > 1) {
+                            GlideNewImageLoader.displayOwnerImageHeadNoCache(getActivity(), mIvPo, DomainMgr.getInstance().getBaseUrlImg() + mFaceBeans.get(1).getTxdz(), R.drawable.icon_face);
+                            if (ObjectUtils.isNotEmpty(mFaceBeans.get(1).getJl())) {
+                                mLlBottom.setVisibility(View.VISIBLE);
+                                mTvPo.setText("配偶:" + mFaceBeans.get(1).getJl());
+                            }
+                        }
 
-                    }
-                    GlideNewImageLoader.displayOwnerImageHeadNoCache(getActivity(), mIvSqr, DomainMgr.getInstance().getBaseUrlImg() + mFaceBeans.get(0).getTxdz(), R.drawable.icon_face);
-                    if (mFaceBeans.size() > 1) {
-                        GlideNewImageLoader.displayOwnerImageHeadNoCache(getActivity(), mIvPo, DomainMgr.getInstance().getBaseUrlImg() + mFaceBeans.get(1).getTxdz(), R.drawable.icon_face);
-                        if (ObjectUtils.isNotEmpty(mFaceBeans.get(1).getJl())) {
+
+                        if (ObjectUtils.isNotEmpty(mFaceBeans.get(0).getJl())) {
                             mLlBottom.setVisibility(View.VISIBLE);
-                            mTvPo.setText("配偶:" + mFaceBeans.get(1).getJl());
+                            mTvGr.setText("本人:" + mFaceBeans.get(0).getJl());
                         }
                     }
-
-
-                    if (ObjectUtils.isNotEmpty(mFaceBeans.get(0).getJl())) {
-                        mLlBottom.setVisibility(View.VISIBLE);
-                        mTvGr.setText("本人:" + mFaceBeans.get(0).getJl());
-                    }
+                } catch (Exception e) {
+                     LogUtils.e(e);
                 }
+
+
             }
 
             @Override
@@ -237,7 +245,7 @@ public class FaceRecognitionFragment extends BaseAppFragment {
 
     @OnClick({R.id.ll_gr, R.id.ll_po})
     public void onViewClicked(View view) {
-        if ("查看详情".equals(SPUtils.getInstance().getString("status"))) {
+        if ("查看详情".equals(SPUtils.getInstance().getString("status")) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
             return;
         }
         switch (view.getId()) {

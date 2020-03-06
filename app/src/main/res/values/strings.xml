@@ -275,6 +275,7 @@
     <string name="str_ckjd"><u>查看进度</u></string>
     <string name="str_ckjy"><u>查看检验</u></string>
     <string name="str_ckcj"><u>查看采集</u></string>
+    <string name="str_yxzl"><u>影像资料</u></string>
     <string-array name="main_tab_txt">
         <item>服务</item>
         <item>商城</item>　　

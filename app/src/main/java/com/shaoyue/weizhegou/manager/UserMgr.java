@@ -75,6 +75,10 @@ UserMgr {
     public static final String SP_LOGIN_POSITION = "sp_login_position";
 
 
+
+    //对公贷款200万以上或以下
+    public static final String SP_DG_DK = "sp_dg_dk";
+
     //授信申请id
     public static final String SP_APPLY_ID = "sp_apply_id";
     //授信身份证

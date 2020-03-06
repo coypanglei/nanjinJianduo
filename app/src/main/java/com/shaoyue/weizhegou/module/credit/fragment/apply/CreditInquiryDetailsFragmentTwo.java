@@ -27,10 +27,9 @@ import com.shaoyue.weizhegou.base.BaseAppFragment;
 import com.shaoyue.weizhegou.entity.ZxcxListBean;
 import com.shaoyue.weizhegou.entity.cedit.InquiryDetailsBean;
 import com.shaoyue.weizhegou.entity.cedit.RefreshBean;
-import com.shaoyue.weizhegou.entity.dhgl.XcjyZxcxBean;
+import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.InquiryDetailsAdapter;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.InquiryDetailsTwoAdapter;
-import com.shaoyue.weizhegou.module.credit.adapter.shenqing.InquiryProgressAdapter;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.zxdbInfoAdapter;
 import com.shaoyue.weizhegou.util.ToastUtil;
 
@@ -208,6 +207,8 @@ public class CreditInquiryDetailsFragmentTwo extends BaseAppFragment {
                                 tvError.setVisibility(View.VISIBLE);
                                 llCs.setVisibility(View.VISIBLE);
                                 tvError.setText(myHangBean.getDescription());
+                            }else {
+                                tvError.setVisibility(View.GONE);
                             }
                             //通过未通过
                             if ("未通过".equals(myHangBean.getZxshjl())) {
@@ -237,9 +238,7 @@ public class CreditInquiryDetailsFragmentTwo extends BaseAppFragment {
                     }
                 }
 
-                if ("查看详情".equals(SPUtils.getInstance().getString("status"))) {
-                    sbSave.setVisibility(View.GONE);
-                }
+
                 mList.clear();
                 mListTwo.clear();
                 mListThree.clear();
@@ -314,44 +313,72 @@ public class CreditInquiryDetailsFragmentTwo extends BaseAppFragment {
                 } else {
                     nestedSc.setVisibility(View.VISIBLE);
                 }
+
+                if ("查看详情".equals(SPUtils.getInstance().getString("status")) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
+                    sbSave.setVisibility(View.GONE);
+                    sbFind.setVisibility(View.GONE);
+                }
+
             }
 
             @Override
             public void onFail(ApiException apiError) {
                 stopProgressDialog();
-                String str = apiError.getErrMsg();
-                if (str.contains("没有相关查询任务")) {
+                errorTv = apiError.getErrMsg();
+                if (errorTv.contains("没有相关查询任务")||errorTv.contains("查询失败")) {
                     sbFind.setVisibility(View.VISIBLE);
-                    tvDescription.setText(str);
+                    tvDescription.setText(errorTv);
                     nestedSc.setVisibility(View.GONE);
+
                 } else {
-                    tvDescription.setText(str);
+                    tvDescription.setText(errorTv);
                     nestedSc.setVisibility(View.GONE);
+                    sbFind.setVisibility(View.GONE);
+                }
+                if ("查看详情".equals(SPUtils.getInstance().getString("status")) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
+                    sbSave.setVisibility(View.GONE);
                     sbFind.setVisibility(View.GONE);
                 }
             }
         }, this);
     }
 
+    private String errorTv;
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(RefreshBean event) {
         xcjyZxcx();
     }
 
-    @OnClick({R.id.sb_find, R.id.tv_tg, R.id.tv_wtg, R.id.sb_save})
+    @OnClick({R.id.sb_find, R.id.tv_tg, R.id.tv_wtg, R.id.sb_save,R.id.sb_resh})
     public void onViewClicked(View view) {
         Drawable drawable = getResources().getDrawable(R.drawable.icon_left_star_black);
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         Drawable drawable2 = getResources().getDrawable(R.drawable.icon_left_blue);
         drawable2.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         switch (view.getId()) {
+
+
+            case R.id.sb_resh:
+                xcjyZxcx();
+                break;
             case R.id.sb_find:
-                DhApi.addsqZxcx(new BaseCallback<BaseResponse<Void>>() {
-                    @Override
-                    public void onSucc(BaseResponse<Void> result) {
-                        EventBus.getDefault().post(new RefreshBean());
-                    }
-                }, this);
+
+                if (errorTv.contains("没有相关查询任务")) {
+                    DhApi.addsqZxcx(new BaseCallback<BaseResponse<Void>>() {
+                        @Override
+                        public void onSucc(BaseResponse<Void> result) {
+                            EventBus.getDefault().post(new RefreshBean());
+                        }
+                    }, this);
+                } else if (errorTv.contains("查询失败")) {
+                    DhApi.cssqZxcx( new BaseCallback<BaseResponse<Void>>() {
+                        @Override
+                        public void onSucc(BaseResponse<Void> result) {
+                            EventBus.getDefault().post(new RefreshBean());
+                        }
+                    }, this);
+                }
                 break;
             case R.id.tv_tg:
                 xtshjl = "通过";

@@ -199,7 +199,7 @@ public class StartDcDialogFragment extends DialogFragment {
                     public void onSucc(BaseResponse<Void> result) {
                         dismiss();
                         SPUtils.getInstance().put(UserMgr.SP_DC_TYPE, sxmx);
-                        UIHelper.showDcCommonActivity("调查", getActivity(), "开始调查");
+                        UIHelper.showDcCommonActivity("调查", getActivity(), "调查");
                     }
                 }, this);
                 break;

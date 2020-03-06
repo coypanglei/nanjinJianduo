@@ -209,6 +209,8 @@ public class MyDataFragment extends BaseFragment {
                                 tvError.setVisibility(View.VISIBLE);
                                 llCs.setVisibility(View.VISIBLE);
                                 tvError.setText(myHangBean.getDescription());
+                            }else {
+                                tvError.setVisibility(View.GONE);
                             }
                             //通过未通过
                             if ("未通过".equals(myHangBean.getXtshjl())) {

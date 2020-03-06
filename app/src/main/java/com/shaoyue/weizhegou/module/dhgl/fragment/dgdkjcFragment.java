@@ -18,9 +18,9 @@ import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.base.BaseTitleFragment;
 import com.shaoyue.weizhegou.entity.user.MainClickBean;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.MenuAdapter;
-import com.shaoyue.weizhegou.module.credit.fragment.MyDataDhglFragment;
 import com.shaoyue.weizhegou.module.credit.fragment.apply.CreditInquiryDetailsFragment;
 import com.shaoyue.weizhegou.module.credit.fragment.diaocha.DcMoneyFragment;
+import com.shaoyue.weizhegou.module.sxdc.fragment.BasicInformationTyFragment;
 import com.shaoyue.weizhegou.widget.NoScrollViewPager;
 
 import java.util.ArrayList;
@@ -71,7 +71,7 @@ public class dgdkjcFragment extends BaseTitleFragment {
     @Override
     protected void initView(View rootView) {
         super.initView(rootView);
-        setCommonTitle("基本信息").hideLeftButtonV2();
+        setCommonTitle("首次贷后检查 - 基本信息").hideLeftButtonV2();
 
 
         final List<MainClickBean> mMenuList = new ArrayList<>();
@@ -81,22 +81,16 @@ public class dgdkjcFragment extends BaseTitleFragment {
         mMenuList.add(new MainClickBean("结论", false));
 
         for (int i = 0; i < mMenuList.size(); i++) {
-            if ("家庭信息".equals(mMenuList.get(i).getTitle())) {
-                fragmentList.add(XcjyFamilyInfoFragment.newInstance(mMenuList.get(i).getTitle()));
-            } else if ("征信查询".equals(mMenuList.get(i).getTitle())) {
+            if ("征信查询".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(CreditInquiryDetailsFragment.newInstance());
             } else if ("影像资料".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(dyVideoDetailsFragment.newInstance("首贷检查"));
             } else if ("基本信息".equals(mMenuList.get(i).getTitle())) {
-                fragmentList.add(BasicInformationSdFragment.newInstance());
-            } else if ("系统数据".equals(mMenuList.get(i).getTitle())) {
-                fragmentList.add(MyDataDhglFragment.newInstance());
+                fragmentList.add(BasicInformationTyFragment.newInstance("贷后基本信息"));
             } else if ("现金流".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(DcMoneyFragment.newInstance());
-            } else if ("现场检验表".equals(mMenuList.get(i).getTitle())) {
-                fragmentList.add(XcjyBDhglFragment.newInstance());
-            } else if ("分析结论".equals(mMenuList.get(i).getTitle())) {
-                fragmentList.add(SjcjFxjlDhglFragment.newInstance());
+            } else if ("结论".equals(mMenuList.get(i).getTitle())) {
+                fragmentList.add(BasicInformationTyFragment.newInstance("首贷结论"));
             }
         }
         mMenuList.get(0).setSelect(true);
@@ -127,7 +121,7 @@ public class dgdkjcFragment extends BaseTitleFragment {
             @Override
             public void onPageSelected(int i) {
                 refresh(i, menuAdapter);
-                setCommonTitle(mMenuList.get(i).getTitle()).hideLeftButtonV2();
+                setCommonTitle("首次贷后检查 - " + mMenuList.get(i).getTitle()).hideLeftButtonV2();
 
             }
 

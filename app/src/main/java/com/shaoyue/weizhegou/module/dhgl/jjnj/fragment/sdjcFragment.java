@@ -5,12 +5,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
@@ -21,15 +17,11 @@ import com.shaoyue.weizhegou.api.callback.BaseCallback;
 import com.shaoyue.weizhegou.api.model.BaseResponse;
 import com.shaoyue.weizhegou.api.remote.CeditApi;
 import com.shaoyue.weizhegou.api.remote.DhApi;
-import com.shaoyue.weizhegou.api.remote.DiaoChaApi;
 import com.shaoyue.weizhegou.base.BaseAppFragment;
 import com.shaoyue.weizhegou.entity.dhgl.SdInfoListBean;
-import com.shaoyue.weizhegou.entity.diaocha.StartDiaochaBean;
-import com.shaoyue.weizhegou.entity.diaocha.sxDiaoChaBean;
 import com.shaoyue.weizhegou.event.OkOrCancelEvent;
 import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.module.credit.adapter.diaocha.sdjcAdapter;
-import com.shaoyue.weizhegou.module.credit.adapter.diaocha.sqDiaochaAdapter;
 import com.shaoyue.weizhegou.router.UIHelper;
 import com.shaoyue.weizhegou.util.ThreadUtil;
 import com.shaoyue.weizhegou.util.ToastUtil;
@@ -177,8 +169,8 @@ public class sdjcFragment extends BaseAppFragment implements BGARefreshLayout.BG
 
                     } else {
                         //请求id 身份证 模型
-                        SPUtils.getInstance().put(UserMgr.SP_APPLY_ID, getSelect().getId());
-                        SPUtils.getInstance().put(UserMgr.SP_ID_CARD, getSelect().getZjhm());
+                        SPUtils.getInstance().put(UserMgr.SP_ID_CARD, getSelect().getId());
+                        SPUtils.getInstance().put(UserMgr.SP_APPLY_ID, getSelect().getZjhm());
                         UIHelper.showDcCommonActivity("首贷", getActivity(), "首贷检查");
                     }
                 } else {

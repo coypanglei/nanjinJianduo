@@ -2,7 +2,8 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:id="@+id/ll_top"
@@ -19,7 +20,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.5"
             android:gravity="center"
-            android:text="序号"
+            tools:text="序号"
             android:textColor="@color/color_0d1730"
             android:textSize="@dimen/dp_11"
 
@@ -31,7 +32,7 @@
             android:layout_height="match_parent"
             android:layout_weight="6"
             android:gravity="center"
-            android:text="身份证号"
+            tools:text="身份证号"
             android:textColor="@color/color_0d1730"
             android:textSize="@dimen/dp_11" />
 
@@ -41,7 +42,7 @@
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:gravity="center"
-            android:text="客户姓名"
+            tools:text="客户姓名"
             android:textColor="@color/color_0d1730"
             android:textSize="@dimen/dp_11" />
 
@@ -52,7 +53,7 @@
             android:layout_height="match_parent"
             android:layout_weight="4"
             android:gravity="center"
-            android:text="贷款金额"
+            tools:text="贷款金额"
             android:textColor="@color/color_0d1730"
             android:textSize="@dimen/dp_11" />
 
@@ -64,7 +65,7 @@
             android:drawablePadding="@dimen/dp_3"
             android:gravity="center"
             android:paddingRight="@dimen/dp_10"
-            android:text="贷款余额"
+            tools:text="贷款余额"
             android:textColor="@color/color_0d1730"
             android:textSize="@dimen/dp_11" />
 
@@ -74,7 +75,7 @@
             android:layout_height="match_parent"
             android:layout_weight="4"
             android:gravity="center"
-            android:text="起始日期"
+            tools:text="起始日期"
             android:textColor="@color/color_0d1730"
             android:textSize="@dimen/dp_11" />
 
@@ -87,7 +88,7 @@
             android:drawablePadding="@dimen/dp_3"
             android:gravity="center"
 
-            android:text="担保方式"
+            tools:text="担保方式"
             android:textColor="@color/color_0d1730"
             android:textSize="@dimen/dp_11" />
 
@@ -98,7 +99,7 @@
             android:layout_height="match_parent"
             android:layout_weight="4"
             android:gravity="center"
-            android:text="贷款用途"
+            tools:text="贷款用途"
             android:textColor="@color/color_0d1730"
             android:textSize="@dimen/dp_11" />
 
@@ -108,7 +109,7 @@
             android:layout_height="match_parent"
             android:layout_weight="4"
             android:gravity="center"
-            android:text="支付方式"
+            tools:text="支付方式"
             android:textColor="@color/color_0d1730"
             android:textSize="@dimen/dp_11" />
 

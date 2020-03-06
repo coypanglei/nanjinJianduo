@@ -10,7 +10,6 @@ import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.libracore.lib.widget.StateButton;
@@ -23,11 +22,9 @@ import com.shaoyue.weizhegou.base.BaseAppFragment;
 import com.shaoyue.weizhegou.entity.ZxcxListBean;
 import com.shaoyue.weizhegou.entity.cedit.InquiryDetailsBean;
 import com.shaoyue.weizhegou.entity.cedit.RefreshBean;
-import com.shaoyue.weizhegou.entity.dhgl.XcjyZxcxBean;
 import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.InquiryDetailsAdapter;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.InquiryDetailsTwoAdapter;
-import com.shaoyue.weizhegou.module.credit.adapter.shenqing.InquiryProgressAdapter;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.zxdbInfoAdapter;
 
 import org.greenrobot.eventbus.EventBus;
@@ -69,6 +66,7 @@ public class CreditInquiryDetailsFragmentThree extends BaseAppFragment {
     TextView tvYqqs;
     @BindView(R.id.rv_credit_five)
     RecyclerView mRvCreditFive;
+    Unbinder unbinder;
 
     private InquiryDetailsTwoAdapter mAdapter;
     private InquiryDetailsAdapter mAdapterTwo;
@@ -86,6 +84,8 @@ public class CreditInquiryDetailsFragmentThree extends BaseAppFragment {
     private String title;
 
     private String id;
+
+    private String tvError;
 
     public static CreditInquiryDetailsFragmentThree newInstance(String title, String id) {
 
@@ -271,14 +271,20 @@ public class CreditInquiryDetailsFragmentThree extends BaseAppFragment {
             @Override
             public void onFail(ApiException apiError) {
                 stopProgressDialog();
-                String str = apiError.getErrMsg();
-                if (str.contains("没有相关查询任务")) {
+                tvError = apiError.getErrMsg();
+
+                if (tvError.contains("没有相关查询任务") || tvError.contains("查询失败")) {
                     sbFind.setVisibility(View.VISIBLE);
-                    tvDescription.setText(str);
+                    tvDescription.setText(tvError);
                     nestedSc.setVisibility(View.GONE);
                 } else {
-                    tvDescription.setText(str);
+                    tvDescription.setText(tvError);
                     nestedSc.setVisibility(View.GONE);
+                    sbFind.setVisibility(View.GONE);
+                }
+
+                if ("查看详情".equals(SPUtils.getInstance().getString("status")) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
+
                     sbFind.setVisibility(View.GONE);
                 }
             }
@@ -290,17 +296,36 @@ public class CreditInquiryDetailsFragmentThree extends BaseAppFragment {
         xcjyZxcx();
     }
 
-    @OnClick(R.id.sb_find)
-    public void onViewClicked() {
-        if ("查看详情".equals(SPUtils.getInstance().getString("status")) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
-            return;
-        }
-        DhApi.adddbsqZxcx(id, new BaseCallback<BaseResponse<Void>>() {
-            @Override
-            public void onSucc(BaseResponse<Void> result) {
-                EventBus.getDefault().post(new RefreshBean());
-            }
-        }, this);
 
+
+
+
+    @OnClick({R.id.sb_find, R.id.sb_resh})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.sb_find:
+                if ("查看详情".equals(SPUtils.getInstance().getString("status")) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
+                    return;
+                }
+                if (tvError.contains("没有相关查询任务")) {
+                    DhApi.adddbsqZxcx(id, new BaseCallback<BaseResponse<Void>>() {
+                        @Override
+                        public void onSucc(BaseResponse<Void> result) {
+                            EventBus.getDefault().post(new RefreshBean());
+                        }
+                    }, this);
+                } else if (tvError.contains("查询失败")) {
+                    DhApi.csdbbsqZxcx(id, new BaseCallback<BaseResponse<Void>>() {
+                        @Override
+                        public void onSucc(BaseResponse<Void> result) {
+                            EventBus.getDefault().post(new RefreshBean());
+                        }
+                    }, this);
+                }
+                break;
+            case R.id.sb_resh:
+                xcjyZxcx();
+                break;
+        }
     }
 }

@@ -19,6 +19,7 @@
             android:layout_width="@dimen/dp_350"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="9dp"
+            android:layout_marginRight="@dimen/dp_16"
             android:drawableRight="@drawable/icon_bottom_go"
             android:hint="截止于"
             android:paddingRight="8dp"
@@ -28,14 +29,16 @@
             />
 
         <TextView
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/dp_5"
             android:id="@+id/tv_name_title"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/tv_time"
             android:drawableLeft="@drawable/icon_left_red"
             android:gravity="center"
-            android:textColor="@color/color_3b3b3b"
-            android:textSize="11dp"
-            tools:text="证件有效期:" />
+            tools:text="年度家庭总收入:预计"
+            android:textColor="@color/color_666666"
+            android:textSize="11dp"/>
     </RelativeLayout>
 </RelativeLayout>

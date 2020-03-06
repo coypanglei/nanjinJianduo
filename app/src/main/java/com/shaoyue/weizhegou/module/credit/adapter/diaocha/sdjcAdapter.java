@@ -5,7 +5,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.entity.dhgl.SdInfoListBean;
-import com.shaoyue.weizhegou.entity.diaocha.sxDiaoChaBean;
 
 
 /**
@@ -44,6 +43,7 @@ public class sdjcAdapter extends BaseQuickAdapter<SdInfoListBean.RecordsBean, Ba
         helper.setText(R.id.tv_qsrq, item.getQsrq());
         helper.setText(R.id.tv_zffs, item.getZffs());
         helper.setText(R.id.tv_zjhm, item.getZjhm());
+        helper.setText(R.id.tv_dkye,item.getDkye());
         if (item.isClick()) {
             helper.setBackgroundColor(R.id.ll_top, mContext.getResources().getColor(R.color.color_33f0f0f0));
             helper.setTextColor(R.id.tv_dkje, mContext.getResources().getColor(R.color.color_2c4eb6));
@@ -54,6 +54,7 @@ public class sdjcAdapter extends BaseQuickAdapter<SdInfoListBean.RecordsBean, Ba
             helper.setTextColor(R.id.tv_zjhm, mContext.getResources().getColor(R.color.color_2c4eb6));
             helper.setTextColor(R.id.tv_dbfs, mContext.getResources().getColor(R.color.color_2c4eb6));
             helper.setTextColor(R.id.tv_khxm,mContext.getResources().getColor(R.color.color_2c4eb6));
+            helper.setTextColor(R.id.tv_dkye,mContext.getResources().getColor(R.color.color_2c4eb6));
         } else {
             helper.setBackgroundColor(R.id.ll_top, mContext.getResources().getColor(R.color.white));
 //            helper.setTextColor(R.id.tv_id_card, mContext.getResources().getColor(R.color.color_2c4eb6));
@@ -65,6 +66,7 @@ public class sdjcAdapter extends BaseQuickAdapter<SdInfoListBean.RecordsBean, Ba
             helper.setTextColor(R.id.tv_zjhm, mContext.getResources().getColor(R.color.color_fc1c1a1d));
             helper.setTextColor(R.id.tv_dbfs, mContext.getResources().getColor(R.color.color_fc1c1a1d));
             helper.setTextColor(R.id.tv_khxm,mContext.getResources().getColor(R.color.color_fc1c1a1d));
+            helper.setTextColor(R.id.tv_dkye,mContext.getResources().getColor(R.color.color_fc1c1a1d));
         }
     }
 }

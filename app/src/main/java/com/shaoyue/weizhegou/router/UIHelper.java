@@ -42,6 +42,7 @@ import com.shaoyue.weizhegou.module.account.dialog.RuleFragment;
 import com.shaoyue.weizhegou.module.account.dialog.VerifiedDialogFragment;
 import com.shaoyue.weizhegou.module.credit.activity.ApplyInfoActivity;
 import com.shaoyue.weizhegou.module.credit.activity.DyFaceActivity;
+import com.shaoyue.weizhegou.module.credit.activity.DyYxzlActivity;
 import com.shaoyue.weizhegou.module.credit.activity.DyZxcxActivity;
 import com.shaoyue.weizhegou.module.credit.activity.DyZxsqActivity;
 import com.shaoyue.weizhegou.module.credit.dialog.ApplicationProgressDialogFragment;
@@ -58,6 +59,7 @@ import com.shaoyue.weizhegou.module.credit.dialog.VideoPicDialogFragment;
 import com.shaoyue.weizhegou.module.credit.dialog.XcjyProgressDialogFragment;
 import com.shaoyue.weizhegou.module.credit.dialog.ZhuChaFragment;
 import com.shaoyue.weizhegou.module.dhgl.activity.XcjyActivity;
+import com.shaoyue.weizhegou.module.dhgl.dialog.CwfxAddDialogFragment;
 import com.shaoyue.weizhegou.module.general.activity.ProfileCommonActivity;
 import com.shaoyue.weizhegou.module.goods.dialog.NewCarGoodsSpecificationFragment;
 import com.shaoyue.weizhegou.module.goods.dialog.NewGoodsSpecificationFragment;
@@ -151,6 +153,8 @@ public class UIHelper {
 
     public static final String FAMILY_DIYA = "dialog_diya";
 
+    public static final String DIALOG_ADD_CWFX = "dialog_add_cwfx";
+
     public static final String START_DC = "dialog_start_dc";
 
 
@@ -183,11 +187,11 @@ public class UIHelper {
      *
      * @param activity
      */
-    public static void showSxSpDialog(FragmentActivity activity, TiJiaoBean id,boolean qianzi) {
+    public static void showSxSpDialog(FragmentActivity activity, TiJiaoBean id, boolean qianzi) {
         FragmentManager fm = activity.getSupportFragmentManager();
         Fragment fragment = fm.findFragmentByTag(SX_SP_DIALOG);
         if (fragment == null) {
-            DialogFragment dialog = SxSpDialogFragment.newInstance(id,qianzi);
+            DialogFragment dialog = SxSpDialogFragment.newInstance(id, qianzi);
             dialog.show(fm, SX_SP_DIALOG);
         }
     }
@@ -463,6 +467,20 @@ public class UIHelper {
         }
     }
 
+    /**
+     * 新增财务分析
+     *
+     * @param activity
+     */
+    public static void showCwfxFragment(FragmentActivity activity, GoAllSelect goAllSelect) {
+        FragmentManager fm = activity.getSupportFragmentManager();
+        Fragment fragment = fm.findFragmentByTag(DIALOG_ADD_CWFX);
+        if (fragment == null) {
+            DialogFragment dialog = CwfxAddDialogFragment.newInstance(goAllSelect);
+            dialog.show(fm, DIALOG_ADD_CWFX);
+        }
+    }
+
 
     /**
      * 展示账号密码
@@ -604,7 +622,6 @@ public class UIHelper {
     }
 
 
-
     /**
      * 跳转征查询抵押activity
      */
@@ -613,12 +630,36 @@ public class UIHelper {
         Intent intent = DyZxcxActivity.newInstance(activity, contentType);
         activity.startActivity(intent);
     }
+
+
+    /**
+     * 跳转影像资料activity
+     */
+
+    public static void showYxzlCommonActivity(Activity activity, String contentType) {
+        Intent intent = DyYxzlActivity.newInstance(activity, contentType);
+        activity.startActivity(intent);
+    }
+
+
+
     /**
      * 跳转授信调查activity
      */
 
     public static void showDcCommonActivity(String type, Activity activity, String contentType) {
         Intent intent = XcjyActivity.newInstance(activity, contentType, type);
+        activity.startActivity(intent);
+
+    }
+
+
+    /**
+     * 跳转对公贷款activity
+     */
+
+    public static void showDgCommonActivity(String type, Activity activity, String contentType,String isbws) {
+        Intent intent = XcjyActivity.newInstance(activity, contentType, type,isbws);
         activity.startActivity(intent);
 
     }
@@ -881,8 +922,6 @@ public class UIHelper {
     }
 
     /**
-     *
-     * 
      * 支付失败
      *
      * @param activity

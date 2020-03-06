@@ -13,6 +13,22 @@ public class BasicTitle extends BaseBean {
     private List<BasicInformationBean.RecordsBean> mlist;
 
     private List<DbBean> mdbBeanList;
+    // 0 正常 1放大
+    private int layout =0;
+
+    public int getLayout() {
+        return layout;
+    }
+
+    public void setLayout(int layout) {
+        this.layout = layout;
+    }
+
+    public BasicTitle(String title, List<BasicInformationBean.RecordsBean> mlist, int layout) {
+        this.title = title;
+        this.mlist = mlist;
+        this.layout = layout;
+    }
 
     public List<DbBean> getMdbBeanList() {
         return mdbBeanList;

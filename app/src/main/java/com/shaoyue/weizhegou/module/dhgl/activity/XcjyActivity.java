@@ -8,6 +8,8 @@ import com.shaoyue.weizhegou.base.BaseCommonActivity;
 import com.shaoyue.weizhegou.base.BaseFragment;
 import com.shaoyue.weizhegou.entity.cedit.OcrBean;
 import com.shaoyue.weizhegou.module.credit.fragment.diaocha.DcInfoFragment;
+import com.shaoyue.weizhegou.module.dhgl.fragment.DgdkInfoFragment;
+import com.shaoyue.weizhegou.module.dhgl.fragment.GrdkInfoFragment;
 import com.shaoyue.weizhegou.module.dhgl.fragment.SjcjInfoFragment;
 import com.shaoyue.weizhegou.module.dhgl.fragment.XcjyInfoFragment;
 import com.shaoyue.weizhegou.module.dhgl.fragment.dgdkjcFragment;
@@ -21,6 +23,9 @@ public class XcjyActivity extends BaseCommonActivity {
 
     private String type;
 
+    //是否两百万以上
+    private String isbws;
+
 
     public static Intent newInstance(Context context, String contentType, String type) {
         Intent intent = new Intent(context, XcjyActivity.class);
@@ -29,10 +34,20 @@ public class XcjyActivity extends BaseCommonActivity {
         return intent;
     }
 
+
+    public static Intent newInstance(Context context, String contentType, String type,String isbws) {
+        Intent intent = new Intent(context, XcjyActivity.class);
+        intent.putExtra(UIHelper.CONTENT_TYPE, contentType);
+        intent.putExtra(UIHelper.TYPE, type);
+        intent.putExtra("isbws",isbws);
+        return intent;
+    }
+
     @Override
     protected boolean initBundle(Bundle bundle) {
         mContentType = (String) getIntent().getSerializableExtra(UIHelper.CONTENT_TYPE);
         type = getIntent().getStringExtra(UIHelper.TYPE);
+        isbws =getIntent().getStringExtra("isbws");
         return true;
     }
 
@@ -47,6 +62,11 @@ public class XcjyActivity extends BaseCommonActivity {
                 return SjcjInfoFragment.newInstance(mContentType);
             case "首贷":
                 return dgdkjcFragment.newInstance(mContentType);
+            case "个贷":
+                return GrdkInfoFragment.newInstance(mContentType);
+            case "对公":
+                return DgdkInfoFragment.newInstance(mContentType,isbws);
+
             default:
                 return null;
         }

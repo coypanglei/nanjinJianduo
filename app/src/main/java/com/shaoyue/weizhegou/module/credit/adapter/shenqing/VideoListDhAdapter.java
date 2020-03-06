@@ -12,6 +12,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.entity.cedit.VideoMaterialBean;
+import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.widget.HorizontalRecyclerView;
 import com.wildma.pictureselector.PictureSelector;
 
@@ -25,10 +26,13 @@ public class VideoListDhAdapter extends BaseQuickAdapter<VideoMaterialBean, Base
 
     private FragmentActivity mFragment;
 
+    //1只能填写一个
+    private int mType;
 
-    public VideoListDhAdapter(FragmentActivity context) {
+    public VideoListDhAdapter(FragmentActivity context, int type) {
         super(R.layout.item_video_list);
         mFragment = context;
+        mType = type;
     }
 
 
@@ -93,7 +97,7 @@ public class VideoListDhAdapter extends BaseQuickAdapter<VideoMaterialBean, Base
                         add = false;
                     }
                 }
-                if (add && item.getList().size() < 6) {
+                if (add && item.getList().size() < mType) {
                     data.setZllx(item.getTitle());
                     mlist.add(data);
                     item.setList(mlist);
@@ -105,6 +109,10 @@ public class VideoListDhAdapter extends BaseQuickAdapter<VideoMaterialBean, Base
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if ("查看详情".equals(SPUtils.getInstance().getString("status")) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
+
+                    return;
+                }
                 List<VideoMaterialBean.ListBean> selet = adapter.getData();
                 if (selet.size() <= 10) {
                     if (ObjectUtils.isEmpty(selet.get(position).getId())) {
@@ -115,7 +123,7 @@ public class VideoListDhAdapter extends BaseQuickAdapter<VideoMaterialBean, Base
                         SPUtils.getInstance().put("selectPic_sxsfzh", selet.get(position).getSxsfzh());
                         PictureSelector
                                 .create(mFragment, 1007)
-                                .selectPicture(false,false, 200, 200, 1, 1);
+                                .selectPicture(false, false, 200, 200, 1, 1);
                     } else {
                         SPUtils.getInstance().put("selectPic", item.getCategory());
                         SPUtils.getInstance().put("selectPic_id", selet.get(position).getId());

@@ -32,6 +32,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.List;
 
 import butterknife.BindView;
@@ -99,6 +100,17 @@ public class DYFaceRecognitionFragment extends BaseTitleFragment {
         super.onResume();
         initView();
     }
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        mFaceBeans =(List<FaceBean>) getArguments().getSerializable("key");
+    }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        getArguments().putSerializable("key", (Serializable) mFaceBeans);
+    }
 
     /**
      * 刷新界面
@@ -146,6 +158,7 @@ public class DYFaceRecognitionFragment extends BaseTitleFragment {
     public void onMessageEvent(final OcrBean ocrBean) {
         /*结果回调*/
         if (ocrBean.getResultCode() == 1104 || ocrBean.getResultCode() == 1105) {
+            LogUtils.e(mFaceBeans);
             if (ObjectUtils.isEmpty(mFaceBeans)) {
                 return;
             }
@@ -229,6 +242,7 @@ public class DYFaceRecognitionFragment extends BaseTitleFragment {
 
     @OnClick({R.id.ll_gr, R.id.ll_po})
     public void onViewClicked(View view) {
+
         if ("查看详情".equals(SPUtils.getInstance().getString("status")) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
             return;
         }

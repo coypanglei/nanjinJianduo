@@ -12,6 +12,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.entity.cedit.VideoMaterialBean;
+import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.widget.HorizontalRecyclerView;
 import com.wildma.pictureselector.PictureSelector;
 
@@ -105,6 +106,9 @@ public class VideoListAdapter extends BaseQuickAdapter<VideoMaterialBean, BaseVi
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if ("查看详情".equals(SPUtils.getInstance().getString("status")) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
+                    return;
+                }
                 List<VideoMaterialBean.ListBean> selet = adapter.getData();
                 if (selet.size() <= 10) {
                     if (ObjectUtils.isEmpty(selet.get(position).getId())) {

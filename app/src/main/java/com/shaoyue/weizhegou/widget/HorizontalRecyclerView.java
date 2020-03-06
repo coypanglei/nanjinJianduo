@@ -64,8 +64,13 @@ public class HorizontalRecyclerView extends RecyclerView {
 
         /*---解决ViewPager嵌套垂直RecyclerView嵌套水平RecyclerView横向滑动到底后不滑动ViewPager start ---*/
         ViewParent parent =this;
-        while(!((parent = parent.getParent()) instanceof ViewPager));// 循环查找viewPager
-        parent.requestDisallowInterceptTouchEvent(true);
+        try {
+            while(!((parent = parent.getParent()) instanceof ViewPager));// 循环查找viewPager
+            parent.requestDisallowInterceptTouchEvent(true);
+        }catch (Exception e){
+
+        }
+
         /*---解决ViewPager嵌套垂直RecyclerView嵌套水平RecyclerView横向滑动到底后不滑动ViewPager start ---*/
         return super.dispatchTouchEvent(ev);
     }

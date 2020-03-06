@@ -2,6 +2,8 @@ package com.shaoyue.weizhegou.entity.cedit;
 
 import com.shaoyue.weizhegou.base.BaseBean;
 
+import org.json.JSONObject;
+
 public class GoAllSelect extends BaseBean {
 
     private QiYeDanBaoBean.RecordsBean mQiYeDanBao;
@@ -9,6 +11,20 @@ public class GoAllSelect extends BaseBean {
 
     private SxykhListBean.RecordsBean mSxykhlistBean;
 
+    public GoAllSelect(boolean isAdd, String title) {
+        this.isAdd = isAdd;
+        this.title = title;
+    }
+
+    private JSONObject jsonObject;
+
+    public JSONObject getJsonObject() {
+        return jsonObject;
+    }
+
+    public void setJsonObject(JSONObject jsonObject) {
+        this.jsonObject = jsonObject;
+    }
 
     public SxykhListBean.RecordsBean getmSxykhlistBean() {
         return mSxykhlistBean;

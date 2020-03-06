@@ -23,6 +23,7 @@ import com.shaoyue.weizhegou.base.BaseFragment;
 import com.shaoyue.weizhegou.entity.cedit.BasicInformationBean;
 import com.shaoyue.weizhegou.entity.cedit.InquiryDetailsBean;
 import com.shaoyue.weizhegou.entity.cedit.MyHangBean;
+import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.InquiryDetailsAdapter;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.MyDataIconAdapter;
 import com.shaoyue.weizhegou.util.ToastUtil;
@@ -119,6 +120,11 @@ public class MyDataDcFragment extends BaseFragment {
     @Override
     protected void initView(View rootView) {
         super.initView(rootView);
+
+        if ("查看详情".equals(SPUtils.getInstance().getString("status")) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
+            sbEdit.setVisibility(View.GONE);
+        }
+
 
         starBar.setStarCount(5);//星星总数
         starBar.setHalf(true);
@@ -248,6 +254,8 @@ public class MyDataDcFragment extends BaseFragment {
                                 tvError.setVisibility(View.VISIBLE);
                                 llCs.setVisibility(View.VISIBLE);
                                 tvError.setText(myHangBean.getDescription());
+                            }else {
+                                tvError.setVisibility(View.GONE);
                             }
                             //通过未通过
                             if ("未通过".equals(myHangBean.getXtshjl())) {

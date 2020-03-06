@@ -480,7 +480,7 @@ public class shouXinSurveyFragment extends BaseAppFragment implements BGARefresh
                         SPUtils.getInstance().put(UserMgr.SP_ID_CARD, getSelect().getSxsfzh());
                         SPUtils.getInstance().put(UserMgr.SP_DC_TASKID, getSelect().getTaskid());
                         SPUtils.getInstance().put(UserMgr.SP_DC_INSTID, getSelect().getInstid());
-                        UIHelper.showDcCommonActivity("调查", getActivity(), "开始调查");
+                        UIHelper.showDcCommonActivity("调查", getActivity(), "调查");
                     }
                 } else {
                     ToastUtil.showBlackToastSucess("暂未选取数据");

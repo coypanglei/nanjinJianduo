@@ -98,8 +98,7 @@ public class DcApi {
     //编辑资产负债
     private static final String SXDC_EDIT = "jeecg-boot/business/sxdcSxjl/edit";
 
-    //贷后基本信息
-    public static final String DH_JBXX = "jeecg-boot/dhjcmb/dhScdhjcJbxx/queryById";
+
 
     //编辑贷后基本信息
     private static final String DH_JBXX_EDIT = "jeecg-boot/dhjcmb/dhScdhjcJbxx/edit";
@@ -369,17 +368,7 @@ public class DcApi {
     }
 
 
-    /**
-     * 编辑贷后基本信息
-     *
-     * @param callback
-     * @param tag
-     */
-    public static void editdhINfo(Map<String, String> params, BaseCallback<BaseResponse<Void>> callback, Object tag) {
-//        params.put("id", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
-        ApiHttpClient.putJson(DH_JBXX_EDIT, params, callback, tag);
 
-    }
 
     /**
      * 添加基本信息
@@ -391,6 +380,20 @@ public class DcApi {
         params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
         ApiHttpClient.postJson(INFO_ADD, params, callback, tag);
     }
+
+
+    /**
+     * 通用信息获取
+     *
+     * @param callback
+     * @param tag
+     */
+    public static void gethqJbinfo(String address, BaseCallback<BaseResponse<JsonObject>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("pid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        ApiHttpClient.post(address, params, callback, tag);
+    }
+
 
     /**
      * 调查基本信息
@@ -404,17 +407,7 @@ public class DcApi {
         ApiHttpClient.post(DC_JBINFO, params, callback, tag);
     }
 
-    /**
-     * 统一基本信息
-     *
-     * @param callback
-     * @param tag
-     */
-    public static void getTyJbinfo(String addresss, BaseCallback<BaseResponse<JsonObject>> callback, Object tag) {
-        Map<String, String> params = new HashMap<>();
-        params.put("id", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
-        ApiHttpClient.post(addresss, params, callback, tag);
-    }
+
 
 
     /**

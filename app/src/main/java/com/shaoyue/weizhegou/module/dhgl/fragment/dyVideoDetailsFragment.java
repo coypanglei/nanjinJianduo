@@ -7,14 +7,13 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.api.callback.BaseCallback;
 import com.shaoyue.weizhegou.api.exception.ApiException;
 import com.shaoyue.weizhegou.api.model.BaseResponse;
-import com.shaoyue.weizhegou.api.remote.DhApi;
+import com.shaoyue.weizhegou.api.remote.TyApi;
 import com.shaoyue.weizhegou.api.remote.UserApi;
 import com.shaoyue.weizhegou.base.BaseAppFragment;
 import com.shaoyue.weizhegou.entity.cedit.OcrBean;
@@ -22,7 +21,6 @@ import com.shaoyue.weizhegou.entity.cedit.VideoBean;
 import com.shaoyue.weizhegou.entity.cedit.VideoMaterialBean;
 import com.shaoyue.weizhegou.event.OkOrCancelEvent;
 import com.shaoyue.weizhegou.manager.AppMgr;
-import com.shaoyue.weizhegou.module.credit.adapter.shenqing.VideoListAdapter;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.VideoListDhAdapter;
 import com.shaoyue.weizhegou.router.UIHelper;
 import com.shaoyue.weizhegou.util.ToastUtil;
@@ -86,7 +84,7 @@ public class dyVideoDetailsFragment extends BaseAppFragment {
     @Override
     protected void initView(View rootView) {
         super.initView(rootView);
-        mAdapter = new VideoListDhAdapter(getActivity());
+        mAdapter = new VideoListDhAdapter(getActivity(),6);
         mRvVideo.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvVideo.setAdapter(mAdapter);
     }
@@ -110,7 +108,7 @@ public class dyVideoDetailsFragment extends BaseAppFragment {
         /*结果回调*/
         if (ocrBean.getResultCode() == 1007) {
 
-            String id =SPUtils.getInstance().getString("selectPic_zllx");
+            String id = SPUtils.getInstance().getString("selectPic_zllx");
 //            LogUtils.e(id);
             if (ObjectUtils.isEmpty(id)) {
                 return;
@@ -150,7 +148,7 @@ public class dyVideoDetailsFragment extends BaseAppFragment {
                                         mdata.setZllx(zllx);
                                         mdata.setSxsfzh(SPUtils.getInstance().getString("selectPic_sxsfzh"));
 
-                                        DhApi.addVideo(mdata, new BaseCallback<BaseResponse<Void>>() {
+                                        TyApi.addVideo(title,mdata, new BaseCallback<BaseResponse<Void>>() {
                                             @Override
                                             public void onSucc(BaseResponse<Void> result) {
                                                 resh();
@@ -189,7 +187,7 @@ public class dyVideoDetailsFragment extends BaseAppFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(final VideoMaterialBean.ListBean listBean) {
-        String id =SPUtils.getInstance().getString("selectPic_id");
+        String id = SPUtils.getInstance().getString("selectPic_id");
         if (id.equals(listBean.getId())) {
             VideoMaterialBean videoMaterialBean = new VideoMaterialBean();
             unPic.clear();
@@ -217,8 +215,22 @@ public class dyVideoDetailsFragment extends BaseAppFragment {
                 }
             }
             videoMaterialBean.setSelect(select);
-            //更换接口
-            videoMaterialBean.setUrl("SDJC");
+            switch (title) {
+                case "首贷检查":
+                    //更换接口
+                    videoMaterialBean.setUrl("SDJC");
+                    break;
+                case "个贷检查":
+                    //更换接口
+                    videoMaterialBean.setUrl("GDJC");
+                    break;
+                case "对公贷款检查":
+                    videoMaterialBean.setUrl("DGJC");
+                    break;
+
+
+            }
+
             UIHelper.showPicDialog(getActivity(), videoMaterialBean);
         }
 
@@ -244,7 +256,7 @@ public class dyVideoDetailsFragment extends BaseAppFragment {
      * 刷新
      */
     private void resh() {
-        DhApi.getSdVideoDetailsList(new BaseCallback<BaseResponse<VideoBean>>() {
+        TyApi.getSdVideoDetailsList(title,new BaseCallback<BaseResponse<VideoBean>>() {
             @Override
             public void onSucc(BaseResponse<VideoBean> result) {
 

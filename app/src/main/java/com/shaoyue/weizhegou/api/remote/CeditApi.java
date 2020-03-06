@@ -244,6 +244,48 @@ public class CeditApi {
     //现金流编辑
     private static final String XJLBJ = "jeecg-boot/business/sxdcXjlpl/saveOrUpdate";
 
+
+    //担保人影像资料 获取
+    private static final String DBR_YXZL = "jeecg-boot/business/dbryxzl/getByDbidForAndriod";
+
+    //担保人影像资料 添加
+
+    private static final String DBR_YXZL_ADD = "jeecg-boot/business/dbryxzl/saveOrUpdate";
+
+
+    /**
+     * 添加音像资料
+     *
+     * @param callback
+     * @param tag
+     */
+    public static void addVideo(String title, VideoMaterialBean.ListBean listBean, BaseCallback<BaseResponse<Void>> callback, Object tag) {
+
+
+        Map<String, String> params = new HashMap<>();
+        params.put("zllx", listBean.getZllx());
+        params.put("sxsfzh", listBean.getSxsfzh());
+        params.put("zldz", listBean.getZldz());
+        params.put("pid", SPUtils.getInstance().getString(UserMgr.SP_ID_CARD));
+        params.put("jcjd", SPUtils.getInstance().getString(UserMgr.SP_ID_CARD));
+        params.put("zjhm", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        params.put("dbid", title);
+        ApiHttpClient.postJson(DBR_YXZL_ADD, params, callback, tag);
+    }
+
+    /**
+     * 查看影音资料列表
+     *
+     * @param callback
+     * @param tag
+     */
+    public static void getSdVideoDetailsList(String id, BaseCallback<BaseResponse<VideoBean>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("dbid", id);
+        params.put("pageSize", "1000000");
+        ApiHttpClient.post(DBR_YXZL, params, callback, tag);
+    }
+
     /**
      * 编辑现金流
      *
@@ -319,7 +361,7 @@ public class CeditApi {
         params.put("sxsqid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
         ApiHttpClient.postJson(LCSP_PROCESS, params, callback, tag);
 
-        
+
     }
 
     /**
