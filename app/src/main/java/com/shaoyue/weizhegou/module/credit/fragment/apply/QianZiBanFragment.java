@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -41,6 +43,7 @@ import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
@@ -69,6 +72,9 @@ public class QianZiBanFragment extends BaseAppFragment {
     @BindView(R.id.ll_9)
     LinearLayout ll9;
     Unbinder unbinder;
+    @BindView(R.id.tv_txrq)
+    TextView tvTxrq;
+
 
     private Bitmap bitmap;
     private List<MainClickBean> mlist = new ArrayList<>();
@@ -120,7 +126,7 @@ public class QianZiBanFragment extends BaseAppFragment {
                 ThreadUtil.runInUIThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (ObjectUtils.isNotEmpty(qianziBean.getSqrqm()) && ObjectUtils.isNotEmpty(qianziBean.getSqrjbkhjlqm())&&ObjectUtils.isEmpty(qianziBean.getUploadImg())) {
+                        if (ObjectUtils.isNotEmpty(qianziBean.getSqrqm()) && ObjectUtils.isNotEmpty(qianziBean.getSqrjbkhjlqm()) && ObjectUtils.isEmpty(qianziBean.getUploadImg())) {
                             EventBus.getDefault().post(new ScreenObject(scrollViewScreenShot(ll9), qianziBean.getJs()));
                         }
                     }
@@ -219,8 +225,13 @@ public class QianZiBanFragment extends BaseAppFragment {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");// HH:mm:ss
 //获取当前时间
             Date date = new Date(System.currentTimeMillis());
-
-            mTvTime.setText("授权日期:" + simpleDateFormat.format(date));
+            if (ObjectUtils.isNotEmpty(qianziBean.getSxrq())) {
+                mTvTime.setText("授权日期:" + qianziBean.getSxrq());
+                tvTxrq.setText("填写日期:" + qianziBean.getSxrq());
+            } else {
+                mTvTime.setText("授权日期:" + simpleDateFormat.format(date));
+                tvTxrq.setText("填写日期:" + simpleDateFormat.format(date));
+            }
             //个人签名文件
             if (ObjectUtils.isNotEmpty(qianziBean.getSqrqm())) {
                 mIvGerenQian.setBackgroundResource(R.color.white);
@@ -296,7 +307,7 @@ public class QianZiBanFragment extends BaseAppFragment {
 
         Bitmap bitmap = null;
         scrollView.setBackgroundColor(Color.parseColor("#F5F5F5"));
-        bitmap = Bitmap.createBitmap(scrollView.getWidth(),scrollView.getHeight(), Bitmap.Config.RGB_565);
+        bitmap = Bitmap.createBitmap(scrollView.getWidth(), scrollView.getHeight(), Bitmap.Config.RGB_565);
         final Canvas canvas = new Canvas(bitmap);
         scrollView.draw(canvas);
         return bitmap;

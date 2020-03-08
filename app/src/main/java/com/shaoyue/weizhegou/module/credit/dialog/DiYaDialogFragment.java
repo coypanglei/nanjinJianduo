@@ -193,7 +193,7 @@ public class DiYaDialogFragment extends DialogFragment {
                     for (BasicInformationBean.RecordsBean bean : list) {
 
                         if (ObjectUtils.isNotEmpty(bean.getDefaultvalue())) {
-                            LogUtils.e(bean.getDefaultvalue());
+
                             if (!bean.getDefaultvalue().contains("请输入") && !bean.getDefaultvalue().contains("选择")) {
                                 map.put(bean.getName(), bean.getDefaultvalue());
                             } else {

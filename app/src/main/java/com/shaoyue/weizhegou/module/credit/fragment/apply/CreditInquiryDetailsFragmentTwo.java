@@ -210,6 +210,7 @@ public class CreditInquiryDetailsFragmentTwo extends BaseAppFragment {
                             }else {
                                 tvError.setVisibility(View.GONE);
                             }
+                            xtshjl = myHangBean.getZxshjl();
                             //通过未通过
                             if ("未通过".equals(myHangBean.getZxshjl())) {
                                 Drawable drawable = getResources().getDrawable(R.drawable.icon_left_star_black);

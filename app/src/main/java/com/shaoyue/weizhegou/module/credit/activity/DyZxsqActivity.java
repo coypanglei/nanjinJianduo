@@ -4,10 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.shaoyue.weizhegou.base.BaseCommonActivity;
 import com.shaoyue.weizhegou.base.BaseFragment;
+import com.shaoyue.weizhegou.entity.cedit.OcrBean;
 import com.shaoyue.weizhegou.module.credit.fragment.apply.DbShouQuanShuFragment;
 import com.shaoyue.weizhegou.router.UIHelper;
+
+import org.greenrobot.eventbus.EventBus;
 
 public class DyZxsqActivity extends BaseCommonActivity {
 
@@ -30,6 +34,26 @@ public class DyZxsqActivity extends BaseCommonActivity {
         return DbShouQuanShuFragment.newInstance(mContentType);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 1004://该结果码要与Fragment中的一致
+            case 1005:
+                //音像资料
+            case 1007:
+                //征信授权书
+            case 1008:
+                //我这里使用的是根据结果码获取数据，然后加上下面一句代码，其
+                //他的什么都不用做
+
+                LogUtils.e(requestCode);
+                LogUtils.e(data);
+                EventBus.getDefault().post(new OcrBean(data, requestCode));
+                break;
+
+        }
+    }
 
 
 }

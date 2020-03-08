@@ -1,6 +1,8 @@
 package com.shaoyue.weizhegou.module.credit.fragment.apply;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -23,6 +25,8 @@ import com.shaoyue.weizhegou.api.remote.UserApi;
 import com.shaoyue.weizhegou.base.BaseTitleFragment;
 import com.shaoyue.weizhegou.entity.cedit.OcrBean;
 import com.shaoyue.weizhegou.entity.cedit.QianziBean;
+import com.shaoyue.weizhegou.entity.cedit.RefreshBean;
+import com.shaoyue.weizhegou.entity.cedit.ScreenObject;
 import com.shaoyue.weizhegou.event.OkOrCancelEvent;
 import com.shaoyue.weizhegou.manager.AppMgr;
 import com.shaoyue.weizhegou.manager.UserMgr;
@@ -33,7 +37,10 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -172,7 +179,25 @@ public class DbShouQuanShuFragment extends BaseTitleFragment {
 
         }
     }
+    /**
+     * 刷新界面
+     *
+     * @param event
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void refresh(ScreenObject event) {
+        LogUtils.e(event);
 
+        if (ObjectUtils.isNotEmpty(event)) {
+            if (mlist.get(0).getJs().equals(event.getJs())) {
+                qianziBean.setScreenImg(event.getBitmap());
+            }
+            if (mlist.get(1).getJs().equals(event.getJs())) {
+                qianziBeanTwo.setScreenImg(event.getBitmap());
+            }
+
+        }
+    }
     //删除图片
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(OkOrCancelEvent event) {
@@ -216,18 +241,10 @@ public class DbShouQuanShuFragment extends BaseTitleFragment {
 
 
                 if (ObjectUtils.isEmpty(qianziBean.getId())) {
-                    LogUtils.e(qianziBean);
-                    LogUtils.e(str2Map(qianziBean));
-                    CeditApi.updateQianMing(str2Map(qianziBean), new BaseCallback<BaseResponse<QianziBean>>() {
-                        @Override
-                        public void onSucc(BaseResponse<QianziBean> result) {
-                            EventBus.getDefault().post(result.data);
-                            sbEdit.setVisibility(View.GONE);
-                            sbSc.setVisibility(View.GONE);
-                        }
-                    }, this);
-                    if (ObjectUtils.isNotEmpty(qianziBeanTwo)) {
-                        CeditApi.updateQianMing(str2Map(qianziBeanTwo), new BaseCallback<BaseResponse<QianziBean>>() {
+                    if (ObjectUtils.isNotEmpty(qianziBean.getScreenImg())&&ObjectUtils.isEmpty(qianziBean.getUploadImg())) {
+                        saveBitmapFile(qianziBean.getJs(), qianziBean);
+                    } else {
+                        CeditApi.updateQianMing(str2Map(qianziBean), new BaseCallback<BaseResponse<QianziBean>>() {
                             @Override
                             public void onSucc(BaseResponse<QianziBean> result) {
                                 EventBus.getDefault().post(result.data);
@@ -236,7 +253,26 @@ public class DbShouQuanShuFragment extends BaseTitleFragment {
                             }
                         }, this);
                     }
+
+                    if(ObjectUtils.isNotEmpty(qianziBeanTwo)) {
+                        if (ObjectUtils.isNotEmpty(qianziBeanTwo.getScreenImg())) {
+                            saveBitmapFile(qianziBeanTwo.getJs(), qianziBeanTwo);
+                        } else {
+                            if (ObjectUtils.isNotEmpty(qianziBeanTwo)) {
+                                CeditApi.updateQianMing(str2Map(qianziBeanTwo), new BaseCallback<BaseResponse<QianziBean>>() {
+                                    @Override
+                                    public void onSucc(BaseResponse<QianziBean> result) {
+                                        EventBus.getDefault().post(result.data);
+                                        sbEdit.setVisibility(View.GONE);
+                                        sbSc.setVisibility(View.GONE);
+
+                                    }
+                                }, this);
+                            }
+                        }
+                    }
                 }
+                EventBus.getDefault().post(new RefreshBean());
                 break;
             //上传
             case R.id.sb_sc:
@@ -246,7 +282,45 @@ public class DbShouQuanShuFragment extends BaseTitleFragment {
                 break;
         }
     }
+    public void saveBitmapFile(String fileNa, final QianziBean qianziBean) {
+        // 首先保存图String fileName
+        File appDir = new File(Environment.getExternalStorageDirectory(), "vgmap");
+        if (!appDir.exists()) {
+            appDir.mkdir();
+        }
+        String fileName = fileNa + ".jpg";
+        File file = new File(appDir, fileName);
+        try {
+            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
+            qianziBean.getScreenImg().compress(Bitmap.CompressFormat.JPEG, 100, bos);
+            bos.flush();
+            bos.close();
+            UserApi.updatePic(file, SPUtils.getInstance().getString(UserMgr.SP_ID_CARD), new BaseCallback<BaseResponse<String>>() {
+                @Override
+                public void onSucc(BaseResponse<String> result) {
+                    stopProgressDialog();
 
+                    qianziBean.setScreenshotImg(result.msg);
+
+                    CeditApi.updateQianMing(str2Map(qianziBean), new BaseCallback<BaseResponse<QianziBean>>() {
+                        @Override
+                        public void onSucc(BaseResponse<QianziBean> result) {
+                            EventBus.getDefault().post(result.data);
+                            sbEdit.setVisibility(View.GONE);
+                            sbSc.setVisibility(View.GONE);
+                        }
+                    }, this);
+
+
+                }
+
+
+            }, this);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(final OcrBean ocrBean) {

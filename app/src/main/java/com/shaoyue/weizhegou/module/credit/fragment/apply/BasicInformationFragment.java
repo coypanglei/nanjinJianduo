@@ -182,11 +182,11 @@ public class BasicInformationFragment extends BaseAppFragment {
     }
 
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        getListById();
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        getListById();
+//    }
 
     /**
      * 时间滑轮

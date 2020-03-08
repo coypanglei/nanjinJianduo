@@ -161,6 +161,14 @@
                     android:textColor="@color/color_333333"
                     android:textSize="10dp"
                     android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tv_txrq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_100"
+                    android:text="填写日期："
+                    android:textColor="@color/color_333333"
+                    android:textSize="10dp" />
 
                 <RelativeLayout
                     android:layout_width="366dp"

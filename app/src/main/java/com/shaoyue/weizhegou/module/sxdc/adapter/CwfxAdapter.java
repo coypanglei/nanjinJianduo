@@ -163,7 +163,7 @@ public class CwfxAdapter extends BaseQuickAdapter<CwfxListBean.RecordsBean, Base
 
                     mDdvXB.removeTextChangedListener(textWatcher);
 
-                    EventBus.getDefault().post(new RefreshBean());
+
                 }
             }
         });
