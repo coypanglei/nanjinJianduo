@@ -39,6 +39,7 @@ public class ApplyInfoActivity extends BaseCommonActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
+            case 1001:
             case 1004://该结果码要与Fragment中的一致
             case 1005:
                 //音像资料

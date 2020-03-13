@@ -326,6 +326,12 @@ public class shouXinShenQingFragment extends BaseAppFragment implements BGARefre
 
                 break;
             case R.id.sb_synchronize:
+                CeditApi.tbInfo(getSelect().getId(), new BaseCallback<BaseResponse<Void>>() {
+                    @Override
+                    public void onSucc(BaseResponse<Void> result) {
+                        ToastUtil.showBlackToastSucess(result.msg);
+                    }
+                }, this);
                 break;
             case R.id.tv_more:
                 if (popupBigPhoto == null) {

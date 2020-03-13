@@ -1,6 +1,7 @@
 package com.shaoyue.weizhegou.api.remote;
 
 
+import com.blankj.utilcode.util.SPUtils;
 import com.lzy.okgo.callback.BitmapCallback;
 import com.shaoyue.weizhegou.api.callback.BaseCallback;
 import com.shaoyue.weizhegou.api.helper.ApiHttpClient;
@@ -354,7 +355,7 @@ public class UserApi extends BaseApi {
      */
     public static void updatePic(File mFile, String zjhm, BaseCallback<BaseResponse<String>> callback, Object tag) {
         Map<String, String> params = new HashMap<>();
-        params.put("zjhm", zjhm);
+        params.put("zjhm", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
         ApiHttpClient.updateImg(API_HAEDER_PIC, params, mFile, callback, tag);
     }
 
@@ -368,6 +369,7 @@ public class UserApi extends BaseApi {
      */
     public static void updatePic(File mFile, BaseCallback<BaseResponse<String>> callback, Object tag) {
         Map<String, String> params = new HashMap<>();
+        params.put("zjhm", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
         ApiHttpClient.updateImg(API_HAEDER_PIC, params, mFile, callback, tag);
     }
 

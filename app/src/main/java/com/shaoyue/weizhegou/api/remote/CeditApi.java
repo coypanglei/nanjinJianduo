@@ -13,6 +13,7 @@ import com.shaoyue.weizhegou.entity.cedit.DiyaDanBaoListBean;
 import com.shaoyue.weizhegou.entity.cedit.FaceBean;
 import com.shaoyue.weizhegou.entity.cedit.FamilyListBean;
 import com.shaoyue.weizhegou.entity.cedit.GongsiDanbao;
+import com.shaoyue.weizhegou.entity.cedit.HfwBean;
 import com.shaoyue.weizhegou.entity.cedit.MyHangBean;
 import com.shaoyue.weizhegou.entity.cedit.ProgressBean;
 import com.shaoyue.weizhegou.entity.cedit.QiYeDanBaoBean;
@@ -251,6 +252,45 @@ public class CeditApi {
     //担保人影像资料 添加
 
     private static final String DBR_YXZL_ADD = "jeecg-boot/business/dbryxzl/saveOrUpdate";
+
+    //汇法网获取
+    private static final String HFW_CHAXUN_LIST = "jeecg-boot/business/sxsqHfwxx/list";
+
+    //汇法网查询
+    private static final String HFW_CHAXUN = "jeecg-boot/business/sxsqHfwxx/chaxun";
+
+
+    //授信同步
+    private static final String SX_TB = "jeecg-boot/xdtb/xdtb/syncById";
+
+
+    /**
+     * 同步
+     */
+    public static void tbInfo(String sxid,BaseCallback<BaseResponse<Void>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("sxid", sxid);
+        ApiHttpClient.post(SX_TB, params, callback, tag);
+    }
+
+
+    /**
+     * 汇法网信息-查询汇法网
+     */
+    public static void cxHfWInfo(BaseCallback<BaseResponse<Void>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        ApiHttpClient.post(HFW_CHAXUN, params, callback, tag);
+    }
+
+    /**
+     * 汇法网信息-查询汇法网结果
+     */
+    public static void getHfWInfo(BaseCallback<BaseResponse<HfwBean>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        ApiHttpClient.post(HFW_CHAXUN_LIST, params, callback, tag);
+    }
 
 
     /**

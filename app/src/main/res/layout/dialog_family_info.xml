@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
@@ -21,8 +20,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/dp_10"
-            android:background="@drawable/blue_btn_bg_kong_5dp"
-            >
+            android:background="@drawable/blue_btn_bg_kong_5dp">
 
             <TextView
                 android:id="@+id/tv_add"
@@ -32,8 +30,7 @@
                 android:gravity="center"
                 android:text="添加"
                 android:textColor="@color/white"
-                android:textSize="14dp"
-                />
+                android:textSize="14dp" />
 
             <TextView
                 android:id="@+id/tv_cancel"
@@ -52,7 +49,7 @@
             android:layout_height="14dp"
             android:layout_marginLeft="@dimen/dp_20"
             android:layout_marginTop="@dimen/dp_20"
-            android:background="@color/color_1e88e5"/>
+            android:background="@color/color_1e88e5" />
 
         <TextView
             android:id="@+id/tv_my_info"
@@ -62,8 +59,7 @@
             android:layout_marginTop="@dimen/dp_18"
             android:text="新增家庭信息"
             android:textColor="@color/color_2e2e2e"
-            android:textSize="@dimen/dp_13"
-            />
+            android:textSize="@dimen/dp_13" />
 
         <ImageView
             android:id="@+id/iv_close"
@@ -72,8 +68,7 @@
             android:layout_alignParentRight="true"
             android:paddingRight="20dp"
             android:scaleType="center"
-            android:src="@drawable/dialog_line_close"
-            />
+            android:src="@drawable/dialog_line_close" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -88,9 +83,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_13"
                 android:gravity="center_horizontal"
+
                 android:orientation="vertical"
                 android:paddingRight="20dp"
                 android:paddingBottom="20dp">
+
+
 
                 <RelativeLayout
                     android:layout_width="@dimen/dp_274"
@@ -104,8 +102,7 @@
                         android:layout_width="206dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginLeft="9dp"
-                        android:hint="请输入姓名"
-                        />
+                        android:hint="请输入姓名" />
 
                     <TextView
                         android:id="@+id/tv_name_title"
@@ -116,7 +113,7 @@
                         android:gravity="center"
                         android:text="姓名:"
                         android:textColor="@color/color_666666"
-                        android:textSize="11dp"/>
+                        android:textSize="11dp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -135,8 +132,7 @@
                         android:digits="0123456789xyzXYZ"
                         android:hint="请输入身份证号码"
                         android:inputType="number"
-                        android:maxLength="18"
-                        />
+                        android:maxLength="18" />
 
                     <TextView
                         android:id="@+id/tv_name_id_card"
@@ -147,7 +143,15 @@
                         android:gravity="center"
                         android:text="身份证号:"
                         android:textColor="@color/color_666666"
-                        android:textSize="11dp"/>
+                        android:textSize="11dp" />
+
+                    <ImageView
+                        android:id="@+id/iv_zheng"
+                        android:layout_width="@dimen/dp_30"
+                        android:layout_height="@dimen/dp_30"
+                        android:layout_alignParentRight="true"
+                        android:scaleType="center"
+                        android:src="@drawable/icon_sfz_ocr" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -165,8 +169,7 @@
                         android:layout_marginLeft="9dp"
                         android:hint="请输入年龄"
                         android:inputType="number"
-                        android:maxLength="3"
-                        />
+                        android:maxLength="3" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -176,7 +179,7 @@
                         android:gravity="center"
                         android:text="年龄:"
                         android:textColor="@color/color_666666"
-                        android:textSize="11dp"/>
+                        android:textSize="11dp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -196,8 +199,7 @@
                         android:text="请选择性别"
                         android:textColor="@color/color_666666"
                         android:textSize="11dp"
-                        app:itemArray="@array/dropdown_array_xb"
-                        />
+                        app:itemArray="@array/dropdown_array_xb" />
 
                     <TextView
                         android:id="@+id/tv_nl"
@@ -208,7 +210,7 @@
                         android:gravity="center"
                         android:text="性别:"
                         android:textColor="@color/color_666666"
-                        android:textSize="11dp"/>
+                        android:textSize="11dp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -228,8 +230,7 @@
                         android:text="请选择民族"
                         android:textColor="@color/color_666666"
                         android:textSize="11dp"
-                        app:itemArray="@array/dropdown_array_mz"
-                        />
+                        app:itemArray="@array/dropdown_array_mz" />
 
                     <TextView
                         android:id="@+id/tv_mz"
@@ -240,7 +241,7 @@
                         android:gravity="center"
                         android:text="民族:"
                         android:textColor="@color/color_666666"
-                        android:textSize="11dp"/>
+                        android:textSize="11dp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -260,8 +261,7 @@
                         android:text="请选择学位"
                         android:textColor="@color/color_666666"
                         android:textSize="11dp"
-                        app:itemArray="@array/dropdown_array_xw"
-                        />
+                        app:itemArray="@array/dropdown_array_xw" />
 
                     <TextView
                         android:id="@+id/tv_xw"
@@ -272,7 +272,7 @@
                         android:gravity="center"
                         android:text="学位:"
                         android:textColor="@color/color_666666"
-                        android:textSize="11dp"/>
+                        android:textSize="11dp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -293,8 +293,7 @@
                         android:text="请选择学历"
                         android:textColor="@color/color_666666"
                         android:textSize="11dp"
-                        app:itemArray="@array/dropdown_array_xl"
-                        />
+                        app:itemArray="@array/dropdown_array_xl" />
 
                     <TextView
                         android:id="@+id/tv_xl"
@@ -305,7 +304,7 @@
                         android:gravity="center"
                         android:text="学历:"
                         android:textColor="@color/color_666666"
-                        android:textSize="11dp"/>
+                        android:textSize="11dp" />
                 </RelativeLayout>
 
 
@@ -327,8 +326,7 @@
                         android:text="请选择健康状况"
                         android:textColor="@color/color_666666"
                         android:textSize="11dp"
-                        app:itemArray="@array/dropdown_array_jkzk"
-                        />
+                        app:itemArray="@array/dropdown_array_jkzk" />
 
                     <TextView
                         android:id="@+id/tv_jkzk"
@@ -339,7 +337,7 @@
                         android:gravity="center"
                         android:text="健康状况:"
                         android:textColor="@color/color_666666"
-                        android:textSize="11dp"/>
+                        android:textSize="11dp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -360,8 +358,7 @@
                         android:text="请选择婚姻状况"
                         android:textColor="@color/color_666666"
                         android:textSize="11dp"
-                        app:itemArray="@array/dropdown_array_hyzk"
-                        />
+                        app:itemArray="@array/dropdown_array_hyzk" />
 
                     <TextView
                         android:id="@+id/tv_hyzk"
@@ -372,7 +369,7 @@
                         android:gravity="center"
                         android:text="婚姻状况:"
                         android:textColor="@color/color_666666"
-                        android:textSize="11dp"/>
+                        android:textSize="11dp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -389,8 +386,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginLeft="9dp"
                         android:hint="请输入联系电话"
-                        android:inputType="phone"
-                        />
+                        android:inputType="phone" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -400,7 +396,7 @@
                         android:gravity="center"
                         android:text="联系电话:"
                         android:textColor="@color/color_666666"
-                        android:textSize="11dp"/>
+                        android:textSize="11dp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -416,8 +412,7 @@
                         android:layout_width="206dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginLeft="9dp"
-                        android:hint="请输入地址"
-                        />
+                        android:hint="请输入地址" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -427,7 +422,7 @@
                         android:gravity="center"
                         android:text="地址:"
                         android:textColor="@color/color_666666"
-                        android:textSize="11dp"/>
+                        android:textSize="11dp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -443,8 +438,7 @@
                         android:layout_width="206dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginLeft="9dp"
-                        android:hint="请输入职业"
-                        />
+                        android:hint="请输入职业" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -454,7 +448,7 @@
                         android:gravity="center"
                         android:text="职业:"
                         android:textColor="@color/color_666666"
-                        android:textSize="11dp"/>
+                        android:textSize="11dp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -475,8 +469,7 @@
                         android:text="请选择角色"
                         android:textColor="@color/color_666666"
                         android:textSize="11dp"
-                        app:itemArray="@array/dropdown_array_js"
-                        />
+                        app:itemArray="@array/dropdown_array_js" />
 
                     <TextView
                         android:id="@+id/tv_js"
@@ -487,7 +480,7 @@
                         android:gravity="center"
                         android:text="角色:"
                         android:textColor="@color/color_666666"
-                        android:textSize="11dp"/>
+                        android:textSize="11dp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -503,8 +496,7 @@
                         android:layout_width="206dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginLeft="9dp"
-                        android:hint="请输入描述"
-                        />
+                        android:hint="请输入描述" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -513,7 +505,7 @@
                         android:gravity="center"
                         android:text="描述:"
                         android:textColor="@color/color_666666"
-                        android:textSize="11dp"/>
+                        android:textSize="11dp" />
                 </RelativeLayout>
 
             </LinearLayout>

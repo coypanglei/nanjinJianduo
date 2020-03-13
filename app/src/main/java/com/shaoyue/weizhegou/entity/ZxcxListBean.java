@@ -2,6 +2,7 @@ package com.shaoyue.weizhegou.entity;
 
 import com.shaoyue.weizhegou.base.BaseBean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ZxcxListBean extends BaseBean {
@@ -195,8 +196,8 @@ public class ZxcxListBean extends BaseBean {
         private String createTime;
         private String blyyms;
         private String sxid;
-        private List<String> lxyqzdqs_Android;
-        private List<String> xyklxyq_Android;
+        private List<String> lxyqzdqs_Android=new ArrayList<>();
+        private List<String> xyklxyq_Android =new ArrayList<>();
         private List<DbqkAndroidBean> dbqk_Android;
 
         public String getZxqkms() {

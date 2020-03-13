@@ -21,11 +21,12 @@ public class QianzibanAdapter extends BaseQuickAdapter<MainClickBean, BaseViewHo
 
     @Override
     protected void convert(final BaseViewHolder helper, final MainClickBean item) {
-        helper.setText(R.id.tv_title, item.getTitle());
-        if(item.isSelect()){
-            helper.setImageResource(R.id.iv_select,R.drawable.icon_xieziban_dui);
-        }else {
-            helper.setImageResource(R.id.iv_select,R.drawable.icon_xieziban_budui);
+        int positon = helper.getAdapterPosition()+1;
+        helper.setText(R.id.tv_title, "(" +  positon+ ")" + item.getTitle());
+        if (item.isSelect()) {
+            helper.setImageResource(R.id.iv_select, R.drawable.icon_xieziban_dui);
+        } else {
+            helper.setImageResource(R.id.iv_select, R.drawable.icon_xieziban_budui);
         }
     }
 }

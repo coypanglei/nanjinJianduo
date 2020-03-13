@@ -1,12 +1,12 @@
 package com.shaoyue.weizhegou.entity.cedit;
 
-import android.graphics.Bitmap;
+import com.shaoyue.weizhegou.base.BaseBean;
 
-public class ScreenObject {
+public class ScreenObject extends BaseBean {
 
-    private Bitmap bitmap;
+    private String bitmap;
 
-    public ScreenObject(Bitmap bitmap, String js) {
+    public ScreenObject(String bitmap, String js) {
         this.bitmap = bitmap;
         this.js = js;
     }
@@ -21,15 +21,11 @@ public class ScreenObject {
         this.js = js;
     }
 
-    public Bitmap getBitmap() {
+    public String getBitmap() {
         return bitmap;
     }
 
-    public void setBitmap(Bitmap bitmap) {
-        this.bitmap = bitmap;
-    }
-
-    public ScreenObject(Bitmap bitmap) {
+    public void setBitmap(String bitmap) {
         this.bitmap = bitmap;
     }
 }

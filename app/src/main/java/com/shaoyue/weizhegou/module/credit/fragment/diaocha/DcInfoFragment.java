@@ -22,6 +22,7 @@ import com.shaoyue.weizhegou.module.credit.adapter.shenqing.MenuAdapter;
 import com.shaoyue.weizhegou.module.credit.fragment.apply.CreditInquiryFragment;
 import com.shaoyue.weizhegou.module.credit.fragment.apply.DiyadanbaoFragment;
 import com.shaoyue.weizhegou.module.credit.fragment.apply.FamilyInfoFragment;
+import com.shaoyue.weizhegou.module.credit.fragment.apply.HfwInformationFragment;
 import com.shaoyue.weizhegou.module.credit.fragment.apply.VideoMaterialFragment;
 import com.shaoyue.weizhegou.module.sxdc.fragment.BasicInformationDcFragment;
 import com.shaoyue.weizhegou.module.sxdc.fragment.SxdcInfoDcFragment;
@@ -87,6 +88,7 @@ public class DcInfoFragment extends BaseTitleFragment {
                 mMenuList.add(new MainClickBean("基本信息", false));
                 mMenuList.add(new MainClickBean("系统数据", false));
                 mMenuList.add(new MainClickBean("征信查询", false));
+                mMenuList.add(new MainClickBean("汇法网查询", false));
                 mMenuList.add(new MainClickBean("实地调查", false));
                 mMenuList.add(new MainClickBean("担保抵押", false));
                 mMenuList.add(new MainClickBean("现金流", false));
@@ -99,6 +101,7 @@ public class DcInfoFragment extends BaseTitleFragment {
                 mMenuList.add(new MainClickBean("基本信息", false));
                 mMenuList.add(new MainClickBean("系统数据", false));
                 mMenuList.add(new MainClickBean("征信查询", false));
+                mMenuList.add(new MainClickBean("汇法网查询", false));
                 mMenuList.add(new MainClickBean("年收入情况", false));
                 mMenuList.add(new MainClickBean("实地调查", false));
                 mMenuList.add(new MainClickBean("资产负债", false));
@@ -114,6 +117,7 @@ public class DcInfoFragment extends BaseTitleFragment {
                 mMenuList.add(new MainClickBean("基本信息", false));
                 mMenuList.add(new MainClickBean("系统数据", false));
                 mMenuList.add(new MainClickBean("征信查询", false));
+                mMenuList.add(new MainClickBean("汇法网查询", false));
                 mMenuList.add(new MainClickBean("实地调查", false));
                 mMenuList.add(new MainClickBean("上下游客户", false));
                 mMenuList.add(new MainClickBean("现金流", false));
@@ -129,6 +133,7 @@ public class DcInfoFragment extends BaseTitleFragment {
                 mMenuList.add(new MainClickBean("基本信息", false));
                 mMenuList.add(new MainClickBean("系统数据", false));
                 mMenuList.add(new MainClickBean("征信查询", false));
+                mMenuList.add(new MainClickBean("汇法网查询", false));
                 mMenuList.add(new MainClickBean("实地调查", false));
                 mMenuList.add(new MainClickBean("种植、养殖户", false));
                 mMenuList.add(new MainClickBean("担保抵押", false));
@@ -173,6 +178,8 @@ public class DcInfoFragment extends BaseTitleFragment {
                 fragmentList.add(SxykhFragment.newInstance());
             } else if ("年收入情况".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(DcnsrFragment.newInstance());
+            } else if ("汇法网查询".equals(mMenuList.get(i).getTitle())) {
+                fragmentList.add(HfwInformationFragment.newInstance());
             }
         }
         mMenuList.get(0).setSelect(true);

@@ -7,13 +7,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
-
 import com.blankj.utilcode.util.SPUtils;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.shaoyue.weizhegou.R;
-
 import com.shaoyue.weizhegou.base.BaseAppFragment;
-
 import com.shaoyue.weizhegou.manager.UserMgr;
 
 import java.util.ArrayList;

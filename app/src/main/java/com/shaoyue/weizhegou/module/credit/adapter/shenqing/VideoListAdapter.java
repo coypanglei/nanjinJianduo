@@ -94,7 +94,7 @@ public class VideoListAdapter extends BaseQuickAdapter<VideoMaterialBean, BaseVi
                         add = false;
                     }
                 }
-                if (add && item.getList().size() < 6) {
+                if (add && item.getList().size() < 10) {
                     data.setZllx(item.getTitle());
                     mlist.add(data);
                     item.setList(mlist);

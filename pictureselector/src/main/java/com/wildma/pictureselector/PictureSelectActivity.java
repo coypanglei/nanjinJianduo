@@ -33,7 +33,7 @@ public class PictureSelectActivity extends Activity {
     private int mRatioWidth;
     private int mRatioHeight;
     private boolean mCropEnabled;
-    private boolean mCloseSelectEnabled;
+    private boolean mCloseSelectEnabled=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

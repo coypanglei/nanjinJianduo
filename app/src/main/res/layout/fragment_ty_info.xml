@@ -36,7 +36,6 @@
 
         <com.libracore.lib.widget.StateButton
             android:id="@+id/sb_zancun"
-             android:visibility="gone"
             android:layout_width="83dp"
             android:layout_height="25dp"
             android:layout_centerVertical="true"
@@ -50,6 +49,7 @@
             android:paddingBottom="1dp"
             android:text="暂存"
             android:textSize="12dp"
+            android:visibility="gone"
             app:normalBackgroundColor="@color/white"
             app:normalStrokeColor="@color/color_49a0ed"
             app:normalStrokeWidth="1dp"
@@ -102,10 +102,23 @@
         android:background="@color/color_c0c0c0" />
 
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/ry_info"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/ry_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
 
 
 </LinearLayout>

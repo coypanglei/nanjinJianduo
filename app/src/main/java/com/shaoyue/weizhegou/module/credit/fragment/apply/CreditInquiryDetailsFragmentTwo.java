@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.libracore.lib.widget.StateButton;
@@ -207,7 +208,7 @@ public class CreditInquiryDetailsFragmentTwo extends BaseAppFragment {
                                 tvError.setVisibility(View.VISIBLE);
                                 llCs.setVisibility(View.VISIBLE);
                                 tvError.setText(myHangBean.getDescription());
-                            }else {
+                            } else {
                                 tvError.setVisibility(View.GONE);
                             }
                             xtshjl = myHangBean.getZxshjl();
@@ -244,7 +245,7 @@ public class CreditInquiryDetailsFragmentTwo extends BaseAppFragment {
                 mListTwo.clear();
                 mListThree.clear();
                 mlistFour.clear();
-
+                mListFive.clear();
                 mList.add(new InquiryDetailsBean("授信机构数", myHangBean.getSxjgs(), ""));
                 mList.add(new InquiryDetailsBean("授信贷款总额", myHangBean.getDksxze(), ""));
                 mList.add(new InquiryDetailsBean("贷款用信总额(元)", myHangBean.getDkyxze(), ""));
@@ -283,11 +284,18 @@ public class CreditInquiryDetailsFragmentTwo extends BaseAppFragment {
                 String xykyqqs = "";
                 Calendar c = Calendar.getInstance();
                 int year = c.get(Calendar.YEAR);   //获取年份
-                for (int i = 0; i < myHangBean.getLxyqzdqs_Android().size(); i++) {
-                    yqqs = yqqs + "<font color=\"#23a7f0\">" + myHangBean.getLxyqzdqs_Android().get(i) + "</font>&nbsp;&nbsp;(" + (year - i) + ")&nbsp;&nbsp;&nbsp;";
-                }
-                for (int i = 0; i < myHangBean.getXyklxyq_Android().size(); i++) {
-                    xykyqqs = xykyqqs + "<font color=\"#23a7f0\">" + myHangBean.getXyklxyq_Android().get(i) + "</font>&nbsp;&nbsp;(" + (year - i) + ")&nbsp;&nbsp;&nbsp;";
+                LogUtils.e(myHangBean.getLxyqzdqs_Android());
+                LogUtils.e(myHangBean.getLxyqzdqs_Android().size());
+                try {
+                    for (int i = 0; i < myHangBean.getLxyqzdqs_Android().size(); i++) {
+                        yqqs = yqqs + "<font color=\"#23a7f0\">" + myHangBean.getLxyqzdqs_Android().get(i) + "</font>&nbsp;&nbsp;(" + (year - i) + ")&nbsp;&nbsp;&nbsp;";
+                    }
+                    for (int i = 0; i < myHangBean.getXyklxyq_Android().size(); i++) {
+                        xykyqqs = xykyqqs + "<font color=\"#23a7f0\">" + myHangBean.getXyklxyq_Android().get(i) + "</font>&nbsp;&nbsp;(" + (year - i) + ")&nbsp;&nbsp;&nbsp;";
+                    }
+
+                } catch (Exception e) {
+
                 }
 
                 tvYqqs.setText(Html.fromHtml(yqqs));
@@ -326,7 +334,7 @@ public class CreditInquiryDetailsFragmentTwo extends BaseAppFragment {
             public void onFail(ApiException apiError) {
                 stopProgressDialog();
                 errorTv = apiError.getErrMsg();
-                if (errorTv.contains("没有相关查询任务")||errorTv.contains("查询失败")) {
+                if (errorTv.contains("没有相关查询任务") || errorTv.contains("查询失败")) {
                     sbFind.setVisibility(View.VISIBLE);
                     tvDescription.setText(errorTv);
                     nestedSc.setVisibility(View.GONE);
@@ -351,7 +359,7 @@ public class CreditInquiryDetailsFragmentTwo extends BaseAppFragment {
         xcjyZxcx();
     }
 
-    @OnClick({R.id.sb_find, R.id.tv_tg, R.id.tv_wtg, R.id.sb_save,R.id.sb_resh})
+    @OnClick({R.id.sb_find, R.id.tv_tg, R.id.tv_wtg, R.id.sb_save, R.id.sb_resh})
     public void onViewClicked(View view) {
         Drawable drawable = getResources().getDrawable(R.drawable.icon_left_star_black);
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
@@ -373,7 +381,7 @@ public class CreditInquiryDetailsFragmentTwo extends BaseAppFragment {
                         }
                     }, this);
                 } else if (errorTv.contains("查询失败")) {
-                    DhApi.cssqZxcx( new BaseCallback<BaseResponse<Void>>() {
+                    DhApi.cssqZxcx(new BaseCallback<BaseResponse<Void>>() {
                         @Override
                         public void onSucc(BaseResponse<Void> result) {
                             EventBus.getDefault().post(new RefreshBean());

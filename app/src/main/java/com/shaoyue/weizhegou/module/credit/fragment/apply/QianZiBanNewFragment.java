@@ -11,13 +11,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.api.callback.BaseCallback;
 import com.shaoyue.weizhegou.api.model.BaseResponse;
@@ -34,8 +34,6 @@ import com.shaoyue.weizhegou.module.credit.adapter.shenqing.QianzibanAdapter;
 import com.shaoyue.weizhegou.router.UIHelper;
 import com.shaoyue.weizhegou.util.GlideNewImageLoader;
 import com.shaoyue.weizhegou.util.ThreadUtil;
-import com.shaoyue.weizhegou.widget.datepicker.CustomDatePicker;
-import com.shaoyue.weizhegou.widget.datepicker.DateFormatUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -55,7 +53,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 
 
-public class QianZiBanFragment extends BaseAppFragment {
+public class QianZiBanNewFragment extends BaseAppFragment {
 
 
     @BindView(R.id.rv_click)
@@ -81,29 +79,18 @@ public class QianZiBanFragment extends BaseAppFragment {
     Unbinder unbinder;
     @BindView(R.id.tv_txrq)
     TextView tvTxrq;
-    @BindView(R.id.rl_qian)
-    RelativeLayout rlQian;
-
-    @BindView(R.id.rl_yh_qian)
-    RelativeLayout rl_yh_qian;
-    @BindView(R.id.tv_title)
-    TextView tvTitle;
-    @BindView(R.id.tv_sxrq)
-    TextView tvSxrq;
-    @BindView(R.id.rl_sqrq)
-    RelativeLayout rlSqrq;
 
 
-
+    private Bitmap bitmap;
     private List<MainClickBean> mlist = new ArrayList<>();
     private int title;
     private QianziBean qianziBean;
 
-    public static QianZiBanFragment newInstance(QianziBean mQianziBean, int title) {
+    public static QianZiBanNewFragment newInstance(QianziBean mQianziBean, int title) {
         Bundle args = new Bundle();
         args.putSerializable("qianziban", mQianziBean);
         args.putInt("title", title);
-        QianZiBanFragment fragment = new QianZiBanFragment();
+        QianZiBanNewFragment fragment = new QianZiBanNewFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -145,7 +132,7 @@ public class QianZiBanFragment extends BaseAppFragment {
                     @Override
                     public void run() {
                         if (ObjectUtils.isNotEmpty(qianziBean.getSqrqm()) && ObjectUtils.isNotEmpty(qianziBean.getSqrjbkhjlqm()) && ObjectUtils.isEmpty(qianziBean.getUploadImg())) {
-                            saveBitmapFile(scrollViewScreenShot(ll9), qianziBean);
+                            saveBitmapFile(scrollViewScreenShot(ll9),qianziBean);
                         }
                     }
                 }, 1000);
@@ -159,7 +146,7 @@ public class QianZiBanFragment extends BaseAppFragment {
         if (!appDir.exists()) {
             appDir.mkdir();
         }
-        String fileName = qianziBean.getJs() + ".jpg";
+        String fileName =   qianziBean.getJs()+".jpg";
         File file = new File(appDir, fileName);
         try {
             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
@@ -171,6 +158,7 @@ public class QianZiBanFragment extends BaseAppFragment {
                 public void onSucc(BaseResponse<String> result) {
                     stopProgressDialog();
                     EventBus.getDefault().post(new ScreenObject(result.msg, qianziBean.getJs()));
+
 
 
                 }
@@ -197,40 +185,9 @@ public class QianZiBanFragment extends BaseAppFragment {
         }
     }
 
-    private CustomDatePicker mDatePicker;
-
-
-    /**
-     * 时间滑轮
-     */
-    private void initDatePicker() {
-        long beginTimestamp = DateFormatUtils.str2Long("2009-05-01", false);
-        long endTimestamp = DateFormatUtils.str2Long("2119-05-01", false);
-        // 通过时间戳初始化日期，毫秒级别
-        mDatePicker = new CustomDatePicker(getActivity(), new CustomDatePicker.Callback() {
-            @Override
-            public void onTimeSelected(long timestamp) {
-                tvSxrq.setText(DateFormatUtils.long2Str(timestamp, false));
-                qianziBean.setTxrq(DateFormatUtils.long2Str(timestamp, false));
-                EventBus.getDefault().post(qianziBean);
-            }
-        }, beginTimestamp, endTimestamp);
-
-        // 不允许点击屏幕或物理返回键关闭
-        mDatePicker.setCancelable(false);
-        // 不显示时和分
-        mDatePicker.setCanShowPreciseTime(false);
-        // 不允许循环滚动
-        mDatePicker.setScrollLoop(false);
-        // 不允许滚动动画
-        mDatePicker.setCanShowAnim(false);
-    }
-
-
     @Override
     protected void initView(View rootView) {
         super.initView(rootView);
-        initDatePicker();
         mAdapter = new QianzibanAdapter();
         mlist.add(new MainClickBean("审核个人信贷业务申请;", false));
         mlist.add(new MainClickBean("审核货记卡、准货记卡申请:", false));
@@ -241,10 +198,6 @@ public class QianZiBanFragment extends BaseAppFragment {
         mlist.add(new MainClickBean("资信审查;", false));
         mlist.add(new MainClickBean("客户准入资格审查;", false));
         mlist.add(new MainClickBean("提取本人或者配偶公积金;", false));
-        if (title == 2) {
-            tvTitle.setText(
-                    "       本人不可撤销地授权贵行办理下述 ____(3)____ 业务涉及到本人时，可以向金融信用信息基础数据库查询、打印、保存、使用本人信用报告，同时本人不可撤销地授权贵行将包括本人基本信息、信贷信息等信用信息向金融信用信息基础数据库报送：");
-        }
         mlist.get(title).setSelect(true);
         mRvClick.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvClick.setNestedScrollingEnabled(false);//禁止滑动
@@ -252,6 +205,37 @@ public class QianZiBanFragment extends BaseAppFragment {
         mAdapter.setNewData(mlist);
         mAdapter.notifyDataSetChanged();
 
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+//                List<MainClickBean> mlist = adapter.getData();
+//                for (MainClickBean mainClickBean : mlist) {
+//                    mainClickBean.setSelect(false);
+//                }
+//                mlist.get(position).setSelect(true);
+//                String cxlx = (position + 1) + "";
+//                qianziBean.setCxlx(cxlx);
+//                adapter.setNewData(mlist);
+//                adapter.notifyDataSetChanged();
+            }
+        });
+        //ViewTreeObserver.OnTouchModeChangeListener
+//        scAll.getViewTreeObserver().OnTouchModeChangeListener
+//                bitmap = Bitmap.createBitmap(scAll.getWidth(), scAll.getChildAt(0).getHeight(), Bitmap.Config.RGB_565);
+//
+//                final Canvas canvas = new Canvas(bitmap);
+//                scAll.draw(canvas);
+
+//        int h = 0;
+//        Bitmap bitmap = null;
+//        for (int i = 0; i < scrollView.getChildCount(); i++) {
+//            h += scrollView.getChildAt(i).getHeight();
+//            scrollView.getChildAt(i).setBackgroundColor(Color.parseColor("#ffffff"));
+//        }
+//        bitmap = Bitmap.createBitmap(scrollView.getWidth(), h, Bitmap.Config.RGB_565);
+//        final Canvas canvas = new Canvas(bitmap);
+//        scrollView.draw(canvas);
+//        return bitmap;
 
 
         initData();
@@ -268,37 +252,32 @@ public class QianZiBanFragment extends BaseAppFragment {
             GlideNewImageLoader.displayImageNoDefault(getActivity(), ivImg, DomainMgr.getInstance().getBaseUrlImg() + qianziBean.getUploadImg());
             scAll.setVisibility(View.GONE);
             ivImg.setVisibility(View.VISIBLE);
-            rlSqrq.setVisibility(View.VISIBLE);
         } else {
             scAll.setVisibility(View.VISIBLE);
             ivImg.setVisibility(View.GONE);
-            rlSqrq.setVisibility(View.GONE);
         }
         if (ObjectUtils.isNotEmpty(qianziBean)) {
-            tvSxrq.setText(qianziBean.getTxrq());
-            mTvSfzh.setText(qianziBean.getZjhm());
+            mTvSfzh.setText("证件号码:" + qianziBean.getZjhm());
 
 
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");// HH:mm:ss
 //获取当前时间
             Date date = new Date(System.currentTimeMillis());
             if (ObjectUtils.isNotEmpty(qianziBean.getSxrq())) {
-                mTvTime.setText(qianziBean.getSxrq());
-                tvTxrq.setText(qianziBean.getSxrq());
+                mTvTime.setText("授权日期:" + qianziBean.getSxrq());
+                tvTxrq.setText("填写日期:" + qianziBean.getSxrq());
             } else {
-                mTvTime.setText(simpleDateFormat.format(date));
-                tvTxrq.setText(simpleDateFormat.format(date));
+                mTvTime.setText("授权日期:" + simpleDateFormat.format(date));
+                tvTxrq.setText("填写日期:" + simpleDateFormat.format(date));
             }
             //个人签名文件
             if (ObjectUtils.isNotEmpty(qianziBean.getSqrqm())) {
                 mIvGerenQian.setBackgroundResource(R.color.white);
-                rlQian.setBackground(null);
                 GlideNewImageLoader.displayImageNoCacheNoDefault(getActivity(), mIvGerenQian, DomainMgr.getInstance().getBaseUrlImg() + qianziBean.getSqrqm());
             }
             //银行签名
             if (ObjectUtils.isNotEmpty(qianziBean.getSqrjbkhjlqm())) {
                 mIvGzQian.setBackgroundResource(R.color.white);
-                rl_yh_qian.setBackground(null);
                 GlideNewImageLoader.displayImageNoCacheNoDefault(getActivity(), mIvGzQian, DomainMgr.getInstance().getBaseUrlImg() + qianziBean.getSqrjbkhjlqm());
             }
 
@@ -318,16 +297,11 @@ public class QianZiBanFragment extends BaseAppFragment {
     }
 
 
-    @OnClick({R.id.iv_geren_qian, R.id.iv_yh, R.id.iv_img,R.id.tv_sxrq})
+    @OnClick({R.id.iv_geren_qian, R.id.iv_yh, R.id.iv_img})
     public void onViewClicked(View view) {
 
         switch (view.getId()) {
-            //授信日期
-            case R.id.tv_sxrq:
-                if(ObjectUtils.isEmpty(qianziBean.getId())) {
-                    mDatePicker.show(tvSxrq.getText().toString());
-                }
-                break;
+
             case R.id.iv_img:
                 unPic.clear();
                 VideoMaterialBean.ListBean bean = new VideoMaterialBean.ListBean();
@@ -370,13 +344,12 @@ public class QianZiBanFragment extends BaseAppFragment {
 
 
         Bitmap bitmap = null;
-        scrollView.setBackgroundColor(Color.parseColor("#ffffff"));
+        scrollView.setBackgroundColor(Color.parseColor("#F5F5F5"));
         bitmap = Bitmap.createBitmap(scrollView.getWidth(), scrollView.getHeight(), Bitmap.Config.RGB_565);
         final Canvas canvas = new Canvas(bitmap);
         scrollView.draw(canvas);
         return bitmap;
     }
-
 
 
 }

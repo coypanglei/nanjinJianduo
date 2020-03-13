@@ -35,7 +35,7 @@ public class PictureSelectDialog extends Dialog implements View.OnClickListener 
         this.closeSelect = closeSelect;
     }
 
-    private boolean closeSelect;
+    private boolean closeSelect=true;
 
     public PictureSelectDialog(Context context) {
         super(context);
@@ -79,6 +79,8 @@ public class PictureSelectDialog extends Dialog implements View.OnClickListener 
         initView();
         if(!closeSelect){
             mBtnAlbum.setVisibility(View.GONE);
+        }else {
+            mBtnAlbum.setVisibility(View.VISIBLE);
         }
         initListener();
     }

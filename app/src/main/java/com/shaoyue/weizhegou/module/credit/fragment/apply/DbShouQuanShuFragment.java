@@ -1,8 +1,6 @@
 package com.shaoyue.weizhegou.module.credit.fragment.apply;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -30,6 +28,7 @@ import com.shaoyue.weizhegou.entity.cedit.ScreenObject;
 import com.shaoyue.weizhegou.event.OkOrCancelEvent;
 import com.shaoyue.weizhegou.manager.AppMgr;
 import com.shaoyue.weizhegou.manager.UserMgr;
+import com.shaoyue.weizhegou.util.ThreadUtil;
 import com.shaoyue.weizhegou.util.ToastUtil;
 import com.wildma.pictureselector.PictureSelector;
 
@@ -37,10 +36,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -113,7 +109,7 @@ public class DbShouQuanShuFragment extends BaseTitleFragment {
                         if (i == 0) {
                             mTitles.add("申请人");
 
-                            if (ObjectUtils.isNotEmpty(mlist.get(0).getId()) || "查看详情".equals(SPUtils.getInstance().getString("status")) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
+                            if ("查看详情".equals(SPUtils.getInstance().getString("status")) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
                                 sbEdit.setVisibility(View.GONE);
                                 sbSc.setVisibility(View.GONE);
                             } else {
@@ -163,8 +159,8 @@ public class DbShouQuanShuFragment extends BaseTitleFragment {
     public void refresh(QianziBean event) {
         LogUtils.e(event);
         if (ObjectUtils.isNotEmpty(mlist.get(0).getId())) {
-            sbEdit.setVisibility(View.GONE);
-            sbSc.setVisibility(View.GONE);
+//            sbEdit.setVisibility(View.GONE);
+//            sbSc.setVisibility(View.GONE);
         } else {
             sbEdit.setVisibility(View.VISIBLE);
             sbSc.setVisibility(View.VISIBLE);
@@ -172,13 +168,17 @@ public class DbShouQuanShuFragment extends BaseTitleFragment {
         if (ObjectUtils.isNotEmpty(event)) {
             if (mlist.get(0).getJs().equals(event.getJs())) {
                 qianziBean = event;
+                mlist.set(0, qianziBean);
             }
             if (mlist.get(1).getJs().equals(event.getJs())) {
                 qianziBeanTwo = event;
+                mlist.set(1, qianziBeanTwo);
             }
+
 
         }
     }
+
     /**
      * 刷新界面
      *
@@ -190,14 +190,15 @@ public class DbShouQuanShuFragment extends BaseTitleFragment {
 
         if (ObjectUtils.isNotEmpty(event)) {
             if (mlist.get(0).getJs().equals(event.getJs())) {
-                qianziBean.setScreenImg(event.getBitmap());
+                qianziBean.setScreenshotImg(event.getBitmap());
             }
             if (mlist.get(1).getJs().equals(event.getJs())) {
-                qianziBeanTwo.setScreenImg(event.getBitmap());
+                qianziBeanTwo.setScreenshotImg(event.getBitmap());
             }
 
         }
     }
+
     //删除图片
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(OkOrCancelEvent event) {
@@ -220,105 +221,148 @@ public class DbShouQuanShuFragment extends BaseTitleFragment {
         switch (view.getId()) {
             //保存
             case R.id.sb_edit:
-                LogUtils.e(qianziBean.getUploadImg());
-
-                if (ObjectUtils.isEmpty(qianziBean.getUploadImg())) {
-                    if (ObjectUtils.isEmpty(qianziBean.getSqrqm()) || ObjectUtils.isEmpty(qianziBean.getSqrjbkhjlqm())) {
-                        ToastUtil.showBlackToastSucess(ObjectUtils.isEmpty(qianziBean.getSqrqm()) ? "缺少申请人签名" : "缺少工作人员签名");
-                        return;
-                    }
-
-                }
-                if (ObjectUtils.isNotEmpty(qianziBeanTwo)) {
-                    LogUtils.e(qianziBeanTwo.getUploadImg());
-                    if (ObjectUtils.isEmpty(qianziBeanTwo.getUploadImg())) {
-                        if (ObjectUtils.isEmpty(qianziBeanTwo.getSqrqm()) || ObjectUtils.isEmpty(qianziBeanTwo.getSqrjbkhjlqm())) {
-                            ToastUtil.showBlackToastSucess(ObjectUtils.isEmpty(qianziBeanTwo.getSqrqm()) ? "缺少申请人配偶签名" : "申请人配偶缺少工作人员签名");
-                            return;
-                        }
-                    }
-                }
+                startProgressDialog(true);
+                ThreadUtil.runInUIThread(new Runnable() {
+                    @Override
+                    public void run() {
 
 
-                if (ObjectUtils.isEmpty(qianziBean.getId())) {
-                    if (ObjectUtils.isNotEmpty(qianziBean.getScreenImg())&&ObjectUtils.isEmpty(qianziBean.getUploadImg())) {
-                        saveBitmapFile(qianziBean.getJs(), qianziBean);
-                    } else {
-                        CeditApi.updateQianMing(str2Map(qianziBean), new BaseCallback<BaseResponse<QianziBean>>() {
-                            @Override
-                            public void onSucc(BaseResponse<QianziBean> result) {
-                                EventBus.getDefault().post(result.data);
-                                sbEdit.setVisibility(View.GONE);
-                                sbSc.setVisibility(View.GONE);
+                        if (ObjectUtils.isEmpty(qianziBean.getUploadImg())) {
+                            if (ObjectUtils.isEmpty(qianziBean.getSqrqm()) || ObjectUtils.isEmpty(qianziBean.getSqrjbkhjlqm())) {
+                                ToastUtil.showBlackToastSucess(ObjectUtils.isEmpty(qianziBean.getSqrqm()) ? "缺少申请人签名" : "缺少工作人员签名");
+                                stopProgressDialog();
+                                return;
                             }
-                        }, this);
-                    }
 
-                    if(ObjectUtils.isNotEmpty(qianziBeanTwo)) {
-                        if (ObjectUtils.isNotEmpty(qianziBeanTwo.getScreenImg())) {
-                            saveBitmapFile(qianziBeanTwo.getJs(), qianziBeanTwo);
-                        } else {
-                            if (ObjectUtils.isNotEmpty(qianziBeanTwo)) {
-                                CeditApi.updateQianMing(str2Map(qianziBeanTwo), new BaseCallback<BaseResponse<QianziBean>>() {
+                        }else {
+                            if (ObjectUtils.isEmpty(qianziBean.getTxrq())) {
+                                ToastUtil.showBlackToastSucess("缺少本人授权日期");
+                                stopProgressDialog();
+                                return;
+                            }
+                        }
+                        boolean isBcpo = true;
+                        if (ObjectUtils.isNotEmpty(qianziBeanTwo)) {
+                            if (ObjectUtils.isEmpty(qianziBeanTwo.getUploadImg())) {
+                                if (ObjectUtils.isEmpty(qianziBeanTwo.getSqrqm()) || ObjectUtils.isEmpty(qianziBeanTwo.getSqrjbkhjlqm())) {
+                                    ToastUtil.showBlackToastSucess(ObjectUtils.isEmpty(qianziBeanTwo.getSqrqm()) ? "缺少申请人配偶签名" : "申请人配偶缺少工作人员签名");
+                                    stopProgressDialog();
+                                    return;
+                                }
+                            } else {
+                                if (ObjectUtils.isEmpty(qianziBeanTwo.getTxrq())) {
+                                    ToastUtil.showBlackToastSucess("缺少配偶授权日期");
+                                    stopProgressDialog();
+                                    return;
+                                }
+                            }
+                        }
+
+
+                        if (ObjectUtils.isEmpty(qianziBean.getId())) {
+                            if (ObjectUtils.isNotEmpty(qianziBean.getScreenshotImg())) {
+
+
+                                CeditApi.updateQianMing(str2Map(qianziBean), new BaseCallback<BaseResponse<QianziBean>>() {
                                     @Override
                                     public void onSucc(BaseResponse<QianziBean> result) {
                                         EventBus.getDefault().post(result.data);
-                                        sbEdit.setVisibility(View.GONE);
-                                        sbSc.setVisibility(View.GONE);
+//                                            sbEdit.setVisibility(View.GONE);
+//                                            sbSc.setVisibility(View.GONE);
+                                        stopProgressDialog();
+                                    }
 
+                                    @Override
+                                    public void onFail(ApiException apiError) {
+                                        super.onFail(apiError);
+                                        stopProgressDialog();
+                                    }
+                                }, this);
+                            } else {
+                                if (ObjectUtils.isNotEmpty(qianziBean.getSqrqm()) && ObjectUtils.isNotEmpty(qianziBean.getSqrjbkhjlqm())) {
+                                    ToastUtil.showBlackToastSucess("授权书保存中，请稍后重试");
+                                    return;
+                                }
+
+                                CeditApi.updateQianMing(str2Map(qianziBean), new BaseCallback<BaseResponse<QianziBean>>() {
+                                    @Override
+                                    public void onSucc(BaseResponse<QianziBean> result) {
+                                        EventBus.getDefault().post(result.data);
+//                                            sbEdit.setVisibility(View.GONE);
+//                                            sbSc.setVisibility(View.GONE);
+                                        stopProgressDialog();
+                                    }
+
+                                    @Override
+                                    public void onFail(ApiException apiError) {
+                                        super.onFail(apiError);
+                                        stopProgressDialog();
                                     }
                                 }, this);
                             }
+
+                            if (ObjectUtils.isNotEmpty(qianziBeanTwo)) {
+                                if (isBcpo) {
+                                    if (ObjectUtils.isNotEmpty(qianziBeanTwo)) {
+                                        if (ObjectUtils.isNotEmpty(qianziBeanTwo.getScreenshotImg())) {
+
+                                            CeditApi.updateQianMing(str2Map(qianziBeanTwo), new BaseCallback<BaseResponse<QianziBean>>() {
+                                                @Override
+                                                public void onSucc(BaseResponse<QianziBean> result) {
+                                                    EventBus.getDefault().post(result.data);
+//                                                    sbEdit.setVisibility(View.GONE);
+//                                                    sbSc.setVisibility(View.GONE);
+                                                    stopProgressDialog();
+                                                }
+
+                                                @Override
+                                                public void onFail(ApiException apiError) {
+                                                    super.onFail(apiError);
+                                                    stopProgressDialog();
+                                                }
+                                            }, this);
+                                        } else {
+                                            if (ObjectUtils.isNotEmpty(qianziBeanTwo.getSqrqm()) && ObjectUtils.isNotEmpty(qianziBeanTwo.getSqrjbkhjlqm())) {
+                                                ToastUtil.showBlackToastSucess("授权书保存中，请稍后重试");
+                                                return;
+                                            }
+                                            if (ObjectUtils.isNotEmpty(qianziBeanTwo)) {
+                                                CeditApi.updateQianMing(str2Map(qianziBeanTwo), new BaseCallback<BaseResponse<QianziBean>>() {
+                                                    @Override
+                                                    public void onSucc(BaseResponse<QianziBean> result) {
+                                                        EventBus.getDefault().post(result.data);
+//                                                        sbEdit.setVisibility(View.GONE);
+//                                                        sbSc.setVisibility(View.GONE);
+
+                                                    }
+
+                                                    @Override
+                                                    public void onFail(ApiException apiError) {
+                                                        super.onFail(apiError);
+                                                        stopProgressDialog();
+                                                    }
+                                                }, this);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
+                        stopProgressDialog();
+                        EventBus.getDefault().post(new RefreshBean());
                     }
-                }
-                EventBus.getDefault().post(new RefreshBean());
+
+                }, 2000);
                 break;
             //上传
             case R.id.sb_sc:
-                PictureSelector
-                        .create(getActivity(), 1008)
-                        .selectPicture(false, 200, 200, 1, 1);
-                break;
-        }
-    }
-    public void saveBitmapFile(String fileNa, final QianziBean qianziBean) {
-        // 首先保存图String fileName
-        File appDir = new File(Environment.getExternalStorageDirectory(), "vgmap");
-        if (!appDir.exists()) {
-            appDir.mkdir();
-        }
-        String fileName = fileNa + ".jpg";
-        File file = new File(appDir, fileName);
-        try {
-            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
-            qianziBean.getScreenImg().compress(Bitmap.CompressFormat.JPEG, 100, bos);
-            bos.flush();
-            bos.close();
-            UserApi.updatePic(file, SPUtils.getInstance().getString(UserMgr.SP_ID_CARD), new BaseCallback<BaseResponse<String>>() {
-                @Override
-                public void onSucc(BaseResponse<String> result) {
-                    stopProgressDialog();
-
-                    qianziBean.setScreenshotImg(result.msg);
-
-                    CeditApi.updateQianMing(str2Map(qianziBean), new BaseCallback<BaseResponse<QianziBean>>() {
-                        @Override
-                        public void onSucc(BaseResponse<QianziBean> result) {
-                            EventBus.getDefault().post(result.data);
-                            sbEdit.setVisibility(View.GONE);
-                            sbSc.setVisibility(View.GONE);
-                        }
-                    }, this);
-
-
+                LogUtils.e();
+                if (ObjectUtils.isEmpty(mlist.get(mTl1.getCurrentTab()).getId())) {
+                    PictureSelector
+                            .create(getActivity(), 1008)
+                            .selectPicture(false, 200, 200, 1, 1);
                 }
-
-
-            }, this);
-
-        } catch (IOException e) {
-            e.printStackTrace();
+                break;
         }
     }
 
@@ -360,9 +404,11 @@ public class DbShouQuanShuFragment extends BaseTitleFragment {
                                         stopProgressDialog();
 
                                         if (ObjectUtils.isNotEmpty(mlist)) {
+
                                             mlist.get(mTl1.getCurrentTab()).setUploadImg(result.msg);
 
                                             EventBus.getDefault().post(mlist.get(mTl1.getCurrentTab()));
+
                                         }
 
                                     }

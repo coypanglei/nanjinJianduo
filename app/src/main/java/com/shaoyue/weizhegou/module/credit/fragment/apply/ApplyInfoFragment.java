@@ -90,6 +90,7 @@ public class ApplyInfoFragment extends BaseTitleFragment {
         mMenuList.add(new MainClickBean("人脸识别", false));
         mMenuList.add(new MainClickBean("征信授权书", false));
         mMenuList.add(new MainClickBean("征信查询", false));
+        mMenuList.add(new MainClickBean("汇法网查询", false));
         mMenuList.add(new MainClickBean("影像资料", false));
         mMenuList.add(new MainClickBean("基本信息", false));
         mMenuList.add(new MainClickBean("我行数据", false));
@@ -111,6 +112,7 @@ public class ApplyInfoFragment extends BaseTitleFragment {
                 fragmentList.add(VideoMaterialFragment.newInstance());
             } else if ("基本信息".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(BasicInformationFragment.newInstance());
+
             } else if ("我行数据".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(MyDataDcFragment.newInstance());
             } else if ("担保抵押".equals(mMenuList.get(i).getTitle())) {
@@ -119,6 +121,8 @@ public class ApplyInfoFragment extends BaseTitleFragment {
                 fragmentList.add(ChuShenFragment.newInstance());
             } else if ("授信申请单".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(SxsqDanQianziFragment.newInstance());
+            }else if("汇法网查询".equals(mMenuList.get(i).getTitle())){
+                fragmentList.add(HfwInformationFragment.newInstance());
             }
         }
         mMenuList.get(0).setSelect(true);

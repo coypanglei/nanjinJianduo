@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/material_gray_100">
+    android:background="@color/white">
+
 
     <ImageView
         android:id="@+id/iv_img"
@@ -11,6 +12,43 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/rl_sqrq"
+        android:visibility="gone"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/iv_img"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/dp_20">
+
+
+        <TextView
+            android:id="@+id/tv_sxrq"
+            style="@style/IDEditStyle"
+            android:layout_width="@dimen/dp_250"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="9dp"
+            android:layout_marginRight="@dimen/dp_16"
+            android:drawableRight="@drawable/icon_bottom_go"
+            android:paddingRight="8dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/color_666666" />
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/tv_sxrq"
+            android:drawableLeft="@drawable/icon_left_red"
+            android:gravity="center"
+            android:paddingLeft="@dimen/dp_5"
+            android:text="授权日期"
+            android:textColor="@color/color_666666"
+            android:textSize="11dp" />
+    </RelativeLayout>
 
     <ScrollView
         android:id="@+id/sc_all"
@@ -39,12 +77,13 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:lineSpacingMultiplier="1.4"
-                android:text="江苏东海农村商业银行:\n   本人不可撤销地授权贵行办理下述业务涉及到本人时,可以向全融信用信息基础数据库查询、打印、保存、使用本人信用
-报告,同时本人不可撤销地授权贵行将包括本人基本信息信贷信息等信用信息向金融信用信息基础数据库报送:"
+                android:text="
+       本人不可撤销地授权贵行办理下述 ____(1)____ 业务涉及到本人时，可以向金融信用信息基础数据库查询、打印、保存、使用本人信用报告，同时本人不可撤销地授权贵行将包括本人基本信息、信贷信息等信用信息向金融信用信息基础数据库报送："
                 android:textColor="@color/color_333333"
                 android:textSize="@dimen/dp_10" />
 
@@ -52,6 +91,7 @@
                 android:id="@+id/rv_click"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp" />
 
@@ -59,12 +99,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:lineSpacingMultiplier="1.4"
-                android:text="本授权书的有效期为:自本人签署本授权书之日起至上述所有业务结清办结之日止。\n
-       本人知并理解本授权书中所有条款的声明,愿意承担授权贵行查询信用信息的法律后果,无论信贷业务是否获批准,本人的授
-权书、信用报告等资料一律不退回。如信贷业务获得批准,为保证贵行资产质量,本人同意贵行对已授信业务和已发放人进行货后
-风险官理时查询本人信用信息。\n
+                android:text="
+       本授权书的有效期为:自本人签署本授权书之日起至上述所有业务结清/办结之日止。\n
+       本人知悉并理解本授权书中所有条款的声明，愿意承担授权贵行查询信用信息的法律后果，无论信贷业务是否获批准，本人的授权书、信用报告等资料一律不退回。如信贷业务获得批准，为保证贵行资产质量，本人同意贵行对已授信业务和已发放的个人贷款进行贷后风险管理时查询本人信用信息。\n
        贵行超出授权查询的一切后果及法律责任由贵行承担。\n
-特此授权"
+       特此授权。
+"
                 android:textColor="@color/color_333333"
                 android:textSize="@dimen/dp_10"
 
@@ -72,9 +112,12 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10">
 
                 <LinearLayout
+
+                    android:id="@+id/ll_left"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -86,21 +129,20 @@
                         android:layout_marginTop="20dp"
                         android:text="授权人(签字):"
                         android:textColor="@color/color_333333"
-                        android:textSize="10dp"
-                        android:textStyle="bold" />
+                        android:textSize="10dp" />
 
                     <TextView
 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="身份证件类型：身份证"
+                        android:layout_marginTop="@dimen/dp_120"
+                        android:text="身份证件类型"
                         android:textColor="@color/color_333333"
 
                         android:textSize="10dp" />
 
                     <TextView
-                        android:id="@+id/tv_sfzh"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
@@ -110,7 +152,7 @@
                         android:textSize="10dp" />
 
                     <TextView
-                        android:id="@+id/tv_time"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
@@ -121,20 +163,72 @@
                 </LinearLayout>
 
                 <RelativeLayout
-                    android:layout_width="366dp"
-                    android:layout_height="175dp"
-                    android:layout_alignParentRight="true"
+                    android:id="@+id/rl_qian"
+                    android:layout_width="235dp"
+                    android:layout_height="112dp"
+                    android:layout_marginLeft="@dimen/dp_50"
+                    android:layout_toRightOf="@id/ll_left"
                     android:background="@drawable/icon_click_qianzi">
 
                     <ImageView
                         android:id="@+id/iv_geren_qian"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_alignParentRight="true"
-                        android:layout_margin="6dp"
-                        android:paddingBottom="@dimen/dp_10" />
+                        android:layout_marginStart="6dp"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginEnd="6dp"
+                        android:paddingBottom="@dimen/dp_10"
+
+                        android:scaleType="fitXY" />
 
                 </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/rl_qian"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginTop="20dp"
+                        android:textColor="@color/color_333333"
+                        android:textSize="10dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_120"
+                        android:text="身份证"
+                        android:textColor="@color/color_333333"
+                        android:textSize="10dp"
+
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_sfzh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:textColor="@color/color_333333"
+                        android:textSize="10dp"
+
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:textColor="@color/color_333333"
+
+                        android:textSize="10dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
 
             </RelativeLayout>
 
@@ -159,21 +253,21 @@
                     android:layout_marginTop="20dp"
                     android:text="银行工作人员(签字):"
                     android:textColor="@color/color_333333"
-                    android:textSize="10dp"
-                    android:textStyle="bold" />
+                    android:textSize="10dp" />
+
                 <TextView
-                    android:id="@+id/tv_txrq"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_100"
+                    android:layout_marginTop="@dimen/dp_140"
                     android:text="填写日期："
                     android:textColor="@color/color_333333"
                     android:textSize="10dp" />
 
                 <RelativeLayout
-                    android:layout_width="366dp"
-                    android:layout_height="175dp"
-                    android:layout_alignParentRight="true"
+                    android:id="@+id/rl_yh_qian"
+                    android:layout_width="235dp"
+                    android:layout_height="112dp"
+                    android:layout_marginLeft="@dimen/dp_110"
                     android:background="@drawable/icon_click_qianzi">
 
                     <ImageView
@@ -182,8 +276,19 @@
                         android:layout_height="match_parent"
                         android:layout_alignParentRight="true"
                         android:layout_margin="6dp"
-                        android:paddingBottom="@dimen/dp_10" />
+                        android:paddingBottom="@dimen/dp_10"
+                        android:scaleType="fitXY" />
                 </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_txrq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/rl_yh_qian"
+                    android:layout_marginTop="@dimen/dp_140"
+                    android:textColor="@color/color_333333"
+                    android:textSize="10dp"
+                    android:textStyle="bold" />
 
             </RelativeLayout>
         </LinearLayout>

@@ -1,10 +1,8 @@
 package com.shaoyue.weizhegou.entity.cedit;
 
-import android.graphics.Bitmap;
-
 import com.shaoyue.weizhegou.base.BaseBean;
 
-public class QianziBean extends BaseBean {
+public class QianziBean extends BaseBean   {
 
 
     /**
@@ -52,17 +50,11 @@ public class QianziBean extends BaseBean {
                 '}';
     }
 
-    private Bitmap screenImg;
+
 
     private String screenshotImg;
 
-    public Bitmap getScreenImg() {
-        return screenImg;
-    }
 
-    public void setScreenImg(Bitmap screenImg) {
-        this.screenImg = screenImg;
-    }
 
     public String getScreenshotImg() {
         return screenshotImg;

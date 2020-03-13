@@ -5,13 +5,18 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.SPUtils;
@@ -19,14 +24,25 @@ import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.api.callback.BaseCallback;
 import com.shaoyue.weizhegou.api.model.BaseResponse;
 import com.shaoyue.weizhegou.api.remote.CeditApi;
+import com.shaoyue.weizhegou.api.remote.UserApi;
 import com.shaoyue.weizhegou.entity.cedit.FamilyBean;
+import com.shaoyue.weizhegou.entity.cedit.IDCardBack;
+import com.shaoyue.weizhegou.entity.cedit.IDCardFrontBean;
+import com.shaoyue.weizhegou.entity.cedit.OcrBean;
 import com.shaoyue.weizhegou.entity.cedit.RefreshBean;
+import com.shaoyue.weizhegou.manager.AppMgr;
 import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.util.ToastUtil;
 import com.shaoyue.weizhegou.widget.DropDownView;
+import com.wildma.pictureselector.PictureSelector;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,6 +50,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import top.zibin.luban.CompressionPredicate;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
 /**
  * 作者：PangLei on 2019/5/15 0015 10:25
@@ -88,6 +107,9 @@ public class FamilyInfoDialogFragment extends DialogFragment {
     TextView mTvJs;
     @BindView(R.id.et_ms)
     EditText mEtMs;
+    @BindView(R.id.iv_zheng)
+    ImageView ivZheng;
+
     private FamilyBean familyBean;
 
 
@@ -98,12 +120,15 @@ public class FamilyInfoDialogFragment extends DialogFragment {
         final LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_family_info, null);
         unbinder = ButterKnife.bind(this, view);
+
         if (ObjectUtils.isNotEmpty(familyBean)) {
             mTvinfo.setText("修改家庭信息");
             mTvAdd.setText("修改");
             mEtIdCard.setEnabled(false);
             mDdvJs.setEnabled(false);
             mDdvXB.setEnabled(false);
+            ivZheng.setVisibility(View.GONE);
+
             if (ObjectUtils.isNotEmpty(familyBean.getDz())) {
                 mEtDz.setText(familyBean.getDz());
             }
@@ -154,11 +179,55 @@ public class FamilyInfoDialogFragment extends DialogFragment {
             }
 
         }
+
+        mEtIdCard.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b) {
+                    mEtIdCard.addTextChangedListener(textWatcher);
+                } else {
+
+                    mEtIdCard.removeTextChangedListener(textWatcher);
+                }
+            }
+        });
         initView(dialog, view);
 
         return dialog;
     }
+    final TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            if (mEtIdCard.hasFocus()) {
+
+                 LogUtils.e(editable.toString().trim().length());
+
+                if(editable.toString().trim().length()==18){
+                    try {
+                        Map<String, String> map = identityCard18(editable.toString().trim());
+                        if (ObjectUtils.isNotEmpty(map.get("sex"))) {
+                            mDdvXB.setText(map.get("sex"));
+                        }
+                        if (ObjectUtils.isNotEmpty(map.get("age"))) {
+                            mEtNl.setText(map.get("age"));
+                        }
+                    } catch (Exception e) {
+
+                    }
+                }
+            }
+        }
+    };
 
     public static FamilyInfoDialogFragment newInstance(FamilyBean familyBean) {
         Bundle args = new Bundle();
@@ -171,6 +240,7 @@ public class FamilyInfoDialogFragment extends DialogFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
         if (ObjectUtils.isNotEmpty(getArguments())) {
             familyBean = (FamilyBean) getArguments().getSerializable("FamilyBean");
         }
@@ -200,6 +270,13 @@ public class FamilyInfoDialogFragment extends DialogFragment {
         dialog.setCanceledOnTouchOutside(false);
     }
 
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -207,10 +284,184 @@ public class FamilyInfoDialogFragment extends DialogFragment {
         unbinder.unbind();
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(OcrBean ocrBean) {
+        LogUtils.e(ocrBean.getData());
+        /*结果回调*/
+        if (ocrBean.getResultCode() == 1001) {
+            //4m大小 支持
+            if (null != ocrBean.getData()) {
 
-    @OnClick({R.id.tv_cancel, R.id.iv_close, R.id.tv_add})
+                String picturePath = ocrBean.getData().getStringExtra(PictureSelector.PICTURE_PATH);
+
+                final File mFile = new File(picturePath);
+                Luban.with(getActivity())
+                        .load(mFile)
+                        .ignoreBy(80)
+                        .setTargetDir(AppMgr.getInstance().getApkPath())
+                        .filter(new CompressionPredicate() {
+                            @Override
+                            public boolean apply(String path) {
+                                return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
+                            }
+                        })
+                        .setCompressListener(new OnCompressListener() {
+                            @Override
+                            public void onStart() {
+                                // TODO 压缩开始前调用，可以在方法内启动 loading UI
+
+                            }
+
+                            @Override
+                            public void onSuccess(final File file) {
+
+                                // TODO 压缩成功后调用，返回压缩后的图片文件
+                                UserApi.updatOcr("front", file, new BaseCallback<BaseResponse<IDCardFrontBean>>() {
+                                    @Override
+                                    public void onSucc(BaseResponse<IDCardFrontBean> result) {
+                                        if (result.data.getImage_status().equals("normal")) {
+                                            if (ObjectUtils.isNotEmpty(result.data.getWords_result().get姓名().getWords())) {
+                                                mEtName.setText(result.data.getWords_result().get姓名().getWords());
+                                            }
+                                            if (ObjectUtils.isNotEmpty(result.data.getWords_result().get公民身份号码().getWords())) {
+                                                mEtIdCard.setText(result.data.getWords_result().get公民身份号码().getWords());
+                                            }
+                                            if (ObjectUtils.isNotEmpty(result.data.getWords_result().get住址())) {
+                                                mEtDz.setText(result.data.getWords_result().get住址().getWords());
+                                            }
+                                            try {
+                                                Map<String, String> map = identityCard18(result.data.getWords_result().get公民身份号码().getWords());
+                                                if (ObjectUtils.isNotEmpty(map.get("sex"))) {
+                                                    mDdvXB.setText(map.get("sex"));
+                                                }
+                                                if (ObjectUtils.isNotEmpty(map.get("age"))) {
+                                                    mEtNl.setText(map.get("age"));
+                                                }
+                                            } catch (Exception e) {
+
+                                            }
+                                        } else {
+                                            ToastUtil.showBlackToastSucess("身份证正面证识别失败");
+                                        }
+                                    }
+                                }, this);
+
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                // TODO 当压缩过程出现问题时调用
+                                ToastUtil.showBlackToastSucess("压缩文件失败");
+                            }
+                        }).launch();
+            }
+        } else if (ocrBean.getResultCode() == 1002) {
+//4m大小 支持
+            if (null != ocrBean.getData()) {
+
+                String picturePath = ocrBean.getData().getStringExtra(PictureSelector.PICTURE_PATH);
+
+                final File mFile = new File(picturePath);
+                Luban.with(getActivity())
+                        .load(mFile)
+                        .ignoreBy(80)
+                        .setTargetDir(AppMgr.getInstance().getApkPath())
+                        .filter(new CompressionPredicate() {
+                            @Override
+                            public boolean apply(String path) {
+                                return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
+                            }
+                        })
+                        .setCompressListener(new OnCompressListener() {
+                            @Override
+                            public void onStart() {
+                                // TODO 压缩开始前调用，可以在方法内启动 loading UI
+                            }
+
+                            @Override
+                            public void onSuccess(final File file) {
+                                // TODO 压缩成功后调用，返回压缩后的图片文件
+                                UserApi.updatOcrBack("back", mFile, new BaseCallback<BaseResponse<IDCardBack>>() {
+                                    @Override
+                                    public void onSucc(BaseResponse<IDCardBack> result) {
+                                        if (result.data.getImage_status().equals("normal")) {
+//                                            LogUtils.e(result.data.getWords_result().get失效日期().getWords());
+//                                            String data = result.data.getWords_result().get失效日期().getWords();
+//                                            String year = data.substring(0, 4);
+//                                            String month = data.substring(4, 6);
+//                                            String day = data.substring(6, 8);
+//                                            String str = year + "-" + month + "-" + day;
+//                                            mTvSelectedDate.setText(str);
+//                                            Glide.with(getActivity()).load(Uri.fromFile(file)).into(mIvFan);
+                                        } else {
+                                            ToastUtil.showBlackToastSucess("身份证背面证识别失败");
+                                        }
+                                    }
+                                }, this);
+
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                // TODO 当压缩过程出现问题时调用
+                                ToastUtil.showBlackToastSucess("压缩文件失败");
+                            }
+                        }).launch();
+            }
+
+        }
+    }
+
+    private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+    /**
+     * 18位身份证获取性别和年龄
+     *
+     * @param CardCode
+     * @return
+     * @throws Exception
+     */
+    public static Map<String, String> identityCard18(String CardCode) throws Exception {
+        Map<String, String> map = new HashMap<String, String>();
+        // 得到年份
+        String year = CardCode.substring(6).substring(0, 4);
+        // 得到月份
+        String month = CardCode.substring(10).substring(0, 2);
+        //得到日
+        //String day=CardCode.substring(12).substring(0,2);
+        String sex;
+        // 判断性别
+        if (Integer.parseInt(CardCode.substring(16).substring(0, 1)) % 2 == 0) {
+            sex = "女";
+        } else {
+            sex = "男";
+        }
+        // 得到当前的系统时间
+        Date date = new Date();
+        // 当前年份
+        String currentYear = format.format(date).substring(0, 4);
+        // 月份
+        String currentMonth = format.format(date).substring(5, 7);
+        //String currentdDay=format.format(date).substring(8,10);
+        int age = 0;
+//        // 当前月份大于用户出身的月份表示已过生日
+//        if (Integer.parseInt(month) <= Integer.parseInt(currentMonth)) {
+//            age = Integer.parseInt(currentYear) - Integer.parseInt(year) + 1;
+//        } else {
+        // 当前用户还没过生日
+        age = Integer.parseInt(currentYear) - Integer.parseInt(year);
+//        }
+        map.put("sex", sex);
+        map.put("age", age + "");
+        return map;
+    }
+
+    @OnClick({R.id.tv_cancel, R.id.iv_close, R.id.tv_add, R.id.iv_zheng})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.iv_zheng:
+                PictureSelector.create(getActivity(), 1001).selectPicture(false, 200, 200, 1, 1);
+                break;
             case R.id.tv_cancel:
                 dismiss();
                 break;
@@ -378,4 +629,5 @@ public class FamilyInfoDialogFragment extends DialogFragment {
                 break;
         }
     }
+
 }
