@@ -29,7 +29,7 @@ import com.shaoyue.weizhegou.module.dhgl.adapter.XcjyAdapter;
 import com.shaoyue.weizhegou.router.UIHelper;
 import com.shaoyue.weizhegou.util.ThreadUtil;
 import com.shaoyue.weizhegou.util.ToastUtil;
-import com.shaoyue.weizhegou.util.XClick.SingleClick;
+
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -285,7 +285,7 @@ public class XzRlFragment extends BaseAppFragment implements BGARefreshLayout.BG
     }
 
 
-    @SingleClick
+
     @OnClick({R.id.sb_find, R.id.tv_more, R.id.sb_start_rl, R.id.sb_select_all
             , R.id.iv_clear, R.id.tv_status})
     public void onViewClicked(View view) {

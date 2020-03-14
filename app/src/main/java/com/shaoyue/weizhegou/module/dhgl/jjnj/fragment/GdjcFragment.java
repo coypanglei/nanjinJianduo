@@ -25,7 +25,6 @@ import com.shaoyue.weizhegou.module.credit.adapter.diaocha.GdjcAdapter;
 import com.shaoyue.weizhegou.router.UIHelper;
 import com.shaoyue.weizhegou.util.ThreadUtil;
 import com.shaoyue.weizhegou.util.ToastUtil;
-import com.shaoyue.weizhegou.util.XClick.SingleClick;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -158,7 +157,7 @@ public class GdjcFragment extends BaseAppFragment implements BGARefreshLayout.BG
         return null;
     }
 
-    @SingleClick
+
     @OnClick({R.id.sb_find, R.id.sb_tianbao, R.id.iv_clear
     })
     public void onViewClicked(View view) {

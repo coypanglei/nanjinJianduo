@@ -1,6 +1,7 @@
 package com.shaoyue.weizhegou.module.credit.dialog;
 
 import android.app.Dialog;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,14 +15,17 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.SPUtils;
+import com.bumptech.glide.Glide;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.api.callback.BaseCallback;
+import com.shaoyue.weizhegou.api.exception.ApiException;
 import com.shaoyue.weizhegou.api.model.BaseResponse;
 import com.shaoyue.weizhegou.api.remote.CeditApi;
 import com.shaoyue.weizhegou.api.remote.UserApi;
@@ -109,6 +113,10 @@ public class FamilyInfoDialogFragment extends DialogFragment {
     EditText mEtMs;
     @BindView(R.id.iv_zheng)
     ImageView ivZheng;
+    @BindView(R.id.iv_fan)
+    ImageView ivFan;
+    @BindView(R.id.ll_png)
+    LinearLayout llPng;
 
     private FamilyBean familyBean;
 
@@ -127,8 +135,7 @@ public class FamilyInfoDialogFragment extends DialogFragment {
             mEtIdCard.setEnabled(false);
             mDdvJs.setEnabled(false);
             mDdvXB.setEnabled(false);
-            ivZheng.setVisibility(View.GONE);
-
+           llPng.setVisibility(View.GONE);
             if (ObjectUtils.isNotEmpty(familyBean.getDz())) {
                 mEtDz.setText(familyBean.getDz());
             }
@@ -195,6 +202,7 @@ public class FamilyInfoDialogFragment extends DialogFragment {
 
         return dialog;
     }
+
     final TextWatcher textWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -210,9 +218,9 @@ public class FamilyInfoDialogFragment extends DialogFragment {
         public void afterTextChanged(Editable editable) {
             if (mEtIdCard.hasFocus()) {
 
-                 LogUtils.e(editable.toString().trim().length());
+                LogUtils.e(editable.toString().trim().length());
 
-                if(editable.toString().trim().length()==18){
+                if (editable.toString().trim().length() == 18) {
                     try {
                         Map<String, String> map = identityCard18(editable.toString().trim());
                         if (ObjectUtils.isNotEmpty(map.get("sex"))) {
@@ -284,6 +292,10 @@ public class FamilyInfoDialogFragment extends DialogFragment {
         unbinder.unbind();
     }
 
+    private String sfzm;
+
+    private String sffm;
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(OcrBean ocrBean) {
         LogUtils.e(ocrBean.getData());
@@ -340,6 +352,20 @@ public class FamilyInfoDialogFragment extends DialogFragment {
                                             } catch (Exception e) {
 
                                             }
+
+                                            Glide.with(getActivity()).load(Uri.fromFile(file)).into(ivZheng);
+                                            UserApi.updatePic(file, new BaseCallback<BaseResponse<String>>() {
+                                                @Override
+                                                public void onSucc(BaseResponse<String> result) {
+                                                    sfzm = result.msg;
+
+                                                }
+
+                                                @Override
+                                                public void onFail(ApiException apiError) {
+                                                    ToastUtil.showBlackToastSucess("上传身份证失败");
+                                                }
+                                            }, this);
                                         } else {
                                             ToastUtil.showBlackToastSucess("身份证正面证识别失败");
                                         }
@@ -385,14 +411,21 @@ public class FamilyInfoDialogFragment extends DialogFragment {
                                     @Override
                                     public void onSucc(BaseResponse<IDCardBack> result) {
                                         if (result.data.getImage_status().equals("normal")) {
-//                                            LogUtils.e(result.data.getWords_result().get失效日期().getWords());
-//                                            String data = result.data.getWords_result().get失效日期().getWords();
-//                                            String year = data.substring(0, 4);
-//                                            String month = data.substring(4, 6);
-//                                            String day = data.substring(6, 8);
-//                                            String str = year + "-" + month + "-" + day;
-//                                            mTvSelectedDate.setText(str);
-//                                            Glide.with(getActivity()).load(Uri.fromFile(file)).into(mIvFan);
+
+
+                                            Glide.with(getActivity()).load(Uri.fromFile(file)).into(ivFan);
+                                            UserApi.updatePic(file, new BaseCallback<BaseResponse<String>>() {
+                                                @Override
+                                                public void onSucc(BaseResponse<String> result) {
+                                                    sffm = result.msg;
+
+                                                }
+
+                                                @Override
+                                                public void onFail(ApiException apiError) {
+                                                    ToastUtil.showBlackToastSucess("上传身份证失败");
+                                                }
+                                            }, this);
                                         } else {
                                             ToastUtil.showBlackToastSucess("身份证背面证识别失败");
                                         }
@@ -456,11 +489,15 @@ public class FamilyInfoDialogFragment extends DialogFragment {
         return map;
     }
 
-    @OnClick({R.id.tv_cancel, R.id.iv_close, R.id.tv_add, R.id.iv_zheng})
+    @OnClick({R.id.tv_cancel, R.id.iv_close, R.id.tv_add, R.id.iv_zheng,R.id.iv_fan})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_zheng:
                 PictureSelector.create(getActivity(), 1001).selectPicture(false, 200, 200, 1, 1);
+                break;
+            case R.id.iv_fan:
+                PictureSelector.create(getActivity(), 1002).selectPicture(false, 200, 200, 1, 1);
+
                 break;
             case R.id.tv_cancel:
                 dismiss();
@@ -591,6 +628,8 @@ public class FamilyInfoDialogFragment extends DialogFragment {
                     params.put("xm", name);
                     params.put("xw", xw);
                     params.put("zy", zy);
+                    params.put("zmdz", sfzm);
+                    params.put("fmdz", sffm);
                     CeditApi.addFamilyInfo(params, new BaseCallback<BaseResponse<Void>>() {
                         @Override
                         public void onSucc(BaseResponse<Void> result) {
@@ -617,6 +656,8 @@ public class FamilyInfoDialogFragment extends DialogFragment {
                     params.put("xm", name);
                     params.put("xw", xw);
                     params.put("zy", zy);
+//                    params.put("zmdz", sfzm);
+//                    params.put("fmdz", sffm);
                     CeditApi.editFamilyInfo(params, new BaseCallback<BaseResponse<Void>>() {
                         @Override
                         public void onSucc(BaseResponse<Void> result) {
@@ -629,5 +670,6 @@ public class FamilyInfoDialogFragment extends DialogFragment {
                 break;
         }
     }
+
 
 }

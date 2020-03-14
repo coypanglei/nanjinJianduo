@@ -267,7 +267,7 @@ public class CeditApi {
     /**
      * 同步
      */
-    public static void tbInfo(String sxid,BaseCallback<BaseResponse<Void>> callback, Object tag) {
+    public static void tbInfo(String sxid, BaseCallback<BaseResponse<Void>> callback, Object tag) {
         Map<String, String> params = new HashMap<>();
         params.put("sxid", sxid);
         ApiHttpClient.post(SX_TB, params, callback, tag);
@@ -919,8 +919,10 @@ public class CeditApi {
     /**
      * 授信申请
      */
-    public static void creditApplication(String xm, String sfzh, String zjdqr, String zjdz, BaseCallback<BaseResponse<applyBean>> callback, Object tag) {
+    public static void creditApplication(String xm, String sfzh, String zjdqr, String zjdz, String sfzm, String sffm, BaseCallback<BaseResponse<applyBean>> callback, Object tag) {
         Map<String, String> params = new HashMap<>();
+        params.put("zmdz", sfzm);
+        params.put("fmdz", sffm);
         params.put("sfzh", sfzh);
         params.put("xm", xm);
         params.put("zjdqr", zjdqr);

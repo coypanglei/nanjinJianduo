@@ -30,7 +30,7 @@ import com.shaoyue.weizhegou.module.credit.adapter.diaocha.sqDiaochaAdapter;
 import com.shaoyue.weizhegou.router.UIHelper;
 import com.shaoyue.weizhegou.util.ThreadUtil;
 import com.shaoyue.weizhegou.util.ToastUtil;
-import com.shaoyue.weizhegou.util.XClick.SingleClick;
+
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -440,7 +440,7 @@ public class shouXinSurveyFragment extends BaseAppFragment implements BGARefresh
         return null;
     }
 
-    @SingleClick
+
     @OnClick({R.id.sb_find, R.id.tv_more, R.id.sb_diaocha, R.id.iv_clear, R.id.sb_update, R.id.tv_dc_status
             , R.id.tv_status, R.id.tv_ckcj})
     public void onViewClicked(View view) {

@@ -28,7 +28,7 @@ import com.shaoyue.weizhegou.module.credit.adapter.shenqing.CreditApplicationAda
 import com.shaoyue.weizhegou.router.UIHelper;
 import com.shaoyue.weizhegou.util.ThreadUtil;
 import com.shaoyue.weizhegou.util.ToastUtil;
-import com.shaoyue.weizhegou.util.XClick.SingleClick;
+
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -276,7 +276,7 @@ public class shouXinShenQingFragment extends BaseAppFragment implements BGARefre
         return null;
     }
 
-    @SingleClick
+
     @OnClick({R.id.sb_find, R.id.sb_application, R.id.sb_edit, R.id.sb_cancel, R.id.sb_synchronize, R.id.tv_more
             , R.id.iv_clear, R.id.tv_status})
     public void onViewClicked(View view) {

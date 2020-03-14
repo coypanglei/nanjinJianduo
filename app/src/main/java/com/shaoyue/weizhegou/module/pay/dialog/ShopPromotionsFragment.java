@@ -11,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -22,7 +21,6 @@ import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.entity.coupon.SettlementCouponBean;
 import com.shaoyue.weizhegou.entity.goods.SettlementCoupon;
 import com.shaoyue.weizhegou.module.pay.adapter.ShopPromotionsAdapter;
-import com.shaoyue.weizhegou.util.XClick.SingleClick;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -130,7 +128,6 @@ public class ShopPromotionsFragment extends DialogFragment implements DialogInte
         unbinder.unbind();
     }
 
-    @SingleClick
     @OnClick({R.id.view_top, R.id.tv_close})
     public void onViewClicked(View view) {
         switch (view.getId()) {

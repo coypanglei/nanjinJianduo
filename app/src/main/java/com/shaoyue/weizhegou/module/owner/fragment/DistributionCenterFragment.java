@@ -19,7 +19,7 @@ import com.shaoyue.weizhegou.entity.user.DistributionNumBean;
 import com.shaoyue.weizhegou.entity.user.UserInfoBean;
 import com.shaoyue.weizhegou.router.ContentType;
 import com.shaoyue.weizhegou.router.UIHelper;
-import com.shaoyue.weizhegou.util.XClick.SingleClick;
+
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -180,7 +180,7 @@ public class DistributionCenterFragment extends BaseCustomFragment {
         initView();
     }
 
-    @SingleClick
+
     @OnClick({R.id.tv_shop_qc_code, R.id.tv_my_superior, R.id.rl_go_commission_details, R.id.tv_withdraw, R.id.tv_sonUserCount,
             R.id.tv_pending_waiting_for_distributor, R.id.tv_pending_waiting_for_distribution_products})
     public void onViewClicked(View view) {

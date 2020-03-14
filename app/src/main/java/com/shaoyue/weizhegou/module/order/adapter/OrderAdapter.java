@@ -5,25 +5,15 @@ import android.app.Activity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.TextView;
 
-import com.blankj.utilcode.util.ObjectUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.shaoyue.weizhegou.R;
-import com.shaoyue.weizhegou.entity.coupon.CouponBean;
 import com.shaoyue.weizhegou.entity.goods.ShopCarBean;
 import com.shaoyue.weizhegou.entity.home.profileBean;
-import com.shaoyue.weizhegou.entity.order.OrderDetailsBean;
 import com.shaoyue.weizhegou.entity.order.OrderIdBean;
-import com.shaoyue.weizhegou.entity.order.OrderListBean;
 import com.shaoyue.weizhegou.router.ContentType;
 import com.shaoyue.weizhegou.router.UIHelper;
-import com.shaoyue.weizhegou.util.XClick.SingleClick;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 作者：PangLei on 2019/4/12 0012 13:55
@@ -113,7 +103,6 @@ public class OrderAdapter extends BaseQuickAdapter<OrderIdBean, BaseViewHolder> 
         mRvContent.setLayoutManager(new LinearLayoutManager(activity));
         mRvContent.setAdapter(mCouponAdapter);
         mCouponAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
-            @SingleClick(1500)
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 ShopCarBean mShopCarBean = (ShopCarBean) adapter.getData().get(position);

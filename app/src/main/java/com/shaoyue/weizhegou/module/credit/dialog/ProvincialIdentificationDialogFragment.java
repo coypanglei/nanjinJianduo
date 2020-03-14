@@ -20,6 +20,7 @@ import com.blankj.utilcode.util.SPUtils;
 import com.bumptech.glide.Glide;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.api.callback.BaseCallback;
+import com.shaoyue.weizhegou.api.exception.ApiException;
 import com.shaoyue.weizhegou.api.model.BaseResponse;
 import com.shaoyue.weizhegou.api.remote.CeditApi;
 import com.shaoyue.weizhegou.api.remote.UserApi;
@@ -31,6 +32,7 @@ import com.shaoyue.weizhegou.manager.AppMgr;
 import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.router.UIHelper;
 import com.shaoyue.weizhegou.util.DialogInitUtil;
+import com.shaoyue.weizhegou.util.ThreadUtil;
 import com.shaoyue.weizhegou.util.ToastUtil;
 import com.shaoyue.weizhegou.widget.datepicker.CustomDatePicker;
 import com.shaoyue.weizhegou.widget.datepicker.DateFormatUtils;
@@ -118,6 +120,9 @@ public class ProvincialIdentificationDialogFragment extends DialogFragment {
         unbinder.unbind();
     }
 
+    private String sfzm;
+
+    private String sffm;
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(OcrBean ocrBean) {
@@ -158,7 +163,22 @@ public class ProvincialIdentificationDialogFragment extends DialogFragment {
                                             mEtName.setText(result.data.getWords_result().get姓名().getWords());
                                             mEtIdCard.setText(result.data.getWords_result().get公民身份号码().getWords());
                                             mEtIdAddress.setText(result.data.getWords_result().get住址().getWords());
+                                            LogUtils.e(file);
                                             Glide.with(getActivity()).load(Uri.fromFile(file)).into(mIvZheng);
+                                            UserApi.updateSfzPic(file, new BaseCallback<BaseResponse<String>>() {
+                                                @Override
+                                                public void onSucc(BaseResponse<String> result) {
+
+                                                    sfzm = result.msg;
+
+                                                }
+
+                                                @Override
+                                                public void onFail(ApiException apiError) {
+                                                    ToastUtil.showBlackToastSucess("上传身份证失败");
+                                                }
+                                            }, this);
+
                                         } else {
                                             ToastUtil.showBlackToastSucess("身份证正面证识别失败");
                                         }
@@ -212,6 +232,18 @@ public class ProvincialIdentificationDialogFragment extends DialogFragment {
                                             String str = year + "-" + month + "-" + day;
                                             mTvSelectedDate.setText(str);
                                             Glide.with(getActivity()).load(Uri.fromFile(file)).into(mIvFan);
+                                            UserApi.updateSfzPic(file, new BaseCallback<BaseResponse<String>>() {
+                                                @Override
+                                                public void onSucc(BaseResponse<String> result) {
+                                                    sffm = result.msg;
+
+                                                }
+
+                                                @Override
+                                                public void onFail(ApiException apiError) {
+                                                    ToastUtil.showBlackToastSucess("上传身份证失败");
+                                                }
+                                            }, this);
                                         } else {
                                             ToastUtil.showBlackToastSucess("身份证背面证识别失败");
                                         }
@@ -230,7 +262,6 @@ public class ProvincialIdentificationDialogFragment extends DialogFragment {
 
         }
     }
-
 
 
     @OnClick({R.id.iv_zheng, R.id.iv_fan, R.id.iv_close, R.id.tv_shenqing, R.id.tv_restart, R.id.et_start_time})
@@ -258,10 +289,10 @@ public class ProvincialIdentificationDialogFragment extends DialogFragment {
 
 
                 //申请
-                String mIdAddress = mEtIdAddress.getText().toString().trim();
-                String mIdCard = mEtIdCard.getText().toString().trim();
-                String mName = mEtName.getText().toString().trim();
-                String mStartTime = mTvSelectedDate.getText().toString().trim();
+                final String mIdAddress = mEtIdAddress.getText().toString().trim();
+                final String mIdCard = mEtIdCard.getText().toString().trim();
+                final String mName = mEtName.getText().toString().trim();
+                final String mStartTime = mTvSelectedDate.getText().toString().trim();
                 if (ObjectUtils.isEmpty(mName)) {
                     ToastUtil.showBlackToastSucess("未填写姓名");
                     return;
@@ -280,16 +311,21 @@ public class ProvincialIdentificationDialogFragment extends DialogFragment {
                     return;
                 }
 
-
-                CeditApi.creditApplication(mName, mIdCard, mStartTime, mIdAddress, new BaseCallback<BaseResponse<applyBean>>() {
+                ThreadUtil.runInUIThread(new Runnable() {
                     @Override
-                    public void onSucc(BaseResponse<applyBean> result) {
-                        //请求id 身份证
-                        SPUtils.getInstance().put(UserMgr.SP_APPLY_ID, result.data.getId());
-                        SPUtils.getInstance().put(UserMgr.SP_ID_CARD, result.data.getSfzh());
-                        UIHelper.showApplyCommonActivity(getActivity(), "申请");
+                    public void run() {
+                        CeditApi.creditApplication(mName, mIdCard, mStartTime, mIdAddress, sfzm, sffm, new BaseCallback<BaseResponse<applyBean>>() {
+                            @Override
+                            public void onSucc(BaseResponse<applyBean> result) {
+                                //请求id 身份证
+                                SPUtils.getInstance().put(UserMgr.SP_APPLY_ID, result.data.getId());
+                                SPUtils.getInstance().put(UserMgr.SP_ID_CARD, result.data.getSfzh());
+                                UIHelper.showApplyCommonActivity(getActivity(), "申请");
+                            }
+                        }, this);
                     }
-                }, this);
+                }, 2000);
+
 
                 break;
             case R.id.tv_restart:

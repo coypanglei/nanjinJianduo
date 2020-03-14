@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.event.OkOrCancelEvent;
-import com.shaoyue.weizhegou.util.XClick.SingleClick;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -42,7 +41,6 @@ public class OkCancelFragment extends DialogFragment implements DialogInterface.
         TextView mTitle = view.findViewById(R.id.tv_title);
         mTitle.setText(title);
         view.findViewById(R.id.tv_ok).setOnClickListener(new View.OnClickListener() {
-            @SingleClick(2000)
             @Override
             public void onClick(View view) {
 

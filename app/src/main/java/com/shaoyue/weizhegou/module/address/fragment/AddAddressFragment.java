@@ -3,20 +3,16 @@ package com.shaoyue.weizhegou.module.address.fragment;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
-import android.location.Address;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.view.View;
-
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.KeyboardUtils;
-
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.lljjcoder.Interface.OnCityItemClickListener;
 import com.lljjcoder.bean.CityBean;
@@ -33,9 +29,6 @@ import com.shaoyue.weizhegou.base.BaseTitleFragment;
 import com.shaoyue.weizhegou.entity.center.AddressListBean;
 import com.shaoyue.weizhegou.util.ThreadUtil;
 import com.shaoyue.weizhegou.util.ToastUtil;
-
-import com.shaoyue.weizhegou.util.XClick.SingleClick;
-
 import com.yanzhenjie.permission.Action;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.Permission;
@@ -45,7 +38,6 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.List;
 
 import butterknife.BindView;
-
 import butterknife.OnClick;
 
 
@@ -314,7 +306,6 @@ public class AddAddressFragment extends BaseTitleFragment {
         }
     }
 
-    @SingleClick(2000)
     @OnClick({R.id.iv_address_book, R.id.rl_select_area, R.id.rl_set_default, R.id.tv_save_address})
     public void onViewClicked(View view) {
         switch (view.getId()) {

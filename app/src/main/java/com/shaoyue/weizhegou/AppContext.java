@@ -17,6 +17,8 @@ public class AppContext extends BaseApplication {
         super.onCreate();
         instance = this;
         SpeedMgr.getInstance().setLineInfo(null);
+
+
     }
 
 

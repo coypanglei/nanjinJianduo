@@ -18,7 +18,6 @@ import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.api.callback.BaseCallback;
 import com.shaoyue.weizhegou.api.exception.ApiException;
 import com.shaoyue.weizhegou.api.model.BaseResponse;
-import com.shaoyue.weizhegou.api.remote.AddressApi;
 import com.shaoyue.weizhegou.api.remote.GoodsApi;
 import com.shaoyue.weizhegou.base.BaseTitleFragment;
 import com.shaoyue.weizhegou.entity.goods.GoodsDetialBean;
@@ -35,7 +34,6 @@ import com.shaoyue.weizhegou.router.ContentType;
 import com.shaoyue.weizhegou.router.UIHelper;
 import com.shaoyue.weizhegou.util.ThreadUtil;
 import com.shaoyue.weizhegou.util.ToastUtil;
-import com.shaoyue.weizhegou.util.XClick.SingleClick;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -46,9 +44,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
-
 import butterknife.OnClick;
-
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
@@ -163,7 +159,6 @@ public class ShoppingCarFragment extends BaseTitleFragment implements BGARefresh
     protected void initView(View rootView) {
         super.initView(rootView);
         setCommonTitle("购物车").setRightBtnV3(R.drawable.icon_delete_history, new View.OnClickListener() {
-            @SingleClick(1000)
             @Override
             public void onClick(View v) {
                 List<ShopCarBean> mData = mShoppingCarAdapter.getData();
@@ -356,7 +351,7 @@ public class ShoppingCarFragment extends BaseTitleFragment implements BGARefresh
         mRvGoods.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvGoods.setAdapter(mShoppingCarAdapter);
         mShoppingCarAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @SingleClick
+
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, final int position) {
                 switch (view.getId()) {
@@ -517,7 +512,7 @@ public class ShoppingCarFragment extends BaseTitleFragment implements BGARefresh
         return true;
     }
 
-    @SingleClick
+
     @OnClick({R.id.ll_cancel_or_select, R.id.tv_settlement})
     public void onViewClicked(View view) {
         switch (view.getId()) {

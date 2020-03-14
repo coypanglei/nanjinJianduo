@@ -6,7 +6,6 @@ import android.support.multidex.MultiDexApplication;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.Utils;
-
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
@@ -54,6 +53,12 @@ public class BaseApplication extends MultiDexApplication {
         initHttpModule();
         // 友盟初始化
         initUmeng();
+
+        //重复点击 https://github.com/liys666666/DoubleClick
+
+
+//                .addAnnotationClass(UnifiedDoubleClick.class) //自定义属性, 可叠加
+//                .addAnnotationClass(UnifiedDoubleClick2.class);
 
 
     }

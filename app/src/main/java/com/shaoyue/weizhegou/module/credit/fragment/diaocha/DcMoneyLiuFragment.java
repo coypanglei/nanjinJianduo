@@ -22,7 +22,6 @@ import com.shaoyue.weizhegou.entity.dhgl.XjlBean;
 import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.module.dhgl.adapter.XjlAdapter;
 import com.shaoyue.weizhegou.util.ToastUtil;
-import com.shaoyue.weizhegou.util.XClick.SingleClick;
 import com.shaoyue.weizhegou.widget.lineTU.LineView;
 
 import java.util.ArrayList;
@@ -181,7 +180,7 @@ public class DcMoneyLiuFragment extends BaseAppFragment {
     }
 
 
-    @SingleClick(4000)
+
     @OnClick(R.id.sb_edit)
     public void onViewClicked() {
 

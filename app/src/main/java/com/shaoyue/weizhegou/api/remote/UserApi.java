@@ -361,6 +361,20 @@ public class UserApi extends BaseApi {
 
 
     /**
+     * 省份证上传图片
+     *
+     * @param mFile
+     * @param callback
+     * @param tag
+     */
+    public static void updateSfzPic(File mFile, BaseCallback<BaseResponse<String>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("zjhm", "jdkj");
+        ApiHttpClient.updateImg(API_HAEDER_PIC, params, mFile, callback, tag);
+    }
+
+
+    /**
      * 上传图片
      *
      * @param mFile

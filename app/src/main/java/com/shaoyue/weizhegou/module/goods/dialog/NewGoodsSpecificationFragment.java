@@ -8,20 +8,16 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.api.callback.BaseCallback;
@@ -43,7 +39,6 @@ import com.shaoyue.weizhegou.router.ContentType;
 import com.shaoyue.weizhegou.router.UIHelper;
 import com.shaoyue.weizhegou.util.GlideNewImageLoader;
 import com.shaoyue.weizhegou.util.ToastUtil;
-import com.shaoyue.weizhegou.util.XClick.SingleClick;
 import com.shaoyue.weizhegou.util.ZMStrUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -410,7 +405,7 @@ public class NewGoodsSpecificationFragment extends DialogFragment implements Dia
     }
 
 
-    @SingleClick(1500)
+
     @OnClick({R.id.iv_close, R.id.view_dismiss, R.id.tv_add_to_shopping_cart, R.id.tv_ok})
     public void onViewClicked(View view) {
         switch (view.getId()) {

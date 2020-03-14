@@ -40,7 +40,6 @@ import com.shaoyue.weizhegou.router.ContentType;
 import com.shaoyue.weizhegou.router.UIHelper;
 import com.shaoyue.weizhegou.util.GlideNewImageLoader;
 import com.shaoyue.weizhegou.util.ToastUtil;
-import com.shaoyue.weizhegou.util.XClick.SingleClick;
 import com.shaoyue.weizhegou.util.ZMStrUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -411,7 +410,6 @@ public class NewCarGoodsSpecificationFragment extends DialogFragment implements 
     }
 
 
-    @SingleClick(1500)
     @OnClick({R.id.iv_close, R.id.view_dismiss, R.id.tv_add_to_shopping_cart, R.id.tv_ok, R.id.tv_order})
     public void onViewClicked(View view) {
         switch (view.getId()) {

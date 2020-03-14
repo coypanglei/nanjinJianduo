@@ -1,54 +1,10 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'android-aspectjx' //添加
 Properties props = new Properties()
 props.load(project.rootProject.file('config.properties').newDataInputStream())
-//注解专用
-import org.aspectj.bridge.IMessage
-import org.aspectj.bridge.MessageHandler
-import org.aspectj.tools.ajc.Main
 
-final def log = project.logger
-final def variants = project.android.applicationVariants
 
-variants.all { variant ->
-//    if (!variant.buildType.isDebuggable()) {
-//        log.debug("Skipping non-debuggable build type '${variant.buildType.name}'.")
-//        return;
-//    }
 
-    JavaCompile javaCompile = variant.javaCompile
-    javaCompile.doLast {
-        String[] args = ["-showWeaveInfo",
-                         "-1.8",
-                         "-inpath", javaCompile.destinationDir.toString(),
-                         "-aspectpath", javaCompile.classpath.asPath,
-                         "-d", javaCompile.destinationDir.toString(),
-                         "-classpath", javaCompile.classpath.asPath,
-                         "-bootclasspath", project.android.bootClasspath.join(File.pathSeparator)]
-        log.debug "ajc args: " + Arrays.toString(args)
-
-        MessageHandler handler = new MessageHandler(true);
-        new Main().run(args, handler);
-        for (IMessage message : handler.getMessages(null, true)) {
-            switch (message.getKind()) {
-                case IMessage.ABORT:
-                case IMessage.ERROR:
-                case IMessage.FAIL:
-                    log.error message.message, message.thrown
-                    break;
-                case IMessage.WARNING:
-                    log.warn message.message, message.thrown
-                    break;
-                case IMessage.INFO:
-                    log.info message.message, message.thrown
-                    break;
-                case IMessage.DEBUG:
-                    log.debug message.message, message.thrown
-                    break;
-            }
-        }
-    }
-}
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
@@ -156,7 +112,7 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'org.aspectj:aspectjrt:1.8.10'
+
     //noinspection GradleCompatible
     implementation "com.android.support:appcompat-v7:$supportVersion"
     implementation "com.android.support:support-v4:$supportVersion"
@@ -278,6 +234,8 @@ dependencies {
     implementation 'com.github.huangyanbin:SmartTable:2.2.0'
     //xcrash 异常
     implementation 'com.iqiyi.xcrash:xcrash-android-lib:2.4.6'
+//    //重复点击
+//    implementation 'com.github.liys666666:DoubleClick:V3.0.0'  //添加
 
 }
 

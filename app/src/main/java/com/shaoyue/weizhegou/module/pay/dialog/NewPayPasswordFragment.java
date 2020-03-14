@@ -22,7 +22,6 @@ import com.shaoyue.weizhegou.api.remote.PayApi;
 import com.shaoyue.weizhegou.event.PayPasswordEvent;
 import com.shaoyue.weizhegou.util.ThreadUtil;
 import com.shaoyue.weizhegou.util.ToastUtil;
-import com.shaoyue.weizhegou.util.XClick.SingleClick;
 import com.shaoyue.weizhegou.widget.PayPasswordView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -135,7 +134,6 @@ public class NewPayPasswordFragment extends DialogFragment implements DialogInte
         unbinder.unbind();
     }
 
-    @SingleClick
     @OnClick({R.id.iv_close, R.id.view_top})
     public void onViewClicked(View view) {
         switch (view.getId()) {

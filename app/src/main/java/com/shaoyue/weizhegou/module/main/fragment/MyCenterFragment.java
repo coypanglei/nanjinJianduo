@@ -34,7 +34,7 @@ import com.shaoyue.weizhegou.router.ContentType;
 import com.shaoyue.weizhegou.router.UIHelper;
 import com.shaoyue.weizhegou.util.GlideNewImageLoader;
 import com.shaoyue.weizhegou.util.ToastUtil;
-import com.shaoyue.weizhegou.util.XClick.SingleClick;
+
 import com.shaoyue.weizhegou.widget.ScrollViewPager;
 import com.shizhefei.view.indicator.IndicatorViewPager;
 import com.shizhefei.view.indicator.ScrollIndicatorView;
@@ -375,7 +375,7 @@ public class MyCenterFragment extends BaseTitleFragment {
 
     }
 
-    @SingleClick
+
     @OnClick({R.id.ll_login, R.id.tv_sign_out, R.id.tv_go_address_management, R.id.tv_account_security,
             R.id.tv_modify_data, R.id.tv_red_envelope, R.id.tv_wallet, R.id.tv_integral, R.id.rl_pending_pay,
             R.id.rl_pending_waiting_for_goods, R.id.rl_pending_receipt, R.id.rl_return, R.id.ll_all_order, R.id.tv_recharge,

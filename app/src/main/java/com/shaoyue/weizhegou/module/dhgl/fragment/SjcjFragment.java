@@ -29,7 +29,7 @@ import com.shaoyue.weizhegou.module.dhgl.adapter.SjcjAdapter;
 import com.shaoyue.weizhegou.router.UIHelper;
 import com.shaoyue.weizhegou.util.ThreadUtil;
 import com.shaoyue.weizhegou.util.ToastUtil;
-import com.shaoyue.weizhegou.util.XClick.SingleClick;
+
 import com.shaoyue.weizhegou.widget.DropDownView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -234,7 +234,7 @@ public class SjcjFragment extends BaseAppFragment implements BGARefreshLayout.BG
         return null;
     }
 
-    @SingleClick
+
     @OnClick({R.id.sb_find, R.id.tv_more, R.id.sb_start_test
             , R.id.iv_clear, R.id.tv_status})
     public void onViewClicked(View view) {

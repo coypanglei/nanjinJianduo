@@ -20,7 +20,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.api.callback.BaseCallback;
@@ -41,7 +40,6 @@ import com.shaoyue.weizhegou.router.UIHelper;
 import com.shaoyue.weizhegou.util.GlideNewImageLoader;
 import com.shaoyue.weizhegou.util.ThreadUtil;
 import com.shaoyue.weizhegou.util.WebViewUtils;
-import com.shaoyue.weizhegou.util.XClick.SingleClick;
 import com.shaoyue.weizhegou.util.ZMCache;
 import com.shaoyue.weizhegou.util.ZMStrUtils;
 import com.shaoyue.weizhegou.widget.AnimManager;
@@ -56,9 +54,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 import static com.shaoyue.weizhegou.router.UIHelper.HOME_INIT_BEAN;
 
@@ -579,7 +575,7 @@ public class GoodsDetailsFragment extends BaseCustomFragment {
     }
 
 
-    @SingleClick(2000)
+
     @OnClick({R.id.tv_gift, R.id.rl_specification, R.id.iv_back, R.id.iv_go_share, R.id.iv_qr_code, R.id.tv_home
             , R.id.tv_add_to_shopping_cart, R.id.tv_order, R.id.rl_go_buy_car})
     public void onViewClicked(View view) {

@@ -16,7 +16,7 @@ import com.shaoyue.weizhegou.base.BaseTitleFragment;
 import com.shaoyue.weizhegou.entity.user.CommissionBalanceBean;
 import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.util.ToastUtil;
-import com.shaoyue.weizhegou.util.XClick.SingleClick;
+
 
 import org.greenrobot.eventbus.EventBus;
 

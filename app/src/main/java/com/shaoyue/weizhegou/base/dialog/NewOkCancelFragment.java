@@ -17,7 +17,6 @@ import com.shaoyue.weizhegou.api.model.BaseResponse;
 import com.shaoyue.weizhegou.api.remote.CeditApi;
 import com.shaoyue.weizhegou.api.remote.DhApi;
 import com.shaoyue.weizhegou.event.OkOrCancelEvent;
-import com.shaoyue.weizhegou.util.XClick.SingleClick;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -47,7 +46,6 @@ public class NewOkCancelFragment extends DialogFragment implements DialogInterfa
         TextView mTitle = view.findViewById(R.id.tv_title);
         mTitle.setText(mOk.getmType());
         view.findViewById(R.id.tv_ok).setOnClickListener(new View.OnClickListener() {
-            @SingleClick(2000)
             @Override
             public void onClick(View view) {
                 switch (mOk.getUrl()) {

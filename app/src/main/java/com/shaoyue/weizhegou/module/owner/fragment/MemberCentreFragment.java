@@ -20,7 +20,7 @@ import com.shaoyue.weizhegou.entity.user.UserInfoBean;
 import com.shaoyue.weizhegou.entity.user.WebBean;
 import com.shaoyue.weizhegou.router.ContentType;
 import com.shaoyue.weizhegou.router.UIHelper;
-import com.shaoyue.weizhegou.util.XClick.SingleClick;
+
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -144,7 +144,7 @@ public class MemberCentreFragment extends BaseCustomFragment {
         }, this);
     }
 
-    @SingleClick
+
     @OnClick({R.id.tv_red_envelope, R.id.tv_account_security, R.id.tv_modify_data, R.id.tv_go_address_management,
             R.id.rl_go_commission_details, R.id.tv_withdraw, R.id.tv_integral, R.id.tv_wallet, R.id.rl_pending_pay,
             R.id.rl_pending_waiting_for_goods, R.id.rl_pending_receipt, R.id.rl_return, R.id.ll_all_order, R.id.tv_recharge,R.id.tv_member_benefits})

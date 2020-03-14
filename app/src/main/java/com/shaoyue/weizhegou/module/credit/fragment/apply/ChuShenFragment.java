@@ -21,7 +21,7 @@ import com.shaoyue.weizhegou.entity.cedit.TiJiaoBean;
 import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.router.UIHelper;
 import com.shaoyue.weizhegou.util.ThreadUtil;
-import com.shaoyue.weizhegou.util.XClick.SingleClick;
+
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -127,7 +127,6 @@ public class ChuShenFragment extends BaseAppFragment {
         return R.layout.fragment_chushen;
     }
 
-    @SingleClick(3000)
     @OnClick({R.id.sb_edit})
     public void onViewClicked() {
 

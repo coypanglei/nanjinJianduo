@@ -29,7 +29,7 @@ import com.shaoyue.weizhegou.module.sxdc.adapter.SxspAdapter;
 import com.shaoyue.weizhegou.router.UIHelper;
 import com.shaoyue.weizhegou.util.ThreadUtil;
 import com.shaoyue.weizhegou.util.ToastUtil;
-import com.shaoyue.weizhegou.util.XClick.SingleClick;
+
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -188,7 +188,7 @@ public class SxDcSpFragment extends BaseAppFragment implements BGARefreshLayout.
     }
 
 
-    @SingleClick
+
     @OnClick({R.id.sb_find, R.id.tv_more, R.id.sb_start_sp, R.id.tv_ckjd, R.id.tv_ckjy, R.id.tv_ckcj
             , R.id.iv_clear})
     public void onViewClicked(View view) {

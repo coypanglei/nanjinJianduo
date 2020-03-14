@@ -19,7 +19,7 @@ import com.shaoyue.weizhegou.entity.user.OrdererNumBean;
 import com.shaoyue.weizhegou.entity.user.UserInfoBean;
 import com.shaoyue.weizhegou.router.ContentType;
 import com.shaoyue.weizhegou.router.UIHelper;
-import com.shaoyue.weizhegou.util.XClick.SingleClick;
+
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -162,7 +162,7 @@ public class OrdererCenterFragment extends BaseCustomFragment {
 
     }
 
-    @SingleClick
+
     @OnClick({R.id.tv_subordinate_orderer, R.id.tv_pending_waiting_for_distributor, R.id.tv_team_order, R.id.rl_go_commission_details, R.id.tv_withdraw})
     public void onViewClicked(View view) {
         switch (view.getId()) {
