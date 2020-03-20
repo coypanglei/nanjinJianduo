@@ -18,7 +18,6 @@ import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.base.BaseTitleFragment;
 import com.shaoyue.weizhegou.entity.user.MainClickBean;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.MenuAdapter;
-import com.shaoyue.weizhegou.module.credit.fragment.apply.CreditInquiryDetailsFragment;
 import com.shaoyue.weizhegou.module.sxdc.fragment.BasicInformationFcwFragment;
 import com.shaoyue.weizhegou.module.sxdc.fragment.BasicInformationTyFragment;
 import com.shaoyue.weizhegou.widget.NoScrollViewPager;
@@ -38,6 +37,8 @@ public class DgdkInfoFragment extends BaseTitleFragment {
     TextView mTvVisible;
     @BindView(R.id.rv_menu)
     RecyclerView mRvMenu;
+
+
 
     private int currentPage = 0;
     private MenuAdapter menuAdapter;
@@ -97,7 +98,7 @@ public class DgdkInfoFragment extends BaseTitleFragment {
 
         for (int i = 0; i < mMenuList.size(); i++) {
             if ("征信查询".equals(mMenuList.get(i).getTitle())) {
-                fragmentList.add(CreditInquiryDetailsFragment.newInstance());
+                fragmentList.add(CreditInquiryDetailsDgFragment.newInstance("",""));
             } else if ("影像资料".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(dyVideoDetailsFragment.newInstance("对公贷款检查"));
             } else if ("基本信息".equals(mMenuList.get(i).getTitle())) {
@@ -105,7 +106,7 @@ public class DgdkInfoFragment extends BaseTitleFragment {
             } else if ("检查结论".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(BasicInformationTyFragment.newInstance("对公贷款检查结果"));
             } else if ("汇法网查询".equals(mMenuList.get(i).getTitle())) {
-                fragmentList.add(BasicInformationTyFragment.newInstance("对公贷款汇法网查询"));
+                fragmentList.add(HfwInformationDgOrgrFragment.newInstance("对公贷款汇法网查询"));
             } else if ("非财务分析".equals(mMenuList.get(i).getTitle())) {
                 //200万元以下非财务分析
                 if (!"对公贷款".equals(isbws)) {

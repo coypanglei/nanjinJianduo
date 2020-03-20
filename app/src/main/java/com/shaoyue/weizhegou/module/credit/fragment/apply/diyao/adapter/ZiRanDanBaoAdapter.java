@@ -29,6 +29,7 @@ public class ZiRanDanBaoAdapter extends BaseQuickAdapter<ZiRanDanBaoListBean.Rec
         helper.setText(R.id.tv_hyzk, item.getHyzk());
         helper.setText(R.id.tv_dbrpo, item.getDbrpo());
         helper.setText(R.id.tv_dbrposfz,item.getDbrposfzh());
+        helper.setText(R.id.tv_yjkrgx,item.getGx());
 
         if (item.isClick()) {
             helper.setBackgroundColor(R.id.ll_top, mContext.getResources().getColor(R.color.color_33f0f0f0));
@@ -39,6 +40,7 @@ public class ZiRanDanBaoAdapter extends BaseQuickAdapter<ZiRanDanBaoListBean.Rec
             helper.setTextColor(R.id.tv_dbrpo, mContext.getResources().getColor(R.color.color_2c4eb6));
             helper.setTextColor(R.id.tv_dbrposfz, mContext.getResources().getColor(R.color.color_2c4eb6));
             helper.setTextColor(R.id.tv_hyzk, mContext.getResources().getColor(R.color.color_2c4eb6));
+            helper.setTextColor(R.id.tv_yjkrgx, mContext.getResources().getColor(R.color.color_2c4eb6));
         } else {
             helper.setBackgroundColor(R.id.ll_top, mContext.getResources().getColor(R.color.white));
             helper.setTextColor(R.id.tv_sfzh, mContext.getResources().getColor(R.color.color_fc1c1a1d));
@@ -48,7 +50,7 @@ public class ZiRanDanBaoAdapter extends BaseQuickAdapter<ZiRanDanBaoListBean.Rec
             helper.setTextColor(R.id.tv_dbrpo, mContext.getResources().getColor(R.color.color_fc1c1a1d));
             helper.setTextColor(R.id.tv_dbrposfz, mContext.getResources().getColor(R.color.color_fc1c1a1d));
             helper.setTextColor(R.id.tv_hyzk, mContext.getResources().getColor(R.color.color_fc1c1a1d));
-
+            helper.setTextColor(R.id.tv_yjkrgx, mContext.getResources().getColor(R.color.color_fc1c1a1d));
 
         }
     }

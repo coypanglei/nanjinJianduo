@@ -103,7 +103,8 @@ public class DgdkjcFragment extends BaseAppFragment implements BGARefreshLayout.
     @Override
     protected void initView(View rootView) {
         super.initView(rootView);
-
+        SPUtils.getInstance()
+                .put(UserMgr.SP_XT_TYPE, "贷后");
         mAdapter = new DgdkjcAdapter();
         mRvApplication.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvApplication.setAdapter(mAdapter);

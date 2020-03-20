@@ -107,7 +107,12 @@ public class DiyadanbaoDetailsOneFragment extends BaseAppFragment implements BGA
 //            rlAll.setVisibility(View.GONE);
 //            llVisable.setVisibility(View.GONE);
 //        } else {
-            if ("调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))||"查看详情".equals(SPUtils.getInstance().getString("status"))) {
+            if ("调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
+                sbAdd.setVisibility(View.GONE);
+                sbDetel.setVisibility(View.GONE);
+//                sbEdit.setVisibility(View.GONE);
+            }
+            if("查看详情".equals(SPUtils.getInstance().getString("status"))){
                 sbAdd.setVisibility(View.GONE);
                 sbDetel.setVisibility(View.GONE);
                 sbEdit.setVisibility(View.GONE);

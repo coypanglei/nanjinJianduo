@@ -31,7 +31,7 @@ public class CreditApplicationAdapter extends BaseQuickAdapter<ApplicationBean, 
         helper.setText(R.id.tv_sxjg, item.getSxjg());
         helper.setText(R.id.tv_sxjl, item.getSxjl());
         helper.setText(R.id.tv_slr, item.getSqr());
-        helper.setText(R.id.tv_csjg, item.getCsjl());
+        helper.setText(R.id.tv_csjg, getState(item.getState()));
         helper.setText(R.id.tv_name, item.getKhmc());
 
         if (item.isClick()) {
@@ -61,5 +61,20 @@ public class CreditApplicationAdapter extends BaseQuickAdapter<ApplicationBean, 
             helper.setTextColor(R.id.tv_csjg, mContext.getResources().getColor(R.color.color_fc1c1a1d));
             helper.setTextColor(R.id.tv_name, mContext.getResources().getColor(R.color.color_fc1c1a1d));
         }
+    }
+
+    /**
+     * 获取同步结果
+     */
+    private String getState(String state) {
+        if ("500".equals(state)) {
+            return "失败";
+        } else if ("1".equals(state)) {
+            return "成功";
+        } else if ("0".equals(state)) {
+            return "同步中";
+        }
+        return "";
+
     }
 }

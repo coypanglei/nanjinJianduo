@@ -42,6 +42,12 @@ public class PictureSelectDialog extends Dialog implements View.OnClickListener 
         this.mContext = context;
     }
 
+    public PictureSelectDialog(Context context,int theme,boolean closeSelect) {
+        super(context,theme);
+        this.mContext = context;
+        this.closeSelect =closeSelect;
+        initDialog();
+    }
     public PictureSelectDialog(Context context, int theme) {
         super(context, theme);
         this.mContext = context;

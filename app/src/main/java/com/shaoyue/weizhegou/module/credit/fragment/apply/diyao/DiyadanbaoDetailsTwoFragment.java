@@ -35,7 +35,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
@@ -56,7 +55,7 @@ public class DiyadanbaoDetailsTwoFragment extends BaseAppFragment implements BGA
     StateButton sbEdit;
     @BindView(R.id.sb_detel)
     StateButton sbDetel;
-    Unbinder unbinder;
+
     @BindView(R.id.rl_all)
     RelativeLayout rlAll;
 

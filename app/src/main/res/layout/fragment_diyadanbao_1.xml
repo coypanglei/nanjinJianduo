@@ -182,6 +182,15 @@
             android:textSize="@dimen/dp_11" />
 
         <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="与借款人关系"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+
+        <TextView
             android:id="@+id/tv_status"
             android:layout_width="0dp"
             android:layout_height="match_parent"

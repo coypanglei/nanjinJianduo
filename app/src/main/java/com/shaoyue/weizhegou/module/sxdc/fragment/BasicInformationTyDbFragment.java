@@ -44,7 +44,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 
-public class BasicInformationTyFragment extends BaseAppFragment {
+public class BasicInformationTyDbFragment extends BaseAppFragment {
 
 
     @BindView(R.id.ry_info)
@@ -68,11 +68,11 @@ public class BasicInformationTyFragment extends BaseAppFragment {
     //标题集合
     private List<BasicTitle> titles = new ArrayList<>();
 
-    public static BasicInformationTyFragment newInstance(String type) {
+    public static BasicInformationTyDbFragment newInstance(String type) {
 
         Bundle args = new Bundle();
         args.putString("type", type);
-        BasicInformationTyFragment fragment = new BasicInformationTyFragment();
+        BasicInformationTyDbFragment fragment = new BasicInformationTyDbFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -169,6 +169,12 @@ public class BasicInformationTyFragment extends BaseAppFragment {
                 titles.add(new BasicTitle("担保抵押状况", new ArrayList<BasicInformationBean.RecordsBean>(), 1));
                 titles.add(new BasicTitle("行业及市场风险分析", new ArrayList<BasicInformationBean.RecordsBean>(), 1));
                 sbZancun.setVisibility(View.GONE);
+                break;
+            case "抵质(押)分析":
+                titles.add(new BasicTitle("抵押物分析",new ArrayList<BasicInformationBean.RecordsBean>()));
+                titles.add(new BasicTitle("土地使用权",new ArrayList<BasicInformationBean.RecordsBean>()));
+                titles.add(new BasicTitle("房屋价值",new ArrayList<BasicInformationBean.RecordsBean>()));
+                titles.add(new BasicTitle("评估信息",new ArrayList<BasicInformationBean.RecordsBean>()));
                 break;
         }
 
@@ -399,14 +405,52 @@ public class BasicInformationTyFragment extends BaseAppFragment {
 
                     }
                 }
-                map.put("id", id);
-                TyApi.editTyINfo(type, map, new BaseCallback<BaseResponse<Void>>() {
-                    @Override
-                    public void onSucc(BaseResponse<Void> result) {
-                        ToastUtil.showBlackToastSucess("保存成功");
-                        getListById();
-                    }
-                }, this);
+//                if (goAllSelect.isAdd()) {
+//
+//                    String add = CeditApi.DANBAOREN_ADD;
+//                    if ("自然人担保分析".equals(goAllSelect.getTitle())) {
+//                        add = CeditApi.DANBAOREN_ADD;
+//                    } else if ("抵(质)押分析".equals(goAllSelect.getTitle())) {
+//                        add = CeditApi.DANBAODIYA_ADD;
+//                    } else if ("公司担保分析".equals(goAllSelect.getTitle())) {
+//                        add = CeditApi.DANBAOREN_ADD_GONGSI;
+//                    } else if ("企业担保分析".equals(goAllSelect.getTitle())) {
+//                        add = CeditApi.DANBAOREN_ADD_QIYE;
+//                    }
+//                    CeditApi.addDanbaoInfo(add, map, new BaseCallback<BaseResponse<Void>>() {
+//                        @Override
+//                        public void onSucc(BaseResponse<Void> result) {
+//
+//                            ToastUtil.showBlackToastSucess("保存成功");
+//                            getListById();
+//                        }
+//                    }, this);
+//                } else {
+//                    String edit = CeditApi.DANBAOREN_EDIT;
+//                    if ("自然人担保分析".equals(goAllSelect.getTitle())) {
+//                        edit = CeditApi.DANBAOREN_EDIT;
+//                        map.put("id", goAllSelect.getmZiRanDanBao().getId());
+//                    } else if ("抵(质)押分析".equals(goAllSelect.getTitle())) {
+//                        edit = CeditApi.DANBAOZHIYA_EDIT+"All";
+//                        map.put("id", goAllSelect.getmDiyaDanBao().getId());
+//                    } else if ("公司担保分析".equals(goAllSelect.getTitle())) {
+//                        edit = CeditApi.DANBAOREN_EDIT_GONGSI;
+//                        map.put("id", goAllSelect.getmGongsiDanBao().getId());
+//                    } else if ("企业担保分析".equals(goAllSelect.getTitle())) {
+//                        edit = CeditApi.DANBAOREN_EDIT_QIYE;
+//                        map.put("id", goAllSelect.getmDiyaDanBao().getId());
+//                    }
+//
+//                    CeditApi.editDanbaoInfo(edit, map, new BaseCallback<BaseResponse<Void>>() {
+//                        @Override
+//                        public void onSucc(BaseResponse<Void> result) {
+//
+//                            ToastUtil.showBlackToastSucess("修改成功");
+//                            getListById();
+//                        }
+//                    }, this);
+//                }
+
 
 
                 break;
@@ -441,45 +485,7 @@ public class BasicInformationTyFragment extends BaseAppFragment {
         return map;
     }
 
-//    /**
-//     * 第一次添加
-//     */
-//    private void firstAdd() {
-//        Map<String, String> map = new HashMap<>();
-//        List<BasicTitle> list = mAdapter.getData();
-//
-//        if (ObjectUtils.isNotEmpty(list)) {
-//            for (BasicTitle title : list) {
-//                for (BasicInformationBean.RecordsBean bean : title.getMlist()) {
-//                    if (ObjectUtils.isNotEmpty(bean.getDefaultvalue())) {
-//                        if (bean.getName().equals("gbhyfl")) {
-//                            map.put(bean.getName(), gbhyfl);
-//                        } else {
-//                            map.put(bean.getName(), bean.getDefaultvalue());
-//                        }
-//                    } else {
-//                        if (bean.getRequire().equals("true")) {
-//                            ToastUtil.showBlackToastSucess(bean.getTitile() + "不能为空");
-//                            return;
-//                        }
-//
-//
-//                    }
-//
-//                }
-//
-//            }
-//        }
-//
-//        DcApi.addInfo(map, new BaseCallback<BaseResponse<Void>>() {
-//            @Override
-//            public void onSucc(BaseResponse<Void> result) {
-//                ToastUtil.showBlackToastSucess("保存成功");
-//                getListById();
-//            }
-//        }, this);
-//
-//    }
+
 
 
 }

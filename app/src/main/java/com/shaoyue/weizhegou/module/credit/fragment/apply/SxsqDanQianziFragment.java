@@ -67,6 +67,8 @@ public class SxsqDanQianziFragment extends BaseAppFragment {
     TextView tvKhrq;
     @BindView(R.id.sb_edit)
     StateButton sbEdit;
+    @BindView(R.id.iv_po_qian)
+    ImageView ivPoQian;
 
 
     private List<QianzibanDanBean> mlist = new ArrayList<>();
@@ -116,6 +118,7 @@ public class SxsqDanQianziFragment extends BaseAppFragment {
             if (ObjectUtils.isEmpty(qianziBean.getId())) {
                 qianziBean = event;
                 sxsqDanBean.setSqrqm(qianziBean.getSqrqm());
+                sxsqDanBean.setSqrpoqm(qianziBean.getSqrjbkhjlqm());
                 initData();
             }
         }
@@ -128,6 +131,7 @@ public class SxsqDanQianziFragment extends BaseAppFragment {
             if (event.getId().equals(qianziBean.getUploadImg())) {
                 qianziBean.setUploadImg("");
                 sxsqDanBean.setSqrqm("");
+                sxsqDanBean.setSqrpoqm("");
                 initData();
             }
 
@@ -160,6 +164,8 @@ public class SxsqDanQianziFragment extends BaseAppFragment {
                 tvKhjl.setText("客户经理: " + result.data.getKhjl());
                 tvKhrq.setText("日期: " + result.data.getSqsj());
                 qianziBean.setSqrqm(result.data.getSqrqm());
+                //配偶签名
+                qianziBean.setSqrjbkhjlqm(result.data.getSqrpoqm());
                 mRvClick.setLayoutManager(new LinearLayoutManager(getActivity()));
                 mRvClick.setNestedScrollingEnabled(false);//禁止滑动
                 mRvClick.setAdapter(mAdapter);
@@ -169,6 +175,11 @@ public class SxsqDanQianziFragment extends BaseAppFragment {
                 if (ObjectUtils.isNotEmpty(qianziBean.getSqrqm())) {
                     mIvGerenQian.setBackgroundResource(R.color.white);
                     GlideNewImageLoader.displayImageNoCacheNoDefault(getActivity(), mIvGerenQian, DomainMgr.getInstance().getBaseUrlImg() + qianziBean.getSqrqm());
+                }
+                //配偶签名文件
+                if (ObjectUtils.isNotEmpty(sxsqDanBean.getSqrpoqm())) {
+                    ivPoQian.setBackgroundResource(R.color.white);
+                    GlideNewImageLoader.displayImageNoCacheNoDefault(getActivity(), ivPoQian, DomainMgr.getInstance().getBaseUrlImg() + sxsqDanBean.getSqrpoqm());
                 }
                 if ("查看详情".equals(SPUtils.getInstance().getString("status")) || ObjectUtils.isNotEmpty(sxsqDanBean.getId())) {
                     sbEdit.setVisibility(View.GONE);
@@ -191,6 +202,10 @@ public class SxsqDanQianziFragment extends BaseAppFragment {
             if (ObjectUtils.isNotEmpty(qianziBean.getSqrqm())) {
                 mIvGerenQian.setBackgroundResource(R.color.white);
                 GlideNewImageLoader.displayImageNoCacheNoDefault(getActivity(), mIvGerenQian, DomainMgr.getInstance().getBaseUrlImg() + qianziBean.getSqrqm());
+            }
+            if (ObjectUtils.isNotEmpty(qianziBean.getSqrjbkhjlqm())) {
+                ivPoQian.setBackgroundResource(R.color.white);
+                GlideNewImageLoader.displayImageNoCacheNoDefault(getActivity(), ivPoQian, DomainMgr.getInstance().getBaseUrlImg() + qianziBean.getSqrjbkhjlqm());
             }
 
 
@@ -218,6 +233,7 @@ public class SxsqDanQianziFragment extends BaseAppFragment {
                 tvKhjl.setText("客户经理: " + result.data.getKhjl());
                 tvKhrq.setText("日期: " + result.data.getSqsj());
                 qianziBean.setSqrqm(result.data.getSqrqm());
+                qianziBean.setSqrjbkhjlqm(result.data.getSqrpoqm());
                 mRvClick.setLayoutManager(new LinearLayoutManager(getActivity()));
                 mRvClick.setNestedScrollingEnabled(false);//禁止滑动
                 mRvClick.setAdapter(mAdapter);
@@ -228,6 +244,11 @@ public class SxsqDanQianziFragment extends BaseAppFragment {
                     mIvGerenQian.setBackgroundResource(R.color.white);
                     GlideNewImageLoader.displayImageNoCacheNoDefault(getActivity(), mIvGerenQian, DomainMgr.getInstance().getBaseUrlImg() + sxsqDanBean.getSqrqm());
                 }
+                //配偶签名文件
+                if (ObjectUtils.isNotEmpty(sxsqDanBean.getSqrpoqm())) {
+                    ivPoQian.setBackgroundResource(R.color.white);
+                    GlideNewImageLoader.displayImageNoCacheNoDefault(getActivity(), ivPoQian, DomainMgr.getInstance().getBaseUrlImg() + sxsqDanBean.getSqrpoqm());
+                }
                 if ("查看详情".equals(SPUtils.getInstance().getString("status"))) {
                     sbEdit.setVisibility(View.GONE);
                 }
@@ -235,7 +256,7 @@ public class SxsqDanQianziFragment extends BaseAppFragment {
         }, this);
     }
 
-    @OnClick({R.id.iv_geren_qian, R.id.sb_edit})
+    @OnClick({R.id.iv_geren_qian, R.id.sb_edit,R.id.iv_po_qian})
     public void onViewClicked(View view) {
 
         switch (view.getId()) {
@@ -245,6 +266,13 @@ public class SxsqDanQianziFragment extends BaseAppFragment {
                     return;
                 }
                 qianziBean.setType(true);
+                UIHelper.showXezibanDialog(getActivity(), qianziBean);
+                break;
+            case R.id.iv_po_qian:
+                if ("查看详情".equals(SPUtils.getInstance().getString("status")) || (ObjectUtils.isNotEmpty(qianziBean.getId()))) {
+                    return;
+                }
+                qianziBean.setType(false);
                 UIHelper.showXezibanDialog(getActivity(), qianziBean);
                 break;
             case R.id.sb_edit:

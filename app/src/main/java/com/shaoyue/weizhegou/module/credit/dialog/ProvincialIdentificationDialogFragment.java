@@ -225,12 +225,25 @@ public class ProvincialIdentificationDialogFragment extends DialogFragment {
                                     public void onSucc(BaseResponse<IDCardBack> result) {
                                         if (result.data.getImage_status().equals("normal")) {
                                             LogUtils.e(result.data.getWords_result().get失效日期().getWords());
-                                            String data = result.data.getWords_result().get失效日期().getWords();
-                                            String year = data.substring(0, 4);
-                                            String month = data.substring(4, 6);
-                                            String day = data.substring(6, 8);
-                                            String str = year + "-" + month + "-" + day;
-                                            mTvSelectedDate.setText(str);
+                                            if (ObjectUtils.isNotEmpty(result.data.getWords_result().get失效日期().getWords())) {
+                                                if (!"长期".equals(result.data.getWords_result().get失效日期().getWords())) {
+                                                    try {
+                                                        String data = result.data.getWords_result().get失效日期().getWords();
+                                                        String year = data.substring(0, 4);
+                                                        String month = data.substring(4, 6);
+                                                        String day = data.substring(6, 8);
+                                                        String str = year + "-" + month + "-" + day;
+                                                        mTvSelectedDate.setText(str);
+                                                    } catch (Exception e) {
+
+                                                    }
+
+                                                } else {
+                                                    mTvSelectedDate.setText("2099-12-31");
+                                                }
+                                            }
+
+
                                             Glide.with(getActivity()).load(Uri.fromFile(file)).into(mIvFan);
                                             UserApi.updateSfzPic(file, new BaseCallback<BaseResponse<String>>() {
                                                 @Override

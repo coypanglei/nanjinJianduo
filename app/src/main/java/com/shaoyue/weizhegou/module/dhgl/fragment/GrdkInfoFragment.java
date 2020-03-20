@@ -18,7 +18,6 @@ import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.base.BaseTitleFragment;
 import com.shaoyue.weizhegou.entity.user.MainClickBean;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.MenuAdapter;
-import com.shaoyue.weizhegou.module.credit.fragment.apply.CreditInquiryDetailsFragment;
 import com.shaoyue.weizhegou.module.sxdc.fragment.BasicInformationTyFragment;
 import com.shaoyue.weizhegou.widget.NoScrollViewPager;
 
@@ -83,7 +82,7 @@ public class GrdkInfoFragment extends BaseTitleFragment {
 
         for (int i = 0; i < mMenuList.size(); i++) {
            if ("征信查询".equals(mMenuList.get(i).getTitle())) {
-                fragmentList.add(CreditInquiryDetailsFragment.newInstance());
+                fragmentList.add(CreditInquiryDetailsDhFragment.newInstance("申请人征信数据",""));
             } else if ("影像资料".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(dyVideoDetailsFragment.newInstance("个贷检查"));
             } else if ("基本信息".equals(mMenuList.get(i).getTitle())) {
@@ -91,7 +90,7 @@ public class GrdkInfoFragment extends BaseTitleFragment {
             } else if("检查结果".equals(mMenuList.get(i).getTitle())){
                 fragmentList.add(BasicInformationTyFragment.newInstance("个贷检查结果"));
             }else if("汇法网查询".equals(mMenuList.get(i).getTitle())){
-               fragmentList.add(BasicInformationTyFragment.newInstance("个贷汇法网查询"));
+               fragmentList.add(HfwInformationDgOrgrFragment.newInstance("个贷汇法网查询"));
            }
         }
         mMenuList.get(0).setSelect(true);

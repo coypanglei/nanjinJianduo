@@ -13,6 +13,7 @@ import com.shaoyue.weizhegou.entity.cedit.VideoMaterialBean;
 import com.shaoyue.weizhegou.entity.cedit.XcjyListBean;
 import com.shaoyue.weizhegou.entity.dhgl.CwfxListBean;
 import com.shaoyue.weizhegou.entity.dhgl.DgInfoListBean;
+import com.shaoyue.weizhegou.entity.dhgl.DgZxcxBean;
 import com.shaoyue.weizhegou.entity.dhgl.DhglInfoGetBean;
 import com.shaoyue.weizhegou.entity.dhgl.GdInfoListBean;
 import com.shaoyue.weizhegou.entity.dhgl.SdInfoListBean;
@@ -107,6 +108,9 @@ public class DhApi {
     //授信征信查询
     private static final String XCJY_SXCX = "jeecg-boot/business/sxsqZxcx/list";
 
+    //个贷征信查询
+    private static final String GD_ZXCX = "jeecg-boot/dhzx/dhZxcx/queryById";
+
 
     //审批列表查询
     private static final String SP_LIST_CX = "jeecg-boot/business/dhglJjXcjydx/splist";
@@ -134,6 +138,14 @@ public class DhApi {
 
     //征信查询任务添加
     private static final String DB_SXCC_ADD = "jeecg-boot/business/sxsqZx/dbAdd";
+
+    //个贷征信任务添加
+    private static final String GD_ZXCX_ADD = "jeecg-boot/dhzx/dhZx/add";
+
+    //个贷查询任务重试
+    private static final String GD_ZXCX_RESET = "jeecg-boot/dhzx/dhZx/reset";
+
+
     //数据采集分析结论
     private static final String SJCJ_FXJL = "jeecg-boot/business/dhglJjCjfxjl/queryByZjhm";
     //取消认领
@@ -148,9 +160,6 @@ public class DhApi {
 
     //财务分析获取
     private static final String CWFX_GET = "jeecg-boot/dhjcmb/dhjcmbCwfx/queryByPId";
-
-
-
 
 
     /**
@@ -347,6 +356,35 @@ public class DhApi {
     }
 
     /**
+     * 个贷征信查询
+     *
+     * @param callback
+     * @param tag
+     */
+    public static void gdZxcx(String id, BaseCallback<BaseResponse<ZxcxListBean>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("pid", SPUtils.getInstance().getString(UserMgr.SP_ID_CARD));
+        ApiHttpClient.post(GD_ZXCX, params, callback, tag);
+
+    }
+
+
+
+    /**
+     * 对公贷款征信查询
+     *
+     * @param id
+     * @param callback
+     * @param tag
+     */
+    public static void dgZxcx(String id, BaseCallback<BaseResponse<DgZxcxBean>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("pid", SPUtils.getInstance().getString(UserMgr.SP_ID_CARD));
+        ApiHttpClient.post(GD_ZXCX, params, callback, tag);
+
+    }
+
+    /**
      * 授信征信查询
      *
      * @param callback
@@ -371,7 +409,6 @@ public class DhApi {
         ApiHttpClient.post(SXCC_ADD, params, callback, tag);
 
     }
-
 
 
     /**
@@ -400,6 +437,35 @@ public class DhApi {
         ApiHttpClient.post(DB_SXCC_ADD, params, callback, tag);
 
     }
+
+
+    /**
+     * 添加个贷征信
+     *
+     * @param callback
+     * @param tag
+     */
+    public static void addgdZxcx(String id,String type, BaseCallback<BaseResponse<Void>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("khlx",type);
+        params.put("pid", SPUtils.getInstance().getString(UserMgr.SP_ID_CARD));
+        ApiHttpClient.post(GD_ZXCX_ADD, params, callback, tag);
+
+    }
+
+    /**
+     * 添加个贷征信查询重试
+     *
+     * @param callback
+     * @param tag
+     */
+    public static void csgdZxcx(String id, BaseCallback<BaseResponse<Void>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("pid", SPUtils.getInstance().getString(UserMgr.SP_ID_CARD));
+        ApiHttpClient.post(GD_ZXCX_RESET, params, callback, tag);
+
+    }
+
 
     /**
      * 添加抵押担保征信查询按钮

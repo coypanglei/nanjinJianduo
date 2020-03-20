@@ -1,6 +1,7 @@
 package com.shaoyue.weizhegou.api.remote;
 
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.lzy.okgo.callback.BitmapCallback;
 import com.shaoyue.weizhegou.api.callback.BaseCallback;
@@ -374,6 +375,7 @@ public class UserApi extends BaseApi {
     }
 
 
+
     /**
      * 上传图片
      *
@@ -383,7 +385,15 @@ public class UserApi extends BaseApi {
      */
     public static void updatePic(File mFile, BaseCallback<BaseResponse<String>> callback, Object tag) {
         Map<String, String> params = new HashMap<>();
-        params.put("zjhm", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        if("申请".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))||"调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
+            params.put("zjhm", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        }else if("贷后".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))){
+            params.put("zjhm", SPUtils.getInstance().getString(UserMgr.SP_ID_CARD));
+            params.put("pic_type",SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE));
+        }else {
+            LogUtils.e("不属于贷后和申请");
+        }
+
         ApiHttpClient.updateImg(API_HAEDER_PIC, params, mFile, callback, tag);
     }
 

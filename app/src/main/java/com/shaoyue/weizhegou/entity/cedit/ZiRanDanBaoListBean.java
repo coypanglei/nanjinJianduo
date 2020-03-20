@@ -72,8 +72,6 @@ public class ZiRanDanBaoListBean extends BaseBean {
     }
 
 
-
-
     public static class RecordsBean {
         /**
          * sxsfzh : null
@@ -92,6 +90,85 @@ public class ZiRanDanBaoListBean extends BaseBean {
          * dbrpo : null
          */
         private boolean click;
+        /**
+         * jtzcfzqk : null
+         * zxqkms : null
+         * dbrwhsx : 22
+         * powhsx : null
+         * description : null
+         * powhqtdbje : 123
+         * delFlag : null
+         * jtnzsr : 111
+         * jtsjdz : null
+         * dbrposfzh : 110101199003075664
+         * jtnjsr : 11
+         * updateBy : sxjl
+         * jtzzc : 11
+         * id : 39d0978c8801c147b826dfffa5da2a74
+         * dbrpo : 311212
+         * polxdh : 15380844201
+         * lxdh : 15380844201
+         * porqz : files/1f56b01fd67455414e77766b9f9839a8/qianming_1584616990769.png
+         * dbrwhqtdbje : 11
+         * dbrnsr : 11
+         * bcdbje : 1111
+         * sxsfzh : null
+         * updateTime : 2020-03-19 19:23:32
+         * zyywyzw : 1111
+         * pogzdw : null
+         * ponsr : 2
+         * dbrztdbnlfx : null
+         * gx : 子女
+         * createBy : sxjl
+         * dbrqz : files/1f56b01fd67455414e77766b9f9839a8/qianming_1584616986866.png
+         * jtscjyqk : null
+         * hyzk : 已婚
+         * sfzh : 320102199003071810
+         * xm : 321
+         * createTime : 2020-03-19 19:15:08
+         * sfgtdb : 是
+         * sxid : 1f56b01fd67455414e77766b9f9839a8
+         * pozyywyzw : 123
+         */
+
+        private String jtzcfzqk;
+        private String zxqkms;
+        private String dbrwhsx;
+        private String powhsx;
+        private String description;
+        private String powhqtdbje;
+        private String delFlag;
+        private String jtnzsr;
+        private String jtsjdz;
+        private String dbrposfzh;
+        private String jtnjsr;
+        private String updateBy;
+        private String jtzzc;
+        private String id;
+        private String dbrpo;
+        private String polxdh;
+        private String lxdh;
+        private String porqz;
+        private String dbrwhqtdbje;
+        private String dbrnsr;
+        private String bcdbje;
+        private String sxsfzh;
+        private String updateTime;
+        private String zyywyzw;
+        private String pogzdw;
+        private String ponsr;
+        private String dbrztdbnlfx;
+        private String gx;
+        private String createBy;
+        private String dbrqz;
+        private String jtscjyqk;
+        private String hyzk;
+        private String sfzh;
+        private String xm;
+        private String createTime;
+        private String sfgtdb;
+        private String sxid;
+        private String pozyywyzw;
 
         public boolean isClick() {
             return click;
@@ -100,27 +177,38 @@ public class ZiRanDanBaoListBean extends BaseBean {
         public void setClick(boolean click) {
             this.click = click;
         }
-        private Object sxsfzh;
-        private String description;
-        private Object updateTime;
-        private Object delFlag;
-        private String dbrposfzh;
-        private String createBy;
-        private String hyzk;
-        private String sfzh;
-        private String xm;
-        private String createTime;
-        private Object updateBy;
-        private String sxid;
-        private String id;
-        private String dbrpo;
 
-        public Object getSxsfzh() {
-            return sxsfzh;
+
+        public String getJtzcfzqk() {
+            return jtzcfzqk;
         }
 
-        public void setSxsfzh(Object sxsfzh) {
-            this.sxsfzh = sxsfzh;
+        public void setJtzcfzqk(String jtzcfzqk) {
+            this.jtzcfzqk = jtzcfzqk;
+        }
+
+        public String getZxqkms() {
+            return zxqkms;
+        }
+
+        public void setZxqkms(String zxqkms) {
+            this.zxqkms = zxqkms;
+        }
+
+        public String getDbrwhsx() {
+            return dbrwhsx;
+        }
+
+        public void setDbrwhsx(String dbrwhsx) {
+            this.dbrwhsx = dbrwhsx;
+        }
+
+        public String getPowhsx() {
+            return powhsx;
+        }
+
+        public void setPowhsx(String powhsx) {
+            this.powhsx = powhsx;
         }
 
         public String getDescription() {
@@ -131,20 +219,36 @@ public class ZiRanDanBaoListBean extends BaseBean {
             this.description = description;
         }
 
-        public Object getUpdateTime() {
-            return updateTime;
+        public String getPowhqtdbje() {
+            return powhqtdbje;
         }
 
-        public void setUpdateTime(Object updateTime) {
-            this.updateTime = updateTime;
+        public void setPowhqtdbje(String powhqtdbje) {
+            this.powhqtdbje = powhqtdbje;
         }
 
-        public Object getDelFlag() {
+        public String getDelFlag() {
             return delFlag;
         }
 
-        public void setDelFlag(Object delFlag) {
+        public void setDelFlag(String delFlag) {
             this.delFlag = delFlag;
+        }
+
+        public String getJtnzsr() {
+            return jtnzsr;
+        }
+
+        public void setJtnzsr(String jtnzsr) {
+            this.jtnzsr = jtnzsr;
+        }
+
+        public String getJtsjdz() {
+            return jtsjdz;
+        }
+
+        public void setJtsjdz(String jtsjdz) {
+            this.jtsjdz = jtsjdz;
         }
 
         public String getDbrposfzh() {
@@ -155,12 +259,172 @@ public class ZiRanDanBaoListBean extends BaseBean {
             this.dbrposfzh = dbrposfzh;
         }
 
+        public String getJtnjsr() {
+            return jtnjsr;
+        }
+
+        public void setJtnjsr(String jtnjsr) {
+            this.jtnjsr = jtnjsr;
+        }
+
+        public String getUpdateBy() {
+            return updateBy;
+        }
+
+        public void setUpdateBy(String updateBy) {
+            this.updateBy = updateBy;
+        }
+
+        public String getJtzzc() {
+            return jtzzc;
+        }
+
+        public void setJtzzc(String jtzzc) {
+            this.jtzzc = jtzzc;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getDbrpo() {
+            return dbrpo;
+        }
+
+        public void setDbrpo(String dbrpo) {
+            this.dbrpo = dbrpo;
+        }
+
+        public String getPolxdh() {
+            return polxdh;
+        }
+
+        public void setPolxdh(String polxdh) {
+            this.polxdh = polxdh;
+        }
+
+        public String getLxdh() {
+            return lxdh;
+        }
+
+        public void setLxdh(String lxdh) {
+            this.lxdh = lxdh;
+        }
+
+        public String getPorqz() {
+            return porqz;
+        }
+
+        public void setPorqz(String porqz) {
+            this.porqz = porqz;
+        }
+
+        public String getDbrwhqtdbje() {
+            return dbrwhqtdbje;
+        }
+
+        public void setDbrwhqtdbje(String dbrwhqtdbje) {
+            this.dbrwhqtdbje = dbrwhqtdbje;
+        }
+
+        public String getDbrnsr() {
+            return dbrnsr;
+        }
+
+        public void setDbrnsr(String dbrnsr) {
+            this.dbrnsr = dbrnsr;
+        }
+
+        public String getBcdbje() {
+            return bcdbje;
+        }
+
+        public void setBcdbje(String bcdbje) {
+            this.bcdbje = bcdbje;
+        }
+
+        public String getSxsfzh() {
+            return sxsfzh;
+        }
+
+        public void setSxsfzh(String sxsfzh) {
+            this.sxsfzh = sxsfzh;
+        }
+
+        public String getUpdateTime() {
+            return updateTime;
+        }
+
+        public void setUpdateTime(String updateTime) {
+            this.updateTime = updateTime;
+        }
+
+        public String getZyywyzw() {
+            return zyywyzw;
+        }
+
+        public void setZyywyzw(String zyywyzw) {
+            this.zyywyzw = zyywyzw;
+        }
+
+        public String getPogzdw() {
+            return pogzdw;
+        }
+
+        public void setPogzdw(String pogzdw) {
+            this.pogzdw = pogzdw;
+        }
+
+        public String getPonsr() {
+            return ponsr;
+        }
+
+        public void setPonsr(String ponsr) {
+            this.ponsr = ponsr;
+        }
+
+        public String getDbrztdbnlfx() {
+            return dbrztdbnlfx;
+        }
+
+        public void setDbrztdbnlfx(String dbrztdbnlfx) {
+            this.dbrztdbnlfx = dbrztdbnlfx;
+        }
+
+        public String getGx() {
+            return gx;
+        }
+
+        public void setGx(String gx) {
+            this.gx = gx;
+        }
+
         public String getCreateBy() {
             return createBy;
         }
 
         public void setCreateBy(String createBy) {
             this.createBy = createBy;
+        }
+
+        public String getDbrqz() {
+            return dbrqz;
+        }
+
+        public void setDbrqz(String dbrqz) {
+            this.dbrqz = dbrqz;
+        }
+
+        public String getJtscjyqk() {
+            return jtscjyqk;
+        }
+
+        public void setJtscjyqk(String jtscjyqk) {
+            this.jtscjyqk = jtscjyqk;
         }
 
         public String getHyzk() {
@@ -195,12 +459,12 @@ public class ZiRanDanBaoListBean extends BaseBean {
             this.createTime = createTime;
         }
 
-        public Object getUpdateBy() {
-            return updateBy;
+        public String getSfgtdb() {
+            return sfgtdb;
         }
 
-        public void setUpdateBy(Object updateBy) {
-            this.updateBy = updateBy;
+        public void setSfgtdb(String sfgtdb) {
+            this.sfgtdb = sfgtdb;
         }
 
         public String getSxid() {
@@ -211,20 +475,12 @@ public class ZiRanDanBaoListBean extends BaseBean {
             this.sxid = sxid;
         }
 
-        public String getId() {
-            return id;
+        public String getPozyywyzw() {
+            return pozyywyzw;
         }
 
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public String getDbrpo() {
-            return dbrpo;
-        }
-
-        public void setDbrpo(String dbrpo) {
-            this.dbrpo = dbrpo;
+        public void setPozyywyzw(String pozyywyzw) {
+            this.pozyywyzw = pozyywyzw;
         }
     }
 }

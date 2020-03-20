@@ -181,15 +181,18 @@
 
                 </LinearLayout>
 
+
+
                 <RelativeLayout
-                    android:id="@+id/rl_qian"
+                    android:id="@+id/rl_qian_po"
                     android:layout_width="@dimen/dp_250"
                     android:layout_height="@dimen/dp_120"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/dp_100"
-                    android:background="@drawable/icon_click_qianzi">
+                    android:background="@drawable/icon_sxsqd_qm">
 
                     <ImageView
+
                         android:id="@+id/iv_geren_qian"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -200,6 +203,25 @@
 
                 </RelativeLayout>
 
+
+                <RelativeLayout
+                    android:id="@+id/rl_qian"
+                    android:layout_width="@dimen/dp_250"
+                    android:layout_height="@dimen/dp_120"
+                    android:layout_toLeftOf="@id/rl_qian_po"
+                    android:layout_marginRight="@dimen/dp_20"
+                    android:background="@drawable/icon_sxsqd__po_qm">
+
+                    <ImageView
+                        android:id="@+id/iv_po_qian"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="6dp"
+                        android:paddingBottom="@dimen/dp_10" />
+
+
+                </RelativeLayout>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

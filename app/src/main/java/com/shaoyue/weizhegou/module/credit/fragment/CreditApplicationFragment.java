@@ -13,11 +13,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ObjectUtils;
+import com.blankj.utilcode.util.SPUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.base.BaseTitleFragment;
 import com.shaoyue.weizhegou.entity.home.profileBean;
 import com.shaoyue.weizhegou.entity.user.MainClickBean;
+import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.MenuAdapter;
 import com.shaoyue.weizhegou.module.dhgl.fragment.SjcjFragment;
 import com.shaoyue.weizhegou.module.dhgl.fragment.SpFragment;
@@ -92,12 +94,20 @@ public class CreditApplicationFragment extends BaseTitleFragment {
             } else if ("待办事项".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(shouXinShenQingFragment.newInstance(mMenuList.get(i).getTitle()));
             } else if ("现场检验".equals(mMenuList.get(i).getTitle())) {
+                SPUtils.getInstance()
+                        .put(UserMgr.SP_XT_TYPE, "贷后");
                 fragmentList.add(XcjyFragment.newInstance(mMenuList.get(i).getTitle()));
             } else if ("数据采集".equals(mMenuList.get(i).getTitle())) {
+                SPUtils.getInstance()
+                        .put(UserMgr.SP_XT_TYPE, "贷后");
                 fragmentList.add(SjcjFragment.newInstance(mMenuList.get(i).getTitle()));
             } else if ("小组任务认领".equals(mMenuList.get(i).getTitle())) {
+                SPUtils.getInstance()
+                        .put(UserMgr.SP_XT_TYPE, "贷后");
                 fragmentList.add(XzRlFragment.newInstance(mMenuList.get(i).getTitle()));
             } else if ("审批".equals(mMenuList.get(i).getTitle())) {
+                SPUtils.getInstance()
+                        .put(UserMgr.SP_XT_TYPE, "贷后");
                 fragmentList.add(SpFragment.newInstance(mMenuList.get(i).getTitle()));
             } else if ("首贷检查".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(sdjcFragment.newInstance(mMenuList.get(i).getTitle()));

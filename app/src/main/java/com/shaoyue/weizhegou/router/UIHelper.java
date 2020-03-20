@@ -41,6 +41,7 @@ import com.shaoyue.weizhegou.module.account.dialog.LineHelpFilelFragment;
 import com.shaoyue.weizhegou.module.account.dialog.RuleFragment;
 import com.shaoyue.weizhegou.module.account.dialog.VerifiedDialogFragment;
 import com.shaoyue.weizhegou.module.credit.activity.ApplyInfoActivity;
+import com.shaoyue.weizhegou.module.credit.activity.DhDyActivity;
 import com.shaoyue.weizhegou.module.credit.activity.DyFaceActivity;
 import com.shaoyue.weizhegou.module.credit.activity.DyYxzlActivity;
 import com.shaoyue.weizhegou.module.credit.activity.DyZxcxActivity;
@@ -452,6 +453,20 @@ public class UIHelper {
             dialog.show(fm, FAMILY_DIYA);
         }
     }
+
+
+
+
+    /**
+     * 贷后新增或修改抵押担保
+     *
+     * @param activity
+     */
+    public static void showDhDiyaFragment(FragmentActivity activity, String contentType) {
+        Intent intent = DhDyActivity.newInstance(activity, contentType);
+        activity.startActivity(intent);
+    }
+
 
     /**
      * 新增或者修改家庭信息

@@ -99,8 +99,7 @@ public class PictureSelectActivity extends Activity {
      * 选择图片
      */
     public void selectPicture() {
-        mSelectPictureDialog = new PictureSelectDialog(this, R.style.ActionSheetDialogStyle);
-        mSelectPictureDialog.setCloseSelect(mCloseSelectEnabled);
+        mSelectPictureDialog = new PictureSelectDialog(this, R.style.ActionSheetDialogStyle,mCloseSelectEnabled);
         mSelectPictureDialog.setOnItemClickListener(new PictureSelectDialog.OnItemClickListener() {
             @Override
             public void onItemClick(int type) {

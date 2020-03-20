@@ -122,6 +122,12 @@
             android:screenOrientation="landscape"
             android:theme="@style/TestTheme"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".module.credit.activity.DhDyActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/TestTheme"
+            android:windowSoftInputMode="adjustResize" />
+
 
         <activity
             android:name=".module.credit.activity.DyYxzlActivity"

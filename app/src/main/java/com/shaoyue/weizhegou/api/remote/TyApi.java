@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.shaoyue.weizhegou.api.callback.BaseCallback;
 import com.shaoyue.weizhegou.api.helper.ApiHttpClient;
 import com.shaoyue.weizhegou.api.model.BaseResponse;
+import com.shaoyue.weizhegou.entity.cedit.HfwBean;
 import com.shaoyue.weizhegou.entity.cedit.VideoBean;
 import com.shaoyue.weizhegou.entity.cedit.VideoMaterialBean;
 import com.shaoyue.weizhegou.manager.UserMgr;
@@ -48,6 +49,9 @@ public class TyApi {
     //个贷汇法网
     private static final String GD_HFW = "jeecg-boot/dhjcmb/dhjcmbGrjyHfw/queryByPid";
 
+    //个贷汇法网查询
+    private static final String GD_HFW_CX = "jeecg-boot/dhjcmb/dhjcmbGrjyHfw/chaxun";
+
     //首贷影像资料列表
     private static final String SD_VIDEO_LIST = "jeecg-boot/dhjcmb/dhScdhjcYxzl/queryByPidForAndroid";
 
@@ -67,6 +71,8 @@ public class TyApi {
     //对公汇法网查询
     private static final String DG_HFW = "jeecg-boot/dhjcmb/dhjcmbDgdkHfw/queryByPid";
 
+    //个贷汇法网查询
+    private static final String DG_HFW_CX = "jeecg-boot/dhjcmb/dhjcmbDgdkHfw/chaxun";
     //对公汇法网编辑
     private static final String DG_HFW_EDIT = "jeecg-boot/dhjcmb/dhjcmbDgdkHfw/saveOrUpdate";
 
@@ -94,6 +100,11 @@ public class TyApi {
 
     //财务分析编辑
     public static final String CWFX_EDIT = "jeecg-boot/dhjcmb/dhjcmbCwfx/edit";
+
+
+    //上传地址接口
+    private static final String API_HAEDER_PIC = "jeecg-boot/sys/common/upload";
+
 
 
 
@@ -184,15 +195,59 @@ public class TyApi {
             case "对公财务分析":
                 address = CWFX_EDIT;
                 break;
+            case "抵质(押)分析":
+                address ="jeecg-boot/business/sxsqDyfx/editAll";
+                params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+                break;
             default:
                 break;
         }
+
         params.put("pid", SPUtils.getInstance().getString(UserMgr.SP_ID_CARD));
         if (ObjectUtils.isNotEmpty(address)) {
             ApiHttpClient.putJson(address, params, callback, tag);
         }
     }
 
+    /**
+     * 汇法网信息-查询汇法网
+     */
+    public static void getHfWInfo(String type,BaseCallback<BaseResponse<HfwBean>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("pid", SPUtils.getInstance().getString(UserMgr.SP_ID_CARD));
+        String address = "";
+        switch (type) {
+            case "个贷汇法网查询":
+                address = GD_HFW;
+                break;
+            case "对公贷款汇法网查询":
+                address = DG_HFW;
+                break;
+            default:
+                break;
+        }
+        ApiHttpClient.post(address, params, callback, tag);
+    }
+
+    /**
+     * 汇法网信息-查询汇法网结果
+     */
+    public static void cxHfWInfo(String type,BaseCallback<BaseResponse<Void>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("pid", SPUtils.getInstance().getString(UserMgr.SP_ID_CARD));
+        String address = "";
+        switch (type) {
+            case "个贷汇法网查询":
+                address = GD_HFW_CX;
+                break;
+            case "对公贷款汇法网查询":
+                address = DG_HFW_CX;
+                break;
+            default:
+                break;
+        }
+        ApiHttpClient.post(address, params, callback, tag);
+    }
     /**
      * 编辑贷后基本信息
      *

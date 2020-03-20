@@ -56,6 +56,16 @@ public class SxsqDanBean extends BaseBean {
     private String khjl;
     private String sqsj;
 
+    private String sqrpoqm;
+
+    public String getSqrpoqm() {
+        return sqrpoqm;
+    }
+
+    public void setSqrpoqm(String sqrpoqm) {
+        this.sqrpoqm = sqrpoqm;
+    }
+
     public String getId() {
         return id;
     }
@@ -225,7 +235,7 @@ public class SxsqDanBean extends BaseBean {
     }
 
     public String getKhjl() {
-        if(ObjectUtils.isEmpty(khjl)){
+        if (ObjectUtils.isEmpty(khjl)) {
             return "";
         }
         return khjl;

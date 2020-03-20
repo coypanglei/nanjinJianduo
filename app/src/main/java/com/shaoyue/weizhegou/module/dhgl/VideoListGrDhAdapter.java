@@ -1,4 +1,4 @@
-package com.shaoyue.weizhegou.module.credit.adapter.shenqing;
+package com.shaoyue.weizhegou.module.dhgl;
 
 
 import android.support.v4.app.FragmentActivity;
@@ -6,14 +6,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.entity.cedit.VideoMaterialBean;
-import com.shaoyue.weizhegou.manager.UserMgr;
+import com.shaoyue.weizhegou.module.credit.adapter.shenqing.VideoAdapter;
 import com.shaoyue.weizhegou.widget.HorizontalRecyclerView;
 import com.wildma.pictureselector.PictureSelector;
 
@@ -23,14 +22,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class VideoListDhAdapter extends BaseQuickAdapter<VideoMaterialBean, BaseViewHolder> {
+public class VideoListGrDhAdapter extends BaseQuickAdapter<VideoMaterialBean, BaseViewHolder> {
 
     private FragmentActivity mFragment;
 
     //1只能填写一个
     private int mType;
 
-    public VideoListDhAdapter(FragmentActivity context, int type) {
+    public VideoListGrDhAdapter(FragmentActivity context, int type) {
         super(R.layout.item_video_list);
         mFragment = context;
         mType = type;
@@ -110,12 +109,7 @@ public class VideoListDhAdapter extends BaseQuickAdapter<VideoMaterialBean, Base
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                LogUtils.e(SPUtils.getInstance().getString("status"));
-                LogUtils.e(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE));
-                if ("查看详情".equals(SPUtils.getInstance().getString("status")) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
 
-                    return;
-                }
                 List<VideoMaterialBean.ListBean> selet = adapter.getData();
                 if (selet.size() <= 1000) {
                     if (ObjectUtils.isEmpty(selet.get(position).getId())) {
@@ -126,7 +120,7 @@ public class VideoListDhAdapter extends BaseQuickAdapter<VideoMaterialBean, Base
                         SPUtils.getInstance().put("selectPic_sxsfzh", selet.get(position).getSxsfzh());
                         PictureSelector
                                 .create(mFragment, 1007)
-                                .selectPicture(true, false, 200, 200, 1, 1);
+                                .selectPicture(false, false, 200, 200, 1, 1);
                     } else {
                         SPUtils.getInstance().put("selectPic", item.getCategory());
                         SPUtils.getInstance().put("selectPic_id", selet.get(position).getId());

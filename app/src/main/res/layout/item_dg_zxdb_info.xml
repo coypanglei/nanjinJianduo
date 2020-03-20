@@ -1,106 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+<LinearLayout android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools">
-
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_36"
-        android:background="@color/color_f7f7f7"
-        android:orientation="horizontal"
-        android:id="@+id/ll_top"
+        android:background="@color/white"
         android:paddingLeft="12dp"
-        android:paddingRight="12dp">
+        android:paddingRight="12dp"
+        android:orientation="horizontal"
+        >
+
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.5"
-            android:gravity="center"
-            android:id="@+id/tv_xuhao"
-            android:textColor="@color/color_0d1730"
-            android:textSize="@dimen/dp_11"
-
-            />
-        <TextView
+            android:id="@+id/tv_lx"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
+
             android:gravity="center"
-            android:id="@+id/tv_xm"
             android:textColor="@color/color_0d1730"
-            android:textSize="@dimen/dp_11"
-            />
+            android:textSize="@dimen/dp_11" />
+
+        <TextView
+            android:id="@+id/tv_zczhs"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
 
 
         <TextView
+            android:id="@+id/tv_zcye"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="6"
+            android:layout_weight="2"
             android:gravity="center"
-            android:id="@+id/tv_sfzh"
             android:textColor="@color/color_0d1730"
-            android:textSize="@dimen/dp_11"
-            />
+            android:textSize="@dimen/dp_11" />
+
         <TextView
+            android:id="@+id/tv_gzzhs"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:gravity="center"
-            tools:text="与借款人关系"
-            android:id="@+id/tv_yjkrgx"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+
+        <TextView
+            android:id="@+id/tv_gzye"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
             android:textColor="@color/color_0d1730"
             android:textSize="@dimen/dp_11" />
         <TextView
-            android:id="@+id/tv_hyzk"
+            android:id="@+id/tv_blzhs"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:gravity="center"
             android:textColor="@color/color_0d1730"
-            android:textSize="@dimen/dp_11"
-            />
+            android:textSize="@dimen/dp_11" />
 
         <TextView
-            android:id="@+id/tv_dbrpo"
+            android:id="@+id/tv_blye"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:gravity="center"
-
             android:textColor="@color/color_0d1730"
-            android:textSize="@dimen/dp_11"
-            />
-
+            android:textSize="@dimen/dp_11" />
+        <TextView
+            android:id="@+id/tv_hjzhs"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
 
         <TextView
+            android:id="@+id/tv_hjye"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="6"
+            android:layout_weight="2"
             android:gravity="center"
-            android:id="@+id/tv_dbrposfz"
             android:textColor="@color/color_0d1730"
-            android:textSize="@dimen/dp_11"
-            />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:gravity="center"
-            android:id="@+id/tv_ms"
-            android:textColor="@color/color_0d1730"
-            android:textSize="@dimen/dp_11"
-            />
-
+            android:textSize="@dimen/dp_11" />
 
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_1"
-        app:layout_constraintTop_toBottomOf="@id/ll_top"
-        />
-</android.support.constraint.ConstraintLayout>
+        android:background="@color/color_f7f7f7"
+   />
+</LinearLayout>
+

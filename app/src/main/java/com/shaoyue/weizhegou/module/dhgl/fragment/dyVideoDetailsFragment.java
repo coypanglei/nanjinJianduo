@@ -21,7 +21,7 @@ import com.shaoyue.weizhegou.entity.cedit.VideoBean;
 import com.shaoyue.weizhegou.entity.cedit.VideoMaterialBean;
 import com.shaoyue.weizhegou.event.OkOrCancelEvent;
 import com.shaoyue.weizhegou.manager.AppMgr;
-import com.shaoyue.weizhegou.module.credit.adapter.shenqing.VideoListDhAdapter;
+import com.shaoyue.weizhegou.module.dhgl.VideoListGrDhAdapter;
 import com.shaoyue.weizhegou.router.UIHelper;
 import com.shaoyue.weizhegou.util.ToastUtil;
 import com.wildma.pictureselector.PictureSelector;
@@ -46,7 +46,7 @@ public class dyVideoDetailsFragment extends BaseAppFragment {
     @BindView(R.id.rv_video)
     RecyclerView mRvVideo;
 
-    private VideoListDhAdapter mAdapter;
+    private VideoListGrDhAdapter mAdapter;
     private VideoMaterialBean.ListBean listBean;
     private String title;
 
@@ -84,7 +84,7 @@ public class dyVideoDetailsFragment extends BaseAppFragment {
     @Override
     protected void initView(View rootView) {
         super.initView(rootView);
-        mAdapter = new VideoListDhAdapter(getActivity(),6);
+        mAdapter = new VideoListGrDhAdapter(getActivity(),1000);
         mRvVideo.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvVideo.setAdapter(mAdapter);
     }
