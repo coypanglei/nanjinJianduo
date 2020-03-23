@@ -40,20 +40,22 @@ public class DgdkjcAdapter extends BaseQuickAdapter<DgInfoListBean.RecordsBean, 
 
 
         helper.setText(R.id.tv_xh, helper.getAdapterPosition() + 1 + "");
-        helper.setText(R.id.tv_khdz,item.getKhdz());
-        helper.setText(R.id.tv_dbfs,item.getDbfs());
-        helper.setText(R.id.tv_sshy,item.getSshy());
-        helper.setText(R.id.tv_qyzjhm,item.getQyzjhm());
-        helper.setText(R.id.tv_fxfl,item.getFxfl());
-        helper.setText(R.id.tv_qymc,item.getQymc());
-        helper.setText(R.id.tv_lxfs,item.getLxfs());
-        helper.setText(R.id.tv_frzjhm,item.getFrzjhm());
-        helper.setText(R.id.tv_dkje,item.getDkje());
-        helper.setText(R.id.tv_dkyt,item.getDkyt());
-        helper.setText(R.id.tv_qsrq,item.getQsrq());
-        helper.setText(R.id.tv_frdb,item.getFrdb());
-
-        helper.setText(R.id.tv_dkye,item.getDkye());
+        helper.setText(R.id.tv_khdz, item.getKhdz());
+        helper.setText(R.id.tv_dbfs, item.getDbfs());
+        helper.setText(R.id.tv_sshy, item.getSshy());
+        helper.setText(R.id.tv_qyzjhm, item.getQyzjhm());
+        helper.setText(R.id.tv_fxfl, item.getFxfl());
+        helper.setText(R.id.tv_qymc, item.getQymc());
+        helper.setText(R.id.tv_lxfs, item.getLxfs());
+        helper.setText(R.id.tv_frzjhm, item.getFrzjhm());
+        helper.setText(R.id.tv_dkje, item.getDkje());
+        helper.setText(R.id.tv_dkyt, item.getDkyt());
+        helper.setText(R.id.tv_qsrq, item.getQsrq());
+        helper.setText(R.id.tv_frdb, item.getFrdb());
+        //审批内容和状态
+        helper.setText(R.id.tv_dkye, item.getDkye());
+        helper.setText(R.id.tv_zt, item.getZt());
+        helper.setText(R.id.tv_spnr,item.getSpnr());
 
         if (item.isClick()) {
             helper.setBackgroundColor(R.id.ll_top, mContext.getResources().getColor(R.color.color_33f0f0f0));
@@ -69,7 +71,9 @@ public class DgdkjcAdapter extends BaseQuickAdapter<DgInfoListBean.RecordsBean, 
             helper.setTextColor(R.id.tv_dkyt, mContext.getResources().getColor(R.color.color_2c4eb6));
             helper.setTextColor(R.id.tv_qsrq, mContext.getResources().getColor(R.color.color_2c4eb6));
             helper.setTextColor(R.id.tv_frdb, mContext.getResources().getColor(R.color.color_2c4eb6));
+            helper.setTextColor(R.id.tv_zt, mContext.getResources().getColor(R.color.color_2c4eb6));
 
+            helper.setTextColor(R.id.tv_spnr, mContext.getResources().getColor(R.color.color_2c4eb6));
             helper.setTextColor(R.id.tv_dkye, mContext.getResources().getColor(R.color.color_2c4eb6));
         } else {
             helper.setBackgroundColor(R.id.ll_top, mContext.getResources().getColor(R.color.white));
@@ -87,7 +91,9 @@ public class DgdkjcAdapter extends BaseQuickAdapter<DgInfoListBean.RecordsBean, 
             helper.setTextColor(R.id.tv_dkyt, mContext.getResources().getColor(R.color.color_fc1c1a1d));
             helper.setTextColor(R.id.tv_qsrq, mContext.getResources().getColor(R.color.color_fc1c1a1d));
             helper.setTextColor(R.id.tv_frdb, mContext.getResources().getColor(R.color.color_fc1c1a1d));
+            helper.setTextColor(R.id.tv_zt, mContext.getResources().getColor(R.color.color_fc1c1a1d));
 
+            helper.setTextColor(R.id.tv_spnr, mContext.getResources().getColor(R.color.color_fc1c1a1d));
             helper.setTextColor(R.id.tv_dkye, mContext.getResources().getColor(R.color.color_fc1c1a1d));
         }
     }

@@ -62,14 +62,28 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/color_c0c0c0" />
-    <android.support.v7.widget.RecyclerView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_100"
-        android:id="@+id/rv_cwfx">
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_100"
+                android:id="@+id/rv_cwfx"/>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
 
 
-    </android.support.v7.widget.RecyclerView>
+
+
 
 
 </LinearLayout>

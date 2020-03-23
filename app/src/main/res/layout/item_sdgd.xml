@@ -143,13 +143,28 @@
 
         <TextView
             android:id="@+id/tv_sfbl"
-            android:layout_width="@dimen/dp_200"
+            android:layout_width="@dimen/dp_250"
             android:layout_height="match_parent"
             android:gravity="center"
             android:textColor="@color/color_0d1730"
             android:textSize="@dimen/dp_11"
             tools:text="借款人在本行对外担保贷款是否出现逾期或者不良" />
-
+        <TextView
+            android:id="@+id/tv_zt"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11"
+            tools:text="状态" />
+        <TextView
+            android:id="@+id/tv_spnr"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11"
+            tools:text="审批内容" />
     </LinearLayout>
 
     <View

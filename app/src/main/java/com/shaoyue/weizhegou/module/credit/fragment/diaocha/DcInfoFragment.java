@@ -90,6 +90,7 @@ public class DcInfoFragment extends BaseTitleFragment {
                 mMenuList.add(new MainClickBean("征信查询", false));
                 mMenuList.add(new MainClickBean("汇法网查询", false));
                 mMenuList.add(new MainClickBean("实地调查", false));
+                mMenuList.add(new MainClickBean("资产负债", false));
                 mMenuList.add(new MainClickBean("担保抵押", false));
                 mMenuList.add(new MainClickBean("现金流", false));
                 mMenuList.add(new MainClickBean("影像资料", false));

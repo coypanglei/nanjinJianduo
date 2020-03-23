@@ -106,6 +106,9 @@ public class CwfxListBean extends BaseBean {
             this.type = type;
         }
 
+        public RecordsBean() {
+        }
+
         public String getType() {
             return type;
         }

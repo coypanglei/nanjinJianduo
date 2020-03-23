@@ -84,6 +84,25 @@ public class SdInfoListBean extends BaseBean {
          * zjhm :
          */
 
+        private String zt;
+        private String spnr;
+
+        public String getZt() {
+            return zt;
+        }
+
+        public void setZt(String zt) {
+            this.zt = zt;
+        }
+
+        public String getSpnr() {
+            return spnr;
+        }
+
+        public void setSpnr(String spnr) {
+            this.spnr = spnr;
+        }
+
         private String dbfs;
         private String dkje;
         private String dkye;

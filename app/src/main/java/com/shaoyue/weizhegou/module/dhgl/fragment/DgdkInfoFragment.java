@@ -85,7 +85,7 @@ public class DgdkInfoFragment extends BaseTitleFragment {
         }
         final List<MainClickBean> mMenuList = new ArrayList<>();
         mMenuList.add(new MainClickBean("基本信息", false));
-        if ("对公贷款".equals(isbws)) {
+        if (!"对公贷款".equals(isbws)) {
             mMenuList.add(new MainClickBean("财务分析", false));
 
         }

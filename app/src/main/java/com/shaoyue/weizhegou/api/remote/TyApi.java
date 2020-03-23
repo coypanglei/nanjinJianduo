@@ -199,6 +199,9 @@ public class TyApi {
                 address ="jeecg-boot/business/sxsqDyfx/editAll";
                 params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
                 break;
+            case "选择行业":
+                address ="jeecg-boot/dhjcmb/dhjcmbDgdk/editHyZzm";
+                break;
             default:
                 break;
         }

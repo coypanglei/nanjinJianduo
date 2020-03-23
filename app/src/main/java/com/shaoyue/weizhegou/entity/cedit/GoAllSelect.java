@@ -2,7 +2,7 @@ package com.shaoyue.weizhegou.entity.cedit;
 
 import com.shaoyue.weizhegou.base.BaseBean;
 
-import org.json.JSONObject;
+import java.util.Map;
 
 public class GoAllSelect extends BaseBean {
 
@@ -16,14 +16,21 @@ public class GoAllSelect extends BaseBean {
         this.title = title;
     }
 
-    private JSONObject jsonObject;
+    private Map jsonObjectmap;
 
-    public JSONObject getJsonObject() {
-        return jsonObject;
+
+    public Map getJsonObjectmap() {
+        return jsonObjectmap;
     }
 
-    public void setJsonObject(JSONObject jsonObject) {
-        this.jsonObject = jsonObject;
+    public void setJsonObjectmap(Map jsonObjectmap) {
+        this.jsonObjectmap = jsonObjectmap;
+    }
+
+    public GoAllSelect( boolean isAdd,String title,Map jsonObjectmap) {
+        this.jsonObjectmap = jsonObjectmap;
+        this.isAdd = isAdd;
+        this.title = title;
     }
 
     public SxykhListBean.RecordsBean getmSxykhlistBean() {

@@ -28,6 +28,7 @@ import com.shaoyue.weizhegou.entity.cedit.GoAllSelect;
 import com.shaoyue.weizhegou.entity.cedit.RefreshBean;
 import com.shaoyue.weizhegou.entity.cedit.TimeSelect;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.BasicInformationAdapter;
+import com.shaoyue.weizhegou.router.UIHelper;
 import com.shaoyue.weizhegou.util.ToastUtil;
 import com.shaoyue.weizhegou.widget.datepicker.CustomDatePicker;
 import com.shaoyue.weizhegou.widget.datepicker.DateFormatUtils;
@@ -51,7 +52,7 @@ import butterknife.Unbinder;
  * <p>
  * 邮箱：434604925@qq.com
  */
-public class CwfxAddDialogFragment extends DialogFragment {
+public class DgAddDialogFragment extends DialogFragment {
 
 
     Unbinder unbinder;
@@ -94,10 +95,10 @@ public class CwfxAddDialogFragment extends DialogFragment {
     }
 
 
-    public static CwfxAddDialogFragment newInstance(GoAllSelect goAllSelect) {
+    public static DgAddDialogFragment newInstance(GoAllSelect goAllSelect) {
         Bundle args = new Bundle();
         args.putSerializable("goAllSelect", goAllSelect);
-        CwfxAddDialogFragment fragment = new CwfxAddDialogFragment();
+        DgAddDialogFragment fragment = new DgAddDialogFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -165,7 +166,7 @@ public class CwfxAddDialogFragment extends DialogFragment {
      */
 
     private void shaxing() {
-        CeditApi.getListAll("对公财务分析", goAllSelect.getTitle(), new BaseCallback<BaseResponse<BasicInformationBean>>() {
+        CeditApi.getListAll("对公选择行业", goAllSelect.getTitle(), new BaseCallback<BaseResponse<BasicInformationBean>>() {
             @Override
             public void onSucc(BaseResponse<BasicInformationBean> result) {
                 mlist.clear();
@@ -240,7 +241,7 @@ public class CwfxAddDialogFragment extends DialogFragment {
                 dismiss();
                 break;
             case R.id.tv_add:
-                Map<String, String> map = new HashMap<>();
+                final Map<String, String> map = new HashMap<>();
                 List<BasicInformationBean.RecordsBean> list = mAdapter.getData();
                 if (ObjectUtils.isNotEmpty(list)) {
                     for (BasicInformationBean.RecordsBean bean : list) {
@@ -273,23 +274,25 @@ public class CwfxAddDialogFragment extends DialogFragment {
                 }
                 if (goAllSelect.isAdd()) {
 
-
-                    TyApi.addTyINfo("对公财务分析", map, new BaseCallback<BaseResponse<Void>>() {
+                    map.put("id",goAllSelect.getJsonObjectmap().get("id").toString());
+                    TyApi.editTyINfo(goAllSelect.getTitle(), map, new BaseCallback<BaseResponse<Void>>() {
                         @Override
                         public void onSucc(BaseResponse<Void> result) {
                             dismiss();
-                            EventBus.getDefault().post(new RefreshBean("对公财务分析"));
+
+                            UIHelper.showDgCommonActivity("对公", getActivity(), "对公检查" , map.get("sshy").toString());
                             ToastUtil.showBlackToastSucess("保存成功");
                         }
                     }, this);
+
                 } else {
                     map.put("id",goAllSelect.getJsonObjectmap().get("id").toString());
-                    TyApi.editTyINfo("对公财务分析", map, new BaseCallback<BaseResponse<Void>>() {
+                    TyApi.editTyINfo(goAllSelect.getTitle(), map, new BaseCallback<BaseResponse<Void>>() {
                         @Override
                         public void onSucc(BaseResponse<Void> result) {
                             dismiss();
-                            EventBus.getDefault().post(new RefreshBean("对公财务分析"));
-                            ToastUtil.showBlackToastSucess("保存成功");
+                            EventBus.getDefault().post(new RefreshBean("对公选择行业"));
+                            ToastUtil.showBlackToastSucess("修改成功");
                         }
                     }, this);
                 }

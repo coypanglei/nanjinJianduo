@@ -88,6 +88,26 @@ public class GdInfoListBean extends BaseBean {
          * sfyqhbl : 否
          */
 
+
+        private String zt;
+        private String spnr;
+
+        public String getZt() {
+            return zt;
+        }
+
+        public void setZt(String zt) {
+            this.zt = zt;
+        }
+
+        public String getSpnr() {
+            return spnr;
+        }
+
+        public void setSpnr(String spnr) {
+            this.spnr = spnr;
+        }
+
         private String khmc;
         private String khdz;
         private String dbfs;

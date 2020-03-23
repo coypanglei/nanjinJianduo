@@ -3,7 +3,6 @@ package com.shaoyue.weizhegou.module.sxdc.adapter;
 
 import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
@@ -11,11 +10,7 @@ import android.widget.EditText;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.shaoyue.weizhegou.R;
-import com.shaoyue.weizhegou.entity.cedit.RefreshBean;
-import com.shaoyue.weizhegou.entity.cedit.TimeSelect;
 import com.shaoyue.weizhegou.entity.dhgl.CwfxListBean;
-
-import org.greenrobot.eventbus.EventBus;
 
 
 /**
@@ -83,18 +78,20 @@ public class CwfxAdapter extends BaseQuickAdapter<CwfxListBean.RecordsBean, Base
 
         if ("3".equals(item.getType())) {
 
-            mDdvXB.setInputType(InputType.TYPE_CLASS_NUMBER);
-            mDdvXB.setEnabled(true);
-            mDdvXB.setBackground(mContext.getResources().getDrawable(R.drawable.bg_edit_add_info));
-            if(id==R.id.et_rq) {
-                mDdvXB.setFocusable(false);
-                mDdvXB.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        EventBus.getDefault().post(new TimeSelect(mDdvXB.getText().toString().trim(),"财务分析时间"));
-                    }
-                });
-            }
+//            mDdvXB.setInputType(InputType.TYPE_CLASS_NUMBER);
+//            mDdvXB.setEnabled(true);
+//            mDdvXB.setBackground(mContext.getResources().getDrawable(R.drawable.bg_edit_add_info));
+//            if(id==R.id.et_rq) {
+//                mDdvXB.setFocusable(false);
+//                mDdvXB.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        EventBus.getDefault().post(new TimeSelect(mDdvXB.getText().toString().trim(),"财务分析时间"));
+//                    }
+//                });
+//            }
+            mDdvXB.setEnabled(false);
+            mDdvXB.setBackground(mContext.getResources().getDrawable(R.drawable.bg_edit_shadow));
         } else if ("2".equals(item.getType())) {
             mDdvXB.setEnabled(false);
             mDdvXB.setBackground(mContext.getResources().getDrawable(R.drawable.bg_edit_shadow));

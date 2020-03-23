@@ -61,6 +61,7 @@ import com.shaoyue.weizhegou.module.credit.dialog.XcjyProgressDialogFragment;
 import com.shaoyue.weizhegou.module.credit.dialog.ZhuChaFragment;
 import com.shaoyue.weizhegou.module.dhgl.activity.XcjyActivity;
 import com.shaoyue.weizhegou.module.dhgl.dialog.CwfxAddDialogFragment;
+import com.shaoyue.weizhegou.module.dhgl.dialog.DgAddDialogFragment;
 import com.shaoyue.weizhegou.module.general.activity.ProfileCommonActivity;
 import com.shaoyue.weizhegou.module.goods.dialog.NewCarGoodsSpecificationFragment;
 import com.shaoyue.weizhegou.module.goods.dialog.NewGoodsSpecificationFragment;
@@ -155,7 +156,7 @@ public class UIHelper {
     public static final String FAMILY_DIYA = "dialog_diya";
 
     public static final String DIALOG_ADD_CWFX = "dialog_add_cwfx";
-
+    public static final String DIALOG_ADD_DG = "dialog_add_cwfx";
     public static final String START_DC = "dialog_start_dc";
 
 
@@ -425,7 +426,17 @@ public class UIHelper {
         }
     }
 
-
+    /**
+     * 开始对公检查
+     */
+     public static void showStartDg(FragmentActivity activity, GoAllSelect goAllSelect) {
+         FragmentManager fm = activity.getSupportFragmentManager();
+         Fragment fragment = fm.findFragmentByTag(DIALOG_ADD_DG);
+         if (fragment == null) {
+             DialogFragment dialog = DgAddDialogFragment.newInstance(goAllSelect);
+             dialog.show(fm, DIALOG_ADD_DG);
+         }
+     }
     /**
      * 新增上游客户
      *

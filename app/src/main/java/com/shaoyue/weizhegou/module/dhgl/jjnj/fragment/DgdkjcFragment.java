@@ -18,11 +18,13 @@ import com.shaoyue.weizhegou.api.model.BaseResponse;
 import com.shaoyue.weizhegou.api.remote.CeditApi;
 import com.shaoyue.weizhegou.api.remote.DhApi;
 import com.shaoyue.weizhegou.base.BaseAppFragment;
+import com.shaoyue.weizhegou.entity.cedit.GoAllSelect;
 import com.shaoyue.weizhegou.entity.dhgl.DgInfoListBean;
 import com.shaoyue.weizhegou.event.OkOrCancelEvent;
 import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.module.credit.adapter.diaocha.DgdkjcAdapter;
 import com.shaoyue.weizhegou.router.UIHelper;
+import com.shaoyue.weizhegou.util.ObjectToMapUtils;
 import com.shaoyue.weizhegou.util.ThreadUtil;
 import com.shaoyue.weizhegou.util.ToastUtil;
 
@@ -159,19 +161,39 @@ public class DgdkjcFragment extends BaseAppFragment implements BGARefreshLayout.
     }
 
 
-    @OnClick({R.id.sb_find, R.id.sb_tianbao, R.id.iv_clear
+    @OnClick({R.id.sb_find, R.id.sb_tianbao, R.id.iv_clear,R.id.sb_xzhy
     })
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.sb_xzhy:
+                if (ObjectUtils.isNotEmpty(getSelect())) {
+                    if (ObjectUtils.isEmpty(getSelect().getId())) {   //请求id 身份证
+
+                    } else {
+//                        SPUtils.getInstance().put(UserMgr.SP_ID_CARD, getSelect().getId());
+//                        SPUtils.getInstance().put(UserMgr.SP_APPLY_ID, getSelect().getQyzjhm());
+                        UIHelper.showStartDg(getActivity(),new GoAllSelect(false,"选择行业", ObjectToMapUtils.str2Map(getSelect())));
+                    }
+                } else {
+                    ToastUtil.showBlackToastSucess("暂未选取数据");
+                }
+
+                break;
             case R.id.sb_tianbao:
                 if (ObjectUtils.isNotEmpty(getSelect())) {
                     if (ObjectUtils.isEmpty(getSelect().getId())) {   //请求id 身份证
 
                     } else {
-                        //请求id 身份证 模型
-                        SPUtils.getInstance().put(UserMgr.SP_ID_CARD, getSelect().getId());
-                        SPUtils.getInstance().put(UserMgr.SP_APPLY_ID, getSelect().getQyzjhm());
-                        UIHelper.showDgCommonActivity("对公", getActivity(), "对公检查" ,getSelect().getSshy());
+                        if(ObjectUtils.isNotEmpty(getSelect().getSshy())&&ObjectUtils.isNotEmpty(getSelect().getZzm())) {
+                            //请求id 身份证 模型
+                            SPUtils.getInstance().put(UserMgr.SP_ID_CARD, getSelect().getId());
+                            SPUtils.getInstance().put(UserMgr.SP_APPLY_ID, getSelect().getQyzjhm());
+                            UIHelper.showDgCommonActivity("对公", getActivity(), "对公检查", getSelect().getSshy());
+                        }else {
+                            SPUtils.getInstance().put(UserMgr.SP_ID_CARD, getSelect().getId());
+                            SPUtils.getInstance().put(UserMgr.SP_APPLY_ID, getSelect().getQyzjhm());
+                            UIHelper.showStartDg(getActivity(),new GoAllSelect(true,"选择行业", ObjectToMapUtils.str2Map(getSelect())));
+                        }
                     }
                 } else {
                     ToastUtil.showBlackToastSucess("暂未选取数据");

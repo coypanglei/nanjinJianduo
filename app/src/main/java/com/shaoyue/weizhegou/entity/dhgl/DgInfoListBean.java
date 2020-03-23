@@ -23,6 +23,7 @@ public class DgInfoListBean extends BaseBean {
     private int pages;
     private List<RecordsBean> records;
 
+
     public int getTotal() {
         return total;
     }
@@ -90,6 +91,35 @@ public class DgInfoListBean extends BaseBean {
          */
        private  boolean click;
 
+        private String zt;
+
+        private String zzm;
+
+        public String getZzm() {
+            return zzm;
+        }
+
+        public void setZzm(String zzm) {
+            this.zzm = zzm;
+        }
+
+        private String spnr;
+
+        public String getZt() {
+            return zt;
+        }
+
+        public void setZt(String zt) {
+            this.zt = zt;
+        }
+
+        public String getSpnr() {
+            return spnr;
+        }
+
+        public void setSpnr(String spnr) {
+            this.spnr = spnr;
+        }
         public boolean isClick() {
             return click;
         }

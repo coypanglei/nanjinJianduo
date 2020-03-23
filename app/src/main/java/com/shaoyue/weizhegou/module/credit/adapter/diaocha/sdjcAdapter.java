@@ -36,14 +36,16 @@ public class sdjcAdapter extends BaseQuickAdapter<SdInfoListBean.RecordsBean, Ba
          *
          */
         helper.setText(R.id.tv_dbfs, item.getDbfs());
-        helper.setText(R.id.tv_dkje,item.getDkje());
+        helper.setText(R.id.tv_dkje, item.getDkje());
         helper.setText(R.id.tv_xh, helper.getAdapterPosition() + 1 + "");
         helper.setText(R.id.tv_dkyt, item.getDkyt());
         helper.setText(R.id.tv_khxm, item.getKhmc());
         helper.setText(R.id.tv_qsrq, item.getQsrq());
         helper.setText(R.id.tv_zffs, item.getZffs());
         helper.setText(R.id.tv_zjhm, item.getZjhm());
-        helper.setText(R.id.tv_dkye,item.getDkye());
+        helper.setText(R.id.tv_dkye, item.getDkye());
+        helper.setText(R.id.tv_spnr, item.getSpnr());
+        helper.setText(R.id.tv_zt, item.getZt());
         if (item.isClick()) {
             helper.setBackgroundColor(R.id.ll_top, mContext.getResources().getColor(R.color.color_33f0f0f0));
             helper.setTextColor(R.id.tv_dkje, mContext.getResources().getColor(R.color.color_2c4eb6));
@@ -53,8 +55,10 @@ public class sdjcAdapter extends BaseQuickAdapter<SdInfoListBean.RecordsBean, Ba
             helper.setTextColor(R.id.tv_zffs, mContext.getResources().getColor(R.color.color_2c4eb6));
             helper.setTextColor(R.id.tv_zjhm, mContext.getResources().getColor(R.color.color_2c4eb6));
             helper.setTextColor(R.id.tv_dbfs, mContext.getResources().getColor(R.color.color_2c4eb6));
-            helper.setTextColor(R.id.tv_khxm,mContext.getResources().getColor(R.color.color_2c4eb6));
-            helper.setTextColor(R.id.tv_dkye,mContext.getResources().getColor(R.color.color_2c4eb6));
+            helper.setTextColor(R.id.tv_khxm, mContext.getResources().getColor(R.color.color_2c4eb6));
+            helper.setTextColor(R.id.tv_dkye, mContext.getResources().getColor(R.color.color_2c4eb6));
+            helper.setTextColor(R.id.tv_spnr, mContext.getResources().getColor(R.color.color_2c4eb6));
+            helper.setTextColor(R.id.tv_zt, mContext.getResources().getColor(R.color.color_2c4eb6));
         } else {
             helper.setBackgroundColor(R.id.ll_top, mContext.getResources().getColor(R.color.white));
 //            helper.setTextColor(R.id.tv_id_card, mContext.getResources().getColor(R.color.color_2c4eb6));
@@ -65,8 +69,10 @@ public class sdjcAdapter extends BaseQuickAdapter<SdInfoListBean.RecordsBean, Ba
             helper.setTextColor(R.id.tv_zffs, mContext.getResources().getColor(R.color.color_fc1c1a1d));
             helper.setTextColor(R.id.tv_zjhm, mContext.getResources().getColor(R.color.color_fc1c1a1d));
             helper.setTextColor(R.id.tv_dbfs, mContext.getResources().getColor(R.color.color_fc1c1a1d));
-            helper.setTextColor(R.id.tv_khxm,mContext.getResources().getColor(R.color.color_fc1c1a1d));
-            helper.setTextColor(R.id.tv_dkye,mContext.getResources().getColor(R.color.color_fc1c1a1d));
+            helper.setTextColor(R.id.tv_khxm, mContext.getResources().getColor(R.color.color_fc1c1a1d));
+            helper.setTextColor(R.id.tv_dkye, mContext.getResources().getColor(R.color.color_fc1c1a1d));
+            helper.setTextColor(R.id.tv_spnr, mContext.getResources().getColor(R.color.color_fc1c1a1d));
+            helper.setTextColor(R.id.tv_zt, mContext.getResources().getColor(R.color.color_fc1c1a1d));
         }
     }
 }

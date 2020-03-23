@@ -55,13 +55,34 @@
 
 
         <com.libracore.lib.widget.StateButton
-            android:id="@+id/sb_tianbao"
+            android:id="@+id/sb_xzhy"
             android:layout_width="83dp"
             android:layout_height="25dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_gravity="center_horizontal"
             android:layout_marginRight="@dimen/dp_16"
+
+            android:paddingLeft="6dp"
+            android:paddingTop="1dp"
+            android:paddingRight="6dp"
+            android:paddingBottom="1dp"
+            android:text="选择行业"
+            android:textSize="12dp"
+            app:normalBackgroundColor="@color/color_ff9e4d"
+            app:normalTextColor="@color/white"
+            app:pressedBackgroundColor="@color/color_ff9e4d"
+            app:pressedTextColor="@color/white"
+            app:radius="2dp" />
+
+        <com.libracore.lib.widget.StateButton
+            android:id="@+id/sb_tianbao"
+            android:layout_width="83dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="@dimen/dp_16"
+            android:layout_toLeftOf="@id/sb_xzhy"
 
             android:paddingLeft="6dp"
             android:paddingTop="1dp"
@@ -130,9 +151,9 @@
                     android:layout_height="match_parent"
 
                     android:gravity="center"
+                    android:text="序号"
                     android:textColor="@color/color_0d1730"
                     android:textSize="@dimen/dp_11"
-                    android:text="序号"
 
                     />
 
@@ -142,9 +163,9 @@
                     android:layout_height="match_parent"
 
                     android:gravity="center"
+                    android:text="企业名称"
                     android:textColor="@color/color_0d1730"
-                    android:textSize="@dimen/dp_11"
-                    android:text="企业名称" />
+                    android:textSize="@dimen/dp_11" />
 
                 <TextView
                     android:id="@+id/tv_qyzjhm"
@@ -152,9 +173,9 @@
                     android:layout_height="match_parent"
 
                     android:gravity="center"
+                    android:text="企业证件号码"
                     android:textColor="@color/color_0d1730"
-                    android:textSize="@dimen/dp_11"
-                    android:text="企业证件号码" />
+                    android:textSize="@dimen/dp_11" />
 
 
                 <TextView
@@ -163,9 +184,9 @@
                     android:layout_height="match_parent"
 
                     android:gravity="center"
+                    android:text="贷款金额"
                     android:textColor="@color/color_0d1730"
-                    android:textSize="@dimen/dp_11"
-                    android:text="贷款金额" />
+                    android:textSize="@dimen/dp_11" />
 
                 <TextView
                     android:id="@+id/tv_dkye"
@@ -175,9 +196,9 @@
                     android:drawablePadding="@dimen/dp_3"
                     android:gravity="center"
                     android:paddingRight="@dimen/dp_10"
+                    android:text="贷款余额"
                     android:textColor="@color/color_0d1730"
-                    android:textSize="@dimen/dp_11"
-                    android:text="贷款余额" />
+                    android:textSize="@dimen/dp_11" />
 
                 <TextView
                     android:id="@+id/tv_qsrq"
@@ -185,9 +206,9 @@
                     android:layout_height="match_parent"
 
                     android:gravity="center"
+                    android:text="起始日期"
                     android:textColor="@color/color_0d1730"
-                    android:textSize="@dimen/dp_11"
-                    android:text="起始日期" />
+                    android:textSize="@dimen/dp_11" />
 
                 <TextView
                     android:id="@+id/tv_dbfs"
@@ -198,9 +219,9 @@
                     android:drawablePadding="@dimen/dp_3"
                     android:gravity="center"
 
+                    android:text="担保方式"
                     android:textColor="@color/color_0d1730"
-                    android:textSize="@dimen/dp_11"
-                    android:text="担保方式" />
+                    android:textSize="@dimen/dp_11" />
 
 
                 <TextView
@@ -209,9 +230,9 @@
                     android:layout_height="match_parent"
 
                     android:gravity="center"
+                    android:text="贷款用途"
                     android:textColor="@color/color_0d1730"
-                    android:textSize="@dimen/dp_11"
-                    android:text="贷款用途" />
+                    android:textSize="@dimen/dp_11" />
 
                 <TextView
                     android:id="@+id/tv_khdz"
@@ -219,9 +240,9 @@
                     android:layout_height="match_parent"
 
                     android:gravity="center"
+                    android:text="客户地址"
                     android:textColor="@color/color_0d1730"
-                    android:textSize="@dimen/dp_11"
-                    android:text="客户地址" />
+                    android:textSize="@dimen/dp_11" />
 
                 <TextView
                     android:id="@+id/tv_frdb"
@@ -229,45 +250,64 @@
                     android:layout_height="match_parent"
 
                     android:gravity="center"
+                    android:text="法人代表"
                     android:textColor="@color/color_0d1730"
-                    android:textSize="@dimen/dp_11"
-                    android:text="法人代表" />
+                    android:textSize="@dimen/dp_11" />
 
                 <TextView
                     android:id="@+id/tv_frzjhm"
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
                     android:gravity="center"
+                    android:text="法人证件号码"
                     android:textColor="@color/color_0d1730"
-                    android:textSize="@dimen/dp_11"
-                    android:text="法人证件号码" />
+                    android:textSize="@dimen/dp_11" />
 
                 <TextView
                     android:id="@+id/tv_lxfs"
                     android:layout_width="@dimen/dp_120"
                     android:layout_height="match_parent"
                     android:gravity="center"
+                    android:text="联系方式"
                     android:textColor="@color/color_0d1730"
-                    android:textSize="@dimen/dp_11"
-                    android:text="联系方式" />
+                    android:textSize="@dimen/dp_11" />
 
                 <TextView
                     android:id="@+id/tv_fxfl"
                     android:layout_width="@dimen/dp_200"
                     android:layout_height="match_parent"
                     android:gravity="center"
+                    android:text="风险分类"
                     android:textColor="@color/color_0d1730"
-                    android:textSize="@dimen/dp_11"
-                    android:text="风险分类" />
+                    android:textSize="@dimen/dp_11" />
 
                 <TextView
                     android:id="@+id/tv_sshy"
                     android:layout_width="@dimen/dp_80"
                     android:layout_height="match_parent"
                     android:gravity="center"
+                    android:text="所属行业"
                     android:textColor="@color/color_0d1730"
-                    android:textSize="@dimen/dp_11"
-                    android:text="所属行业" />
+                    android:textSize="@dimen/dp_11" />
+
+                <TextView
+                    android:id="@+id/tv_zt"
+                    android:layout_width="@dimen/dp_60"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="状态"
+                    android:textColor="@color/color_0d1730"
+                    android:textSize="@dimen/dp_11" />
+
+                <TextView
+                    android:id="@+id/tv_spnr"
+                    android:layout_width="@dimen/dp_60"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="审批内容"
+                    android:textColor="@color/color_0d1730"
+                    android:textSize="@dimen/dp_11" />
+
 
             </LinearLayout>
 
