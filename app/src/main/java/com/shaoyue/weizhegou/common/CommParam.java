@@ -2,7 +2,6 @@ package com.shaoyue.weizhegou.common;
 
 import android.os.Build;
 
-
 import com.shaoyue.weizhegou.BuildConfig;
 import com.shaoyue.weizhegou.manager.AppMgr;
 import com.shaoyue.weizhegou.util.ZMCommUtil;

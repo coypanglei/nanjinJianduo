@@ -16,6 +16,7 @@ import com.shaoyue.weizhegou.base.BaseTitleFragment;
 import com.shaoyue.weizhegou.entity.AuthUser;
 import com.shaoyue.weizhegou.entity.user.WebBean;
 import com.shaoyue.weizhegou.interfac.CommCallBack;
+import com.shaoyue.weizhegou.manager.AppMgr;
 import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.router.ContentType;
 import com.shaoyue.weizhegou.router.UIHelper;
@@ -235,7 +236,7 @@ public class LoginFragment extends BaseTitleFragment {
         final String password = mPasswordEditText.getText().toString();
 
         startProgressDialog(false);
-        UserMgr.getInstance().doLoginByPhone(phone, password, new CommCallBack() {
+        UserMgr.getInstance().doLoginByPhone(phone, password, AppMgr.getInstance().getimei(getActivity()), new CommCallBack() {
             @Override
             public void complete(int code, String msg) {
                 stopProgressDialog();

@@ -130,6 +130,7 @@ public class BasicInformationTyFragment extends BaseAppFragment {
             case "首贷结论":
                 titles.add(new BasicTitle("结论", new ArrayList<BasicInformationBean.RecordsBean>()));
                 sbZancun.setVisibility(View.GONE);
+                sbEdit.setText("提交");
                 break;
 
             case "贷后基本信息":
@@ -145,6 +146,7 @@ public class BasicInformationTyFragment extends BaseAppFragment {
             case "个贷检查结果":
                 titles.add(new BasicTitle("检查结果", new ArrayList<BasicInformationBean.RecordsBean>(), 1));
                 sbZancun.setVisibility(View.GONE);
+                sbEdit.setText("提交");
                 break;
             case "个贷汇法网查询":
                 titles.add(new BasicTitle("汇法网查询", new ArrayList<BasicInformationBean.RecordsBean>(), 1));
@@ -162,6 +164,7 @@ public class BasicInformationTyFragment extends BaseAppFragment {
             case "对公贷款检查结果":
                 titles.add(new BasicTitle("检查结论", new ArrayList<BasicInformationBean.RecordsBean>(), 1));
                 sbZancun.setVisibility(View.GONE);
+                sbEdit.setText("提交");
                 break;
             case "对公非财务分析":
                 titles.add(new BasicTitle("履约及信用状况", new ArrayList<BasicInformationBean.RecordsBean>(), 1));
@@ -403,7 +406,7 @@ public class BasicInformationTyFragment extends BaseAppFragment {
                 TyApi.editTyINfo(type, map, new BaseCallback<BaseResponse<Void>>() {
                     @Override
                     public void onSucc(BaseResponse<Void> result) {
-                        ToastUtil.showBlackToastSucess("保存成功");
+                        ToastUtil.showBlackToastSucess(result.msg);
                         getListById();
                     }
                 }, this);

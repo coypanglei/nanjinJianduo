@@ -18,6 +18,7 @@ import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.base.BaseTitleFragment;
 import com.shaoyue.weizhegou.entity.user.MainClickBean;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.MenuAdapter;
+import com.shaoyue.weizhegou.module.credit.fragment.diaocha.DcMoneyFragment;
 import com.shaoyue.weizhegou.module.sxdc.fragment.BasicInformationFcwFragment;
 import com.shaoyue.weizhegou.module.sxdc.fragment.BasicInformationTyFragment;
 import com.shaoyue.weizhegou.widget.NoScrollViewPager;
@@ -49,16 +50,19 @@ public class DgdkInfoFragment extends BaseTitleFragment {
 
     private String isbws;
 
+    private String is2;
+
     @Override
     protected int getContentLayoutId() {
         return R.layout.activity_credit_application;
     }
 
-    public static DgdkInfoFragment newInstance(String mContentType, String isbws) {
+    public static DgdkInfoFragment newInstance(String mContentType, String isbws,String is2) {
         SPUtils.getInstance().put("status", mContentType);
         Bundle args = new Bundle();
         args.putString("type", mContentType);
         args.putString("isbws", isbws);
+        args.putString("is2",is2);
         DgdkInfoFragment fragment = new DgdkInfoFragment();
         fragment.setArguments(args);
         return fragment;
@@ -70,6 +74,7 @@ public class DgdkInfoFragment extends BaseTitleFragment {
         if (ObjectUtils.isNotEmpty(getArguments())) {
             type = getArguments().getString("type");
             isbws = getArguments().getString("isbws");
+            is2 =getArguments().getString("is2");
         }
     }
 
@@ -78,20 +83,21 @@ public class DgdkInfoFragment extends BaseTitleFragment {
         super.initView(rootView);
 
 
-        if (!"对公贷款".equals(isbws)) {
+        if (!"false".equals(is2)) {
             setCommonTitle("对公贷款贷后检查报告(200万元以上) " + isbws + " - 基本信息").hideLeftButtonV2();
         } else {
             setCommonTitle("对公贷款贷后检查报告(200万元以下) - 基本信息").hideLeftButtonV2();
         }
         final List<MainClickBean> mMenuList = new ArrayList<>();
         mMenuList.add(new MainClickBean("基本信息", false));
-        if (!"对公贷款".equals(isbws)) {
+        if (!"false".equals(is2)) {
             mMenuList.add(new MainClickBean("财务分析", false));
 
         }
         mMenuList.add(new MainClickBean("非财务分析", false));
         mMenuList.add(new MainClickBean("征信查询", false));
         mMenuList.add(new MainClickBean("汇法网查询", false));
+        mMenuList.add(new MainClickBean("现金流",false));
         mMenuList.add(new MainClickBean("影像资料", false));
         mMenuList.add(new MainClickBean("检查结论", false));
 
@@ -109,7 +115,7 @@ public class DgdkInfoFragment extends BaseTitleFragment {
                 fragmentList.add(HfwInformationDgOrgrFragment.newInstance("对公贷款汇法网查询"));
             } else if ("非财务分析".equals(mMenuList.get(i).getTitle())) {
                 //200万元以下非财务分析
-                if (!"对公贷款".equals(isbws)) {
+                if (!"false".equals(is2)) {
                     fragmentList.add(BasicInformationFcwFragment.newInstance("200万元以上非财务分析" + isbws));
                 } else {
                     fragmentList.add(BasicInformationFcwFragment.newInstance("200万元以下非财务分析"));
@@ -117,6 +123,8 @@ public class DgdkInfoFragment extends BaseTitleFragment {
 
             } else if ("财务分析".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(FcwfxFragment.newInstance());
+            }else if ("现金流".equals(mMenuList.get(i).getTitle())) {
+                fragmentList.add(DcMoneyFragment.newInstance());
             }
         }
         mMenuList.get(0).setSelect(true);
@@ -147,7 +155,7 @@ public class DgdkInfoFragment extends BaseTitleFragment {
             @Override
             public void onPageSelected(int i) {
                 refresh(i, menuAdapter);
-                if (!"对公贷款".equals(isbws)) {
+                if (!"false".equals(is2)) {
                     setCommonTitle("对公贷款贷后检查报告(200万元以上) " + isbws + " - " + mMenuList.get(i).getTitle()).hideLeftButtonV2();
                 } else {
                     setCommonTitle("对公贷款贷后检查报告(200万元以下) - " + mMenuList.get(i).getTitle()).hideLeftButtonV2();

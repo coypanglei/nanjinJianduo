@@ -323,7 +323,7 @@ public class AccountApi extends BaseApi {
      * @param callback
      * @param tag
      */
-    public static void loginByPhone(String phone, String password,
+    public static void loginByPhone(String phone, String password,String imei,
                                     BaseCallback<BaseResponse<LoginBean>> callback, Object tag) {
         if (!checkPhoneAndPwd(phone, password, callback)) {
             return;
@@ -333,6 +333,7 @@ public class AccountApi extends BaseApi {
         params.put("um_token", UserMgr.getInstance().getSpDeviceToken());
         params.put("username", phone);
         params.put("password", password);
+        params.put("captcha", imei);
         ApiHttpClient.postJson(API_ACCOUNT_LOGIN, params, callback, tag);
 
     }

@@ -296,7 +296,12 @@ public class shouXinShenQingFragment extends BaseAppFragment implements BGARefre
                         ToastUtil.showBlackToastSucess("当前流程状态无法修改");
                         return;
                     }
-
+                    if(ObjectUtils.isNotEmpty(getSelect().getLczt())){
+                        if(!"待提交".equals(getSelect().getLczt())){
+                            ToastUtil.showBlackToastSucess("当前流程状态无法修改");
+                            return;
+                        }
+                    }
                     if (ObjectUtils.isNotEmpty(getSelect().getId())) {
                         //请求id 身份证
                         SPUtils.getInstance().put(UserMgr.SP_APPLY_ID, getSelect().getId());

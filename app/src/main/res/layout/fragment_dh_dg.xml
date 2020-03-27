@@ -238,21 +238,23 @@
                     android:id="@+id/tv_khdz"
                     android:layout_width="180dp"
                     android:layout_height="match_parent"
-
                     android:gravity="center"
+
                     android:text="客户地址"
                     android:textColor="@color/color_0d1730"
-                    android:textSize="@dimen/dp_11" />
+                    android:textSize="@dimen/dp_11"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/tv_frdb"
                     android:layout_width="120dp"
                     android:layout_height="match_parent"
-
                     android:gravity="center"
+
                     android:text="法人代表"
                     android:textColor="@color/color_0d1730"
-                    android:textSize="@dimen/dp_11" />
+                    android:textSize="@dimen/dp_11"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/tv_frzjhm"
@@ -260,6 +262,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="法人证件号码"
+                    android:visibility="gone"
                     android:textColor="@color/color_0d1730"
                     android:textSize="@dimen/dp_11" />
 
@@ -269,6 +272,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="联系方式"
+                    android:visibility="gone"
                     android:textColor="@color/color_0d1730"
                     android:textSize="@dimen/dp_11" />
 

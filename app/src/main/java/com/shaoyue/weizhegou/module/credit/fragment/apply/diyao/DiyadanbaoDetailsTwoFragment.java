@@ -98,11 +98,14 @@ public class DiyadanbaoDetailsTwoFragment extends BaseAppFragment implements BGA
     @Override
     protected void initView(View rootView) {
         super.initView(rootView);
-        if ("查看详情".equals(SPUtils.getInstance().getString("status")) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
-            rlAll.setVisibility(View.GONE);
+        if ("调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
+
+//                sbEdit.setVisibility(View.GONE);
+        }
+        if("查看详情".equals(SPUtils.getInstance().getString("status"))){
             sbAdd.setVisibility(View.GONE);
-            sbEdit.setVisibility(View.GONE);
             sbDetel.setVisibility(View.GONE);
+            sbEdit.setVisibility(View.GONE);
         }
         mEmptyText.setText("未添加信息");
         mAdapter = new ZiRanDanBaoTwoAdapter();
@@ -234,6 +237,11 @@ public class DiyadanbaoDetailsTwoFragment extends BaseAppFragment implements BGA
         switch (view.getId()) {
             case R.id.sb_add:
                 UIHelper.showDiyaFragment(getActivity(), new GoAllSelect(true, "抵(质)押分析", getSelect()));
+       //         if ("调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
+//                    UIHelper.showDhDiyaFragment(getActivity(),new GoAllSelect(true,"新增授信调查-抵(质)押分析", ObjectToMapUtils.str2Map(getSelect())));
+//                }else {
+//                    UIHelper.showDiyaFragment(getActivity(), new GoAllSelect(true, "抵(质)押分析", getSelect()));
+//                }
                 break;
             case R.id.sb_edit:
                 if (ObjectUtils.isEmpty(getSelect())) {
@@ -241,6 +249,11 @@ public class DiyadanbaoDetailsTwoFragment extends BaseAppFragment implements BGA
                     return;
                 }
                 UIHelper.showDiyaFragment(getActivity(), new GoAllSelect(false, "抵(质)押分析", getSelect()));
+                //                if ("调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
+//                    UIHelper.showDhDiyaFragment(getActivity(),new GoAllSelect(false,"新增授信调查-抵(质)押分析", ObjectToMapUtils.str2Map(getSelect())));
+//                }else {
+//                    UIHelper.showDiyaFragment(getActivity(), new GoAllSelect(false, "抵(质)押分析", getSelect()));
+//                }
                 break;
             case R.id.sb_detel:
                 if (ObjectUtils.isEmpty(getSelect())) {

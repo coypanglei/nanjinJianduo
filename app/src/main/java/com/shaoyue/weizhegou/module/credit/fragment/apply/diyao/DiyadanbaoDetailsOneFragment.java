@@ -25,6 +25,7 @@ import com.shaoyue.weizhegou.event.OkOrCancelEvent;
 import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.module.credit.fragment.apply.diyao.adapter.ZiRanDanBaoAdapter;
 import com.shaoyue.weizhegou.router.UIHelper;
+import com.shaoyue.weizhegou.util.ObjectToMapUtils;
 import com.shaoyue.weizhegou.util.ThreadUtil;
 import com.shaoyue.weizhegou.util.ToastUtil;
 
@@ -248,15 +249,23 @@ public class DiyadanbaoDetailsOneFragment extends BaseAppFragment implements BGA
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.sb_add:
-                UIHelper.showDiyaFragment(getActivity(), new GoAllSelect(true, "自然人担保分析", getSelect()));
+
+                if ("调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
+                       UIHelper.showDhDiyaFragment(getActivity(),new GoAllSelect(true,"授信调查(自然人)担保分析", ObjectToMapUtils.str2Map(getSelect())));
+                }else {
+                    UIHelper.showDiyaFragment(getActivity(), new GoAllSelect(true, "自然人担保分析", getSelect()));
+                }
                 break;
             case R.id.sb_edit:
                 if (ObjectUtils.isEmpty(getSelect())) {
                     ToastUtil.showBlackToastSucess("没有选中数据");
                     return;
                 }
-
-                UIHelper.showDiyaFragment(getActivity(), new GoAllSelect(false, "自然人担保分析", getSelect()));
+                if ("调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
+                    UIHelper.showDhDiyaFragment(getActivity(),new GoAllSelect(false,"授信调查(自然人)担保分析", ObjectToMapUtils.str2Map(getSelect())));
+                }else {
+                    UIHelper.showDiyaFragment(getActivity(), new GoAllSelect(false, "自然人担保分析", getSelect()));
+                }
                 break;
             case R.id.sb_detel:
                 if (ObjectUtils.isEmpty(getSelect())) {

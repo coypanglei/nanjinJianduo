@@ -39,6 +39,11 @@ import com.shaoyue.weizhegou.router.UIHelper;
 import com.shaoyue.weizhegou.util.ToastUtil;
 import com.shaoyue.weizhegou.util.ToolUtils;
 import com.shaoyue.weizhegou.widget.gesture.GestureLockLayout;
+import com.yanzhenjie.permission.Action;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.Permission;
+
+import java.util.List;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -185,6 +190,20 @@ public class LauncherFragment extends BaseAppFragment implements StartListener {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppMgr.getInstance().setStartListener(this);
+        AndPermission.with(this)
+                .runtime()
+                .permission(Permission.READ_PHONE_STATE)
+                .onGranted(new Action<List<String>>() {
+                    @Override
+                    public void onAction(List<String> data) {
+                    }                })
+                .onDenied(new Action<List<String>>() {
+                    @Override
+                    public void onAction(List<String> data) {
+                        ToastUtil.showErrorToast(getResources().getString(R.string.t_permission_denied));
+                    }
+                })
+                .start();
     }
 
     @Override
@@ -320,7 +339,7 @@ public class LauncherFragment extends BaseAppFragment implements StartListener {
     private void loginVoid() {
         String mAccountEdit = mEtLoginName.getText().toString().trim();
         String mPasswordEdit = mEtLoginPassword.getText().toString().trim();
-        UserMgr.getInstance().doLoginByPhone(mAccountEdit, mPasswordEdit, new CommCallBack() {
+        UserMgr.getInstance().doLoginByPhone(mAccountEdit, mPasswordEdit, AppMgr.getInstance().getimei(getActivity()),new CommCallBack() {
             @Override
             public void complete(int code, String msg) {
                 if (code == 0) {
@@ -384,7 +403,7 @@ public class LauncherFragment extends BaseAppFragment implements StartListener {
                 byte[] bytes = cryptoObject.getCipher().doFinal();
                 String mAccount = SPUtils.getInstance().getString(UserMgr.getInstance().SP_LOGIN_NAME, "");
                 String mPassword = SPUtils.getInstance().getString(UserMgr.getInstance().SP_LOGIN_PASSWORD, "");
-                UserMgr.getInstance().doLoginByPhone(mAccount, mPassword, new CommCallBack() {
+                UserMgr.getInstance().doLoginByPhone(mAccount, mPassword, AppMgr.getInstance().getimei(getActivity()),new CommCallBack() {
                     @Override
                     public void complete(int code, String msg) {
                         if (code == 0) {
@@ -445,7 +464,7 @@ public class LauncherFragment extends BaseAppFragment implements StartListener {
                 if (isMatched) {
                     String mAccount = SPUtils.getInstance().getString(UserMgr.getInstance().SP_LOGIN_NAME, "");
                     String mPassword = SPUtils.getInstance().getString(UserMgr.getInstance().SP_LOGIN_PASSWORD, "");
-                    UserMgr.getInstance().doLoginByPhone(mAccount, mPassword, new CommCallBack() {
+                    UserMgr.getInstance().doLoginByPhone(mAccount, mPassword, AppMgr.getInstance().getimei(getActivity()),new CommCallBack() {
                         @Override
                         public void complete(int code, String msg) {
                             if (code == 0) {

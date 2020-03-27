@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.f1reking.signatureview.SignatureView;
@@ -124,8 +125,8 @@ public class QianziDialogFragment extends DialogFragment {
                 break;
             case R.id.tv_ok:
                 //上传签名
-
-                if (ObjectUtils.isEmpty(qianziBean) || ObjectUtils.isEmpty(qianziBean.getZjhm())) {
+                LogUtils.e(qianziBean);
+                if (ObjectUtils.isEmpty(qianziBean) ) {
                     return;
                 }
                 AndPermission.with(this)

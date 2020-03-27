@@ -138,7 +138,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:gravity="center"
-                    android:text="1月"
+                    android:text="近1月"
                     android:textColor="@color/color_0d1730"
                     android:textSize="@dimen/dp_12" />
 
@@ -147,7 +147,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:gravity="center"
-                    android:text="2月"
+                    android:text="近2月"
                     android:textColor="@color/color_0d1730"
                     android:textSize="@dimen/dp_12" />
 
@@ -156,7 +156,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:gravity="center"
-                    android:text="3月"
+                    android:text="近3月"
                     android:textColor="@color/color_0d1730"
                     android:textSize="@dimen/dp_12" />
 
@@ -165,7 +165,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:gravity="center"
-                    android:text="4月"
+                    android:text="近4月"
                     android:textColor="@color/color_0d1730"
                     android:textSize="@dimen/dp_12" />
 
@@ -174,7 +174,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:gravity="center"
-                    android:text="5月"
+                    android:text="近5月"
                     android:textColor="@color/color_0d1730"
                     android:textSize="@dimen/dp_12" />
 
@@ -183,7 +183,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:gravity="center"
-                    android:text="6月"
+                    android:text="近6月"
                     android:textColor="@color/color_0d1730"
                     android:textSize="@dimen/dp_12" />
 
@@ -193,7 +193,7 @@
                     android:layout_gravity="center_vertical"
                     android:gravity="center"
 
-                    android:text="7月"
+                    android:text="近7月"
                     android:textColor="@color/color_0d1730"
                     android:textSize="@dimen/dp_12" />
 
@@ -202,7 +202,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:gravity="center"
-                    android:text="8月"
+                    android:text="近8月"
                     android:textColor="@color/color_0d1730"
                     android:textSize="@dimen/dp_12" />
 
@@ -211,7 +211,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:gravity="center"
-                    android:text="9月"
+                    android:text="近9月"
                     android:textColor="@color/color_0d1730"
                     android:textSize="@dimen/dp_12" />
 
@@ -220,7 +220,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:gravity="center"
-                    android:text="10月"
+                    android:text="近10月"
                     android:textColor="@color/color_0d1730"
                     android:textSize="@dimen/dp_12" />
 
@@ -229,7 +229,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:gravity="center"
-                    android:text="11月"
+                    android:text="近11月"
                     android:textColor="@color/color_0d1730"
                     android:textSize="@dimen/dp_12" />
 
@@ -238,7 +238,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:gravity="center"
-                    android:text="12月"
+                    android:text="近12月"
                     android:textColor="@color/color_0d1730"
                     android:textSize="@dimen/dp_12" />
             </LinearLayout>

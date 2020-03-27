@@ -91,6 +91,17 @@ public class DgInfoListBean extends BaseBean {
          */
        private  boolean click;
 
+       private String dgdk;
+
+
+        public String getDgdk() {
+            return dgdk;
+        }
+
+        public void setDgdk(String dgdk) {
+            this.dgdk = dgdk;
+        }
+
         private String zt;
 
         private String zzm;

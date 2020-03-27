@@ -469,14 +469,15 @@ public class UIHelper {
 
 
     /**
-     * 贷后新增或修改抵押担保
+     * 贷后新增或修改抵押担保界面
      *
      * @param activity
      */
-    public static void showDhDiyaFragment(FragmentActivity activity, String contentType) {
-        Intent intent = DhDyActivity.newInstance(activity, contentType);
+    public static void showDhDiyaFragment(FragmentActivity activity ,GoAllSelect goAllSelect) {
+        Intent intent = DhDyActivity.newInstance(activity, goAllSelect);
         activity.startActivity(intent);
     }
+
 
 
     /**
@@ -684,8 +685,8 @@ public class UIHelper {
      * 跳转对公贷款activity
      */
 
-    public static void showDgCommonActivity(String type, Activity activity, String contentType,String isbws) {
-        Intent intent = XcjyActivity.newInstance(activity, contentType, type,isbws);
+    public static void showDgCommonActivity(String type, Activity activity, String contentType,String isbws,String is2) {
+        Intent intent = XcjyActivity.newInstance(activity, contentType, type,isbws,is2);
         activity.startActivity(intent);
 
     }

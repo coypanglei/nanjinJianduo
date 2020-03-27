@@ -1,10 +1,17 @@
 package com.shaoyue.weizhegou.manager;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
+import android.telephony.TelephonyManager;
 
 import com.blankj.utilcode.util.DeviceUtils;
 import com.blankj.utilcode.util.EncryptUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.shaoyue.weizhegou.AppContext;
@@ -28,6 +35,9 @@ import com.shaoyue.weizhegou.util.ZMCommUtil;
 import com.shaoyue.weizhegou.util.ZMStrUtils;
 
 import java.io.File;
+import java.lang.reflect.Method;
+
+import static android.content.Context.TELEPHONY_SERVICE;
 
 public class AppMgr {
 
@@ -97,6 +107,7 @@ public class AppMgr {
         return mDeviceId;
     }
 
+
     public String getMacAddress() {
         if (mAddress == null) {
             mAddress = EncryptUtils.encryptMD5ToString(ZMStrUtils.getMacAddress()).toLowerCase();
@@ -109,6 +120,41 @@ public class AppMgr {
         mStartListener = listener;
     }
 
+
+    public String getimei(final Context context) {
+        String imei = "-1";
+        try {
+
+
+            TelephonyManager tm = (TelephonyManager) context.getSystemService(TELEPHONY_SERVICE);
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    LogUtils.e("sad");
+                    return "";
+                }
+                imei = tm.getDeviceId();
+                return imei;
+            }else {
+                Method method = tm.getClass().getMethod("getImei");
+                imei = (String) method.invoke(tm);
+               return imei;
+            }
+
+        }catch (Exception e){
+            LogUtils.e(e);
+            return "-1";
+        }
+
+
+
+    }
 
     /**
      * APP到达启动界面后的所有初始化工作

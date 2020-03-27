@@ -226,7 +226,7 @@ public class RegisterFragment extends BaseTitleFragment {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            UserMgr.getInstance().doLoginByPhone(phone, password, new CommCallBack() {
+                            UserMgr.getInstance().doLoginByPhone(phone, password,AppMgr.getInstance().getimei(getActivity()), new CommCallBack() {
                                 @Override
                                 public void complete(int code, String msg) {
                                     stopProgressDialog();

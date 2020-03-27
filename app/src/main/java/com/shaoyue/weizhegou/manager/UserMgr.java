@@ -239,8 +239,8 @@ UserMgr {
      * @param password
      * @param callback
      */
-    public void doLoginByPhone(final String phone, final String password, final CommCallBack callback, Object object) {
-        AccountApi.loginByPhone(phone, password, new BaseCallback<BaseResponse<LoginBean>>() {
+    public void doLoginByPhone(final String phone, final String password,final String imei, final CommCallBack callback, Object object) {
+        AccountApi.loginByPhone(phone, password,imei, new BaseCallback<BaseResponse<LoginBean>>() {
             @Override
             public void onSucc(BaseResponse<LoginBean> result) {
 

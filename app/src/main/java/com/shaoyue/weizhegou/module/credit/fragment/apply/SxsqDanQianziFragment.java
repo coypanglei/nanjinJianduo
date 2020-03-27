@@ -148,16 +148,17 @@ public class SxsqDanQianziFragment extends BaseAppFragment {
         CeditApi.getSxsqDan(new BaseCallback<BaseResponse<SxsqDanBean>>() {
             @Override
             public void onSucc(BaseResponse<SxsqDanBean> result) {
+                mlist.clear();
                 mlist.add(new QianzibanDanBean("支行:  ", result.data.getZh()));
                 mlist.add(new QianzibanDanBean("申请人名称:  ", result.data.getSqrxm()));
                 mlist.add(new QianzibanDanBean("身份证号码:  ", result.data.getSfzh()));
                 mlist.add(new QianzibanDanBean("婚姻状况:  ", result.data.getHyzk()));
                 mlist.add(new QianzibanDanBean("联系方式:  ", result.data.getLxfs()));
                 mlist.add(new QianzibanDanBean("常住地址:  ", result.data.getCzdz()));
-                mlist.add(new QianzibanDanBean("授信申请额度:  ", result.data.getEd()));
+                mlist.add(new QianzibanDanBean("授信申请额度:  ", result.data.getEd()+" 万元"));
                 mlist.add(new QianzibanDanBean("授信担保方式:  ", result.data.getZydbfs()));
-                mlist.add(new QianzibanDanBean("授信期限:  ", result.data.getQx()));
-                mlist.add(new QianzibanDanBean("授信用途:  ", result.data.getZydbfs()));
+                mlist.add(new QianzibanDanBean("授信期限:  ", result.data.getQx()+" 月"));
+                mlist.add(new QianzibanDanBean("授信用途:  ", result.data.getYt()));
                 qianziBean.setZjhm(result.data.getSfzh());
                 sxsqDanBean = result.data;
                 tvRq.setText("日期: " + result.data.getSqsj());
@@ -217,6 +218,7 @@ public class SxsqDanQianziFragment extends BaseAppFragment {
         CeditApi.getSxsqDan(new BaseCallback<BaseResponse<SxsqDanBean>>() {
             @Override
             public void onSucc(BaseResponse<SxsqDanBean> result) {
+                mlist.clear();
                 mlist.add(new QianzibanDanBean("支行:  ", result.data.getZh()));
                 mlist.add(new QianzibanDanBean("申请人名称:  ", result.data.getSqrxm()));
                 mlist.add(new QianzibanDanBean("身份证号码:  ", result.data.getSfzh()));
@@ -226,7 +228,7 @@ public class SxsqDanQianziFragment extends BaseAppFragment {
                 mlist.add(new QianzibanDanBean("授信申请额度:  ", result.data.getEd()));
                 mlist.add(new QianzibanDanBean("授信担保方式:  ", result.data.getZydbfs()));
                 mlist.add(new QianzibanDanBean("授信期限:  ", result.data.getQx()));
-                mlist.add(new QianzibanDanBean("授信用途:  ", result.data.getZydbfs()));
+                mlist.add(new QianzibanDanBean("授信用途:  ", result.data.getYt()));
                 qianziBean.setZjhm(result.data.getSfzh());
                 sxsqDanBean = result.data;
                 tvRq.setText("日期: " + result.data.getSqsj());

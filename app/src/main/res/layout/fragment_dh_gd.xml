@@ -245,11 +245,13 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="本期是否出现逾期欠息"
+                    android:visibility="gone"
                     android:textColor="@color/color_0d1730"
                     android:textSize="@dimen/dp_11" />
                 <TextView
                     android:id="@+id/tv_sfbl"
                     android:layout_width="@dimen/dp_250"
+                    android:visibility="gone"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="借款人在本行对外担保贷款是否出现逾期或者不良"

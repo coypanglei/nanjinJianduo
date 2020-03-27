@@ -24,7 +24,11 @@ public class XcjyActivity extends BaseCommonActivity {
     private String type;
 
     //是否两百万以上
+    private String is2;
+
+    //
     private String isbws;
+
 
 
     public static Intent newInstance(Context context, String contentType, String type) {
@@ -35,11 +39,12 @@ public class XcjyActivity extends BaseCommonActivity {
     }
 
 
-    public static Intent newInstance(Context context, String contentType, String type,String isbws) {
+    public static Intent newInstance(Context context, String contentType, String type,String isbws,String is2) {
         Intent intent = new Intent(context, XcjyActivity.class);
         intent.putExtra(UIHelper.CONTENT_TYPE, contentType);
         intent.putExtra(UIHelper.TYPE, type);
         intent.putExtra("isbws",isbws);
+        intent.putExtra("is2",is2);
         return intent;
     }
 
@@ -48,6 +53,7 @@ public class XcjyActivity extends BaseCommonActivity {
         mContentType = (String) getIntent().getSerializableExtra(UIHelper.CONTENT_TYPE);
         type = getIntent().getStringExtra(UIHelper.TYPE);
         isbws =getIntent().getStringExtra("isbws");
+        is2 =getIntent().getStringExtra("is2");
         return true;
     }
 
@@ -65,7 +71,7 @@ public class XcjyActivity extends BaseCommonActivity {
             case "个贷":
                 return GrdkInfoFragment.newInstance(mContentType);
             case "对公":
-                return DgdkInfoFragment.newInstance(mContentType,isbws);
+                return DgdkInfoFragment.newInstance(mContentType,isbws,is2);
 
             default:
                 return null;

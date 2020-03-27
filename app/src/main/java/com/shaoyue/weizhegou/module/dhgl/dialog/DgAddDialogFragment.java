@@ -275,12 +275,13 @@ public class DgAddDialogFragment extends DialogFragment {
                 if (goAllSelect.isAdd()) {
 
                     map.put("id",goAllSelect.getJsonObjectmap().get("id").toString());
+                    map.put("dgdk",goAllSelect.getJsonObjectmap().get("dgdk").toString());
                     TyApi.editTyINfo(goAllSelect.getTitle(), map, new BaseCallback<BaseResponse<Void>>() {
                         @Override
                         public void onSucc(BaseResponse<Void> result) {
                             dismiss();
 
-                            UIHelper.showDgCommonActivity("对公", getActivity(), "对公检查" , map.get("sshy").toString());
+                            UIHelper.showDgCommonActivity("对公", getActivity(), "对公检查" , map.get("sshy").toString(),map.get("dgdk").toString());
                             ToastUtil.showBlackToastSucess("保存成功");
                         }
                     }, this);

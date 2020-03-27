@@ -188,7 +188,7 @@ public class DgdkjcFragment extends BaseAppFragment implements BGARefreshLayout.
                             //请求id 身份证 模型
                             SPUtils.getInstance().put(UserMgr.SP_ID_CARD, getSelect().getId());
                             SPUtils.getInstance().put(UserMgr.SP_APPLY_ID, getSelect().getQyzjhm());
-                            UIHelper.showDgCommonActivity("对公", getActivity(), "对公检查", getSelect().getSshy());
+                            UIHelper.showDgCommonActivity("对公", getActivity(), "对公检查", getSelect().getSshy(),getSelect().getDgdk());
                         }else {
                             SPUtils.getInstance().put(UserMgr.SP_ID_CARD, getSelect().getId());
                             SPUtils.getInstance().put(UserMgr.SP_APPLY_ID, getSelect().getQyzjhm());
@@ -267,8 +267,6 @@ public class DgdkjcFragment extends BaseAppFragment implements BGARefreshLayout.
                 mRefreshLayout.endLoadingMore();
                 mAdapter.addData(result.data.getRecords());
                 page++;
-
-
             }
         }, this);
         return true;

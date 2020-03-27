@@ -6,31 +6,43 @@ import android.os.Bundle;
 
 import com.shaoyue.weizhegou.base.BaseCommonActivity;
 import com.shaoyue.weizhegou.base.BaseFragment;
+import com.shaoyue.weizhegou.entity.cedit.GoAllSelect;
 import com.shaoyue.weizhegou.entity.cedit.OcrBean;
-import com.shaoyue.weizhegou.module.sxdc.fragment.BasicInformationTyDbFragment;
-import com.shaoyue.weizhegou.router.UIHelper;
+import com.shaoyue.weizhegou.module.dhgl.dialog.DcAddOrChangeDialogFragment;
 
 import org.greenrobot.eventbus.EventBus;
 
 public class DhDyActivity extends BaseCommonActivity {
 
-    private String mContentType;
 
-    public static Intent newInstance(Context context, String contentType) {
+
+    private GoAllSelect goAllSelect;
+    public static Intent newInstance(Context context, GoAllSelect goAllSelect) {
         Intent intent = new Intent(context, DhDyActivity.class);
-        intent.putExtra(UIHelper.CONTENT_TYPE, contentType);
+
+        intent.putExtra("GoAllSelect",goAllSelect);
         return intent;
     }
 
     @Override
     protected boolean initBundle(Bundle bundle) {
-        mContentType = (String) getIntent().getSerializableExtra(UIHelper.CONTENT_TYPE);
+
+        goAllSelect =(GoAllSelect) getIntent().getSerializableExtra("GoAllSelect");
         return true;
     }
 
     @Override
     protected BaseFragment getFirstFragment() {
-        return BasicInformationTyDbFragment.newInstance(mContentType);
+
+        switch (goAllSelect.getTitle()) {
+            case "授信调查(自然人)担保分析":
+                return DcAddOrChangeDialogFragment.newInstance(goAllSelect);
+            case "新增授信调查-抵(质)押分析":
+                return DcAddOrChangeDialogFragment.newInstance(goAllSelect);
+            default:
+                return null;
+        }
+
     }
 
 
