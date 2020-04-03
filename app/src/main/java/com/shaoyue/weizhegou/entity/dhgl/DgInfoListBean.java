@@ -88,11 +88,31 @@ public class DgInfoListBean extends BaseBean {
          * frdb : 齐全
          * id : 6
          * dkye : 34
+         * ghjlmc:
          */
        private  boolean click;
 
        private String dgdk;
 
+       private String ghjlmc;
+
+       private String jgmc;
+
+        public String getJgmc() {
+            return jgmc;
+        }
+
+        public void setJgmc(String jgmc) {
+            this.jgmc = jgmc;
+        }
+
+        public String getGhjlmc() {
+            return ghjlmc;
+        }
+
+        public void setGhjlmc(String ghjlmc) {
+            this.ghjlmc = ghjlmc;
+        }
 
         public String getDgdk() {
             return dgdk;

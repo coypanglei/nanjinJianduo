@@ -137,7 +137,7 @@ DhglBasicInformationAdapter extends BaseQuickAdapter<BasicInformationBean.Record
             if ("date".equals(item.getParamtype())) {
                 final TextView textView = helper.getView(R.id.tv_time);
                 if (ObjectUtils.isEmpty(item.getDefaultvalue())) {
-                    textView.setText("2099-12-31");
+                    textView.setText("");
                 } else {
                     textView.setText(item.getDefaultvalue());
                 }
@@ -199,7 +199,7 @@ DhglBasicInformationAdapter extends BaseQuickAdapter<BasicInformationBean.Record
                         } else {
 
                             mDdvXB.removeTextChangedListener(textWatcher);
-//                            EventBus.getDefault().post(new RefreshBean());
+                            EventBus.getDefault().post(new RefreshBean());
                         }
                     }
                 });

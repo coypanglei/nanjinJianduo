@@ -8,6 +8,7 @@ import com.shaoyue.weizhegou.base.BaseCommonActivity;
 import com.shaoyue.weizhegou.base.BaseFragment;
 import com.shaoyue.weizhegou.entity.cedit.GoAllSelect;
 import com.shaoyue.weizhegou.entity.cedit.OcrBean;
+import com.shaoyue.weizhegou.module.credit.fragment.diaocha.DcDbQyfxFragment;
 import com.shaoyue.weizhegou.module.dhgl.dialog.DcAddOrChangeDialogFragment;
 
 import org.greenrobot.eventbus.EventBus;
@@ -39,6 +40,8 @@ public class DhDyActivity extends BaseCommonActivity {
                 return DcAddOrChangeDialogFragment.newInstance(goAllSelect);
             case "新增授信调查-抵(质)押分析":
                 return DcAddOrChangeDialogFragment.newInstance(goAllSelect);
+            case "授信调查-企业担保分析":
+                return DcDbQyfxFragment.newInstance(goAllSelect);
             default:
                 return null;
         }

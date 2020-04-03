@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'android-aspectjx' //添加
 Properties props = new Properties()
 props.load(project.rootProject.file('config.properties').newDataInputStream())
 
@@ -236,6 +235,8 @@ dependencies {
     implementation 'com.iqiyi.xcrash:xcrash-android-lib:2.4.6'
 //    //重复点击
 //    implementation 'com.github.liys666666:DoubleClick:V3.0.0'  //添加
+//    //图片选择控件
+   //implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.1'
 
 }
 

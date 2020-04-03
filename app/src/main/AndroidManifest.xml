@@ -1,63 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/apk/distribution"
+    xmlns:xmls="http://schemas.android.com/tools"
     package="com.shaoyue.weizhegou"
 
     >
 
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" />
-    <!-- 请求网络 -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <!-- 指纹权限 -->
-    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
-
-    <!-- 震动权限 -->
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.FLASHLIGHT" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-
-
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
-
-
     <application
         android:name="com.shaoyue.weizhegou.AppContext"
         android:allowBackup="true"
+
         android:icon="@drawable/app_logo"
         android:label="@string/app_name"
-
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data
-            android:name="design_width_in_dp"
-            android:value="800" />
-        <meta-data
-            android:name="design_height_in_dp"
-            android:value="470" />
-
-
-        <!--适配华为（huawei）刘海屏-->
-        <meta-data
-            android:name="android.notch_support"
-            android:value="true" />
-        <!--适配小米（xiaomi）刘海屏-->
-        <meta-data
-            android:name="notch.config"
-            android:value="portrait|landscape" />
-
         <activity
             android:name="com.shaoyue.weizhegou.module.start.LauncherActivity"
             android:screenOrientation="landscape">
@@ -67,42 +23,44 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.shaoyue.weizhegou.module.account.activity.LoginActivity"
             android:launchMode="singleTask"
             android:screenOrientation="landscape" />
 
+
+        <!--适配华为（huawei）刘海屏-->
         <activity
             android:name="com.shaoyue.weizhegou.module.account.activity.SettlementCenterActivity"
             android:screenOrientation="landscape" />
+        <!--适配小米（xiaomi）刘海屏-->
         <activity
             android:name="com.shaoyue.weizhegou.module.account.activity.GoodsDetailsActivity"
             android:screenOrientation="landscape" />
+
         <activity
             android:name="com.shaoyue.weizhegou.module.account.activity.OrderDetailsActivity"
             android:screenOrientation="landscape" />
+
         <activity
             android:name="com.shaoyue.weizhegou.module.main.activity.MainActivity"
             android:screenOrientation="landscape"
             android:theme="@style/TestTheme" />
+
         <activity
             android:name="com.shaoyue.weizhegou.module.main.activity.CreditNavActivity"
             android:screenOrientation="landscape"
             android:theme="@style/TestTheme" />
-
         <activity
             android:name="com.shaoyue.weizhegou.module.main.activity.DhglNewNavActivity"
             android:screenOrientation="landscape"
             android:theme="@style/TestTheme" />
-
         <activity
             android:name="com.shaoyue.weizhegou.module.web.WebActivity"
             android:screenOrientation="landscape" />
         <activity
             android:name="com.shaoyue.weizhegou.module.web.WebShareActivity"
             android:screenOrientation="landscape" />
-
         <activity
             android:name="com.shaoyue.weizhegou.module.general.activity.ProfileCommonActivity"
             android:screenOrientation="landscape"
@@ -115,7 +73,6 @@
             android:theme="@style/TestTheme"
             android:windowSoftInputMode="adjustResize" />
 
-
         <activity
             android:name=".module.credit.activity.DyFaceActivity"
             android:screenOrientation="landscape"
@@ -126,7 +83,6 @@
             android:screenOrientation="landscape"
             android:theme="@style/TestTheme"
             android:windowSoftInputMode="adjustResize" />
-
 
         <activity
             android:name=".module.credit.activity.DyYxzlActivity"
@@ -139,6 +95,8 @@
             android:screenOrientation="landscape"
             android:theme="@style/TestTheme"
             android:windowSoftInputMode="adjustResize" />
+
+
         <activity
             android:name=".module.credit.activity.DyZxcxActivity"
             android:screenOrientation="landscape"
@@ -159,12 +117,36 @@
             android:screenOrientation="landscape"
             android:theme="@style/UpdateAppDialog" />
 
+        <activity
+            android:name="com.shaoyue.weizhegou.wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name="com.shaoyue.weizhegou.module.web.WxWebViewActivity"
+            android:screenOrientation="landscape" />
+        <meta-data
+            android:name="design_width_in_dp"
+            android:value="800" />
 
-        <service android:name="com.shaoyue.weizhegou.service.DownloadService" />
+
+        <meta-data
+            android:name="design_height_in_dp"
+            android:value="470" />
+
+
+        <meta-data
+            android:name="android.notch_support"
+            android:value="true" />
+
+        <meta-data
+            android:name="notch.config"
+            android:value="portrait|landscape" />
 
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="${UMENG_CHANNEL_VALUE}" />
+
 
         <meta-data
             android:name="UMENG_APPKEY"
@@ -181,18 +163,38 @@
                 android:resource="@xml/new_app_file_paths" />
         </provider>
 
-
-        <activity
-            android:name="com.shaoyue.weizhegou.wxapi.WXEntryActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:exported="true"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
-        <activity
-            android:name="com.shaoyue.weizhegou.module.web.WxWebViewActivity"
-            android:screenOrientation="landscape" />
+        <service android:name="com.shaoyue.weizhegou.service.DownloadService" />
 
 
     </application>
+    <uses-feature android:name="android.hardware.camera" />
+    <!-- 请求网络 -->
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <!-- 指纹权限 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <!-- 震动权限 -->
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+
+
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
 </manifest>

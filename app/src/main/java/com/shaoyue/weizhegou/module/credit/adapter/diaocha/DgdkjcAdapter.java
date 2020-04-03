@@ -56,6 +56,8 @@ public class DgdkjcAdapter extends BaseQuickAdapter<DgInfoListBean.RecordsBean, 
         helper.setText(R.id.tv_dkye, item.getDkye());
         helper.setText(R.id.tv_zt, item.getZt());
         helper.setText(R.id.tv_spnr,item.getSpnr());
+        helper.setText(R.id.tv_ghjl,item.getGhjlmc());
+        helper.setText(R.id.tv_jgmc,item.getJgmc());
 
         if (item.isClick()) {
             helper.setBackgroundColor(R.id.ll_top, mContext.getResources().getColor(R.color.color_33f0f0f0));

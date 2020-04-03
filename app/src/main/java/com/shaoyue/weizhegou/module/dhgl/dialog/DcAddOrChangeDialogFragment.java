@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
@@ -65,6 +66,9 @@ public class DcAddOrChangeDialogFragment extends BaseTitleFragment {
     ImageView ivGerenQian;
     @BindView(R.id.iv_po_qian)
     ImageView ivPoQian;
+    @BindView(R.id.ll_qian)
+    LinearLayout llQian;
+
 
     //标题集合
     private List<BasicTitle> titles = new ArrayList<>();
@@ -76,6 +80,7 @@ public class DcAddOrChangeDialogFragment extends BaseTitleFragment {
     private GoAllSelect goAllSelect;
     BasicInformationNewAdapter mAdapter;
     private QianziBean qianziBean;
+
     @Override
     protected int getContentLayoutId() {
         return R.layout.frgament_dc_add_or_edit;
@@ -133,6 +138,7 @@ public class DcAddOrChangeDialogFragment extends BaseTitleFragment {
 
         }
     }
+
     /**
      * 刷新数据
      */
@@ -162,14 +168,15 @@ public class DcAddOrChangeDialogFragment extends BaseTitleFragment {
         rvCwfx.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvCwfx.setAdapter(mAdapter);
         if (goAllSelect.isAdd()) {
-            setCommonTitle("新增" + goAllSelect.getTitle());
+            setCommonTitle("新增" + goAllSelect.getTitle().replace("新增", ""));
         } else {
-            setCommonTitle("修改" + goAllSelect.getTitle());
+            setCommonTitle("修改" + goAllSelect.getTitle().replace("新增", ""));
 
         }
         sbAdd.setVisibility(View.GONE);
         switch (goAllSelect.getTitle()) {
             case "授信调查(自然人)担保分析":
+                llQian.setVisibility(View.VISIBLE);
                 titles.add(new BasicTitle("担保人", new ArrayList<BasicInformationBean.RecordsBean>()));
                 titles.add(new BasicTitle("配偶", new ArrayList<BasicInformationBean.RecordsBean>()));
                 titles.add(new BasicTitle("担保信息", new ArrayList<BasicInformationBean.RecordsBean>()));
@@ -216,16 +223,18 @@ public class DcAddOrChangeDialogFragment extends BaseTitleFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(final TimeSelect timeSelect) {
-        if (ObjectUtils.isNotEmpty(timeSelect.getTime())) {
-            List<BasicTitle> list = mAdapter.getData();
-            for (BasicTitle title : list) {
-                for (BasicInformationBean.RecordsBean bean : title.getMlist()) {
-                    if (bean.getTitile().equals(timeSelect.getTitle())) {
-                        mDatePicker.show(timeSelect.getTime());
-                        timeTitle = timeSelect.getTitle();
-                    }
+//        if (ObjectUtils.isNotEmpty(timeSelect.getTime())) {
+        List<BasicTitle> list = mAdapter.getData();
+        for (BasicTitle title : list) {
+            for (BasicInformationBean.RecordsBean bean : title.getMlist()) {
+                    LogUtils.e(timeSelect.getTitle());
+                if (bean.getTitile().equals(timeSelect.getTitle())) {
+
+                    mDatePicker.show(timeSelect.getTime());
+                    timeTitle = timeSelect.getTitle();
                 }
             }
+
 
         }
 
@@ -288,11 +297,13 @@ public class DcAddOrChangeDialogFragment extends BaseTitleFragment {
                         mAdapter.setNewData(titles);
 
                     }
+                    //修改时添加数据
+                    if (!goAllSelect.isAdd()) {
+                        getListById();
+                    }
 
-
-                    getListById();
                 } catch (Exception e) {
-
+                     LogUtils.e(e);
                 }
 
 
@@ -337,10 +348,10 @@ public class DcAddOrChangeDialogFragment extends BaseTitleFragment {
                 mAdapter.notifyDataSetChanged();
             }
             LogUtils.e(map.get("dbrqz"));
-            if(ObjectUtils.isNotEmpty(map.get("dbrqz"))) {
+            if (ObjectUtils.isNotEmpty(map.get("dbrqz"))) {
                 qianziBean.setSqrqm(map.get("dbrqz"));
             }
-            if(ObjectUtils.isNotEmpty(map.get("porqz"))) {
+            if (ObjectUtils.isNotEmpty(map.get("porqz"))) {
                 qianziBean.setSqrjbkhjlqm(map.get("porqz"));
             }
             initData();
@@ -383,7 +394,7 @@ public class DcAddOrChangeDialogFragment extends BaseTitleFragment {
         return map;
     }
 
-    @OnClick({R.id.sb_edit,R.id.iv_geren_qian,R.id.iv_po_qian})
+    @OnClick({R.id.sb_edit, R.id.iv_geren_qian, R.id.iv_po_qian})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_geren_qian:
@@ -429,11 +440,11 @@ public class DcAddOrChangeDialogFragment extends BaseTitleFragment {
                     if ("授信调查(自然人)担保分析".equals(goAllSelect.getTitle())) {
                         add = CeditApi.DANBAOREN_ADD + "All";
                     } else if ("新增授信调查-抵(质)押分析".equals(goAllSelect.getTitle())) {
-                        add = CeditApi.DANBAODIYA_ADD+ "All";
+                        add = CeditApi.DANBAODIYA_ADD + "All";
                     } else if ("公司担保分析".equals(goAllSelect.getTitle())) {
-                        add = CeditApi.DANBAOREN_ADD_GONGSI;
+                        add = CeditApi.DANBAOREN_ADD_GONGSI+ "All";
                     } else if ("企业担保分析".equals(goAllSelect.getTitle())) {
-                        add = CeditApi.DANBAOREN_ADD_QIYE;
+                        add = CeditApi.DANBAOREN_ADD_QIYE+ "All";
                     }
                     CeditApi.addDanbaoInfo(add, map, new BaseCallback<BaseResponse<Void>>() {
                         @Override
@@ -447,16 +458,16 @@ public class DcAddOrChangeDialogFragment extends BaseTitleFragment {
                     String edit = CeditApi.DANBAOREN_EDIT;
                     if ("授信调查(自然人)担保分析".equals(goAllSelect.getTitle())) {
                         edit = CeditApi.DANBAOREN_EDIT + "All";
-                        map.put("dbrqz",qianziBean.getSqrqm());
-                        map.put("porqz",qianziBean.getSqrjbkhjlqm());
+                        map.put("dbrqz", qianziBean.getSqrqm());
+                        map.put("porqz", qianziBean.getSqrjbkhjlqm());
                     } else if ("新增授信调查-抵(质)押分析".equals(goAllSelect.getTitle())) {
-                        edit = CeditApi.DANBAOZHIYA_EDIT+"All";
+                        edit = CeditApi.DANBAOZHIYA_EDIT + "All";
 
                     } else if ("公司担保分析".equals(goAllSelect.getTitle())) {
-                        edit = CeditApi.DANBAOREN_EDIT_GONGSI;
+                        edit = CeditApi.DANBAOREN_EDIT_GONGSI+ "All";
 
                     } else if ("企业担保分析".equals(goAllSelect.getTitle())) {
-                        edit = CeditApi.DANBAOREN_EDIT_QIYE;
+                        edit = CeditApi.DANBAOREN_EDIT_QIYE+ "All";
 
                     }
 
@@ -471,7 +482,6 @@ public class DcAddOrChangeDialogFragment extends BaseTitleFragment {
                 break;
         }
     }
-
 
 
 }

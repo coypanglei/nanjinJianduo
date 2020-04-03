@@ -17,6 +17,7 @@ import com.shaoyue.weizhegou.entity.dhgl.DgZxcxBean;
 import com.shaoyue.weizhegou.entity.dhgl.DhglInfoGetBean;
 import com.shaoyue.weizhegou.entity.dhgl.GdInfoListBean;
 import com.shaoyue.weizhegou.entity.dhgl.SdInfoListBean;
+import com.shaoyue.weizhegou.entity.dhgl.SdxjlBean;
 import com.shaoyue.weizhegou.entity.dhgl.XcfxBean;
 import com.shaoyue.weizhegou.entity.dhgl.XcjyBBean;
 import com.shaoyue.weizhegou.entity.dhgl.XcjyProgressListBean;
@@ -162,6 +163,10 @@ public class DhApi {
     private static final String CWFX_GET = "jeecg-boot/dhjcmb/dhjcmbCwfx/queryByPId";
 
 
+    //首贷现金流
+    private static final String SD_XJL="jeecg-boot/dhjcmb/dhSdJyls/list";
+
+
     /**
      * 对公贷款信息-财务分析
      */
@@ -182,6 +187,21 @@ public class DhApi {
         params.put("pageSize", pageSize);
         params.put("khmcOrzjhm", khmc);
         ApiHttpClient.post(DGDK_FY, params, callback, tag);
+    }
+
+
+
+    /**
+     * 首贷信息-首贷现金流
+     */
+    public static void getSdxjlList(int pageNum, String pageSize, String khmc
+            , BaseCallback<BaseResponse<SdxjlBean>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("pageNo", pageNum + "");
+        params.put("pageSize", pageSize);
+        params.put("khmcOrzjhm", khmc);
+        params.put("pid", SPUtils.getInstance().getString(UserMgr.SP_ID_CARD));
+        ApiHttpClient.post(SD_XJL, params, callback, tag);
     }
 
     /**

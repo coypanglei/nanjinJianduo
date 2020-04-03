@@ -31,6 +31,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -59,7 +60,6 @@ public class DiyadanbaoDetailsFourFragment extends BaseAppFragment implements BG
     StateButton sbDetel;
     @BindView(R.id.rl_all)
     RelativeLayout rlAll;
-
 
 
     private int page = 1;
@@ -98,7 +98,11 @@ public class DiyadanbaoDetailsFourFragment extends BaseAppFragment implements BG
     @Override
     protected void initView(View rootView) {
         super.initView(rootView);
-        if ("查看详情".equals(SPUtils.getInstance().getString("status")) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
+        if ("调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
+
+//                sbEdit.setVisibility(View.GONE);
+        }
+        if ("查看详情".equals(SPUtils.getInstance().getString("status"))) {
             rlAll.setVisibility(View.GONE);
             sbAdd.setVisibility(View.GONE);
             sbEdit.setVisibility(View.GONE);
@@ -190,15 +194,22 @@ public class DiyadanbaoDetailsFourFragment extends BaseAppFragment implements BG
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.sb_add:
-                UIHelper.showDiyaFragment(getActivity(), new GoAllSelect(true, "企业担保分析", getSelect()));
+                if ("调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
+                    UIHelper.showDhDiyaFragment(getActivity(), new GoAllSelect(true, "授信调查-企业担保分析", new HashMap()));
+                } else {
+                    UIHelper.showDiyaFragment(getActivity(), new GoAllSelect(true, "企业担保分析", getSelect()));
+                }
                 break;
             case R.id.sb_edit:
                 if (ObjectUtils.isEmpty(getSelect())) {
                     ToastUtil.showBlackToastSucess("没有选中数据");
                     return;
                 }
-
-                UIHelper.showDiyaFragment(getActivity(), new GoAllSelect(false, "企业担保分析", getSelect()));
+                if ("调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
+                    UIHelper.showDhDiyaFragment(getActivity(), new GoAllSelect(false, "授信调查-企业担保分析", new HashMap()));
+                } else {
+                    UIHelper.showDiyaFragment(getActivity(), new GoAllSelect(false, "企业担保分析", getSelect()));
+                }
                 break;
             case R.id.sb_detel:
                 if (ObjectUtils.isEmpty(getSelect())) {

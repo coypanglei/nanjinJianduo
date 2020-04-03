@@ -2,6 +2,7 @@ package com.shaoyue.weizhegou.entity.cedit;
 
 import com.shaoyue.weizhegou.base.BaseBean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BasicInformationBean extends BaseBean {
@@ -103,8 +104,8 @@ public class BasicInformationBean extends BaseBean {
         private String type;
         private String category;
         private String dateformat;
-        private List<OptionlistBean> optionlist;
-        private List<BasicInformationBean.RecordsBean> list;
+        private List<OptionlistBean> optionlist=new ArrayList<>();
+        private List<BasicInformationBean.RecordsBean> list =new ArrayList<>();
 
         public List<RecordsBean> getList() {
             return list;

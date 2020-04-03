@@ -2,6 +2,7 @@ package com.shaoyue.weizhegou.api.remote;
 
 import android.text.TextUtils;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.shaoyue.weizhegou.api.callback.BaseCallback;
 import com.shaoyue.weizhegou.api.callback.ResultInterface;
@@ -330,9 +331,12 @@ public class AccountApi extends BaseApi {
         }
 
         Map<String, String> params = new HashMap<>();
+
+
         params.put("um_token", UserMgr.getInstance().getSpDeviceToken());
         params.put("username", phone);
         params.put("password", password);
+        LogUtils.e(imei);
         params.put("captcha", imei);
         ApiHttpClient.postJson(API_ACCOUNT_LOGIN, params, callback, tag);
 

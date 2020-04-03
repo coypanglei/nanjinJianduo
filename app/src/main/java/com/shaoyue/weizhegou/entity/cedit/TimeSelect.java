@@ -9,6 +9,14 @@ public class TimeSelect extends BaseBean {
 
     private String title;
 
+    @Override
+    public String toString() {
+        return "TimeSelect{" +
+                "time='" + time + '\'' +
+                ", title='" + title + '\'' +
+                '}';
+    }
+
     public TimeSelect(String time, String title) {
         this.time = time;
         this.title = title;

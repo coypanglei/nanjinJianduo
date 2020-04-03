@@ -19,7 +19,7 @@ import com.shaoyue.weizhegou.base.BaseTitleFragment;
 import com.shaoyue.weizhegou.entity.user.MainClickBean;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.MenuAdapter;
 import com.shaoyue.weizhegou.module.credit.fragment.apply.CreditInquiryDetailsFragment;
-import com.shaoyue.weizhegou.module.credit.fragment.diaocha.DcMoneyFragment;
+import com.shaoyue.weizhegou.module.dhgl.jjnj.fragment.SdxjlFragment;
 import com.shaoyue.weizhegou.module.sxdc.fragment.BasicInformationTyFragment;
 import com.shaoyue.weizhegou.widget.NoScrollViewPager;
 
@@ -88,7 +88,7 @@ public class dgdkjcFragment extends BaseTitleFragment {
             } else if ("基本信息".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(BasicInformationTyFragment.newInstance("贷后基本信息"));
             } else if ("现金流".equals(mMenuList.get(i).getTitle())) {
-                fragmentList.add(DcMoneyFragment.newInstance());
+                fragmentList.add(SdxjlFragment.newInstance());
             } else if ("结论".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(BasicInformationTyFragment.newInstance("首贷结论"));
             }

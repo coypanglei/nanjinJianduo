@@ -46,6 +46,10 @@ public class sdjcAdapter extends BaseQuickAdapter<SdInfoListBean.RecordsBean, Ba
         helper.setText(R.id.tv_dkye, item.getDkye());
         helper.setText(R.id.tv_spnr, item.getSpnr());
         helper.setText(R.id.tv_zt, item.getZt());
+
+        helper.setText(R.id.tv_ghjl,item.getGhjlmc());
+        helper.setText(R.id.tv_jgmc,item.getJgmc());
+
         if (item.isClick()) {
             helper.setBackgroundColor(R.id.ll_top, mContext.getResources().getColor(R.color.color_33f0f0f0));
             helper.setTextColor(R.id.tv_dkje, mContext.getResources().getColor(R.color.color_2c4eb6));

@@ -83,7 +83,25 @@ public class SdInfoListBean extends BaseBean {
          * zffs :
          * zjhm :
          */
+        private String ghjlmc;
 
+        private String jgmc;
+
+        public String getJgmc() {
+            return jgmc;
+        }
+
+        public void setJgmc(String jgmc) {
+            this.jgmc = jgmc;
+        }
+
+        public String getGhjlmc() {
+            return ghjlmc;
+        }
+
+        public void setGhjlmc(String ghjlmc) {
+            this.ghjlmc = ghjlmc;
+        }
         private String zt;
         private String spnr;
 

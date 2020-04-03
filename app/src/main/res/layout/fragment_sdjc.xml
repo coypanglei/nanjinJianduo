@@ -93,6 +93,14 @@
         android:layout_height="@dimen/dp_1"
         android:background="@color/color_d4d4d4" />
 
+    <com.shaoyue.weizhegou.widget.CustomHScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_36"
@@ -102,9 +110,10 @@
         android:paddingRight="12dp">
 
         <TextView
-            android:layout_width="0dp"
+            android:id="@+id/tv_xh"
+            android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
-            android:layout_weight="1.5"
+
             android:gravity="center"
             android:text="序号"
             android:textColor="@color/color_0d1730"
@@ -113,18 +122,35 @@
             />
 
         <TextView
-            android:layout_width="0dp"
+            android:id="@+id/tv_zjhm"
+            android:layout_width="@dimen/dp_120"
             android:layout_height="match_parent"
-            android:layout_weight="6"
+
             android:gravity="center"
             android:text="身份证号"
             android:textColor="@color/color_0d1730"
             android:textSize="@dimen/dp_11" />
-
         <TextView
-            android:layout_width="0dp"
+            android:id="@+id/tv_ghjl"
+            android:layout_width="@dimen/dp_80"
             android:layout_height="match_parent"
-            android:layout_weight="3"
+            android:gravity="center"
+            android:text="管户经理"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+        <TextView
+            android:id="@+id/tv_jgmc"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="机构名称"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+        <TextView
+            android:id="@+id/tv_khxm"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="match_parent"
+
             android:gravity="center"
             android:text="客户姓名"
             android:textColor="@color/color_0d1730"
@@ -132,18 +158,20 @@
 
 
         <TextView
-            android:layout_width="0dp"
+            android:id="@+id/tv_dkje"
+            android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
-            android:layout_weight="4"
+
             android:gravity="center"
             android:text="贷款金额"
             android:textColor="@color/color_0d1730"
             android:textSize="@dimen/dp_11" />
 
         <TextView
-            android:layout_width="0dp"
+            android:id="@+id/tv_dkye"
+            android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
-            android:layout_weight="4"
+
             android:drawablePadding="@dimen/dp_3"
             android:gravity="center"
             android:paddingRight="@dimen/dp_10"
@@ -152,19 +180,20 @@
             android:textSize="@dimen/dp_11" />
 
         <TextView
-            android:layout_width="0dp"
+            android:id="@+id/tv_qsrq"
+            android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
-            android:layout_weight="4"
+
             android:gravity="center"
             android:text="起始日期"
             android:textColor="@color/color_0d1730"
             android:textSize="@dimen/dp_11" />
 
         <TextView
-            android:id="@+id/tv_status"
-            android:layout_width="0dp"
+            android:id="@+id/tv_dbfs"
+            android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
-            android:layout_weight="4"
+
 
             android:drawablePadding="@dimen/dp_3"
             android:gravity="center"
@@ -175,42 +204,43 @@
 
 
         <TextView
-            android:layout_width="0dp"
+            android:id="@+id/tv_dkyt"
+            android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
-            android:layout_weight="4"
+
             android:gravity="center"
             android:text="贷款用途"
             android:textColor="@color/color_0d1730"
             android:textSize="@dimen/dp_11" />
 
         <TextView
-            android:layout_width="0dp"
+            android:id="@+id/tv_zffs"
+            android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
-            android:layout_weight="4"
+
             android:gravity="center"
             android:text="支付方式"
             android:textColor="@color/color_0d1730"
             android:textSize="@dimen/dp_11" />
-
         <TextView
             android:id="@+id/tv_zt"
-            android:layout_weight="4"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/dp_60"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="状态"
-            android:textColor="@color/color_0d1730"
-            android:textSize="@dimen/dp_11" />
 
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11"
+            android:text="状态" />
         <TextView
             android:id="@+id/tv_spnr"
-            android:layout_weight="4"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/dp_60"
+
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="审批内容"
             android:textColor="@color/color_0d1730"
-            android:textSize="@dimen/dp_11" />
+            android:textSize="@dimen/dp_11"
+            android:text="审批内容" />
+
     </LinearLayout>
 
     <include layout="@layout/empty_view" />
@@ -227,5 +257,7 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
     </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
+        </LinearLayout>
 
+    </com.shaoyue.weizhegou.widget.CustomHScrollView>
 </LinearLayout>

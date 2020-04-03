@@ -22,6 +22,8 @@ public class LauncherActivity extends BaseCommonActivity {
      * 开屏页一定要禁止用户对返回按钮的控制，否则将可能导致用户手动退出了App而广告无法正常曝光和计费
      */
     @Override
+
+
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
             //两秒之内按返回键就会退出

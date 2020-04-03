@@ -10,10 +10,13 @@ import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.config.PictureConfig;
+import com.luck.picture.lib.config.PictureMimeType;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.entity.cedit.VideoMaterialBean;
+import com.shaoyue.weizhegou.util.GlideEngine;
 import com.shaoyue.weizhegou.widget.HorizontalRecyclerView;
-import com.wildma.pictureselector.PictureSelector;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -119,9 +122,13 @@ public class VideoListAdapter extends BaseQuickAdapter<VideoMaterialBean, BaseVi
                         SPUtils.getInstance().put("selectPic_id", selet.get(position).getId());
                         SPUtils.getInstance().put("selectPic_zllx", selet.get(position).getZllx());
                         SPUtils.getInstance().put("selectPic_sxsfzh", selet.get(position).getSxsfzh());
-                        PictureSelector
-                                .create(mFragment, 1007)
-                                .selectPicture(false, 200, 200, 1, 1);
+                        PictureSelector.create(mFragment)
+                                .openGallery(PictureMimeType.ofImage())
+                                .loadImageEngine(GlideEngine.createGlideEngine()) // 请参考Demo GlideEngine.java
+                                .forResult(PictureConfig.CHOOSE_REQUEST);
+//                        PictureSelector
+//                                .create(mFragment, 1007)
+//                                .selectPicture(false, 200, 200, 1, 1);
                     } else {
                         SPUtils.getInstance().put("selectPic", item.getCategory());
                         SPUtils.getInstance().put("selectPic_id", selet.get(position).getId());

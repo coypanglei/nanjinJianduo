@@ -46,7 +46,22 @@
             android:textSize="@dimen/dp_11"
             tools:text="证件号码" />
 
-
+        <TextView
+            android:id="@+id/tv_ghjl"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            tools:text="管户经理"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
+        <TextView
+            android:id="@+id/tv_jgmc"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            tools:text="机构名称"
+            android:textColor="@color/color_0d1730"
+            android:textSize="@dimen/dp_11" />
         <TextView
             android:id="@+id/tv_dkje"
             android:layout_width="80dp"
