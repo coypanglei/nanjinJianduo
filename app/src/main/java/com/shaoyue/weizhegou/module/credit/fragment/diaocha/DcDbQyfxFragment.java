@@ -24,12 +24,17 @@ import com.shaoyue.weizhegou.base.BaseTitleFragment;
 import com.shaoyue.weizhegou.entity.BasicTitle;
 import com.shaoyue.weizhegou.entity.cedit.BasicInformationBean;
 import com.shaoyue.weizhegou.entity.cedit.GoAllSelect;
+import com.shaoyue.weizhegou.entity.cedit.TimeSelect;
 import com.shaoyue.weizhegou.entity.sxdc.DbBean;
 import com.shaoyue.weizhegou.module.sxdc.adapter.DydbQyInformationAdapter;
 import com.shaoyue.weizhegou.util.GsonUtil;
 import com.shaoyue.weizhegou.util.ToastUtil;
 import com.shaoyue.weizhegou.widget.datepicker.CustomDatePicker;
 import com.shaoyue.weizhegou.widget.datepicker.DateFormatUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -77,7 +82,7 @@ public class DcDbQyfxFragment extends BaseTitleFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        EventBus.getDefault().register(this);
+        EventBus.getDefault().register(this);
         if (ObjectUtils.isNotEmpty(getArguments())) {
             goAllSelect = (GoAllSelect) getArguments().getSerializable("goAllSelect");
         }
@@ -86,26 +91,53 @@ public class DcDbQyfxFragment extends BaseTitleFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        EventBus.getDefault().unregister(this);
+        EventBus.getDefault().unregister(this);
     }
 
+    private String timeTitle;
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(final TimeSelect timeSelect) {
+
+            List<BasicTitle> list = mAdapter.getData();
+            for (BasicTitle title : list) {
+                for (BasicInformationBean.RecordsBean bean : title.getMlist()) {
+                    if (bean.getTitile().equals(timeSelect.getTitle())) {
+                        mDatePicker.show(timeSelect.getTime());
+                        timeTitle = timeSelect.getTitle();
+                    }
+                }
+            }
+
+
+
+    }
+
+    /**
+     * 时间滑轮
+     */
     /**
      * 时间滑轮
      */
     private void initDatePicker() {
         long beginTimestamp = DateFormatUtils.str2Long("2009-05-01", false);
         long endTimestamp = DateFormatUtils.str2Long("2119-05-01", false);
-
-//
-//        mEtStartTime.setText(DateFormatUtils.long2Str(System.currentTimeMillis(), false));
-
         // 通过时间戳初始化日期，毫秒级别
         mDatePicker = new CustomDatePicker(getActivity(), new CustomDatePicker.Callback() {
             @Override
             public void onTimeSelected(long timestamp) {
-                mEtStartTime.setText(DateFormatUtils.long2Str(timestamp, false));
+                List<BasicTitle> list = mAdapter.getData();
+                for (BasicTitle title : list) {
+                    for (BasicInformationBean.RecordsBean bean : title.getMlist()) {
+                        if (bean.getTitile().equals(timeTitle)) {
+                            bean.setDefaultvalue(DateFormatUtils.long2Str(timestamp, false));
+                        }
+                    }
+                }
+                mAdapter.setNewData(list);
+                mAdapter.notifyDataSetChanged();
             }
         }, beginTimestamp, endTimestamp);
+
         // 不允许点击屏幕或物理返回键关闭
         mDatePicker.setCancelable(false);
         // 不显示时和分
@@ -115,7 +147,6 @@ public class DcDbQyfxFragment extends BaseTitleFragment {
         // 不允许滚动动画
         mDatePicker.setCanShowAnim(false);
     }
-
 
     @Override
     protected void initView(View rootView) {
@@ -131,6 +162,7 @@ public class DcDbQyfxFragment extends BaseTitleFragment {
 
         titles.add(new BasicTitle("企业信息", new ArrayList<BasicInformationBean.RecordsBean>()));
         titles.add(new BasicTitle("财务分析", new ArrayList<BasicInformationBean.RecordsBean>()));
+        titles.add(new BasicTitle("情况说明",new ArrayList<BasicInformationBean.RecordsBean>()));
 
 
         mEtStartTime.setVisibility(View.GONE);
@@ -224,6 +256,7 @@ public class DcDbQyfxFragment extends BaseTitleFragment {
      * 获取界面数据byid
      */
     private void getListById() {
+        LogUtils.e("asasd");
 //        DcApi.getSyjbInfo(new BaseCallback<BaseResponse<JsonObject>>() {
 //            @Override
 //            public void onSucc(BaseResponse<JsonObject> result) {
@@ -248,7 +281,7 @@ public class DcDbQyfxFragment extends BaseTitleFragment {
 
         try {
             Map<String, String> map = goAllSelect.getJsonObjectmap();
-
+            LogUtils.e(map);
             List<BasicTitle> list = mAdapter.getData();
 
             if (ObjectUtils.isNotEmpty(list)) {
@@ -393,7 +426,7 @@ public class DcDbQyfxFragment extends BaseTitleFragment {
 
                         }
                     }
-                    if ("主营业务收入检验".equals(title.getTitle()) || "年净利润检验".equals(title.getTitle())) {
+                    if ("企业信息".equals(title.getTitle()) || "情况说明".equals(title.getTitle())) {
                         if (ObjectUtils.isNotEmpty(bean1.getName())) {
                             map.put(bean1.getName(), bean1.getDefaultvalue());
                         }

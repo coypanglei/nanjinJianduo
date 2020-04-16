@@ -329,6 +329,7 @@ public class shouXinShenQingFragment extends BaseAppFragment implements BGARefre
                 }
                 UIHelper.showOkClearDialog(getActivity(), "是否取消申请?");
 
+
                 break;
             case R.id.sb_synchronize:
                 CeditApi.tbInfo(getSelect().getId(), new BaseCallback<BaseResponse<Void>>() {

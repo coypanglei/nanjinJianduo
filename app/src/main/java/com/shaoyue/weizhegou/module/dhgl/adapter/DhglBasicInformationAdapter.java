@@ -50,7 +50,8 @@ DhglBasicInformationAdapter extends BaseQuickAdapter<BasicInformationBean.Record
     private FragmentActivity activity;
 
 
-    public DhglBasicInformationAdapter() {
+    public
+    DhglBasicInformationAdapter() {
         super(null);
         setMultiTypeDelegate(new MultiTypeDelegate<BasicInformationBean.RecordsBean>() {
             @Override

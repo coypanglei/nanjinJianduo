@@ -13,6 +13,8 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.flyco.tablayout.SlidingTabLayout;
+import com.huantansheng.easyphotos.EasyPhotos;
+import com.huantansheng.easyphotos.models.album.entity.Photo;
 import com.libracore.lib.widget.StateButton;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.api.callback.BaseCallback;
@@ -28,9 +30,9 @@ import com.shaoyue.weizhegou.entity.cedit.ScreenObject;
 import com.shaoyue.weizhegou.event.OkOrCancelEvent;
 import com.shaoyue.weizhegou.manager.AppMgr;
 import com.shaoyue.weizhegou.manager.UserMgr;
+import com.shaoyue.weizhegou.util.GlideEngine;
 import com.shaoyue.weizhegou.util.ThreadUtil;
 import com.shaoyue.weizhegou.util.ToastUtil;
-import com.wildma.pictureselector.PictureSelector;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -358,9 +360,13 @@ public class DbShouQuanShuFragment extends BaseTitleFragment {
             case R.id.sb_sc:
                 LogUtils.e();
                 if (ObjectUtils.isEmpty(mlist.get(mTl1.getCurrentTab()).getId())) {
-                    PictureSelector
-                            .create(getActivity(), 1008)
-                            .selectPicture(false, 200, 200, 1, 1);
+                    EasyPhotos.createAlbum(getActivity(), true, GlideEngine.getInstance())//参数说明：上下文，是否显示相机按钮，[配置Glide为图片加载引擎](https://github.com/HuanTanSheng/EasyPhotos/wiki/12-%E9%85%8D%E7%BD%AEImageEngine%EF%BC%8C%E6%94%AF%E6%8C%81%E6%89%80%E6%9C%89%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD%E5%BA%93)
+                            .setFileProviderAuthority("com.shaoyue.weizhegou.fileprovider")//参数说明：见下方`FileProvider的配置`
+                            .setCount(1)//参数说明：最大可选数，默认1
+                            .start(1008);
+//                    PictureSelector
+//                            .create(getActivity(), 1008)
+//                            .selectPicture(false, 200, 200, 1, 1);
                 }
                 break;
         }
@@ -374,7 +380,11 @@ public class DbShouQuanShuFragment extends BaseTitleFragment {
             LogUtils.e(mTl1.getCurrentTab());
             //4m大小 支持
             if (null != ocrBean.getData()) {
-                String picturePath = ocrBean.getData().getStringExtra(PictureSelector.PICTURE_PATH);
+                final ArrayList<Photo> resultPhotos = ocrBean.getData().getParcelableArrayListExtra(EasyPhotos.RESULT_PHOTOS);
+                if (ObjectUtils.isEmpty(resultPhotos) || resultPhotos.size() == 0) {
+                    return;
+                }
+                String picturePath = resultPhotos.get(0).path;
 
                 final File mFile = new File(picturePath);
                 Luban.with(getActivity())

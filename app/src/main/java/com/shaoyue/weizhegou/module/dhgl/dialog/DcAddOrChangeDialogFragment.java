@@ -23,6 +23,7 @@ import com.shaoyue.weizhegou.entity.BasicTitle;
 import com.shaoyue.weizhegou.entity.cedit.BasicInformationBean;
 import com.shaoyue.weizhegou.entity.cedit.GoAllSelect;
 import com.shaoyue.weizhegou.entity.cedit.QianziBean;
+import com.shaoyue.weizhegou.entity.cedit.RefreshBean;
 import com.shaoyue.weizhegou.entity.cedit.TimeSelect;
 import com.shaoyue.weizhegou.entity.diaocha.AddressSelectBean;
 import com.shaoyue.weizhegou.event.OkOrCancelEvent;
@@ -139,6 +140,59 @@ public class DcAddOrChangeDialogFragment extends BaseTitleFragment {
         }
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(final RefreshBean refreshBean) {
+//        if ("担保分析".equals(refreshBean.getTitle())) {
+        final List<BasicTitle> list = mAdapter.getData();
+        //评估单价x建筑面积
+        Double pgdj = 0.0;
+        Double jzmj = 0.0;
+        if (ObjectUtils.isNotEmpty(list)) {
+            for (BasicTitle title : list) {
+                for (BasicInformationBean.RecordsBean bean : title.getMlist()) {
+                    if (ObjectUtils.isNotEmpty(bean.getDefaultvalue())) {
+                        if ("pgdj".equals(bean.getName())) {
+                            pgdj = Double.valueOf(bean.getDefaultvalue());
+
+                        }
+                        if ("jzmj".equals(bean.getName())) {
+                            jzmj = Double.valueOf(bean.getDefaultvalue());
+                        }
+                    }
+                }
+
+            }
+        }
+
+        for (BasicTitle title : list) {
+            for (BasicInformationBean.RecordsBean bean : title.getMlist()) {
+                if (ObjectUtils.isNotEmpty(bean.getDefaultvalue())) {
+                    if ("pgj".equals(bean.getName())) {
+                        Double pgj = pgdj * jzmj / 10000;
+                        bean.setDefaultvalue(pgj + "");
+                        LogUtils.e(pgj);
+                    }
+
+                }
+            }
+
+        }
+
+        if (rvCwfx.isComputingLayout()) {
+            rvCwfx.post(new Runnable() {
+                @Override
+                public void run() {
+                    mAdapter.setNewData(list);
+                    mAdapter.notifyDataSetChanged();
+                }
+            });
+        } else {
+            mAdapter.setNewData(list);
+            mAdapter.notifyDataSetChanged();
+        }
+
+    }
+
     /**
      * 刷新数据
      */
@@ -160,6 +214,7 @@ public class DcAddOrChangeDialogFragment extends BaseTitleFragment {
 
         }
     }
+
 
     @Override
     protected void initView(View rootView) {
@@ -227,7 +282,7 @@ public class DcAddOrChangeDialogFragment extends BaseTitleFragment {
         List<BasicTitle> list = mAdapter.getData();
         for (BasicTitle title : list) {
             for (BasicInformationBean.RecordsBean bean : title.getMlist()) {
-                    LogUtils.e(timeSelect.getTitle());
+                LogUtils.e(timeSelect.getTitle());
                 if (bean.getTitile().equals(timeSelect.getTitle())) {
 
                     mDatePicker.show(timeSelect.getTime());
@@ -303,7 +358,7 @@ public class DcAddOrChangeDialogFragment extends BaseTitleFragment {
                     }
 
                 } catch (Exception e) {
-                     LogUtils.e(e);
+                    LogUtils.e(e);
                 }
 
 
@@ -442,9 +497,9 @@ public class DcAddOrChangeDialogFragment extends BaseTitleFragment {
                     } else if ("新增授信调查-抵(质)押分析".equals(goAllSelect.getTitle())) {
                         add = CeditApi.DANBAODIYA_ADD + "All";
                     } else if ("公司担保分析".equals(goAllSelect.getTitle())) {
-                        add = CeditApi.DANBAOREN_ADD_GONGSI+ "All";
+                        add = CeditApi.DANBAOREN_ADD_GONGSI + "All";
                     } else if ("企业担保分析".equals(goAllSelect.getTitle())) {
-                        add = CeditApi.DANBAOREN_ADD_QIYE+ "All";
+                        add = CeditApi.DANBAOREN_ADD_QIYE + "All";
                     }
                     CeditApi.addDanbaoInfo(add, map, new BaseCallback<BaseResponse<Void>>() {
                         @Override
@@ -464,10 +519,10 @@ public class DcAddOrChangeDialogFragment extends BaseTitleFragment {
                         edit = CeditApi.DANBAOZHIYA_EDIT + "All";
 
                     } else if ("公司担保分析".equals(goAllSelect.getTitle())) {
-                        edit = CeditApi.DANBAOREN_EDIT_GONGSI+ "All";
+                        edit = CeditApi.DANBAOREN_EDIT_GONGSI + "All";
 
                     } else if ("企业担保分析".equals(goAllSelect.getTitle())) {
-                        edit = CeditApi.DANBAOREN_EDIT_QIYE+ "All";
+                        edit = CeditApi.DANBAOREN_EDIT_QIYE + "All";
 
                     }
 

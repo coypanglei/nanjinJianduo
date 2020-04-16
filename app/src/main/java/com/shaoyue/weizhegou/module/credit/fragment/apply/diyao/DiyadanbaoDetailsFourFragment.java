@@ -24,6 +24,7 @@ import com.shaoyue.weizhegou.event.OkOrCancelEvent;
 import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.module.credit.fragment.apply.diyao.adapter.ZiRanDanBaoFourAdapter;
 import com.shaoyue.weizhegou.router.UIHelper;
+import com.shaoyue.weizhegou.util.ObjectToMapUtils;
 import com.shaoyue.weizhegou.util.ThreadUtil;
 import com.shaoyue.weizhegou.util.ToastUtil;
 
@@ -206,7 +207,7 @@ public class DiyadanbaoDetailsFourFragment extends BaseAppFragment implements BG
                     return;
                 }
                 if ("调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
-                    UIHelper.showDhDiyaFragment(getActivity(), new GoAllSelect(false, "授信调查-企业担保分析", new HashMap()));
+                    UIHelper.showDhDiyaFragment(getActivity(), new GoAllSelect(false, "授信调查-企业担保分析", ObjectToMapUtils.str2Map(getSelect())));
                 } else {
                     UIHelper.showDiyaFragment(getActivity(), new GoAllSelect(false, "企业担保分析", getSelect()));
                 }

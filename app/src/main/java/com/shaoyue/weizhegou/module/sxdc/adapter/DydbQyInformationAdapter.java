@@ -38,7 +38,7 @@ public class DydbQyInformationAdapter extends BaseQuickAdapter<BasicTitle, BaseV
     @Override
     protected void convert(final BaseViewHolder helper, final BasicTitle item) {
         helper.setText(R.id.tv_my_info, item.getTitle());
-        if ("企业信息".equals(item.getTitle())||"年净利润检验".equals(item.getTitle())) {
+        if ("企业信息".equals(item.getTitle())||"情况说明".equals(item.getTitle())) {
             RecyclerView mIdJiben = helper.getView(R.id.ry);
             DhglBasicInformationAdapter mAdapter;
             mAdapter = new DhglBasicInformationAdapter();

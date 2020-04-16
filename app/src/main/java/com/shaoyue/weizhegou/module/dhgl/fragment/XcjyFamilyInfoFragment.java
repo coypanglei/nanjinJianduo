@@ -218,10 +218,10 @@ public class XcjyFamilyInfoFragment extends BaseAppFragment implements BGARefres
             public void onSucc(BaseResponse<FamilyListBean> result) {
 
                 pages = result.data.getPages();
-                if (result.data.getData().size() > 0) {
+                if (result.data.getTs() > 0) {
                     mEmptyRelative.setVisibility(View.GONE);
                     SPUtils.getInstance().put(UserMgr.SP_IS_PO, false);
-                    if (result.data.getData().size() > 1) {
+                    if (result.data.getTs() > 1) {
                         SPUtils.getInstance().put(UserMgr.SP_IS_PO, true);
                     }
 

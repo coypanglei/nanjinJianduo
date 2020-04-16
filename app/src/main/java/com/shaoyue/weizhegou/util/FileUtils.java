@@ -1,4 +1,4 @@
-package com.wildma.pictureselector;
+package com.shaoyue.weizhegou.util;
 
 import android.os.Environment;
 

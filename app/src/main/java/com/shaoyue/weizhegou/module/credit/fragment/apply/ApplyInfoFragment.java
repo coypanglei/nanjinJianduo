@@ -26,6 +26,7 @@ import com.shaoyue.weizhegou.entity.cedit.RefreshBean;
 import com.shaoyue.weizhegou.entity.user.MainClickBean;
 import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.MenuAdapter;
+import com.shaoyue.weizhegou.module.credit.fragment.diaocha.DcMoneyLiuFragment;
 import com.shaoyue.weizhegou.module.credit.fragment.diaocha.MyDataDcFragment;
 import com.shaoyue.weizhegou.widget.NoScrollViewPager;
 
@@ -87,13 +88,14 @@ public class ApplyInfoFragment extends BaseTitleFragment {
 
         final List<MainClickBean> mMenuList = new ArrayList<>();
         mMenuList.add(new MainClickBean("家庭信息", true));
+        mMenuList.add(new MainClickBean("我行数据", false));
         mMenuList.add(new MainClickBean("人脸识别", false));
+        mMenuList.add(new MainClickBean("现金流", false));
         mMenuList.add(new MainClickBean("征信授权书", false));
         mMenuList.add(new MainClickBean("征信查询", false));
         mMenuList.add(new MainClickBean("汇法网查询", false));
         mMenuList.add(new MainClickBean("影像资料", false));
         mMenuList.add(new MainClickBean("基本信息", false));
-        mMenuList.add(new MainClickBean("我行数据", false));
         mMenuList.add(new MainClickBean("担保抵押", false));
         mMenuList.add(new MainClickBean("初审结果", false));
         mMenuList.add(new MainClickBean("授信申请单", false));
@@ -123,6 +125,8 @@ public class ApplyInfoFragment extends BaseTitleFragment {
                 fragmentList.add(SxsqDanQianziFragment.newInstance());
             }else if("汇法网查询".equals(mMenuList.get(i).getTitle())){
                 fragmentList.add(HfwInformationFragment.newInstance());
+            }else if ("现金流".equals(mMenuList.get(i).getTitle())) {
+                fragmentList.add(DcMoneyLiuFragment.newInstance());
             }
         }
         mMenuList.get(0).setSelect(true);

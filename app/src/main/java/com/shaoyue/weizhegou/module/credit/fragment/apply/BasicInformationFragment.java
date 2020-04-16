@@ -20,9 +20,12 @@ import com.shaoyue.weizhegou.api.remote.CeditApi;
 import com.shaoyue.weizhegou.base.BaseAppFragment;
 import com.shaoyue.weizhegou.entity.BasicTitle;
 import com.shaoyue.weizhegou.entity.cedit.BasicInformationBean;
+import com.shaoyue.weizhegou.entity.cedit.InfoChangeBean;
 import com.shaoyue.weizhegou.entity.cedit.TimeSelect;
 import com.shaoyue.weizhegou.entity.diaocha.AddressSelectBean;
+import com.shaoyue.weizhegou.event.OkOrCancelEvent;
 import com.shaoyue.weizhegou.module.sxdc.adapter.BasicInformationAdapter;
+import com.shaoyue.weizhegou.router.UIHelper;
 import com.shaoyue.weizhegou.util.ObjectToMapUtils;
 import com.shaoyue.weizhegou.util.ToastUtil;
 import com.shaoyue.weizhegou.widget.datepicker.CustomDatePicker;
@@ -70,8 +73,6 @@ public class BasicInformationFragment extends BaseAppFragment {
     private String id;
     private String gbhyflmc;
     private String gbhyfl;
-
-
 
 
     public static BasicInformationFragment newInstance() {
@@ -125,7 +126,7 @@ public class BasicInformationFragment extends BaseAppFragment {
 
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(final AddressSelectBean addressSelectBean){
+    public void onMessageEvent(final AddressSelectBean addressSelectBean) {
         List<BasicTitle> list = mAdapter.getData();
         if (ObjectUtils.isNotEmpty(list)) {
             for (BasicTitle title : list) {
@@ -148,6 +149,48 @@ public class BasicInformationFragment extends BaseAppFragment {
         if (ObjectUtils.isNotEmpty(timeSelect.getTime())) {
             mDatePicker.show(timeSelect.getTime());
             timeTitle = timeSelect.getTitle();
+        }
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(final BasicInformationBean.RecordsBean item) {
+        if (ObjectUtils.isNotEmpty(item.getDefaultvalue())) {
+            if (item.getDefaultvalue().equals("阳光信贷")) {
+                CeditApi.infoChange(new BaseCallback<BaseResponse<InfoChangeBean>>() {
+                    @Override
+                    public void onSucc(BaseResponse<InfoChangeBean> result) {
+                        LogUtils.e(result);
+                        if (ObjectUtils.isNotEmpty(result.data)) {
+                            List<BasicTitle> list = mAdapter.getData();
+
+                            if (ObjectUtils.isNotEmpty(list)) {
+                                for (BasicTitle title : list) {
+                                    for (BasicInformationBean.RecordsBean bean : title.getMlist()) {
+
+                                        if (ObjectUtils.isNotEmpty(bean.getDefaultvalue())) {
+                                            if (bean.getName().equals("fsfs")) {
+                                                if ("true".equals(result.data.getClsx())) {
+                                                    bean.setDefaultvalue("存量授信");
+                                                } else {
+                                                    bean.setDefaultvalue("增量授信");
+                                                }
+
+                                            }
+                                        }
+                                    }
+
+                                }
+                            }
+                            mAdapter.setNewData(list);
+                            mAdapter.notifyDataSetChanged();
+                            UIHelper.infoShowDialog(getActivity(), new OkOrCancelEvent(result.data.getTsxx()));
+                        }
+
+                    }
+                }, this);
+
+            }
         }
 
     }
@@ -181,12 +224,6 @@ public class BasicInformationFragment extends BaseAppFragment {
         }, this);
     }
 
-
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        getListById();
-//    }
 
     /**
      * 时间滑轮

@@ -130,7 +130,19 @@ public class MyHangBean extends BaseBean {
          * sqjjnj : 11
          * bdqb : 未开通
          * dwdb : 11.0
+         * dbbs
          */
+
+        private String dbbs;
+
+        public String getDbbs() {
+            return dbbs;
+        }
+
+        public void setDbbs(String dbbs) {
+            this.dbbs = dbbs;
+        }
+
         @SerializedName("hzgx")
         private String hzgx;
 

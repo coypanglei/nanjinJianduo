@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 
 import com.blankj.utilcode.util.ObjectUtils;
 import com.shaoyue.weizhegou.base.BaseAppActivity;
+import com.shaoyue.weizhegou.base.dialog.InfoShowFragment;
 import com.shaoyue.weizhegou.base.dialog.NewOkCancelFragment;
 import com.shaoyue.weizhegou.base.dialog.OkCancelFragment;
 import com.shaoyue.weizhegou.entity.ActivityBean;
@@ -125,7 +126,9 @@ public class UIHelper {
     public static final String FIAL = "fail";
 
     public static final String Ok_CANCEL = "ok_cancel";
-    public static final String Ok_CANCEL_NEW = "ok_cancel";
+    public static final String Ok_CANCEL_NEW = "ok_cancel_new";
+
+    public static final String INFO_SHOW= "info_show";
 
     public static final String EDIT_NUM = "edit_num";
 
@@ -765,6 +768,21 @@ public class UIHelper {
         if (fragment == null) {
             DialogFragment dialog = NewOkCancelFragment.newInstance(title);
             dialog.show(fm, Ok_CANCEL_NEW);
+        }
+    }
+
+
+    /**
+     * 基本信息的dialog
+     *
+     * @param activity
+     */
+    public static void infoShowDialog(FragmentActivity activity, OkOrCancelEvent title) {
+        FragmentManager fm = activity.getSupportFragmentManager();
+        Fragment fragment = fm.findFragmentByTag(INFO_SHOW);
+        if (fragment == null) {
+            InfoShowFragment dialog = InfoShowFragment.newInstance(title);
+            dialog.show(fm, INFO_SHOW);
         }
     }
 

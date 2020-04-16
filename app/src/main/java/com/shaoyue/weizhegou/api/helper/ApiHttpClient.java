@@ -17,6 +17,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -131,6 +132,27 @@ public class ApiHttpClient {
         getRequest.headers("X-Access-Token", UserMgr.getInstance().getSessionId());
         getRequest.execute(callback);
     }
+
+    /**
+     * 多图上传图片
+     *
+     * @param partUrl
+     * @param callback
+     * @param tag
+     */
+    public static void updateImg(String partUrl, Map<String, String> params, List<File> mFile, BaseCallback callback, Object tag) {
+        PostRequest getRequest = OkGo.<Bitmap>post(getAbsoulteApiUrl(partUrl));
+        getRequest.tag(tag);
+
+        Map<String, String> postParams = getPostData(params);
+        for (Map.Entry<String, String> entry : postParams.entrySet()) {
+            getRequest.params(entry.getKey(), entry.getValue());
+        }
+        getRequest.addFileParams("files", mFile);
+        getRequest.headers("X-Access-Token", UserMgr.getInstance().getSessionId());
+        getRequest.execute(callback);
+    }
+
 
 
     /**

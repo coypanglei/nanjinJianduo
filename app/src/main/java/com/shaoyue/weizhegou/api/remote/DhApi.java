@@ -367,10 +367,11 @@ public class DhApi {
      * @param callback
      * @param tag
      */
-    public static void sxjyZxcx(String id, BaseCallback<BaseResponse<ZxcxListBean>> callback, Object tag) {
+    public static void sxjyZxcx(String js,String id, BaseCallback<BaseResponse<ZxcxListBean>> callback, Object tag) {
         Map<String, String> params = new HashMap<>();
         params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
         params.put("description", id);
+        params.put("js",js);
         ApiHttpClient.post(XCJY_SXCX, params, callback, tag);
 
     }
@@ -410,8 +411,9 @@ public class DhApi {
      * @param callback
      * @param tag
      */
-    public static void sxjyZxcx(BaseCallback<BaseResponse<ZxcxListBean>> callback, Object tag) {
+    public static void sxZxcx(String js,BaseCallback<BaseResponse<ZxcxListBean>> callback, Object tag) {
         Map<String, String> params = new HashMap<>();
+        params.put("js",js);
         params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
         ApiHttpClient.post(XCJY_SXCX, params, callback, tag);
 
@@ -423,8 +425,9 @@ public class DhApi {
      * @param callback
      * @param tag
      */
-    public static void addsqZxcx(BaseCallback<BaseResponse<Void>> callback, Object tag) {
+    public static void addsqZxcx(String js,BaseCallback<BaseResponse<Void>> callback, Object tag) {
         Map<String, String> params = new HashMap<>();
+        params.put("js",js);
         params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
         ApiHttpClient.post(SXCC_ADD, params, callback, tag);
 
@@ -437,9 +440,10 @@ public class DhApi {
      * @param callback
      * @param tag
      */
-    public static void cssqZxcx(BaseCallback<BaseResponse<Void>> callback, Object tag) {
+    public static void cssqZxcx(String js,BaseCallback<BaseResponse<Void>> callback, Object tag) {
         Map<String, String> params = new HashMap<>();
         params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        params.put("js",js);
         ApiHttpClient.post(SXCC_CS, params, callback, tag);
 
     }
@@ -450,8 +454,9 @@ public class DhApi {
      * @param callback
      * @param tag
      */
-    public static void adddbsqZxcx(String id, BaseCallback<BaseResponse<Void>> callback, Object tag) {
+    public static void adddbsqZxcx(String js ,String id, BaseCallback<BaseResponse<Void>> callback, Object tag) {
         Map<String, String> params = new HashMap<>();
+        params.put("js",js);
         params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
         params.put("id", id);
         ApiHttpClient.post(DB_SXCC_ADD, params, callback, tag);
@@ -493,8 +498,9 @@ public class DhApi {
      * @param callback
      * @param tag
      */
-    public static void csdbbsqZxcx(String id, BaseCallback<BaseResponse<Void>> callback, Object tag) {
+    public static void csdbbsqZxcx(String js,String id, BaseCallback<BaseResponse<Void>> callback, Object tag) {
         Map<String, String> params = new HashMap<>();
+        params.put("js",js);
         params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
         params.put("dbid", id);
         ApiHttpClient.post(SXCC_CS, params, callback, tag);

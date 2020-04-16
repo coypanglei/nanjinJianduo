@@ -171,7 +171,7 @@ public class CreditInquiryDetailsFragmentTwo extends BaseAppFragment {
 
 
     }
-
+    String js="本人";
     @Override
     public void onResume() {
         super.onResume();
@@ -183,14 +183,19 @@ public class CreditInquiryDetailsFragmentTwo extends BaseAppFragment {
      */
     private void xcjyZxcx() {
         startProgressDialog(true);
-        DhApi.sxjyZxcx(new BaseCallback<BaseResponse<ZxcxListBean>>() {
+
+        if ("配偶征信数据".equals(title)){
+            js ="配偶";
+        }
+        DhApi.sxZxcx(js,new BaseCallback<BaseResponse<ZxcxListBean>>() {
             @Override
             public void onSucc(BaseResponse<ZxcxListBean> result) {
                 nestedSc.setVisibility(View.VISIBLE);
                 stopProgressDialog();
                 ZxcxListBean.RecordsBean bean = new ZxcxListBean.RecordsBean();
-                if ("配偶征信数据".equals(title) && result.data.getTotal() == 2) {
-                    myHangBean = result.data.getRecords().get(1);
+
+                if ("配偶征信数据".equals(title) ) {
+                    myHangBean = result.data.getRecords().get(0);
                     llWhpj.setVisibility(View.GONE);
                 }
 
@@ -295,7 +300,7 @@ public class CreditInquiryDetailsFragmentTwo extends BaseAppFragment {
                     }
 
                 } catch (Exception e) {
-
+                    
                 }
 
                 tvYqqs.setText(Html.fromHtml(yqqs));
@@ -374,14 +379,14 @@ public class CreditInquiryDetailsFragmentTwo extends BaseAppFragment {
             case R.id.sb_find:
 
                 if (errorTv.contains("没有相关查询任务")) {
-                    DhApi.addsqZxcx(new BaseCallback<BaseResponse<Void>>() {
+                    DhApi.addsqZxcx(js,new BaseCallback<BaseResponse<Void>>() {
                         @Override
                         public void onSucc(BaseResponse<Void> result) {
                             EventBus.getDefault().post(new RefreshBean());
                         }
                     }, this);
                 } else if (errorTv.contains("查询失败")) {
-                    DhApi.cssqZxcx(new BaseCallback<BaseResponse<Void>>() {
+                    DhApi.cssqZxcx(js,new BaseCallback<BaseResponse<Void>>() {
                         @Override
                         public void onSucc(BaseResponse<Void> result) {
                             EventBus.getDefault().post(new RefreshBean());
@@ -448,7 +453,7 @@ public class CreditInquiryDetailsFragmentTwo extends BaseAppFragment {
 
                 map.put("blyyms", whblyycs);
 
-                CeditApi.saveZxcx(map, new BaseCallback<BaseResponse<Void>>() {
+                CeditApi.saveZxcx(js,map, new BaseCallback<BaseResponse<Void>>() {
                     @Override
                     public void onSucc(BaseResponse<Void> result) {
                         ToastUtil.showBlackToastSucess("保存成功");

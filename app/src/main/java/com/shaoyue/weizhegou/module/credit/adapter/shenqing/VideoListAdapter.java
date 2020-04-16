@@ -10,9 +10,7 @@ import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.luck.picture.lib.PictureSelector;
-import com.luck.picture.lib.config.PictureConfig;
-import com.luck.picture.lib.config.PictureMimeType;
+import com.huantansheng.easyphotos.EasyPhotos;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.entity.cedit.VideoMaterialBean;
 import com.shaoyue.weizhegou.util.GlideEngine;
@@ -111,7 +109,7 @@ public class VideoListAdapter extends BaseQuickAdapter<VideoMaterialBean, BaseVi
 //                if ("查看详情".equals(SPUtils.getInstance().getString("status")) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
 //                    return;
 //                }
-                if ("查看详情".equals(SPUtils.getInstance().getString("status")) ) {
+                if ("查看详情".equals(SPUtils.getInstance().getString("status"))) {
                     return;
                 }
                 List<VideoMaterialBean.ListBean> selet = adapter.getData();
@@ -122,13 +120,17 @@ public class VideoListAdapter extends BaseQuickAdapter<VideoMaterialBean, BaseVi
                         SPUtils.getInstance().put("selectPic_id", selet.get(position).getId());
                         SPUtils.getInstance().put("selectPic_zllx", selet.get(position).getZllx());
                         SPUtils.getInstance().put("selectPic_sxsfzh", selet.get(position).getSxsfzh());
-                        PictureSelector.create(mFragment)
-                                .openGallery(PictureMimeType.ofImage())
-                                .loadImageEngine(GlideEngine.createGlideEngine()) // 请参考Demo GlideEngine.java
-                                .forResult(PictureConfig.CHOOSE_REQUEST);
-//                        PictureSelector
-//                                .create(mFragment, 1007)
-//                                .selectPicture(false, 200, 200, 1, 1);
+                        if (item.getTitle().contains("借款人身份证") || item.getTitle().contains("配偶身份证")) {
+                            EasyPhotos.createAlbum(mFragment, true, GlideEngine.getInstance())//参数说明：上下文，是否显示相机按钮，[配置Glide为图片加载引擎](https://github.com/HuanTanSheng/EasyPhotos/wiki/12-%E9%85%8D%E7%BD%AEImageEngine%EF%BC%8C%E6%94%AF%E6%8C%81%E6%89%80%E6%9C%89%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD%E5%BA%93)
+                                    .setFileProviderAuthority("com.shaoyue.weizhegou.fileprovider")//参数说明：见下方`FileProvider的配置`
+                                    .setCount(1)//参数说明：最大可选数，默认1
+                                    .start(1007);
+                        }else {
+                            EasyPhotos.createAlbum(mFragment, true, GlideEngine.getInstance())//参数说明：上下文，是否显示相机按钮，[配置Glide为图片加载引擎](https://github.com/HuanTanSheng/EasyPhotos/wiki/12-%E9%85%8D%E7%BD%AEImageEngine%EF%BC%8C%E6%94%AF%E6%8C%81%E6%89%80%E6%9C%89%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD%E5%BA%93)
+                                    .setFileProviderAuthority("com.shaoyue.weizhegou.fileprovider")//参数说明：见下方`FileProvider的配置`
+                                    .setCount(8)//参数说明：最大可选数，默认1
+                                    .start(1007);
+                        }
                     } else {
                         SPUtils.getInstance().put("selectPic", item.getCategory());
                         SPUtils.getInstance().put("selectPic_id", selet.get(position).getId());

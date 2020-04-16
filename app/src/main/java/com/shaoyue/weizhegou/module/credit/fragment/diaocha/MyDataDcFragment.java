@@ -296,7 +296,7 @@ public class MyDataDcFragment extends BaseFragment {
                             mList.add(new InquiryDetailsBean("最后一笔本息结清时间", myHangBean.getZhybdkjqsj(), myHangPeiOu.getZhybdkjqsj()));
                             mList.add(new InquiryDetailsBean("五级分类", myHangBean.getSqwjfl(), myHangPeiOu.getSqwjfl()));
                             mList.add(new InquiryDetailsBean("欠款欠息次数", myHangBean.getQkqxcs() + "", myHangPeiOu.getQkqxcs() + ""));
-                            mList.add(new InquiryDetailsBean("", "", ""));
+                            mList.add(new InquiryDetailsBean("担保笔数", myHangBean.getDbbs(), myHangPeiOu.getDbbs()));
                             mList.add(new InquiryDetailsBean("", "", ""));
                             mList.add(new InquiryDetailsBean("", "", ""));
 

@@ -23,6 +23,8 @@ import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.bumptech.glide.Glide;
+import com.huantansheng.easyphotos.EasyPhotos;
+import com.huantansheng.easyphotos.models.album.entity.Photo;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.api.callback.BaseCallback;
 import com.shaoyue.weizhegou.api.exception.ApiException;
@@ -36,9 +38,9 @@ import com.shaoyue.weizhegou.entity.cedit.OcrBean;
 import com.shaoyue.weizhegou.entity.cedit.RefreshBean;
 import com.shaoyue.weizhegou.manager.AppMgr;
 import com.shaoyue.weizhegou.manager.UserMgr;
+import com.shaoyue.weizhegou.util.GlideEngine;
 import com.shaoyue.weizhegou.util.ToastUtil;
 import com.shaoyue.weizhegou.widget.DropDownView;
-import com.wildma.pictureselector.PictureSelector;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -46,6 +48,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -303,8 +306,11 @@ public class FamilyInfoDialogFragment extends DialogFragment {
         if (ocrBean.getResultCode() == 1001) {
             //4m大小 支持
             if (null != ocrBean.getData()) {
-
-                String picturePath = ocrBean.getData().getStringExtra(PictureSelector.PICTURE_PATH);
+                final ArrayList<Photo> resultPhotos = ocrBean.getData().getParcelableArrayListExtra(EasyPhotos.RESULT_PHOTOS);
+                if (ObjectUtils.isEmpty(resultPhotos) || resultPhotos.size() == 0) {
+                    return;
+                }
+                String picturePath = resultPhotos.get(0).path;
 
                 final File mFile = new File(picturePath);
                 Luban.with(getActivity())
@@ -385,7 +391,11 @@ public class FamilyInfoDialogFragment extends DialogFragment {
 //4m大小 支持
             if (null != ocrBean.getData()) {
 
-                String picturePath = ocrBean.getData().getStringExtra(PictureSelector.PICTURE_PATH);
+                final ArrayList<Photo> resultPhotos = ocrBean.getData().getParcelableArrayListExtra(EasyPhotos.RESULT_PHOTOS);
+                if (ObjectUtils.isEmpty(resultPhotos) || resultPhotos.size() == 0) {
+                    return;
+                }
+                String picturePath = resultPhotos.get(0).path;
 
                 final File mFile = new File(picturePath);
                 Luban.with(getActivity())
@@ -493,10 +503,16 @@ public class FamilyInfoDialogFragment extends DialogFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_zheng:
-                PictureSelector.create(getActivity(), 1001).selectPicture(false, 200, 200, 1, 1);
+                EasyPhotos.createAlbum(getActivity(),true, GlideEngine.getInstance())//参数说明：上下文，是否显示相机按钮，[配置Glide为图片加载引擎](https://github.com/HuanTanSheng/EasyPhotos/wiki/12-%E9%85%8D%E7%BD%AEImageEngine%EF%BC%8C%E6%94%AF%E6%8C%81%E6%89%80%E6%9C%89%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD%E5%BA%93)
+                        .setFileProviderAuthority("com.shaoyue.weizhegou.fileprovider")//参数说明：见下方`FileProvider的配置`
+                        .setCount(1)//参数说明：最大可选数，默认1
+                        .start(1001);
                 break;
             case R.id.iv_fan:
-                PictureSelector.create(getActivity(), 1002).selectPicture(false, 200, 200, 1, 1);
+                EasyPhotos.createAlbum(getActivity(),true, GlideEngine.getInstance())//参数说明：上下文，是否显示相机按钮，[配置Glide为图片加载引擎](https://github.com/HuanTanSheng/EasyPhotos/wiki/12-%E9%85%8D%E7%BD%AEImageEngine%EF%BC%8C%E6%94%AF%E6%8C%81%E6%89%80%E6%9C%89%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD%E5%BA%93)
+                        .setFileProviderAuthority("com.shaoyue.weizhegou.fileprovider")//参数说明：见下方`FileProvider的配置`
+                        .setCount(1)//参数说明：最大可选数，默认1
+                        .start(1002);
 
                 break;
             case R.id.tv_cancel:

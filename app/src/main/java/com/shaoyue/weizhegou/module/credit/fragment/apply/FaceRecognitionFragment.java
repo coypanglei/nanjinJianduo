@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
+import com.huantansheng.easyphotos.EasyPhotos;
+import com.huantansheng.easyphotos.models.album.entity.Photo;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.api.callback.BaseCallback;
 import com.shaoyue.weizhegou.api.exception.ApiException;
@@ -26,7 +28,6 @@ import com.shaoyue.weizhegou.manager.DomainMgr;
 import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.util.GlideNewImageLoader;
 import com.shaoyue.weizhegou.util.ToastUtil;
-import com.wildma.pictureselector.PictureSelector;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -34,6 +35,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -158,7 +160,7 @@ public class FaceRecognitionFragment extends BaseAppFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(final OcrBean ocrBean) {
-        LogUtils.e(ocrBean);
+
         /*结果回调*/
         if (ocrBean.getResultCode() == 1004 || ocrBean.getResultCode() == 1005) {
             LogUtils.e(mFaceBeans);
@@ -168,7 +170,11 @@ public class FaceRecognitionFragment extends BaseAppFragment {
             //4m大小 支持
             if (null != ocrBean.getData()) {
 
-                String picturePath = ocrBean.getData().getStringExtra(PictureSelector.PICTURE_PATH);
+                final ArrayList<Photo> resultPhotos = ocrBean.getData().getParcelableArrayListExtra(EasyPhotos.RESULT_PHOTOS);
+                if (ObjectUtils.isEmpty(resultPhotos) || resultPhotos.size() == 0) {
+                    return;
+                }
+                String picturePath = resultPhotos.get(0).path;
 
                 final File mFile = new File(picturePath);
                 Luban.with(getActivity())
@@ -254,15 +260,17 @@ public class FaceRecognitionFragment extends BaseAppFragment {
                  * create()方法参数一是上下文，在activity中传activity.this，在fragment中传fragment.this。参数二为请求码，用于结果回调onActivityResult中判断
                  * selectPicture()方法参数分别为 是否裁剪、裁剪后图片的宽(单位px)、裁剪后图片的高、宽比例、高比例。都不传则默认为裁剪，宽200，高200，宽高比例为1：1。
                  */
-                PictureSelector
-                        .create(getActivity(), 1004)
-                        .selectPicture(false, 200, 200, 1, 1);
+                EasyPhotos.createCamera(getActivity())//参数说明：上下文，是否显示相机按钮，[配置Glide为图片加载引擎](https://github.com/HuanTanSheng/EasyPhotos/wiki/12-%E9%85%8D%E7%BD%AEImageEngine%EF%BC%8C%E6%94%AF%E6%8C%81%E6%89%80%E6%9C%89%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD%E5%BA%93)
+                        .setFileProviderAuthority("com.shaoyue.weizhegou.fileprovider")//参数说明：见下方`FileProvider的配置`
+                        .setCount(1)//参数说明：最大可选数，默认1
+                        .start(1004);
 
                 break;
             case R.id.ll_po:
-                PictureSelector
-                        .create(getActivity(), 1005)
-                        .selectPicture(false, 200, 200, 1, 1);
+                EasyPhotos.createCamera(getActivity())//参数说明：上下文，是否显示相机按钮，[配置Glide为图片加载引擎](https://github.com/HuanTanSheng/EasyPhotos/wiki/12-%E9%85%8D%E7%BD%AEImageEngine%EF%BC%8C%E6%94%AF%E6%8C%81%E6%89%80%E6%9C%89%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD%E5%BA%93)
+                        .setFileProviderAuthority("com.shaoyue.weizhegou.fileprovider")//参数说明：见下方`FileProvider的配置`
+                        .setCount(1)//参数说明：最大可选数，默认1
+                        .start(1005);
                 break;
         }
     }

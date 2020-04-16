@@ -1,1 +1,1 @@
-include ':app', ':vendorlib', ':libracore', ':citypickerview', ':pictureselector'
+include ':app', ':vendorlib', ':libracore', ':citypickerview'

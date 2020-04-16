@@ -9,6 +9,8 @@ import android.view.View;
 
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
+import com.huantansheng.easyphotos.EasyPhotos;
+import com.huantansheng.easyphotos.models.album.entity.Photo;
 import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.api.callback.BaseCallback;
 import com.shaoyue.weizhegou.api.exception.ApiException;
@@ -24,7 +26,6 @@ import com.shaoyue.weizhegou.manager.AppMgr;
 import com.shaoyue.weizhegou.module.dhgl.VideoListGrDhAdapter;
 import com.shaoyue.weizhegou.router.UIHelper;
 import com.shaoyue.weizhegou.util.ToastUtil;
-import com.wildma.pictureselector.PictureSelector;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -104,7 +105,6 @@ public class dyVideoDetailsFragment extends BaseAppFragment {
 
 
     private void addPic(final OcrBean ocrBean) {
-
         /*结果回调*/
         if (ocrBean.getResultCode() == 1007) {
 
@@ -115,70 +115,83 @@ public class dyVideoDetailsFragment extends BaseAppFragment {
             }
             //4m大小 支持
             if (null != ocrBean.getData()) {
-                String picturePath = ocrBean.getData().getStringExtra(PictureSelector.PICTURE_PATH);
+                final ArrayList<Photo> resultPhotos = ocrBean.getData().getParcelableArrayListExtra(EasyPhotos.RESULT_PHOTOS);
+                if (ObjectUtils.isEmpty(resultPhotos) || resultPhotos.size() == 0) {
+                    return;
+                }
+                final List<File> files = new ArrayList<>();
+                for (int i = 0; i < resultPhotos.size(); i++) {
+                    String picturePath = resultPhotos.get(i).path;
+                    final File mFile = new File(picturePath);
+                    Luban.with(getActivity())
+                            .load(mFile)
+                            .ignoreBy(80)
+                            .setTargetDir(AppMgr.getInstance().getApkPath())
+                            .filter(new CompressionPredicate() {
+                                @Override
+                                public boolean apply(String path) {
+                                    return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
+                                }
+                            })
+                            .setCompressListener(new OnCompressListener() {
+                                @Override
+                                public void onStart() {
+                                    // TODO 压缩开始前调用，可以在方法内启动 loading UI
+                                    startProgressDialog(true);
+                                }
 
-                final File mFile = new File(picturePath);
-                Luban.with(getActivity())
-                        .load(mFile)
-                        .ignoreBy(80)
-                        .setTargetDir(AppMgr.getInstance().getApkPath())
-                        .filter(new CompressionPredicate() {
-                            @Override
-                            public boolean apply(String path) {
-                                return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
-                            }
-                        })
-                        .setCompressListener(new OnCompressListener() {
-                            @Override
-                            public void onStart() {
-                                // TODO 压缩开始前调用，可以在方法内启动 loading UI
-                                startProgressDialog(true);
-                            }
-
-                            @Override
-                            public void onSuccess(final File file) {
-                                final String zllx = SPUtils.getInstance().getString("selectPic_zllx").replace("反", "").replace("正", "").replace("面", "");
+                                @Override
+                                public void onSuccess(final File file) {
+                                    //添加文件
+                                    files.add(file);
+                                    //判断集合是否为空
+                                    if (files.size() == resultPhotos.size()) {
+                                        final String zllx = SPUtils.getInstance().getString("selectPic_zllx").replace("反", "").replace("正", "").replace("面", "");
 //                                //上传头像
 
-                                UserApi.updatePic(file, new BaseCallback<BaseResponse<String>>() {
-                                    @Override
-                                    public void onSucc(BaseResponse<String> result) {
-                                        VideoMaterialBean.ListBean mdata = new VideoMaterialBean.ListBean();
-                                        mdata.setZldz(result.msg);
-                                        mdata.setZllx(zllx);
-                                        mdata.setSxsfzh(SPUtils.getInstance().getString("selectPic_sxsfzh"));
-
-                                        TyApi.addVideo(title,mdata, new BaseCallback<BaseResponse<Void>>() {
+                                        UserApi.updatePic(files, new BaseCallback<BaseResponse<String>>() {
                                             @Override
-                                            public void onSucc(BaseResponse<Void> result) {
-                                                resh();
-                                                stopProgressDialog();
+                                            public void onSucc(BaseResponse<String> result) {
+                                                VideoMaterialBean.ListBean mdata = new VideoMaterialBean.ListBean();
+                                                mdata.setZldz(result.msg);
+                                                mdata.setZllx(zllx);
+                                                mdata.setSxsfzh(SPUtils.getInstance().getString("selectPic_sxsfzh"));
+                                                TyApi.addVideo(title,mdata, new BaseCallback<BaseResponse<Void>>() {
+                                                    @Override
+                                                    public void onSucc(BaseResponse<Void> result) {
+                                                        resh();
+                                                        stopProgressDialog();
+                                                    }
+
+                                                    @Override
+                                                    public void onFail(ApiException apiError) {
+                                                        super.onFail(apiError);
+                                                        stopProgressDialog();
+                                                    }
+                                                }, this);
+
                                             }
 
                                             @Override
                                             public void onFail(ApiException apiError) {
-                                                super.onFail(apiError);
                                                 stopProgressDialog();
                                             }
                                         }, this);
-
                                     }
+                                }
 
-                                    @Override
-                                    public void onFail(ApiException apiError) {
-                                        stopProgressDialog();
-                                    }
-                                }, this);
+                                @Override
+                                public void onError(Throwable e) {
+                                    // TODO 当压缩过程出现问题时调用
+                                    ToastUtil.showBlackToastSucess("压缩文件失败");
+                                }
+                            }).launch();
+                }
 
-                            }
 
-                            @Override
-                            public void onError(Throwable e) {
-                                // TODO 当压缩过程出现问题时调用
-                                ToastUtil.showBlackToastSucess("压缩文件失败");
-                            }
-                        }).launch();
             }
+
+
         }
 
 

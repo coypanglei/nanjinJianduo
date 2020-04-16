@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.blankj.utilcode.util.AppUtils;
+import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
@@ -20,9 +22,8 @@ import com.shaoyue.weizhegou.api.model.BaseResponse;
 import com.shaoyue.weizhegou.api.remote.UserApi;
 import com.shaoyue.weizhegou.entity.cedit.QianziBean;
 import com.shaoyue.weizhegou.manager.UserMgr;
+import com.shaoyue.weizhegou.util.PictureSelector;
 import com.shaoyue.weizhegou.util.ToastUtil;
-import com.wildma.pictureselector.Constant;
-import com.wildma.pictureselector.FileUtils;
 import com.yanzhenjie.permission.Action;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.Permission;
@@ -135,10 +136,10 @@ public class QianziDialogFragment extends DialogFragment {
                         .onGranted(new Action<List<String>>() {
                             @Override
                             public void onAction(List<String> data) {
-                                FileUtils.createOrExistsDir(Constant.DIR_ROOT);
+                                FileUtils.createOrExistsDir(PictureSelector.DIR_ROOT);
                                 //bitmap转签名文件
                                 StringBuffer buffer = new StringBuffer();
-                                String pathName = buffer.append(Constant.DIR_ROOT).append(Constant.APP_NAME).append(".").append(System.currentTimeMillis()).append(".jpg").toString();
+                                String pathName = buffer.append(PictureSelector.DIR_ROOT).append(AppUtils.getAppName()).append(".").append(System.currentTimeMillis()).append(".jpg").toString();
                                 try {
                                     mSignView.save(pathName, false, 1);
                                     //上传图片

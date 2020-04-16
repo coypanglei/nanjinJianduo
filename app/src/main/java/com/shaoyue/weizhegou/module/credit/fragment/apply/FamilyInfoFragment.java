@@ -218,7 +218,7 @@ public class FamilyInfoFragment extends BaseAppFragment implements BGARefreshLay
                 mAdapter.setNewData(result.data.getData());
                 mAdapter.notifyDataSetChanged();
 
-                if (result.data.getData().size() > 0) {
+                if (result.data.getTs() > 0) {
                     mEmptyRelative.setVisibility(View.GONE);
                     SPUtils.getInstance().put(UserMgr.SP_IS_PO, false);
                     if (result.data.getData().size() > 1) {

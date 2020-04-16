@@ -14,6 +14,7 @@ import com.shaoyue.weizhegou.entity.cedit.FaceBean;
 import com.shaoyue.weizhegou.entity.cedit.FamilyListBean;
 import com.shaoyue.weizhegou.entity.cedit.GongsiDanbao;
 import com.shaoyue.weizhegou.entity.cedit.HfwBean;
+import com.shaoyue.weizhegou.entity.cedit.InfoChangeBean;
 import com.shaoyue.weizhegou.entity.cedit.MyHangBean;
 import com.shaoyue.weizhegou.entity.cedit.ProgressBean;
 import com.shaoyue.weizhegou.entity.cedit.QiYeDanBaoBean;
@@ -78,6 +79,9 @@ public class CeditApi {
 
     //人脸识别信息查询
     private static final String FACE_FIND = "jeecg-boot/business/sxsqJtxx/authJtxx";
+
+    //基本信息弹框
+    private static final String INFO_CHAGE = "jeecg-boot/business/sxsqJbxx/getYsxed";
 
     //人脸识别信息查询抵押
     private static final String FACE_FIND_DY = "jeecg-boot/business/sxsqDbrxx/authJtxx";
@@ -601,7 +605,8 @@ public class CeditApi {
      * @param callback
      * @param tag
      */
-    public static void saveZxcx(Map<String, String> params, BaseCallback<BaseResponse<Void>> callback, Object tag) {
+    public static void saveZxcx(String js,Map<String, String> params, BaseCallback<BaseResponse<Void>> callback, Object tag) {
+        params.put("js",js);
         params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
         ApiHttpClient.postJson(SAVE_ZXCX, params, callback, tag);
 
@@ -827,7 +832,19 @@ public class CeditApi {
         ApiHttpClient.post(FACE_FIND, params, callback, tag);
     }
 
-
+    /**
+     * 基本信息修改
+     *
+     * @param callback
+     * @param tag
+     */
+    public static void infoChange(BaseCallback<BaseResponse<InfoChangeBean>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+//        params.put("token", UserMgr.getInstance().getSessionId());
+        params.put("sxid", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        params.put("sfzh", SPUtils.getInstance().getString(UserMgr.SP_ID_CARD));
+        ApiHttpClient.post(INFO_CHAGE, params, callback, tag);
+    }
     /**
      * 查询家庭信息
      *

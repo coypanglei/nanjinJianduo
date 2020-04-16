@@ -11,6 +11,16 @@ public class FamilyListBean {
     private boolean searchCount;
     private int pages;
 
+     private int ts;
+
+    public int getTs() {
+        return ts;
+    }
+
+    public void setTs(int ts) {
+        this.ts = ts;
+    }
+
     public int getTotal() {
         return total;
     }

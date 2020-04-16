@@ -149,7 +149,7 @@ public class CreditInquiryDetailsFragmentThree extends BaseAppFragment {
         mRvCreditFour.setNestedScrollingEnabled(false);//禁止滑动
 
     }
-
+    String js="担保人";
     @Override
     public void onResume() {
         super.onResume();
@@ -163,7 +163,10 @@ public class CreditInquiryDetailsFragmentThree extends BaseAppFragment {
      */
     private void xcjyZxcx() {
         startProgressDialog(true);
-        DhApi.sxjyZxcx(id, new BaseCallback<BaseResponse<ZxcxListBean>>() {
+        if ("配偶征信数据".equals(title)){
+            js ="担保人配偶";
+        }
+        DhApi.sxjyZxcx(js,id, new BaseCallback<BaseResponse<ZxcxListBean>>() {
             @Override
             public void onSucc(BaseResponse<ZxcxListBean> result) {
                 nestedSc.setVisibility(View.VISIBLE);
@@ -308,14 +311,14 @@ public class CreditInquiryDetailsFragmentThree extends BaseAppFragment {
                     return;
                 }
                 if (tvError.contains("没有相关查询任务")) {
-                    DhApi.adddbsqZxcx(id, new BaseCallback<BaseResponse<Void>>() {
+                    DhApi.adddbsqZxcx(js,id, new BaseCallback<BaseResponse<Void>>() {
                         @Override
                         public void onSucc(BaseResponse<Void> result) {
                             EventBus.getDefault().post(new RefreshBean());
                         }
                     }, this);
                 } else if (tvError.contains("查询失败")) {
-                    DhApi.csdbbsqZxcx(id, new BaseCallback<BaseResponse<Void>>() {
+                    DhApi.csdbbsqZxcx(js,id, new BaseCallback<BaseResponse<Void>>() {
                         @Override
                         public void onSucc(BaseResponse<Void> result) {
                             EventBus.getDefault().post(new RefreshBean());

@@ -22,6 +22,7 @@ import com.shaoyue.weizhegou.manager.UserMgr;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class UserApi extends BaseApi {
@@ -35,6 +36,9 @@ public class UserApi extends BaseApi {
 
     //上传地址接口
     private static final String API_HAEDER_PIC = "jeecg-boot/sys/common/upload";
+
+    //多图上传地址接口
+    private static final String API_HAEDER_PICS = "jeecg-boot/sys/common/uploadBatch";
 
     private static final String API_CHANGE_USER_INFO = "jeecg-boot/sys/user/editUser";
 
@@ -108,7 +112,6 @@ public class UserApi extends BaseApi {
     private static final String SYSVERSION_VERSION = "jeecg-boot/system/sysVersion/version";
 
 
-
     public static void getInfoMsg(int pageNo, String pageSize, BaseCallback<BaseResponse<UserMsgBean>> callback, Object tag) {
         Map<String, String> params = new HashMap<>();
         params.put("pageNo", pageNo + "");
@@ -151,9 +154,6 @@ public class UserApi extends BaseApi {
     }
 
 
-
-
-
     /**
      * 是否绑定微信
      */
@@ -179,10 +179,6 @@ public class UserApi extends BaseApi {
         params.put("amount", amount);
         ApiHttpClient.post(API_USER_TOBAlANCE, params, callback, tag);
     }
-
-
-
-
 
 
     /**
@@ -375,7 +371,6 @@ public class UserApi extends BaseApi {
     }
 
 
-
     /**
      * 上传图片
      *
@@ -385,12 +380,12 @@ public class UserApi extends BaseApi {
      */
     public static void updatePic(File mFile, BaseCallback<BaseResponse<String>> callback, Object tag) {
         Map<String, String> params = new HashMap<>();
-        if("申请".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))||"调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
+        if ("申请".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE)) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
             params.put("zjhm", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
-        }else if("贷后".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))){
+        } else if ("贷后".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
             params.put("zjhm", SPUtils.getInstance().getString(UserMgr.SP_ID_CARD));
-            params.put("pic_type",SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE));
-        }else {
+            params.put("pic_type", SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE));
+        } else {
             LogUtils.e("不属于贷后和申请");
         }
 
@@ -398,7 +393,26 @@ public class UserApi extends BaseApi {
     }
 
 
+    /**
+     * 多图上传文件
+     *
+     * @param mFiles
+     * @param callback
+     * @param tag
+     */
+    public static void updatePic(List<File> mFiles, BaseCallback<BaseResponse<String>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        if ("申请".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE)) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
+            params.put("zjhm", SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        } else if ("贷后".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
+            params.put("zjhm", SPUtils.getInstance().getString(UserMgr.SP_ID_CARD));
+            params.put("pic_type", SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE));
+        } else {
+            LogUtils.e("不属于贷后和申请");
+        }
 
+        ApiHttpClient.updateImg(API_HAEDER_PICS, params, mFiles, callback, tag);
+    }
 
 
     /**

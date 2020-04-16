@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.shaoyue.weizhegou.R;
 
 import java.util.ArrayList;
@@ -60,7 +59,7 @@ public class DropDownViewRecycleViewAdapter extends RecyclerView.Adapter<Recycle
     public DropDownViewRecycleViewAdapter(Context context, List<Map<String, Object>> dataList, int itemWidth) {
         mContext = context;
         this.mDataList = dataList;
-        LogUtils.e(dataList);
+//        LogUtils.e(dataList);
         this.itemWidth = itemWidth;
     }
 
