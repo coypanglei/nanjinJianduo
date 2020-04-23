@@ -120,7 +120,7 @@ public class MyDataDcFragment extends BaseFragment {
     @Override
     protected void initView(View rootView) {
         super.initView(rootView);
-
+        initData();
         if ("查看详情".equals(SPUtils.getInstance().getString("status")) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
             sbEdit.setVisibility(View.GONE);
         }
@@ -196,11 +196,24 @@ public class MyDataDcFragment extends BaseFragment {
         }, this);
     }
 
-
+    private boolean mIsVisibleToUser = false;
     @Override
     public void onResume() {
         super.onResume();
-        initData();
+        if (mIsVisibleToUser) {//在这里进行一下判断
+            initData();
+        }
+    }
+
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        mIsVisibleToUser = isVisibleToUser;//被调用时记录下状态
+        if (isVisibleToUser) {
+            initData();
+        }
     }
 
     private MyHangBean.RecordsBean myHangBean;
@@ -209,7 +222,6 @@ public class MyDataDcFragment extends BaseFragment {
      * 刷新数据
      */
     private void initData() {
-
         Map<String, String> map = new HashMap<>();
         CeditApi.lookInfo(map, new BaseCallback<BaseResponse<MyHangBean>>() {
             @Override
@@ -234,6 +246,8 @@ public class MyDataDcFragment extends BaseFragment {
                             etCs.setText(myHangBean.getCs());
                             ddvXb.setSelectName(myHangBean.getHzgx());
 //                            if (ObjectUtils.isNotEmpty(myHangBean.getId())) {
+
+                            
 //                                click = false;
 //                            } else {
 //                                click = true;
@@ -499,6 +513,8 @@ public class MyDataDcFragment extends BaseFragment {
 
                 }
             }
+
+
         }, this);
     }
 

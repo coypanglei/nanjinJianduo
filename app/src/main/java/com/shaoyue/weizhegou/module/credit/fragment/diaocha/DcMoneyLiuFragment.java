@@ -101,7 +101,7 @@ public class DcMoneyLiuFragment extends BaseAppFragment {
     }
 
     private void initData() {
-        if ("调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
+        if ("调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))||"申请".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
             llMs.setVisibility(View.VISIBLE);
             CeditApi.getXjlInfo(new BaseCallback<BaseResponse<XjlBean>>() {
                 @Override

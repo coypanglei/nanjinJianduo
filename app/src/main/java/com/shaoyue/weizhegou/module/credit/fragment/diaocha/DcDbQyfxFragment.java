@@ -19,7 +19,6 @@ import com.shaoyue.weizhegou.api.callback.BaseCallback;
 import com.shaoyue.weizhegou.api.exception.ApiException;
 import com.shaoyue.weizhegou.api.model.BaseResponse;
 import com.shaoyue.weizhegou.api.remote.CeditApi;
-import com.shaoyue.weizhegou.api.remote.DcApi;
 import com.shaoyue.weizhegou.base.BaseTitleFragment;
 import com.shaoyue.weizhegou.entity.BasicTitle;
 import com.shaoyue.weizhegou.entity.cedit.BasicInformationBean;
@@ -95,19 +94,19 @@ public class DcDbQyfxFragment extends BaseTitleFragment {
     }
 
     private String timeTitle;
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(final TimeSelect timeSelect) {
 
-            List<BasicTitle> list = mAdapter.getData();
-            for (BasicTitle title : list) {
-                for (BasicInformationBean.RecordsBean bean : title.getMlist()) {
-                    if (bean.getTitile().equals(timeSelect.getTitle())) {
-                        mDatePicker.show(timeSelect.getTime());
-                        timeTitle = timeSelect.getTitle();
-                    }
+        List<BasicTitle> list = mAdapter.getData();
+        for (BasicTitle title : list) {
+            for (BasicInformationBean.RecordsBean bean : title.getMlist()) {
+                if (bean.getTitile().equals(timeSelect.getTitle())) {
+                    mDatePicker.show(timeSelect.getTime());
+                    timeTitle = timeSelect.getTitle();
                 }
             }
-
+        }
 
 
     }
@@ -152,7 +151,7 @@ public class DcDbQyfxFragment extends BaseTitleFragment {
     protected void initView(View rootView) {
         super.initView(rootView);
         sbZancun.setVisibility(View.GONE);
-        rlTime.setVisibility(View.VISIBLE);
+//        rlTime.setVisibility(View.VISIBLE);
         initDatePicker();
         if (goAllSelect.isAdd()) {
             setCommonTitle("新增" + goAllSelect.getTitle().replace("新增", ""));
@@ -162,7 +161,7 @@ public class DcDbQyfxFragment extends BaseTitleFragment {
 
         titles.add(new BasicTitle("企业信息", new ArrayList<BasicInformationBean.RecordsBean>()));
         titles.add(new BasicTitle("财务分析", new ArrayList<BasicInformationBean.RecordsBean>()));
-        titles.add(new BasicTitle("情况说明",new ArrayList<BasicInformationBean.RecordsBean>()));
+        titles.add(new BasicTitle("情况说明", new ArrayList<BasicInformationBean.RecordsBean>()));
 
 
         mEtStartTime.setVisibility(View.GONE);
@@ -256,7 +255,6 @@ public class DcDbQyfxFragment extends BaseTitleFragment {
      * 获取界面数据byid
      */
     private void getListById() {
-        LogUtils.e("asasd");
 //        DcApi.getSyjbInfo(new BaseCallback<BaseResponse<JsonObject>>() {
 //            @Override
 //            public void onSucc(BaseResponse<JsonObject> result) {
@@ -317,7 +315,6 @@ public class DcDbQyfxFragment extends BaseTitleFragment {
         }
 
 
-
     }
 
     @OnClick({R.id.sb_edit, R.id.et_start_time})
@@ -347,7 +344,9 @@ public class DcDbQyfxFragment extends BaseTitleFragment {
 
                     }
                 }
-                map.put("id", goAllSelect.getJsonObjectmap().get("id").toString());
+                if (ObjectUtils.isNotEmpty(goAllSelect.getJsonObjectmap().get("id"))) {
+                    map.put("id", goAllSelect.getJsonObjectmap().get("id").toString());
+                }
                 if (goAllSelect.isAdd()) {
 
                     String add = CeditApi.DANBAOREN_ADD;
@@ -357,7 +356,7 @@ public class DcDbQyfxFragment extends BaseTitleFragment {
                         add = CeditApi.DANBAODIYA_ADD + "All";
                     } else if ("公司担保分析".equals(goAllSelect.getTitle())) {
                         add = CeditApi.DANBAOREN_ADD_GONGSI + "All";
-                    } else if ("企业担保分析".equals(goAllSelect.getTitle())) {
+                    } else if ("授信调查-企业担保分析".equals(goAllSelect.getTitle())) {
                         add = CeditApi.DANBAOREN_ADD_QIYE + "All";
                     }
                     CeditApi.addDanbaoInfo(add, map, new BaseCallback<BaseResponse<Void>>() {
@@ -414,12 +413,13 @@ public class DcDbQyfxFragment extends BaseTitleFragment {
                 for (BasicInformationBean.RecordsBean bean1 : title.getMlist()) {
                     if (ObjectUtils.isNotEmpty(bean1.getList())) {
                         for (BasicInformationBean.RecordsBean bean : bean1.getList()) {
-
+                            LogUtils.e(bean.getName());
                             if (ObjectUtils.isNotEmpty(bean.getDefaultvalue())) {
                                 if (bean.getName().equals("gbhyfl")) {
                                     LogUtils.e(gbhyfl);
                                     map.put(bean.getName(), gbhyfl);
                                 } else {
+
                                     map.put(bean.getName(), bean.getDefaultvalue());
                                 }
                             }
@@ -460,78 +460,6 @@ public class DcDbQyfxFragment extends BaseTitleFragment {
         }
 
         return map;
-    }
-
-    /**
-     * 第一次添加
-     */
-    private void firstAdd() {
-        Map<String, String> map = new HashMap<>();
-        List<BasicTitle> list = mAdapter.getData();
-
-        if (ObjectUtils.isNotEmpty(list)) {
-            for (BasicTitle title : list) {
-                for (BasicInformationBean.RecordsBean bean1 : title.getMlist()) {
-                    if (ObjectUtils.isNotEmpty(bean1.getList())) {
-                        for (BasicInformationBean.RecordsBean bean : bean1.getList()) {
-
-                            if (ObjectUtils.isNotEmpty(bean.getDefaultvalue())) {
-                                if ("gbhyfl".equals(bean.getName())) {
-                                    map.put(bean.getName(), gbhyfl);
-                                } else {
-                                    map.put(bean.getName(), bean.getDefaultvalue());
-                                }
-                            } else {
-                                if ("true".equals(bean.getRequire())) {
-                                    ToastUtil.showBlackToastSucess(bean.getTitile() + "不能为空");
-                                    return;
-                                }
-
-
-                            }
-                        }
-                    }
-                    if ("主营业务收入检验".equals(title.getTitle()) || "年净利润检验".equals(title.getTitle())) {
-                        if (ObjectUtils.isNotEmpty(bean1.getName())) {
-                            map.put(bean1.getName(), bean1.getDefaultvalue());
-                        }
-
-                    }
-                }
-                //担保集合 获取数据
-                if ("担保".equals(title.getTitle())) {
-                    Field[] fields = DbBean.class.getDeclaredFields();
-                    for (int t = 0; t < fields.length; t++) {
-                        for (int i = 0; i < title.getMdbBeanList().size(); i++) {
-
-                            //设置是否允许访问，不是修改原来的访问权限修饰词。
-                            fields[t].setAccessible(true);
-
-                            try {
-                                LogUtils.e(fields[t].getName() + (i) + ":" + fields[t].get(title.getMdbBeanList().get(i)));
-                                map.put(fields[t].getName() + (i), fields[t].get(title.getMdbBeanList().get(i)) + "");
-                            } catch (IllegalAccessException e) {
-                                e.printStackTrace();
-                            }
-
-
-                        }
-
-                    }
-
-                }
-
-            }
-        }
-
-        DcApi.addSyjbINfo(map, new BaseCallback<BaseResponse<Void>>() {
-            @Override
-            public void onSucc(BaseResponse<Void> result) {
-                ToastUtil.showBlackToastSucess("保存成功");
-                removeFragment();
-            }
-        }, this);
-
     }
 
 }

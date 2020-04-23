@@ -199,6 +199,7 @@ public class DhglXCJYBAdapter extends BaseQuickAdapter<BasicInformationBean.Reco
                                 } else {
 
                                     mDdvXB.removeTextChangedListener(textWatcher);
+
                                 }
                             }
                         }

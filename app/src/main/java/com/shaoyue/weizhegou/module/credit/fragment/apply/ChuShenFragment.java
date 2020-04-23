@@ -82,6 +82,8 @@ public class ChuShenFragment extends BaseAppFragment {
                     tvSqrWhSjcs.setText(result.data.getWh().get(0).getWhsjcs());
                     if ("通过".equals(result.data.getWh().get(0).getWhsjshjl())) {
                         ivWhsj.setImageResource(R.drawable.icon_chushen_pass);
+                    } else if ("未知".equals(result.data.getWh().get(0).getWhsjshjl())) {
+                        ivWhsj.setImageResource(R.drawable.icon_chushen_weizhi);
                     } else {
                         ivWhsj.setImageResource(R.drawable.icon_chushen_no_pass);
                     }
@@ -96,6 +98,8 @@ public class ChuShenFragment extends BaseAppFragment {
                     tvSqrZxSjcs.setText(result.data.getZx().get(0).getZxsjcs());
                     if ("通过".equals(result.data.getZx().get(0).getZxsjshjl())) {
                         ivZxsj.setImageResource(R.drawable.icon_chushen_pass);
+                    } else if ("未知".equals(result.data.getZx().get(0).getZxsjshjl())) {
+                        ivZxsj.setImageResource(R.drawable.icon_chushen_weizhi);
                     } else {
                         ivZxsj.setImageResource(R.drawable.icon_chushen_no_pass);
                     }

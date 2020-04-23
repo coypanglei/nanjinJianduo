@@ -210,7 +210,36 @@
                             android:textColor="@color/color_3b3b3b"
                             android:textSize="11dp"/>
                     </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="@dimen/dp_274"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/dp_11">
 
+
+                        <TextView
+                            android:id="@+id/et_qf_time"
+                            style="@style/IDEditStyle"
+                            android:layout_width="206dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginLeft="9dp"
+                            android:drawableRight="@drawable/icon_bottom_go"
+                            android:paddingRight="8dp"
+                            android:textColor="#99100808"
+                            android:hint="起始于"
+                            />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:layout_toLeftOf="@id/et_qf_time"
+                            android:gravity="center"
+                            android:text="签发日期:"
+                            android:textColor="@color/color_3b3b3b"
+                            android:textSize="11dp"/>
+
+                    </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="@dimen/dp_274"

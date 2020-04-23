@@ -175,6 +175,7 @@ public class BasicInformationTyDbFragment extends BaseAppFragment {
                 titles.add(new BasicTitle("土地使用权",new ArrayList<BasicInformationBean.RecordsBean>()));
                 titles.add(new BasicTitle("房屋价值",new ArrayList<BasicInformationBean.RecordsBean>()));
                 titles.add(new BasicTitle("评估信息",new ArrayList<BasicInformationBean.RecordsBean>()));
+                sbZancun.setVisibility(View.GONE);
                 break;
         }
 

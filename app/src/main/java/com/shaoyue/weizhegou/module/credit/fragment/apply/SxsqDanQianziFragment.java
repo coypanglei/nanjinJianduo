@@ -182,7 +182,7 @@ public class SxsqDanQianziFragment extends BaseAppFragment {
                     ivPoQian.setBackgroundResource(R.color.white);
                     GlideNewImageLoader.displayImageNoCacheNoDefault(getActivity(), ivPoQian, DomainMgr.getInstance().getBaseUrlImg() + sxsqDanBean.getSqrpoqm());
                 }
-                if ("查看详情".equals(SPUtils.getInstance().getString("status")) || ObjectUtils.isNotEmpty(sxsqDanBean.getId())) {
+                if ("查看详情".equals(SPUtils.getInstance().getString("status")) ) {
                     sbEdit.setVisibility(View.GONE);
                 }
             }

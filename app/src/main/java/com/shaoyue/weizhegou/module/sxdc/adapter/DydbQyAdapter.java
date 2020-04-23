@@ -7,6 +7,7 @@ import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.method.DigitsKeyListener;
+import android.view.View;
 import android.widget.EditText;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -108,7 +109,17 @@ public class DydbQyAdapter extends BaseQuickAdapter<BasicInformationBean.Records
                 }
             }
         };
+        mDdvXB.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b) {
+                    mDdvXB.addTextChangedListener(textWatcher);
+                } else {
 
+                    mDdvXB.removeTextChangedListener(textWatcher);
+                }
+            }
+        });
         if (item.isEdit()) {
             mDdvXB.setText(item.getDefaultvalue());
         } else {

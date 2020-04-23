@@ -201,6 +201,13 @@ DhglBasicInformationAdapter extends BaseQuickAdapter<BasicInformationBean.Record
 
                             mDdvXB.removeTextChangedListener(textWatcher);
                             EventBus.getDefault().post(new RefreshBean());
+                            if ("pgdj".equals(item.getName())) {
+                                EventBus.getDefault().post(new RefreshBean("计算"));
+
+                            }
+                            if ("jzmj".equals(item.getName())) {
+                                EventBus.getDefault().post(new RefreshBean("计算"));
+                            }
                         }
                     }
                 });

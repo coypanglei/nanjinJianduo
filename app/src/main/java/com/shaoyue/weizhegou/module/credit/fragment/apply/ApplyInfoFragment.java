@@ -168,7 +168,7 @@ public class ApplyInfoFragment extends BaseTitleFragment {
                                 public void onFail(ApiException apiError) {
                                     super.onFail(apiError);
                                     if (apiError.getErrMsg().contains("人脸识别")) {
-                                        mViewpager.setCurrentItem(1);
+                                        mViewpager.setCurrentItem(2);
                                     } else {
                                         mViewpager.setCurrentItem(0);
                                     }

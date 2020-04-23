@@ -39,6 +39,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -139,57 +140,32 @@ public class DcAddOrChangeDialogFragment extends BaseTitleFragment {
 
         }
     }
-
+    Double pgdj = 0.0;
+    Double jzmj = 0.0;
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(final RefreshBean refreshBean) {
-//        if ("担保分析".equals(refreshBean.getTitle())) {
-        final List<BasicTitle> list = mAdapter.getData();
-        //评估单价x建筑面积
-        Double pgdj = 0.0;
-        Double jzmj = 0.0;
-        if (ObjectUtils.isNotEmpty(list)) {
-            for (BasicTitle title : list) {
-                for (BasicInformationBean.RecordsBean bean : title.getMlist()) {
-                    if (ObjectUtils.isNotEmpty(bean.getDefaultvalue())) {
-                        if ("pgdj".equals(bean.getName())) {
-                            pgdj = Double.valueOf(bean.getDefaultvalue());
+       if("计算".equals(refreshBean.getTitle())) {
+           final List<BasicTitle> list = mAdapter.getData();
+           //评估单价x建筑面积
 
-                        }
-                        if ("jzmj".equals(bean.getName())) {
-                            jzmj = Double.valueOf(bean.getDefaultvalue());
-                        }
-                    }
-                }
+           if (ObjectUtils.isNotEmpty(list)) {
+               for (BasicTitle title : list) {
+                   for (BasicInformationBean.RecordsBean bean : title.getMlist()) {
+                       if (ObjectUtils.isNotEmpty(bean.getDefaultvalue())) {
+                           if ("pgdj".equals(bean.getName())) {
+                               pgdj = Double.valueOf(bean.getDefaultvalue());
 
-            }
-        }
+                           }
+                           if ("jzmj".equals(bean.getName())) {
+                               jzmj = Double.valueOf(bean.getDefaultvalue());
+                           }
+                       }
+                   }
 
-        for (BasicTitle title : list) {
-            for (BasicInformationBean.RecordsBean bean : title.getMlist()) {
-                if (ObjectUtils.isNotEmpty(bean.getDefaultvalue())) {
-                    if ("pgj".equals(bean.getName())) {
-                        Double pgj = pgdj * jzmj / 10000;
-                        bean.setDefaultvalue(pgj + "");
-                        LogUtils.e(pgj);
-                    }
+               }
+           }
 
-                }
-            }
-
-        }
-
-        if (rvCwfx.isComputingLayout()) {
-            rvCwfx.post(new Runnable() {
-                @Override
-                public void run() {
-                    mAdapter.setNewData(list);
-                    mAdapter.notifyDataSetChanged();
-                }
-            });
-        } else {
-            mAdapter.setNewData(list);
-            mAdapter.notifyDataSetChanged();
-        }
+       }
 
     }
 
@@ -488,7 +464,15 @@ public class DcAddOrChangeDialogFragment extends BaseTitleFragment {
 
                     }
                 }
-                map.put("id", goAllSelect.getJsonObjectmap().get("id").toString());
+                Double pgj = pgdj * jzmj / 10000;
+                if (pgj != 0) {
+                    DecimalFormat f = new DecimalFormat("#######.######");
+                    String string = f.format(pgj );
+                    map.put("pgj", string);
+                }
+                if (ObjectUtils.isNotEmpty(goAllSelect.getJsonObjectmap().get("id"))) {
+                    map.put("id", goAllSelect.getJsonObjectmap().get("id").toString());
+                }
                 if (goAllSelect.isAdd()) {
 
                     String add = CeditApi.DANBAOREN_ADD;
@@ -498,7 +482,7 @@ public class DcAddOrChangeDialogFragment extends BaseTitleFragment {
                         add = CeditApi.DANBAODIYA_ADD + "All";
                     } else if ("公司担保分析".equals(goAllSelect.getTitle())) {
                         add = CeditApi.DANBAOREN_ADD_GONGSI + "All";
-                    } else if ("企业担保分析".equals(goAllSelect.getTitle())) {
+                    } else if ("授信调查-企业担保分析".equals(goAllSelect.getTitle())) {
                         add = CeditApi.DANBAOREN_ADD_QIYE + "All";
                     }
                     CeditApi.addDanbaoInfo(add, map, new BaseCallback<BaseResponse<Void>>() {
@@ -521,7 +505,7 @@ public class DcAddOrChangeDialogFragment extends BaseTitleFragment {
                     } else if ("公司担保分析".equals(goAllSelect.getTitle())) {
                         edit = CeditApi.DANBAOREN_EDIT_GONGSI + "All";
 
-                    } else if ("企业担保分析".equals(goAllSelect.getTitle())) {
+                    } else if ("授信调查-企业担保分析".equals(goAllSelect.getTitle())) {
                         edit = CeditApi.DANBAOREN_EDIT_QIYE + "All";
 
                     }

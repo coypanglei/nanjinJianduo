@@ -172,8 +172,8 @@ public class CreditInquiryDetailsFragmentThree extends BaseAppFragment {
                 nestedSc.setVisibility(View.VISIBLE);
                 stopProgressDialog();
                 ZxcxListBean.RecordsBean bean = new ZxcxListBean.RecordsBean();
-                if ("配偶征信数据".equals(title) && result.data.getTotal() == 2) {
-                    myHangBean = result.data.getRecords().get(1);
+                if ("配偶征信数据".equals(title) ) {
+                    myHangBean = result.data.getRecords().get(0);
                 }
 
                 if ("申请人征信数据".equals(title)) {

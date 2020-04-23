@@ -14,7 +14,6 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.RegexUtils;
 import com.shaoyue.weizhegou.R;
@@ -251,7 +250,9 @@ public class DiYaDialogFragment extends DialogFragment {
                         map.put("id", goAllSelect.getmGongsiDanBao().getId());
                     } else if ("企业担保分析".equals(goAllSelect.getTitle())) {
                         edit = CeditApi.DANBAOREN_EDIT_QIYE;
-                        map.put("id", goAllSelect.getmDiyaDanBao().getId());
+//                        LogUtils.e(goAllSelect.getmQiYeDanBao());
+
+                        map.put("id", goAllSelect.getmQiYeDanBao().getId());
                     }
 
                     CeditApi.editDanbaoInfo(edit, map, new BaseCallback<BaseResponse<Void>>() {

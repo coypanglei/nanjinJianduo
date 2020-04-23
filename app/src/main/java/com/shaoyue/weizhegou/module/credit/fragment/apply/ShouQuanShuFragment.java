@@ -232,130 +232,84 @@ public class ShouQuanShuFragment extends BaseAppFragment {
                 ThreadUtil.runInUIThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (ObjectUtils.isEmpty(qianziBean.getUploadImg())) {
-                            if (ObjectUtils.isEmpty(qianziBean.getSqrqm()) || ObjectUtils.isEmpty(qianziBean.getSqrjbkhjlqm())) {
-                                ToastUtil.showBlackToastSucess(ObjectUtils.isEmpty(qianziBean.getSqrqm()) ? "缺少申请人签名" : "缺少工作人员签名");
-                                stopProgressDialog();
-                                return;
-                            }
-
-                        } else {
-                            if (ObjectUtils.isEmpty(qianziBean.getTxrq())) {
-                                ToastUtil.showBlackToastSucess("缺少本人授权日期");
-                                stopProgressDialog();
-                                return;
-                            }
-                        }
-                        boolean isBcpo = true;
-                        if (ObjectUtils.isNotEmpty(qianziBeanTwo)) {
-                            LogUtils.e(qianziBeanTwo.getUploadImg());
-                            if (ObjectUtils.isEmpty(qianziBeanTwo.getUploadImg())) {
-                                if (ObjectUtils.isEmpty(qianziBeanTwo.getSqrqm()) || ObjectUtils.isEmpty(qianziBeanTwo.getSqrjbkhjlqm())) {
-                                    //ToastUtil.showBlackToastSucess(ObjectUtils.isEmpty(qianziBeanTwo.getSqrqm()) ? "缺少申请人配偶签名" : "申请人配偶缺少工作人员签名");
-                                    isBcpo = false;
+                        // 判断页数
+                        int tab = mTl1.getCurrentTab();
+                        // 获取对象
+                        QianziBean obj = (tab==0)?qianziBean:qianziBeanTwo;
+                        // 判断对象是否为空
+                        if (ObjectUtils.isNotEmpty(obj))
+                        {
+                            // 判断是否可以保存
+                            if (ObjectUtils.isEmpty(obj.getUploadImg())) {
+                                if (ObjectUtils.isEmpty(obj.getSqrqm()) || ObjectUtils.isEmpty(obj.getSqrjbkhjlqm())) {
+                                    ToastUtil.showBlackToastSucess(ObjectUtils.isEmpty(obj.getSqrqm()) ? "缺少申请人签名" : "缺少工作人员签名");
+                                    stopProgressDialog();
+                                    return;
                                 }
                             } else {
-                                if (ObjectUtils.isEmpty(qianziBeanTwo.getTxrq())) {
-                                    ToastUtil.showBlackToastSucess("缺少配偶授权日期");
+                                if (ObjectUtils.isEmpty(obj.getTxrq())) {
+                                    ToastUtil.showBlackToastSucess("缺少授权日期");
                                     stopProgressDialog();
                                     return;
                                 }
                             }
-                        }
 
-
-                        if (ObjectUtils.isEmpty(qianziBean.getId())) {
-                            if (ObjectUtils.isNotEmpty(qianziBean.getScreenshotImg())) {
-
-
-                                CeditApi.updateQianMing(str2Map(qianziBean), new BaseCallback<BaseResponse<QianziBean>>() {
-                                    @Override
-                                    public void onSucc(BaseResponse<QianziBean> result) {
-                                        EventBus.getDefault().post(result.data);
+                            // 判断是否已经存在
+                            if (ObjectUtils.isEmpty(obj.getId())) {
+                                if (ObjectUtils.isNotEmpty(obj.getScreenshotImg())) {
+                                    CeditApi.updateQianMing(str2Map(obj), new BaseCallback<BaseResponse<QianziBean>>() {
+                                        @Override
+                                        public void onSucc(BaseResponse<QianziBean> result) {
+                                            EventBus.getDefault().post(result.data);
 //                                            sbEdit.setVisibility(View.GONE);
 //                                            sbSc.setVisibility(View.GONE);
-                                        stopProgressDialog();
-                                    }
-
-                                    @Override
-                                    public void onFail(ApiException apiError) {
-                                        super.onFail(apiError);
-                                        stopProgressDialog();
-                                    }
-                                }, this);
-                            } else {
-                                if (ObjectUtils.isNotEmpty(qianziBean.getSqrqm()) && ObjectUtils.isNotEmpty(qianziBean.getSqrjbkhjlqm())) {
-                                    ToastUtil.showBlackToastSucess("授权书保存中，请稍后重试");
-                                    stopProgressDialog();
-                                    return;
-                                }
-
-                                CeditApi.updateQianMing(str2Map(qianziBean), new BaseCallback<BaseResponse<QianziBean>>() {
-                                    @Override
-                                    public void onSucc(BaseResponse<QianziBean> result) {
-                                        EventBus.getDefault().post(result.data);
-                                        //                                            sbEdit.setVisibility(View.GONE);
-//                                            sbSc.setVisibility(View.GONE);
-                                        stopProgressDialog();
-                                    }
-
-                                    @Override
-                                    public void onFail(ApiException apiError) {
-                                        super.onFail(apiError);
-                                        stopProgressDialog();
-                                    }
-                                }, this);
-                            }
-
-
-                        }
-
-                        if (ObjectUtils.isNotEmpty(qianziBeanTwo) && ObjectUtils.isEmpty(qianziBeanTwo.getId())) {
-                            if (isBcpo) {
-                                if (ObjectUtils.isNotEmpty(qianziBeanTwo)) {
-                                    if (ObjectUtils.isNotEmpty(qianziBeanTwo.getScreenshotImg())) {
-                                        CeditApi.updateQianMing(str2Map(qianziBeanTwo), new BaseCallback<BaseResponse<QianziBean>>() {
-                                            @Override
-                                            public void onSucc(BaseResponse<QianziBean> result) {
-                                                EventBus.getDefault().post(result.data);
-                                                //                                            sbEdit.setVisibility(View.GONE);
-//                                                    sbSc.setVisibility(View.GONE);
-                                                stopProgressDialog();
-                                            }
-
-                                            @Override
-                                            public void onFail(ApiException apiError) {
-                                                super.onFail(apiError);
-                                                stopProgressDialog();
-                                            }
-                                        }, this);
-                                    } else {
-                                        if (ObjectUtils.isNotEmpty(qianziBeanTwo.getSqrqm()) && ObjectUtils.isNotEmpty(qianziBeanTwo.getSqrjbkhjlqm())) {
-                                            ToastUtil.showBlackToastSucess("授权书保存中，请稍后重试");
                                             stopProgressDialog();
-                                            return;
                                         }
-                                        if (ObjectUtils.isNotEmpty(qianziBeanTwo)) {
-                                            CeditApi.updateQianMing(str2Map(qianziBeanTwo), new BaseCallback<BaseResponse<QianziBean>>() {
-                                                @Override
-                                                public void onSucc(BaseResponse<QianziBean> result) {
-                                                    EventBus.getDefault().post(result.data);
-                                                    //                                            sbEdit.setVisibility(View.GONE);
-//                                                        sbSc.setVisibility(View.GONE);
-                                                    stopProgressDialog();
-                                                }
 
-                                                @Override
-                                                public void onFail(ApiException apiError) {
-                                                    super.onFail(apiError);
-                                                    stopProgressDialog();
-                                                }
-                                            }, this);
+                                        @Override
+                                        public void onFail(ApiException apiError) {
+                                            super.onFail(apiError);
+                                            stopProgressDialog();
                                         }
+                                    }, this);
+                                } else {
+                                    if (ObjectUtils.isNotEmpty(obj.getSqrqm()) && ObjectUtils.isNotEmpty(obj.getSqrjbkhjlqm())) {
+                                        ToastUtil.showBlackToastSucess("授权书保存中，请稍后重试");
+                                        stopProgressDialog();
+                                        return;
                                     }
+
+                                    CeditApi.updateQianMing(str2Map(obj), new BaseCallback<BaseResponse<QianziBean>>() {
+                                        @Override
+                                        public void onSucc(BaseResponse<QianziBean> result) {
+                                            EventBus.getDefault().post(result.data);
+                                            //                                            sbEdit.setVisibility(View.GONE);
+//                                            sbSc.setVisibility(View.GONE);
+                                            stopProgressDialog();
+                                        }
+
+                                        @Override
+                                        public void onFail(ApiException apiError) {
+                                            super.onFail(apiError);
+                                            stopProgressDialog();
+                                        }
+                                    }, this);
                                 }
                             }
+                            else
+                            {
+                                ToastUtil.showBlackToastSucess("授权书已存在，不可以修改！");
+                                stopProgressDialog();
+                                return;
+                            }
                         }
+                        else
+                        {
+                            ToastUtil.showBlackToastSucess("未找到对象");
+                            stopProgressDialog();
+                            return;
+                        }
+
                         stopProgressDialog();
                         EventBus.getDefault().post(new RefreshBean());
                     }

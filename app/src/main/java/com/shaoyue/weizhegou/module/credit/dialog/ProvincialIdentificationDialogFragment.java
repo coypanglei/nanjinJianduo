@@ -75,6 +75,9 @@ public class ProvincialIdentificationDialogFragment extends DialogFragment {
     EditText mEtIdAddress;
     @BindView(R.id.et_start_time)
     TextView mTvSelectedDate;
+    @BindView(R.id.et_qf_time)
+    TextView etQfTime;
+
     private CustomDatePicker mDatePicker;
 
     @NonNull
@@ -252,6 +255,23 @@ public class ProvincialIdentificationDialogFragment extends DialogFragment {
                                                     mTvSelectedDate.setText("2099-12-31");
                                                 }
                                             }
+                                            if (ObjectUtils.isNotEmpty(result.data.getWords_result().get签发日期().getWords())) {
+                                                if (!"长期".equals(result.data.getWords_result().get签发日期().getWords())) {
+                                                    try {
+                                                        String data = result.data.getWords_result().get签发日期().getWords();
+                                                        String year = data.substring(0, 4);
+                                                        String month = data.substring(4, 6);
+                                                        String day = data.substring(6, 8);
+                                                        String str = year + "-" + month + "-" + day;
+                                                        etQfTime.setText(str);
+                                                    } catch (Exception e) {
+
+                                                    }
+
+                                                } else {
+                                                    etQfTime.setText("");
+                                                }
+                                            }
 
 
                                             Glide.with(getActivity()).load(Uri.fromFile(file)).into(mIvFan);
@@ -287,7 +307,7 @@ public class ProvincialIdentificationDialogFragment extends DialogFragment {
     }
 
 
-    @OnClick({R.id.iv_zheng, R.id.iv_fan, R.id.iv_close, R.id.tv_shenqing, R.id.tv_restart, R.id.et_start_time})
+    @OnClick({R.id.iv_zheng, R.id.iv_fan, R.id.iv_close, R.id.tv_shenqing, R.id.tv_restart, R.id.et_start_time, R.id.et_qf_time})
     public void onViewClicked(View view) {
 
 
@@ -322,6 +342,7 @@ public class ProvincialIdentificationDialogFragment extends DialogFragment {
                 final String mIdCard = mEtIdCard.getText().toString().trim();
                 final String mName = mEtName.getText().toString().trim();
                 final String mStartTime = mTvSelectedDate.getText().toString().trim();
+                final String zjqfr = etQfTime.getText().toString().trim();
                 if (ObjectUtils.isEmpty(mName)) {
                     ToastUtil.showBlackToastSucess("未填写姓名");
                     return;
@@ -343,7 +364,7 @@ public class ProvincialIdentificationDialogFragment extends DialogFragment {
                 ThreadUtil.runInUIThread(new Runnable() {
                     @Override
                     public void run() {
-                        CeditApi.creditApplication(mName, mIdCard, mStartTime, mIdAddress, sfzm, sffm, new BaseCallback<BaseResponse<applyBean>>() {
+                        CeditApi.creditApplication(zjqfr,mName, mIdCard, mStartTime, mIdAddress, sfzm, sffm, new BaseCallback<BaseResponse<applyBean>>() {
                             @Override
                             public void onSucc(BaseResponse<applyBean> result) {
                                 //请求id 身份证
@@ -367,15 +388,21 @@ public class ProvincialIdentificationDialogFragment extends DialogFragment {
                 mIvFan.setImageResource(R.drawable.icon_id_card_fan);
                 break;
             case R.id.et_start_time:
-
+                startTime = true;
                 mDatePicker.show(mTvSelectedDate.getText().toString());
 
 
+                break;
+            case R.id.et_qf_time:
+                startTime = false;
+                mDatePicker.show(etQfTime.getText().toString());
                 break;
         }
 
 
     }
+
+    private boolean startTime;
 
     /**
      * 时间滑轮
@@ -391,7 +418,11 @@ public class ProvincialIdentificationDialogFragment extends DialogFragment {
         mDatePicker = new CustomDatePicker(getActivity(), new CustomDatePicker.Callback() {
             @Override
             public void onTimeSelected(long timestamp) {
-                mTvSelectedDate.setText(DateFormatUtils.long2Str(timestamp, false));
+                if (startTime) {
+                    mTvSelectedDate.setText(DateFormatUtils.long2Str(timestamp, false));
+                } else {
+                    etQfTime.setText(DateFormatUtils.long2Str(timestamp, false));
+                }
             }
         }, beginTimestamp, endTimestamp);
         // 不允许点击屏幕或物理返回键关闭
@@ -403,4 +434,5 @@ public class ProvincialIdentificationDialogFragment extends DialogFragment {
         // 不允许滚动动画
         mDatePicker.setCanShowAnim(false);
     }
+
 }

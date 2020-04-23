@@ -20,11 +20,7 @@ import com.shaoyue.weizhegou.base.BaseAppFragment;
 import com.shaoyue.weizhegou.entity.cedit.GoAllSelect;
 import com.shaoyue.weizhegou.entity.cedit.GongsiDanbao;
 import com.shaoyue.weizhegou.entity.cedit.RefreshBean;
-
-
-
 import com.shaoyue.weizhegou.event.OkOrCancelEvent;
-import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.module.credit.fragment.apply.diyao.adapter.ZiRanDanBaoThreeAdapter;
 import com.shaoyue.weizhegou.router.UIHelper;
 import com.shaoyue.weizhegou.util.ThreadUtil;
@@ -101,7 +97,7 @@ public class DiyadanbaoDetailsThreeFragment extends BaseAppFragment implements B
     @Override
     protected void initView(View rootView) {
         super.initView(rootView);
-        if ("查看详情".equals(SPUtils.getInstance().getString("status")) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
+        if ("查看详情".equals(SPUtils.getInstance().getString("status"))) {
             rlAll.setVisibility(View.GONE);
             sbAdd.setVisibility(View.GONE);
             sbEdit.setVisibility(View.GONE);
