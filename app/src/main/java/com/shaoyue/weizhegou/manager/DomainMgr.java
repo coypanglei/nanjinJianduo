@@ -5,7 +5,6 @@ import com.blankj.utilcode.util.SPUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
-
 import com.shaoyue.weizhegou.api.remote.BaseApi;
 import com.shaoyue.weizhegou.common.CommConfig;
 import com.shaoyue.weizhegou.interfac.CommCallBack;
@@ -45,12 +44,14 @@ public class DomainMgr {
      *
      * @return
      */
-    public String
-    getBaseUrl() {
+    public String getBaseUrl() {
         if (baseUrl == null) {
-          //  baseUrl = "http://221.226.157.160:8087/";
-
+//            online
+            //  baseUrl = "http://221.226.157.160:8087/";
+//测试
             baseUrl = "http://212.129.130.163:8080/";
+
+
             // baseUrl = "http://192.168.2.163:8080/";
             //   baseUrl = "http://192.168.0.106:8080/";
 //            baseUrl = "http://192.168.2.102:8080/";

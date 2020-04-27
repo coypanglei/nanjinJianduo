@@ -379,7 +379,7 @@ public class CreditInquiryDetailsFragmentFour extends BaseAppFragment {
             case R.id.sb_find:
 
                 if (errorTv.contains("没有相关查询任务")) {
-                    DhApi.addjjZxcx(js,new BaseCallback<BaseResponse<Void>>() {
+                    DhApi.addjjZxcx(new BaseCallback<BaseResponse<Void>>() {
                         @Override
                         public void onSucc(BaseResponse<Void> result) {
                             EventBus.getDefault().post(new RefreshBean());

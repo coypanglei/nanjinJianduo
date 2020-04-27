@@ -484,9 +484,9 @@ public class DhApi {
      * @param callback
      * @param tag
      */
-    public static void addjjZxcx(String type, BaseCallback<BaseResponse<Void>> callback, Object tag) {
+    public static void addjjZxcx( BaseCallback<BaseResponse<Void>> callback, Object tag) {
         Map<String, String> params = new HashMap<>();
-        params.put("khlx",type);
+        params.put("khlx","季检");
         params.put("pid", "-1");
         params.put("jcjd",SPUtils.getInstance().getString(UserMgr.SP_ID_CARD));
         params.put("zjhm",SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
