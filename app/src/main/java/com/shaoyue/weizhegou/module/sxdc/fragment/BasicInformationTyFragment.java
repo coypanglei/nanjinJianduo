@@ -444,45 +444,7 @@ public class BasicInformationTyFragment extends BaseAppFragment {
         return map;
     }
 
-//    /**
-//     * 第一次添加
-//     */
-//    private void firstAdd() {
-//        Map<String, String> map = new HashMap<>();
-//        List<BasicTitle> list = mAdapter.getData();
-//
-//        if (ObjectUtils.isNotEmpty(list)) {
-//            for (BasicTitle title : list) {
-//                for (BasicInformationBean.RecordsBean bean : title.getMlist()) {
-//                    if (ObjectUtils.isNotEmpty(bean.getDefaultvalue())) {
-//                        if (bean.getName().equals("gbhyfl")) {
-//                            map.put(bean.getName(), gbhyfl);
-//                        } else {
-//                            map.put(bean.getName(), bean.getDefaultvalue());
-//                        }
-//                    } else {
-//                        if (bean.getRequire().equals("true")) {
-//                            ToastUtil.showBlackToastSucess(bean.getTitile() + "不能为空");
-//                            return;
-//                        }
-//
-//
-//                    }
-//
-//                }
-//
-//            }
-//        }
-//
-//        DcApi.addInfo(map, new BaseCallback<BaseResponse<Void>>() {
-//            @Override
-//            public void onSucc(BaseResponse<Void> result) {
-//                ToastUtil.showBlackToastSucess("保存成功");
-//                getListById();
-//            }
-//        }, this);
-//
-//    }
+
 
 
 }

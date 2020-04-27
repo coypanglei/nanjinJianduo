@@ -19,7 +19,7 @@ import com.shaoyue.weizhegou.base.BaseTitleFragment;
 import com.shaoyue.weizhegou.entity.user.MainClickBean;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.MenuAdapter;
 import com.shaoyue.weizhegou.module.credit.fragment.MyDataDhglFragment;
-import com.shaoyue.weizhegou.module.credit.fragment.apply.CreditInquiryDetailsFragment;
+import com.shaoyue.weizhegou.module.credit.fragment.apply.CreditInquiryDetailsFragmentFour;
 import com.shaoyue.weizhegou.module.credit.fragment.diaocha.DcMoneyFragment;
 import com.shaoyue.weizhegou.widget.NoScrollViewPager;
 
@@ -88,7 +88,7 @@ public class XcjyInfoFragment extends BaseTitleFragment {
             if ("家庭信息".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(XcjyFamilyInfoFragment.newInstance(mMenuList.get(i).getTitle()));
             } else if ("征信查询".equals(mMenuList.get(i).getTitle())) {
-                fragmentList.add(CreditInquiryDetailsFragment.newInstance());
+                fragmentList.add(CreditInquiryDetailsFragmentFour.newInstance("申请人征信数据"));
             } else if ("影像资料".equals(mMenuList.get(i).getTitle())) {
                 fragmentList.add(XcjyVideoDetailsFragment.newInstance("现场检验"));
             } else if ("基本信息".equals(mMenuList.get(i).getTitle())) {

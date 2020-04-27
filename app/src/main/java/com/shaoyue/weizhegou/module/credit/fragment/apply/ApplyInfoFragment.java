@@ -11,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -141,7 +140,6 @@ public class ApplyInfoFragment extends BaseTitleFragment {
                 mTvVisible.setText("显示菜单");
                 if (currentPage != position) {
                     EventBus.getDefault().post(new RefreshBean());
-                    LogUtils.e(position);
                     if (position != 0) {
                         if (position == 1) {
                             CeditApi.findFaceInfo(new BaseCallback<BaseResponse<List<FaceBean>>>() {

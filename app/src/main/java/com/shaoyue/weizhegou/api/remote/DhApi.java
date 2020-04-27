@@ -420,6 +420,22 @@ public class DhApi {
     }
 
     /**
+     * 季检征信查询
+     *
+     * @param callback
+     * @param tag
+     */
+    public static void jjZxcx(String js,BaseCallback<BaseResponse<ZxcxListBean>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("js",js);
+        params.put("pid","-1");
+        params.put("jcjd",SPUtils.getInstance().getString(UserMgr.SP_ID_CARD));
+        params.put("zjhm",SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        ApiHttpClient.post(GD_ZXCX, params, callback, tag);
+
+    }
+
+    /**
      * 添加征信查询按钮
      *
      * @param callback
@@ -462,7 +478,35 @@ public class DhApi {
         ApiHttpClient.post(DB_SXCC_ADD, params, callback, tag);
 
     }
+    /**
+     * 添加季检征信
+     *
+     * @param callback
+     * @param tag
+     */
+    public static void addjjZxcx(String type, BaseCallback<BaseResponse<Void>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("khlx",type);
+        params.put("pid", "-1");
+        params.put("jcjd",SPUtils.getInstance().getString(UserMgr.SP_ID_CARD));
+        params.put("zjhm",SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        ApiHttpClient.post(GD_ZXCX_ADD, params, callback, tag);
 
+    }
+    /**
+     * 添加季检征信查询重试
+     *
+     * @param callback
+     * @param tag
+     */
+    public static void csjjZxcx( BaseCallback<BaseResponse<Void>> callback, Object tag) {
+        Map<String, String> params = new HashMap<>();
+        params.put("pid", "-1");
+        params.put("jcjd",SPUtils.getInstance().getString(UserMgr.SP_ID_CARD));
+        params.put("zjhm",SPUtils.getInstance().getString(UserMgr.SP_APPLY_ID));
+        ApiHttpClient.post(GD_ZXCX_RESET, params, callback, tag);
+
+    }
 
     /**
      * 添加个贷征信

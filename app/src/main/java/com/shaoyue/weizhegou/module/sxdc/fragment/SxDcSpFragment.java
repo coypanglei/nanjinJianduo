@@ -213,6 +213,7 @@ public class SxDcSpFragment extends BaseAppFragment implements BGARefreshLayout.
                             //请求id 身份证
                             SPUtils.getInstance().put(UserMgr.SP_APPLY_ID, getSelect().getSxid());
                             SPUtils.getInstance().put(UserMgr.SP_ID_CARD, getSelect().getSxsfzh());
+
                             UIHelper.showDcCommonActivity("调查", getActivity(), "查看详情");
                         }
                     } else {

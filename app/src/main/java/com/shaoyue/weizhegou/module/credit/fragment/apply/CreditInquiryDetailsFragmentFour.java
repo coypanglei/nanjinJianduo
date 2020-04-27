@@ -1,5 +1,6 @@
-package com.shaoyue.weizhegou.module.dhgl.fragment;
+package com.shaoyue.weizhegou.module.credit.fragment.apply;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
@@ -8,8 +9,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.libracore.lib.widget.StateButton;
@@ -17,6 +22,7 @@ import com.shaoyue.weizhegou.R;
 import com.shaoyue.weizhegou.api.callback.BaseCallback;
 import com.shaoyue.weizhegou.api.exception.ApiException;
 import com.shaoyue.weizhegou.api.model.BaseResponse;
+import com.shaoyue.weizhegou.api.remote.CeditApi;
 import com.shaoyue.weizhegou.api.remote.DhApi;
 import com.shaoyue.weizhegou.base.BaseAppFragment;
 import com.shaoyue.weizhegou.entity.ZxcxListBean;
@@ -26,6 +32,7 @@ import com.shaoyue.weizhegou.manager.UserMgr;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.InquiryDetailsAdapter;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.InquiryDetailsTwoAdapter;
 import com.shaoyue.weizhegou.module.credit.adapter.shenqing.zxdbInfoAdapter;
+import com.shaoyue.weizhegou.util.ToastUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -33,13 +40,16 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 
-public class CreditInquiryDetailsDhFragment extends BaseAppFragment {
+public class CreditInquiryDetailsFragmentFour extends BaseAppFragment {
 
     @BindView(R.id.rv_credit)
     RecyclerView mRvCredit;
@@ -49,12 +59,31 @@ public class CreditInquiryDetailsDhFragment extends BaseAppFragment {
     RecyclerView mRvCreditThree;
     @BindView(R.id.rv_credit_four)
     RecyclerView mRvCreditFour;
+    @BindView(R.id.rv_credit_five)
+    RecyclerView mRvCreditFive;
     @BindView(R.id.sb_find)
     StateButton sbFind;
     @BindView(R.id.nested_sc)
     NestedScrollView nestedSc;
     @BindView(R.id.tv_description)
     TextView tvDescription;
+    Unbinder unbinder;
+    @BindView(R.id.ll_whpj)
+    LinearLayout llWhpj;
+    @BindView(R.id.et_cs)
+    EditText etCs;
+    @BindView(R.id.ll_cs)
+    RelativeLayout llCs;
+    @BindView(R.id.tv_tg)
+    TextView tvTg;
+    @BindView(R.id.tv_wtg)
+    TextView tvWtg;
+    @BindView(R.id.et_buliang)
+    EditText etBuliang;
+    @BindView(R.id.tv_error)
+    TextView tvError;
+    @BindView(R.id.sb_save)
+    StateButton sbSave;
     @BindView(R.id.tv_yqbz)
     TextView tvYqbz;
     @BindView(R.id.tv_sfsxzxr)
@@ -63,8 +92,7 @@ public class CreditInquiryDetailsDhFragment extends BaseAppFragment {
     TextView tvXykyq;
     @BindView(R.id.tv_yqqs)
     TextView tvYqqs;
-    @BindView(R.id.rv_credit_five)
-    RecyclerView mRvCreditFive;
+
 
     private InquiryDetailsTwoAdapter mAdapter;
     private InquiryDetailsAdapter mAdapterTwo;
@@ -80,17 +108,14 @@ public class CreditInquiryDetailsDhFragment extends BaseAppFragment {
     private List<ZxcxListBean.RecordsBean.DbqkAndroidBean> mlistFour = new ArrayList<>();
 
     private String title;
+    private ZxcxListBean.RecordsBean myHangBean;
 
-    private String id;
 
-    private String tvError;
-
-    public static CreditInquiryDetailsDhFragment newInstance(String title, String id) {
+    public static CreditInquiryDetailsFragmentFour newInstance(String title) {
 
         Bundle args = new Bundle();
         args.putString("title", title);
-        args.putString("id", id);
-        CreditInquiryDetailsDhFragment fragment = new CreditInquiryDetailsDhFragment();
+        CreditInquiryDetailsFragmentFour fragment = new CreditInquiryDetailsFragmentFour();
         fragment.setArguments(args);
         return fragment;
     }
@@ -101,7 +126,6 @@ public class CreditInquiryDetailsDhFragment extends BaseAppFragment {
         EventBus.getDefault().register(this);
         if (ObjectUtils.isNotEmpty(getArguments())) {
             title = getArguments().getString("title");
-            id = getArguments().getString("id");
         }
     }
 
@@ -119,7 +143,6 @@ public class CreditInquiryDetailsDhFragment extends BaseAppFragment {
     @Override
     protected void initView(View rootView) {
         super.initView(rootView);
-
         myHangBean = new ZxcxListBean.RecordsBean();
         mAdapter = new InquiryDetailsTwoAdapter();
         mAdapterTwo = new InquiryDetailsAdapter("笔数", "余额(元)");
@@ -145,37 +168,35 @@ public class CreditInquiryDetailsDhFragment extends BaseAppFragment {
         mRvCreditFour.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvCreditFour.setAdapter(mAdapterFour);
         mRvCreditFour.setNestedScrollingEnabled(false);//禁止滑动
-        xcjyZxcx();
-    }
 
+
+    }
+    String js="本人";
     @Override
     public void onResume() {
         super.onResume();
-
+        xcjyZxcx();
     }
-
-    private ZxcxListBean.RecordsBean myHangBean;
 
     /**
      * 现场检验征信查询
      */
     private void xcjyZxcx() {
-        if ("查看详情".equals(SPUtils.getInstance().getString("status")) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
-            sbFind.setVisibility(
-                    View.GONE
-            );
-        }
-
         startProgressDialog(true);
-        DhApi.gdZxcx(id, new BaseCallback<BaseResponse<ZxcxListBean>>() {
+
+        if ("配偶征信数据".equals(title)){
+            js ="配偶";
+        }
+        DhApi.jjZxcx(js,new BaseCallback<BaseResponse<ZxcxListBean>>() {
             @Override
             public void onSucc(BaseResponse<ZxcxListBean> result) {
-
                 nestedSc.setVisibility(View.VISIBLE);
                 stopProgressDialog();
                 ZxcxListBean.RecordsBean bean = new ZxcxListBean.RecordsBean();
-                if ("配偶征信数据".equals(title) && result.data.getTotal() == 2) {
-                    myHangBean = result.data.getRecords().get(1);
+
+                if ("配偶征信数据".equals(title) ) {
+                    myHangBean = result.data.getRecords().get(0);
+                    llWhpj.setVisibility(View.GONE);
                 }
 
                 if ("申请人征信数据".equals(title)) {
@@ -183,21 +204,53 @@ public class CreditInquiryDetailsDhFragment extends BaseAppFragment {
                         if (ObjectUtils.isNotEmpty(result.data.getRecords().get(0))) {
                             myHangBean = result.data.getRecords().get(0);
 
+                           // sbSave.setVisibility(View.VISIBLE);
+//                            llWhpj.setVisibility(View.VISIBLE);
+                            etBuliang.setText(myHangBean.getBlyyms());
+                            etCs.setText(myHangBean.getCs());
                             //提示信息
                             if (ObjectUtils.isNotEmpty(myHangBean.getDescription())) {
-                                tvDescription.setVisibility(View.VISIBLE);
-
-                                tvDescription.setText(myHangBean.getDescription());
+                                tvError.setVisibility(View.VISIBLE);
+                                llCs.setVisibility(View.VISIBLE);
+                                tvError.setText(myHangBean.getDescription());
+                            } else {
+                                tvError.setVisibility(View.GONE);
                             }
+                            xtshjl = myHangBean.getZxshjl();
+                            //通过未通过
+                            if ("未通过".equals(myHangBean.getZxshjl())) {
+                                Drawable drawable = getResources().getDrawable(R.drawable.icon_left_star_black);
+                                drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
 
+                                tvTg.setCompoundDrawables(drawable, null, null, null);
+                                tvTg.setTextColor(getResources().getColor(R.color.color_b9b8b8));
+                                Drawable drawable2 = getResources().getDrawable(R.drawable.icon_left_blue);
+                                drawable2.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+
+                                tvWtg.setCompoundDrawables(drawable2, null, null, null);
+                                tvWtg.setTextColor(getResources().getColor(R.color.color_49a0ed));
+                            } else {
+                                Drawable drawable = getResources().getDrawable(R.drawable.icon_left_star_black);
+                                drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+
+                                tvWtg.setCompoundDrawables(drawable, null, null, null);
+                                tvWtg.setTextColor(getResources().getColor(R.color.color_b9b8b8));
+                                Drawable drawable2 = getResources().getDrawable(R.drawable.icon_left_blue);
+                                drawable2.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+
+                                tvTg.setCompoundDrawables(drawable2, null, null, null);
+                                tvTg.setTextColor(getResources().getColor(R.color.color_49a0ed));
+                            }
                         }
                     }
                 }
+
+
                 mList.clear();
                 mListTwo.clear();
                 mListThree.clear();
                 mlistFour.clear();
-
+                mListFive.clear();
                 mList.add(new InquiryDetailsBean("授信机构数", myHangBean.getSxjgs(), ""));
                 mList.add(new InquiryDetailsBean("授信贷款总额", myHangBean.getDksxze(), ""));
                 mList.add(new InquiryDetailsBean("贷款用信总额(元)", myHangBean.getDkyxze(), ""));
@@ -236,15 +289,18 @@ public class CreditInquiryDetailsDhFragment extends BaseAppFragment {
                 String xykyqqs = "";
                 Calendar c = Calendar.getInstance();
                 int year = c.get(Calendar.YEAR);   //获取年份
-                if (ObjectUtils.isNotEmpty(myHangBean.getXyklxyq_Android())) {
+                LogUtils.e(myHangBean.getLxyqzdqs_Android());
+                LogUtils.e(myHangBean.getLxyqzdqs_Android().size());
+                try {
                     for (int i = 0; i < myHangBean.getLxyqzdqs_Android().size(); i++) {
                         yqqs = yqqs + "<font color=\"#23a7f0\">" + myHangBean.getLxyqzdqs_Android().get(i) + "</font>&nbsp;&nbsp;(" + (year - i) + ")&nbsp;&nbsp;&nbsp;";
                     }
-                }
-                if (ObjectUtils.isNotEmpty(myHangBean.getXyklxyq_Android())) {
                     for (int i = 0; i < myHangBean.getXyklxyq_Android().size(); i++) {
                         xykyqqs = xykyqqs + "<font color=\"#23a7f0\">" + myHangBean.getXyklxyq_Android().get(i) + "</font>&nbsp;&nbsp;(" + (year - i) + ")&nbsp;&nbsp;&nbsp;";
                     }
+
+                } catch (Exception e) {
+                    
                 }
 
                 tvYqqs.setText(Html.fromHtml(yqqs));
@@ -271,63 +327,144 @@ public class CreditInquiryDetailsDhFragment extends BaseAppFragment {
                 } else {
                     nestedSc.setVisibility(View.VISIBLE);
                 }
+
+                if ("查看详情".equals(SPUtils.getInstance().getString("status")) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
+                    sbSave.setVisibility(View.GONE);
+                    sbFind.setVisibility(View.GONE);
+                }
+
             }
 
             @Override
             public void onFail(ApiException apiError) {
                 stopProgressDialog();
-                tvError = apiError.getErrMsg();
-
-                if (tvError.contains("没有相关查询任务") || tvError.contains("查询失败")) {
+                errorTv = apiError.getErrMsg();
+                if (errorTv.contains("没有相关查询任务") || errorTv.contains("查询失败")) {
                     sbFind.setVisibility(View.VISIBLE);
-                    tvDescription.setText(tvError);
+                    tvDescription.setText(errorTv);
                     nestedSc.setVisibility(View.GONE);
+
                 } else {
-                    tvDescription.setText(tvError);
+                    tvDescription.setText(errorTv);
                     nestedSc.setVisibility(View.GONE);
                     sbFind.setVisibility(View.GONE);
                 }
-
                 if ("查看详情".equals(SPUtils.getInstance().getString("status")) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
-
+                    sbSave.setVisibility(View.GONE);
                     sbFind.setVisibility(View.GONE);
                 }
             }
         }, this);
     }
 
+    private String errorTv;
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(RefreshBean event) {
         xcjyZxcx();
     }
 
-
-    @OnClick({R.id.sb_find, R.id.sb_resh})
+    @OnClick({R.id.sb_find, R.id.tv_tg, R.id.tv_wtg, R.id.sb_save, R.id.sb_resh})
     public void onViewClicked(View view) {
+        Drawable drawable = getResources().getDrawable(R.drawable.icon_left_star_black);
+        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+        Drawable drawable2 = getResources().getDrawable(R.drawable.icon_left_blue);
+        drawable2.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         switch (view.getId()) {
-            case R.id.sb_find:
-                if ("查看详情".equals(SPUtils.getInstance().getString("status")) || "调查".equals(SPUtils.getInstance().getString(UserMgr.SP_XT_TYPE))) {
-                    return;
-                }
-                if (tvError.contains("没有相关查询任务")) {
-                    DhApi.addgdZxcx(id,"个人", new BaseCallback<BaseResponse<Void>>() {
-                        @Override
-                        public void onSucc(BaseResponse<Void> result) {
-                            EventBus.getDefault().post(new RefreshBean());
-                        }
-                    }, this);
-                } else if (tvError.contains("查询失败")) {
-                    DhApi.csgdZxcx(id, new BaseCallback<BaseResponse<Void>>() {
-                        @Override
-                        public void onSucc(BaseResponse<Void> result) {
-                            EventBus.getDefault().post(new RefreshBean());
-                        }
-                    }, this);
-                }
-                break;
+
+
             case R.id.sb_resh:
                 xcjyZxcx();
                 break;
+            case R.id.sb_find:
+
+                if (errorTv.contains("没有相关查询任务")) {
+                    DhApi.addjjZxcx(js,new BaseCallback<BaseResponse<Void>>() {
+                        @Override
+                        public void onSucc(BaseResponse<Void> result) {
+                            EventBus.getDefault().post(new RefreshBean());
+                        }
+                    }, this);
+                } else if (errorTv.contains("查询失败")) {
+                    DhApi.csjjZxcx(new BaseCallback<BaseResponse<Void>>() {
+                        @Override
+                        public void onSucc(BaseResponse<Void> result) {
+                            EventBus.getDefault().post(new RefreshBean());
+                        }
+                    }, this);
+                }
+                break;
+            case R.id.tv_tg:
+                xtshjl = "通过";
+                if (!"通过".equals(myHangBean.getYzxshjl())) {
+                    tvError.setVisibility(View.VISIBLE);
+                    llCs.setVisibility(View.VISIBLE);
+                    tvError.setText("系统未通过，人工干预已通过!!");
+                } else {
+                    tvError.setVisibility(View.GONE);
+                    llCs.setVisibility(View.GONE);
+                }
+                tvWtg.setCompoundDrawables(drawable, null, null, null);
+                tvWtg.setTextColor(getResources().getColor(R.color.color_b9b8b8));
+                tvTg.setCompoundDrawables(drawable2, null, null, null);
+                tvTg.setTextColor(getResources().getColor(R.color.color_49a0ed));
+                break;
+            case R.id.tv_wtg:
+                xtshjl = "未通过";
+
+                if ("通过".equals(myHangBean.getYzxshjl())) {
+                    tvError.setVisibility(View.VISIBLE);
+                    llCs.setVisibility(View.VISIBLE);
+                    tvError.setText("系统已通过，人工干预未通过!!");
+                } else {
+                    tvError.setVisibility(View.GONE);
+                    llCs.setVisibility(View.GONE);
+                }
+                tvTg.setCompoundDrawables(drawable, null, null, null);
+                tvTg.setTextColor(getResources().getColor(R.color.color_b9b8b8));
+                tvWtg.setCompoundDrawables(drawable2, null, null, null);
+                tvWtg.setTextColor(getResources().getColor(R.color.color_49a0ed));
+                break;
+            case R.id.sb_save:
+                //blyyms: "似的发射点"
+                //cs: ""
+                //description: ""
+                //sxid: "d0fd82770ea5e6ca1f61bd6c5b2f9ca4"
+                //zxshjl: "未通过"
+                String whblyycs = etBuliang.getText().toString().trim();
+                String description = tvError.getText().toString();
+                Map<String, String> map = new HashMap<>();
+                map.put("zxshjl", xtshjl);
+                if (tvError.getVisibility() == View.VISIBLE) {
+                    map.put("description", description);
+                } else {
+                    map.put("description", "");
+                }
+                if (llCs.getVisibility() == View.VISIBLE) {
+                    String cs = etCs.getText().toString().trim();
+                    if (ObjectUtils.isNotEmpty(cs)) {
+                        map.put("cs", etCs.getText().toString().trim());
+                    } else {
+                        ToastUtil.showBlackToastSucess("请填写陈述");
+                        return;
+                    }
+
+                }
+
+                map.put("blyyms", whblyycs);
+
+                CeditApi.saveZxcx(js,map, new BaseCallback<BaseResponse<Void>>() {
+                    @Override
+                    public void onSucc(BaseResponse<Void> result) {
+                        ToastUtil.showBlackToastSucess("保存成功");
+                        xcjyZxcx();
+                    }
+                }, this);
+                break;
         }
+
+
     }
+
+
 }

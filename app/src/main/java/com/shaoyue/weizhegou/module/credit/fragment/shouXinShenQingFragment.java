@@ -332,6 +332,10 @@ public class shouXinShenQingFragment extends BaseAppFragment implements BGARefre
 
                 break;
             case R.id.sb_synchronize:
+                if (ObjectUtils.isEmpty(getSelect())) {
+                    ToastUtil.showBlackToastSucess("请选择数据");
+                    return;
+                }
                 CeditApi.tbInfo(getSelect().getId(), new BaseCallback<BaseResponse<Void>>() {
                     @Override
                     public void onSucc(BaseResponse<Void> result) {

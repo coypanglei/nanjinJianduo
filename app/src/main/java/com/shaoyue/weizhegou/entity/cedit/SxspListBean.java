@@ -70,6 +70,24 @@ public class SxspListBean {
     }
 
     public static class RecordsBean {
+        public String getJcjd() {
+            return jcjd;
+        }
+
+        public void setJcjd(String jcjd) {
+            this.jcjd = jcjd;
+        }
+
+        private String zjhm;
+
+        public String getZjhm() {
+            return zjhm;
+        }
+
+        public void setZjhm(String zjhm) {
+            this.zjhm = zjhm;
+        }
+
         /**
          * khxm : 巩崇龙
          * dqhj : 分发岗
@@ -97,6 +115,9 @@ public class SxspListBean {
          * taskid : 690083
          */
 
+
+
+        private String jcjd;
         private String khxm;
         private String dqhj;
         private String czsj;
